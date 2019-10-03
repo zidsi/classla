@@ -196,6 +196,8 @@ def load_conllu(file):
                 if word.parent == "remapping":
                     raise UDError("There is a cycle in a sentence")
                 if word.parent is None:
+                    if word.columns[HEAD]=='_':
+                        return
                     head = int(word.columns[HEAD])
                     if head < 0 or head > len(ud.words) - sentence_start:
                         raise UDError("HEAD '{}' points outside of the sentence".format(_encode(word.columns[HEAD])))
@@ -214,8 +216,9 @@ def load_conllu(file):
                     word.parent.functional_children.append(word)
 
             # Check there is a single root node
-            if len([word for word in ud.words[sentence_start:] if word.parent is None]) != 1:
-                raise UDError("There are multiple roots in a sentence")
+            if word.columns[HEAD]!='_':
+                if len([word for word in ud.words[sentence_start:] if word.parent is None]) != 1:
+                    raise UDError("There are multiple roots in a sentence")
 
             # End the sentence
             ud.sentences[-1].end = index
@@ -266,12 +269,13 @@ def load_conllu(file):
                 raise UDError("Incorrect word ID '{}' for word '{}', expected '{}'".format(
                     _encode(columns[ID]), _encode(columns[FORM]), len(ud.words) - sentence_start + 1))
 
-            try:
-                head_id = int(columns[HEAD])
-            except:
-                raise UDError("Cannot parse HEAD '{}'".format(_encode(columns[HEAD])))
-            if head_id < 0:
-                raise UDError("HEAD cannot be negative")
+            if columns[HEAD]!='_':
+                try:
+                    head_id = int(columns[HEAD])
+                except:
+                    raise UDError("Cannot parse HEAD '{}'".format(_encode(columns[HEAD])))
+                if head_id < 0:
+                    raise UDError("HEAD cannot be negative")
 
             ud.words.append(UDWord(ud.tokens[-1], columns, is_multiword=False))
 

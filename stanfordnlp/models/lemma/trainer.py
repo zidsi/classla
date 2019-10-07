@@ -37,7 +37,7 @@ class Trainer(object):
             self.model = None if args['dict_only'] else Seq2SeqModel(args, emb_matrix=emb_matrix, use_cuda=use_cuda)
             self.vocab = vocab
             # dict-based components
-            self.word_dict = dict()
+            self.fallback_dict = dict()
             self.composite_dict = dict()
         if not self.args['dict_only']:
             if self.args.get('edit', False):
@@ -57,7 +57,6 @@ class Trainer(object):
     def update(self, batch, eval=False):
         inputs, orig_idx = unpack_batch(batch, self.use_cuda)
         src, src_mask, tgt_in, tgt_out, pos, edits = inputs
-
         if eval:
             self.model.eval()
         else:
@@ -123,28 +122,28 @@ class Trainer(object):
         utils.change_lr(self.optimizer, new_lr)
 
     def train_dict(self, triples):
-        """ Train a dict lemmatizer given training (word, pos, lemma) triples. """
+        """ Train a dict lemmatizer given training (word, pos, feats, lemma) tuples. """
         # accumulate counter
         ctr = Counter()
-        ctr.update([(p[0], p[1], p[2]) for p in triples])
+        ctr.update([(p[0], p[1], p[2], p[3]) for p in triples])
         # find the most frequent mappings
         for p, _ in ctr.most_common():
-            w, pos, l = p
-            if (w,pos) not in self.composite_dict:
-                self.composite_dict[(w,pos)] = l
-            if w not in self.word_dict:
-                self.word_dict[w] = l
+            w, pos, feats, l = p
+            if (w,pos,feats) not in self.composite_dict:
+                self.composite_dict[(w,pos,feats)] = l
+            if (w, pos) not in self.fallback_dict:
+                self.fallback_dict[(w,pos)] = l
         return
 
     def predict_dict(self, pairs):
         """ Predict a list of lemmas using the dict model given (word, pos) pairs. """
         lemmas = []
         for p in pairs:
-            w, pos = p
-            if (w,pos) in self.composite_dict:
-                lemmas += [self.composite_dict[(w,pos)]]
-            elif w in self.word_dict:
-                lemmas += [self.word_dict[w]]
+            w, pos, feats = p
+            if (w,pos,feats) in self.composite_dict:
+                lemmas += [self.composite_dict[(w,pos,feats)]]
+            elif (w,pos) in self.fallback_dict:
+                lemmas += [self.fallback_dict[(w,pos)]]
             else:
                 lemmas += [w]
         return lemmas
@@ -154,10 +153,10 @@ class Trainer(object):
 
         skip = []
         for p in pairs:
-            w, pos = p
-            if (w,pos) in self.composite_dict:
+            w, pos, feats = p
+            if (w,pos,feats) in self.composite_dict:
                 skip.append(True)
-            elif w in self.word_dict:
+            elif w in self.fallback_dict:
                 skip.append(True)
             else:
                 skip.append(False)
@@ -168,11 +167,11 @@ class Trainer(object):
         lemmas = []
         assert len(pairs) == len(other_preds)
         for p, pred in zip(pairs, other_preds):
-            w, pos = p
-            if (w,pos) in self.composite_dict:
-                lemmas += [self.composite_dict[(w,pos)]]
-            elif w in self.word_dict:
-                lemmas += [self.word_dict[w]]
+            w, pos, feats = p
+            if (w,pos,feats) in self.composite_dict:
+                lemmas += [self.composite_dict[(w,pos,feats)]]
+            elif (w,pos) in self.fallback_dict:
+                lemmas += [self.fallback_dict[(w,pos)]]
             else:
                 lemmas += [pred]
         return lemmas
@@ -180,7 +179,7 @@ class Trainer(object):
     def save(self, filename):
         params = {
                 'model': self.model.state_dict() if self.model is not None else None,
-                'dicts': (self.word_dict, self.composite_dict),
+                'dicts': (self.fallback_dict, self.composite_dict),
                 'vocab': self.vocab.state_dict(),
                 'config': self.args
                 }
@@ -197,7 +196,7 @@ class Trainer(object):
             print("Cannot load model from {}".format(filename))
             sys.exit(1)
         self.args = checkpoint['config']
-        self.word_dict, self.composite_dict = checkpoint['dicts']
+        self.fallback_dict, self.composite_dict = checkpoint['dicts']
         if not self.args['dict_only']:
             self.model = Seq2SeqModel(self.args, use_cuda=use_cuda)
             self.model.load_state_dict(checkpoint['model'])

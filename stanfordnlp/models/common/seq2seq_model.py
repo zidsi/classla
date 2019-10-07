@@ -139,8 +139,7 @@ class Seq2SeqModel(nn.Module):
             # append pos to the end of src sequence
             assert pos is not None
             pos_inputs = self.pos_drop(self.pos_embedding(pos))
-            enc_inputs = torch.cat([enc_inputs, pos_inputs.unsqueeze(1)], dim=1)
-
+            enc_inputs = torch.cat([pos_inputs.unsqueeze(1), enc_inputs], dim=1)
         h_in, (hn, cn) = self.encode(enc_inputs, src_lens)
 
         if self.edit:
@@ -166,7 +165,7 @@ class Seq2SeqModel(nn.Module):
         if self.use_pos:
             assert pos is not None
             pos_inputs = self.pos_drop(self.pos_embedding(pos))
-            enc_inputs = torch.cat([enc_inputs, pos_inputs.unsqueeze(1)], dim=1)
+            enc_inputs = torch.cat([pos_inputs.unsqueeze(1), enc_inputs], dim=1)
 
         # (1) encode source
         h_in, (hn, cn) = self.encode(enc_inputs, src_lens)

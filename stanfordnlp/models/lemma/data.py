@@ -8,6 +8,7 @@ import stanfordnlp.models.common.seq2seq_constant as constant
 from stanfordnlp.models.common.data import map_to_ids, get_long_tensor, get_float_tensor, sort_all
 from stanfordnlp.models.common import conll
 from stanfordnlp.models.lemma.vocab import Vocab, MultiVocab
+from stanfordnlp.models.pos.vocab import WordVocab, FeatureVocab
 from stanfordnlp.models.lemma import edit
 from stanfordnlp.pipeline.doc import Document
 
@@ -36,6 +37,16 @@ class DataLoader:
             assert len(data) == len(skip)
             data = [x for x, y in zip(data, skip) if not y]
 
+        if not evaluation:
+            hapax_data = []
+            from collections import Counter
+            data_cnt = Counter([tuple(e) for e in data])
+            for datum in data_cnt:
+                if data_cnt[datum] < 5:
+                    for i in range(data_cnt[datum]):
+                        hapax_data.append(datum)
+            data = hapax_data
+
         # handle vocab
         if vocab is not None:
             self.vocab = vocab
@@ -49,7 +60,6 @@ class DataLoader:
             keep = int(args['sample_train'] * len(data))
             data = random.sample(data, keep)
             print("Subsample training set with rate {:g}".format(args['sample_train']))
-
         data = self.preprocess(data, self.vocab['char'], self.vocab['pos'], args)
         # shuffle for training
         if self.shuffled:
@@ -120,9 +130,9 @@ class DataLoader:
 
     def load_file(self, filename):
         conll_file = conll.CoNLLFile(filename)
-        data = conll_file.get(['word', 'upos', 'lemma'])
+        data = conll_file.get(['word', 'xpos', 'lemma'])
         return conll_file, data
 
     def load_doc(self, doc):
-        data = doc.conll_file.get(['word', 'upos', 'lemma'])
+        data = doc.conll_file.get(['word', 'xpos', 'lemma'])
         return doc.conll_file, data

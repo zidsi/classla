@@ -37,6 +37,8 @@ python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file s
 
 ```
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --gold_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file pretagged/pos.lemma.depparse.ssj500k_ud.dev.conllu --mode predict
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr500k_ud --eval_file pretagged/pos.lemma.hr500k_ud.dev.conllu --gold_file pretagged/pos.lemma.hr500k_ud.dev.conllu --shorthand hr_set --output_file pretagged/pos.lemma.depparse.hr500k_ud.dev.conllu --mode predict
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --eval_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file pretagged/pos.lemma.depparse.SETimes.SR_ud.dev.conllu --mode predict
 ```
 
 ## Training your own models

@@ -29,7 +29,7 @@ from stanfordnlp.models.common.pretrain import Pretrain
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='data/depparse', help='Root dir for saving models.')
-    parser.add_argument('--wordvec_dir', type=str, default='extern_data/word2vec', help='Directory of word vectors')
+    parser.add_argument('--wordvec_file', type=str, default='extern_data/word2vec', help='File with word vectors')
     parser.add_argument('--train_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--eval_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
@@ -104,8 +104,8 @@ def train(args):
             else '{}/{}_parser.pt'.format(args['save_dir'], args['shorthand'])
 
     # load pretrained vectors
-    vec_file = utils.get_wordvec_file(args['wordvec_dir'], args['shorthand'])
-    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+    vec_file = args['wordvec_file']
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['save_name'])
     pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
 
     # load data
@@ -205,8 +205,8 @@ def evaluate(args):
     gold_file = args['gold_file']
     model_file = args['save_dir'] + '/' + args['save_name'] if args['save_name'] is not None \
             else '{}/{}_parser.pt'.format(args['save_dir'], args['shorthand'])
-    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
-    
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'],args['save_name'])
+
     # load pretrain
     pretrain = Pretrain(pretrain_file)
 

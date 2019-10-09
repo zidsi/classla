@@ -17,10 +17,10 @@ import random
 import torch
 from torch import nn, optim
 
-from stanfordnlp.models.my_lemma.data import DataLoader
-from stanfordnlp.models.my_lemma.vocab import Vocab
-from stanfordnlp.models.my_lemma.trainer import Trainer
-from stanfordnlp.models.my_lemma import scorer, edit
+from stanfordnlp.models.lemma.data import DataLoader
+from stanfordnlp.models.lemma.vocab import Vocab
+from stanfordnlp.models.lemma.trainer import Trainer
+from stanfordnlp.models.lemma import scorer, edit
 from stanfordnlp.models.common import utils
 import stanfordnlp.models.common.seq2seq_constant as constant
 

@@ -49,7 +49,7 @@ python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file h
 python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file SETimes.SR+srLex --eval_file data/pos.SETimes.SR.dev.conllu --output_file temp --gold_file data/pos.SETimes.SR.dev.conllu --mode predict
 ```
 
-Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
+Again, leaving out the ```-gold_file``` argument, no evaluation will be performed.
 
 The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged.
 
@@ -72,7 +72,7 @@ python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr50
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --eval_file data/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file data/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file temp --mode predict
 ```
 
-Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
+Again, leaving out the ```-gold_file``` argument, no evaluation will be performed.
 
 The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged and lemmatised.
 

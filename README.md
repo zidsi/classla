@@ -39,8 +39,15 @@ Similarly to PoS tagging, there are pre-trained models for lemmatisation availab
 
 Running the lemmatiser for Slovenian, if models are placed in the ```models/lemma/``` directory, can be performed as follows:
 ```
-python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --mode predict
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --eval_file data/pos.ssj500k.dev.conllu --output_file temp --gold_file data/pos.ssj500k.dev.conllu --mode predict
 ```
+
+Similarly, for Croatian or Serbian, these are the corresponding commands:
+
+```
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file hr500k+hrLex --eval_file data/pos.hr500k.dev.conllu --output_file temp --gold_file data/pos.hr500k.dev.conllu --mode predict
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file SETimes.SR+srLex --eval_file data/pos.SETimes.SR.dev.conllu --output_file temp --gold_file data/pos.SETimes.SETimes.SR.dev.conllu --predict
+``` 
 
 Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
 
@@ -56,7 +63,13 @@ For UD depency parsing, the pre-trained models are also available for
 Parsing Slovenian data, once models are placed in the ```models/lemma/``` directory, can be performed as follows:
 
 ```
-python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file data/ssj500k_ud.dev.conllu --gold_file data/ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp --mode predict
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file data/pos.lemma.ssj500k_ud.dev.conllu --gold_file data/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp --mode predict
+```
+Similarly, for Croatian or Serbian, these are the corresponding commands:
+
+```
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr500k_ud --eval_file data/pos.lemma.hr500k_ud.dev.conllu --gold_file data/pos.lemma.hr500k_ud.dev.conllu --shorthand hr_set --output_file temp --mode predict
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --eval_file data/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file data/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file temp --mode predict
 ```
 
 Again, leaving out the ```-gold_file``` argument no evaluation will be performed.

@@ -2,26 +2,23 @@
 ## A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork For Processing South Slavic Languages 
 
 This is a fork of the [Stanford NLP Group's official Python NLP library](https://github.com/stanfordnlp/stanfordnlp). The main changes to the official library are
-- possibility of training a tagger on training datasets which are not UD-parsed (regular situation for most languages)
+- possibility of training the tagger and lemmatiser on datasets which are not UD-parsed
 - using an external dictionary while performing lemmatization
 - looking up (word, upos, feats) triples in dictionaries during lemmatization, fallbacking to (word, upos)
-- speeding up the seq2seq training procedure for lemmatization by training only on instances occurring less than 5 times in the training data
-- speeding up the lemmatization (seq2seqing only forms not seen in the training data and lexicon) also outside the pipeline mode
+- speeding up the seq2seq lemmatization training procedure by training only on instances occurring less than 5 times in the training data
+- speeding up the lemmatization by seq2seqing only forms not seen in the lookup lexicon (implemented in stanfordnlp only in the pipeline)
 - encoding POS information at the beginning of the sequence, improving significantly seq2seq lemmatization results
 
 ## Running the tool
 
 ### Part-of-speech tagging
 
-Once you placed the Slovene PoS-tagging model (files ```ssj500``` and ```ssj500k.pretrain.pt```) into the ```models/pos/``` path, you can run the following command:
+For now, there are available pre-trained models for part-of-speech tagging for standard [http://hdl.handle.net/11356/1251](Slovenian), [http://hdl.handle.net/11356/1252](Croatian) and [http://hdl.handle.net/11356/1253](Serbian).
+
+Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovene, (2) Croatian, or (3) Serbian)
 
 ```
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name ssj500k --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --shorthand sl_ssj --mode predict
-```
-
-Similarly, you can try out the Croatian and Serbian tagger as well:
-
-```
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name hr500k --eval_file data/hr500k.dev.conllu --output_file temp --gold_file data/hr500k.dev.conllu --shorthand hr_set --mode predict
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name SETimes.SR --eval_file data/SETimes.SR.dev.conllu --output_file temp --gold_file data/SETimes.SR.dev.conllu --shorthand sr_set --mode predict
 ```

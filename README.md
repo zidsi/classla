@@ -14,9 +14,9 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 ### Part-of-speech tagging
 
 For now, there are available pre-trained models for part-of-speech tagging for 
-- standard Slovenian [http://hdl.handle.net/11356/1251], 
-- standard Croatian [http://hdl.handle.net/11356/1252] and 
-- standard Serbian [http://hdl.handle.net/11356/1253].
+- standard Slovenian http://hdl.handle.net/11356/1251 
+- standard Croatian http://hdl.handle.net/11356/1252 
+- standard Serbian http://hdl.handle.net/11356/1253
 
 Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovenian, (2) Croatian, or (3) Serbian)
 
@@ -28,12 +28,23 @@ python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name SETimes.S
 
 If you do not want to evaluate the tagger, but just annotate a new file, you can leave out the ```--gold_file``` argument.
 
-### Lemmatization
+The input to part-of-speech tagging is a CONLLU-formated file.
 
-```
-python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --eval_file pretagged/pos.ssj500k.dev.conllu --output_file pretagged/pos.lemma.ssj500k.dev.conllu --gold_file pretagged/pos.ssj500k.dev.conllu --mode predict
+### Lemmatisation
 
+Similarly to PoS tagging, there are pre-trained models for lemmatisation available as well for
+- standard Slovenian http://hdl.handle.net/11356/1254
+- standard Croatian http://hdl.handle.net/11356/1255
+- standard Serbian http://hdl.handle.net/11356/1256
+
+Running the lemmatiser is done, if models are placed in the ```models/lemma/``` directory, for Slovenian as follows:
 ```
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --mode predict
+```
+
+Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
+
+The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged.
 
 ### Parsing
 

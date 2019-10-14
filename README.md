@@ -37,7 +37,7 @@ Similarly to PoS tagging, there are pre-trained models for lemmatisation availab
 - standard Croatian http://hdl.handle.net/11356/1255
 - standard Serbian http://hdl.handle.net/11356/1256
 
-Running the lemmatiser is done, if models are placed in the ```models/lemma/``` directory, for Slovenian as follows:
+Running the lemmatiser for Slovenian, if models are placed in the ```models/lemma/``` directory, can be performed as follows:
 ```
 python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --mode predict
 ```
@@ -48,11 +48,20 @@ The input to lemmatisation is a CONLLU-formated file which was previously part-o
 
 ### Parsing
 
+For UD depency parsing, the pre-trained models are also available for
+- standard Slovenian http://hdl.handle.net/11356/1257
+- standard Croatian http://hdl.handle.net/11356/1258
+- standard Serbian http://hdl.handle.net/11356/1259
+
+Parsing Slovenian data, once models are placed in the ```models/lemma/``` directory, can be performed as follows:
+
 ```
-python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --gold_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file pretagged/pos.lemma.depparse.ssj500k_ud.dev.conllu --mode predict
-python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr500k_ud --eval_file pretagged/pos.lemma.hr500k_ud.dev.conllu --gold_file pretagged/pos.lemma.hr500k_ud.dev.conllu --shorthand hr_set --output_file pretagged/pos.lemma.depparse.hr500k_ud.dev.conllu --mode predict
-python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --eval_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file pretagged/pos.lemma.depparse.SETimes.SR_ud.dev.conllu --mode predict
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file data/ssj500k_ud.dev.conllu --gold_file data/ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp --mode predict
 ```
+
+Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
+
+The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged and lemmatised.
 
 ## Training your own models
 

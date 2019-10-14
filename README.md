@@ -13,15 +13,20 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 
 ### Part-of-speech tagging
 
-For now, there are available pre-trained models for part-of-speech tagging for standard [http://hdl.handle.net/11356/1251](Slovenian), [http://hdl.handle.net/11356/1252](Croatian) and [http://hdl.handle.net/11356/1253](Serbian).
+For now, there are available pre-trained models for part-of-speech tagging for 
+- standard Slovenian [http://hdl.handle.net/11356/1251], 
+- standard Croatian [http://hdl.handle.net/11356/1252] and 
+- standard Serbian [http://hdl.handle.net/11356/1253].
 
-Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovene, (2) Croatian, or (3) Serbian)
+Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovenian, (2) Croatian, or (3) Serbian)
 
 ```
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name ssj500k --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --shorthand sl_ssj --mode predict
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name hr500k --eval_file data/hr500k.dev.conllu --output_file temp --gold_file data/hr500k.dev.conllu --shorthand hr_set --mode predict
 python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name SETimes.SR --eval_file data/SETimes.SR.dev.conllu --output_file temp --gold_file data/SETimes.SR.dev.conllu --shorthand sr_set --mode predict
 ```
+
+If you do not want to evaluate the tagger, but just annotate a new file, you can leave out the ```--gold_file``` argument.
 
 ### Lemmatization
 

@@ -49,9 +49,9 @@ The input to lemmatisation is a CONLLU-formated file which was previously part-o
 ### Parsing
 
 For UD depency parsing, the pre-trained models are also available for
-- standard Slovenian http://hdl.handle.net/11356/1257
-- standard Croatian http://hdl.handle.net/11356/1258
-- standard Serbian http://hdl.handle.net/11356/1259
+- standard Slovenian http://hdl.handle.net/11356/1258
+- standard Croatian http://hdl.handle.net/11356/1259
+- standard Serbian http://hdl.handle.net/11356/1260
 
 Parsing Slovenian data, once models are placed in the ```models/lemma/``` directory, can be performed as follows:
 

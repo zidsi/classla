@@ -47,7 +47,7 @@ Similarly, for Croatian or Serbian, these are the corresponding commands:
 ```
 python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file hr500k+hrLex --eval_file data/pos.hr500k.dev.conllu --output_file temp --gold_file data/pos.hr500k.dev.conllu --mode predict
 python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file SETimes.SR+srLex --eval_file data/pos.SETimes.SR.dev.conllu --output_file temp --gold_file data/pos.SETimes.SETimes.SR.dev.conllu --predict
-``` 
+```
 
 Again, leaving out the ```-gold_file``` argument no evaluation will be performed.
 

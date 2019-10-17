@@ -79,6 +79,8 @@ def parse_args():
     return args
 
 def main():
+    sys.setrecursionlimit(50000)
+
     args = parse_args()
 
     torch.manual_seed(args.seed)

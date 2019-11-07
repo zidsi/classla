@@ -135,3 +135,42 @@ python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj5
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr500k_ud --wordvec_file ~/data/clarin.si-embed/embed.hr-token.ft.sg.vec.xz --train_file pretagged/pos.lemma.hr500k_ud.train+test.conllu --eval_file pretagged/pos.lemma.hr500k_ud.dev.conllu --gold_file pretagged/pos.lemma.hr500k_ud.dev.conllu --shorthand hr_set --output_file temp.depparse.hr --mode train
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --wordvec_file ~/data/clarin.si-embed/embed.sr-token.ft.sg.vec.xz --train_file pretagged/pos.lemma.SETimes.SR_ud.train+test.conllu --eval_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file temp.depparse.sr --mode train
 ```
+
+## English training
+
+
+### Tokenization
+```
+python stanfordnlp/utils/prepare_tokenizer_data.py ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.txt ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.conllu -o ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.toklabels -m ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test-mwt.json
+python stanfordnlp/utils/prepare_tokenizer_data.py ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train.txt ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train.conllu -o ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train.toklabels -m ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train-mwt.json
+python stanfordnlp/utils/prepare_tokenizer_data.py ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.txt ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu -o ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.toklabels -m ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev-mwt.json
+
+python -m stanfordnlp.models.tokenizer --label_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.toklabels --txt_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.txt --conll_file temp.tokenize.en --dev_label_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.toklabels --dev_txt_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.txt --dev_conll_gold ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu --lang en --save_dir models/tokenize --save_name ewt --mwt_json_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test-mwt.json --max_seqlen 300
+python -m stanfordnlp.models.tokenizer --mode predict --txt_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.txt --save_dir models/tokenize/ --save_name ewt --conll_file temp
+```
+
+### Part-of-speech tagging
+
+```
+python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name ewt --wordvec_file ~/data/conll17/English/en.vectors.xz --train_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.conllu --eval_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu --gold_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu --mode train --shorthand en_ewt --output_file temp.en
+
+python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name ewt --eval_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.conllu --output_file pretagged/pos.ewt.train+test.conllu --gold_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-train+test.conllu --shorthand en_ewt --mode predict
+python -m stanfordnlp.models.tagger --save_dir models/pos/ --save_name ewt --eval_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu --output_file pretagged/pos.ewt.dev.conllu --gold_file ~/data/conll18/ud-treebanks-v2.4/UD_English-EWT/en_ewt-ud-dev.conllu --shorthand en_ewt --mode predict
+```
+
+### Lemmatization
+
+```
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ewt --train_file pretagged/pos.ewt.train+test.conllu --eval_file pretagged/pos.ewt.dev.conllu --output_file temp.lemma.en --gold_file pretagged/pos.ewt.dev.conllu --mode train --num_epoch 30 --decay_epoch 20 --pos
+
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ewt --eval_file pretagged/pos.ewt.train+test.conllu --output_file pretagged/pos.lemma.ewt.train+test.conllu --gold_file pretagged/pos.ewt.train+test.conllu --mode predict
+python -m stanfordnlp.models.lemmatizer --model_dir models/lemma/ --model_file ewt --eval_file pretagged/pos.ewt.dev.conllu --output_file pretagged/pos.lemma.ewt.dev.conllu --gold_file pretagged/pos.ewt.dev.conllu --mode predict
+```
+
+### Parsing
+
+```
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ewt --wordvec_file ~/data/conll17/English/en.vectors.xz --train_file pretagged/pos.lemma.ewt.train+test.conllu --eval_file pretagged/pos.lemma.ewt.dev.conllu --gold_file pretagged/pos.lemma.ewt.dev.conllu --shorthand en_ewt --output_file temp.depparse.en --mode train
+
+python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ewt --eval_file pretagged/pos.lemma.ewt.dev.conllu --gold_file pretagged/pos.lemma.ewt.dev.conllu --shorthand en_ewt --output_file pretagged/pos.lemma.depparse.ewt.dev.conllu --mode predict
+```

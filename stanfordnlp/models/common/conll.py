@@ -34,7 +34,9 @@ class CoNLLFile():
         Load data into a list of sentences, where each sentence is a list of lines,
         and each line is a list of conllu fields.
         """
-        sents, cache = [], []
+        sents, cache = [], dict()
+        cache['sent'] = []
+        cache['comm'] = []
         if self._from_str:
             infile = io.StringIO(self.file)
         else:
@@ -43,19 +45,27 @@ class CoNLLFile():
             for line in infile:
                 line = line.strip()
                 if len(line) == 0:
-                    if len(cache) > 0:
-                        sents.append(cache)
-                        cache = []
+                    if len(cache['sent']):
+                        sent = dict()
+                        sent['sent'] = cache['sent']
+                        sent['comm'] = cache['comm']
+                        sents.append(sent)
+                        cache['sent'] = []
+                    cache['comm'] = [] # ignore stand-alone comments
                 else:
-                    if line.startswith('#'): # skip comment line
+                    if line.startswith('#'):
+                        cache['comm'].append(line)
                         continue
                     array = line.split('\t')
                     if self.ignore_gapping and '.' in array[0]:
                         continue
                     assert len(array) == FIELD_NUM
-                    cache += [array]
-        if len(cache) > 0:
-            sents.append(cache)
+                    cache['sent'] += [array]
+        if len(cache['sent']):
+            sent = dict()
+            sent['sent'] = cache['sent']
+            sent['comm'] = cache['comm']
+            sents.append(sent)
         return sents
 
     @property
@@ -77,7 +87,7 @@ class CoNLLFile():
         if not hasattr(self, '_num_words'):
             n = 0
             for sent in self.sents:
-                for ln in sent:
+                for ln in sent['sent']:
                     if '-' not in ln[0]:
                         n += 1
             self._num_words = n
@@ -94,7 +104,7 @@ class CoNLLFile():
         results = []
         for sent in self.sents:
             cursent = []
-            for ln in sent:
+            for ln in sent['sent']:
                 if '-' in ln[0]: # skip
                     continue
                 if len(field_idxs) == 1:
@@ -118,7 +128,7 @@ class CoNLLFile():
         field_idxs = [FIELD_TO_IDX[f.lower()] for f in fields]
         cidx = 0
         for sent in self.sents:
-            for ln in sent:
+            for ln in sent['sent']:
                 if '-' in ln[0]:
                     continue
                 if len(field_idxs) == 1:
@@ -142,7 +152,9 @@ class CoNLLFile():
         """
         return_string = ""
         for sent in self.sents:
-            for ln in sent:
+            for cm in sent['comm']:
+                return_string += cm + "\n"
+            for ln in sent['sent']:
                 return_string += ("\t".join(ln)+"\n")
             return_string += "\n"
         return return_string
@@ -154,7 +166,9 @@ class CoNLLFile():
         idx = 0
         with open(filename, 'w') as outfile:
             for sent in self.sents:
-                for ln in sent:
+                for cm in sent['comm']:
+                    print(cm, file=outfile)
+                for ln in sent['sent']:
                     if '-' not in ln[0]: # do not process if it is a mwt line
                         lm = lemmas[idx]
                         if len(lm) == 0:
@@ -173,7 +187,7 @@ class CoNLLFile():
         for sent in self.sents:
             mwt_begin = 0
             mwt_end = -1
-            for ln in sent:
+            for ln in sent['sent']:
                 if '.' in ln[0]:
                     # skip ellipsis
                     continue
@@ -197,7 +211,7 @@ class CoNLLFile():
         word_idx = FIELD_TO_IDX['word']
         cands = []
         for sent in self.sents:
-            for ln in sent:
+            for ln in sent['sent']:
                 if "MWT=Yes" in ln[-1]:
                     cands += [ln[word_idx]]
 
@@ -209,7 +223,9 @@ class CoNLLFile():
         count = 0
 
         for sent in self.sents:
-            for ln in sent:
+            for cm in sent['comm']:
+                print(cm, file=outfile)
+            for ln in sent['sent']:
                 idx += 1
                 if "MWT=Yes" not in ln[-1]:
                     print("{}\t{}".format(idx, "\t".join(ln[1:6] + [str(idx-1)] + ln[7:])), file=output_file)

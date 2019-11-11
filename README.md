@@ -11,6 +11,10 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 
 ## Running the tool
 
+### Tokenization
+
+For tokenization of Slovenian, Croatian or Serbian, a rule-based tokenizer, [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser) should be applied prior to further processing.
+
 ### Part-of-speech tagging
 
 For now, there are available pre-trained models for part-of-speech tagging for 

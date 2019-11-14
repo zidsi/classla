@@ -13,7 +13,9 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 
 ### Tokenization
 
-For tokenization of Slovenian, Croatian or Serbian, a rule-based tokenizer, [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser) should be applied prior to further processing.
+For tokenization of Slovenian, Croatian or Serbian, a rule-based tokenizer, [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser) should be applied prior to further processing, producing CoNLL-U output.
+
+For tokenization of Slovenian, compliant with standard training data and reference corpora, [Obeliks4J](https://github.com/clarinsi/Obeliks4J) should be used, again, by generating CoNLL-U output.
 
 ### Part-of-speech tagging
 

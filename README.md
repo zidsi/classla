@@ -9,6 +9,22 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 - speeding up the lemmatization by seq2seqing only forms not seen in the lookup lexicon (implemented in stanfordnlp only in the pipeline)
 - encoding POS information at the beginning of the sequence, improving significantly seq2seq lemmatization results
 
+## Benchmarking results
+
+This pipeline currently (December 2019) is the state-of-the-art in processing Slovenian, Croatian and Serbian, with the following (CoNLL-2018-shared-task) F1 metrics obtained on the [babushka-bench](https://github.com/clarinsi/babushka-bench) benchmarking platform (with gold segmentation and remaining preprocessing with the same pipeline):
+
+|language|layer|F1|
+|---|---|---|
+|Slovenian|morphosyntax (XPOS)|96.72|
+|Slovenian|lemmatization (LEMMA)|99.02|
+|Slovenian|dependency parsing (LAS)|92.68|
+|Croatian|morphosyntax (XPOS)|94.13|
+|Croatian|lemmatization (LEMMA)|97.60|
+|Croatian|dependency parsing (LAS)|85.86|
+|Serbian|morphosyntax (XPOS)|95.23|
+|Serbian|lemmatization (LEMMA)|97.89|
+|Serbian|dependency parsing (LAS)|88.96|
+
 ## Running the tool
 
 ### Tokenization

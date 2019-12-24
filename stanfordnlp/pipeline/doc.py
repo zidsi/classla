@@ -49,7 +49,7 @@ class Document:
 
     def load_annotations(self):
         """ Integrate info from the CoNLLFile instance. """
-        self._sentences = [Sentence(token_list) for token_list in self.conll_file.sents]
+        self._sentences = [Sentence(token_list['sent']) for token_list in self.conll_file.sents]
 
     def write_conll_to_file(self, file_path):
         """ Write conll contents to file. """
@@ -68,6 +68,7 @@ class Sentence:
 
     def _process_tokens(self, tokens):
         st, en = -1, -1
+        print(tokens)
         for tok in tokens:
             m = multi_word_token_line.match(tok[CONLLU_FIELD_TO_IDX['id']])
             if m:

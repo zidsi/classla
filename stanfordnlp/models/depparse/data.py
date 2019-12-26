@@ -99,7 +99,11 @@ class DataLoader:
         batch = self.data[key]
         batch_size = len(batch)
         batch = list(zip(*batch))
-        assert len(batch) == 9
+        print(len(batch))
+        try:
+            assert len(batch) == 9
+        except:
+            print(len(batch),batch)
 
         # sort sentences by lens for easy RNN operations
         lens = [len(x) for x in batch[0]]
@@ -159,7 +163,7 @@ class DataLoader:
         current = []
         currentlen = 0
         for x in data:
-            if len(x[0]) + currentlen > self.batch_size:
+            if len(x[0]) + currentlen > self.batch_size and currentlen > 0:
                 res.append(current)
                 current = []
                 currentlen = 0

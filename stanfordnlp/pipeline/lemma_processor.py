@@ -79,7 +79,7 @@ class LemmaProcessor(UDProcessor):
                     else:
                         preds1.append(preds[i])
                         i += 1
-                preds = self.trainer.ensemble(batch.conll.get(['word', 'upos', 'feats']), preds1)
+                preds = self.trainer.ensemble([(e[0].lower(),e[1],e[2]) for e in batch.conll.get(['word', 'upos', 'feats'])], preds1)
             else:
                 preds = self.trainer.postprocess(batch.conll.get(['word']), preds, edits=edits)
 

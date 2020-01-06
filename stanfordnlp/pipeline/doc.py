@@ -68,7 +68,6 @@ class Sentence:
 
     def _process_tokens(self, tokens):
         st, en = -1, -1
-        print(tokens)
         for tok in tokens:
             m = multi_word_token_line.match(tok[CONLLU_FIELD_TO_IDX['id']])
             if m:

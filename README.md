@@ -11,7 +11,7 @@ This is a fork of the [Stanford NLP Group's official Python NLP library](https:/
 
 ## Benchmarking results
 
-This pipeline currently (December 2019) is the state-of-the-art in processing Slovenian, Croatian and Serbian, with the following (CoNLL-2018-shared-task) F1 metrics obtained on the [babushka-bench](https://github.com/clarinsi/babushka-bench) benchmarking platform (with gold segmentation and remaining preprocessing with the same pipeline):
+This pipeline currently (January 2020) is the state-of-the-art in processing Slovenian, Croatian and Serbian, with the following (CoNLL-2018-shared-task) F1 metrics obtained on the [babushka-bench](https://github.com/clarinsi/babushka-bench) benchmarking platform (with gold segmentation and remaining preprocessing with the same pipeline):
 
 |language|layer|F1|
 |---|---|---|
@@ -55,9 +55,9 @@ The input to part-of-speech tagging is a CONLLU-formated file.
 ### Lemmatisation
 
 Similarly to PoS tagging, there are pre-trained models for lemmatisation available as well for
-- standard Slovenian http://hdl.handle.net/11356/1254
-- standard Croatian http://hdl.handle.net/11356/1255
-- standard Serbian http://hdl.handle.net/11356/1256
+- standard Slovenian http://hdl.handle.net/11356/1286
+- standard Croatian http://hdl.handle.net/11356/1287
+- standard Serbian http://hdl.handle.net/11356/1288
 
 Running the lemmatiser for Slovenian, if models are placed in the ```models/lemma/``` directory, can be performed as follows:
 ```
@@ -97,6 +97,13 @@ python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETi
 Again, leaving out the ```-gold_file``` argument, no evaluation will be performed.
 
 The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged and lemmatised.
+
+### NER
+
+```
+python -m stanfordnlp.models.ner_tagger --save_dir models/ner/ --save_name ssj500k --eval_file data/ssj500k.test.json --mode predict --output_file out.ner.sl
+python -m stanfordnlp.models.ner_tagger --save_dir models/ner/ --save_name hr500k --eval_file data/hr500k.test.json --mode predict --output_file out.ner.hr
+```
 
 ## Training your own models
 
@@ -156,6 +163,14 @@ Once you have all the training data preprocessed, you can train the parsers in t
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --wordvec_file ~/data/clarin.si-embed/embed.sl-token.ft.sg.vec.xz --train_file pretagged/pos.lemma.ssj500k_ud.train+test.conllu --eval_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --gold_file pretagged/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp.depparse.sl --mode train
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name hr500k_ud --wordvec_file ~/data/clarin.si-embed/embed.hr-token.ft.sg.vec.xz --train_file pretagged/pos.lemma.hr500k_ud.train+test.conllu --eval_file pretagged/pos.lemma.hr500k_ud.dev.conllu --gold_file pretagged/pos.lemma.hr500k_ud.dev.conllu --shorthand hr_set --output_file temp.depparse.hr --mode train
 python -m stanfordnlp.models.parser --save_dir models/depparse/ --save_name SETimes.SR_ud --wordvec_file ~/data/clarin.si-embed/embed.sr-token.ft.sg.vec.xz --train_file pretagged/pos.lemma.SETimes.SR_ud.train+test.conllu --eval_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --gold_file pretagged/pos.lemma.SETimes.SR_ud.dev.conllu --shorthand sr_set --output_file temp.depparse.sr --mode train
+```
+
+### NER
+
+``` 
+python -m stanfordnlp.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.sl-token.ft.sg.vec.xz --train_file data/ssj500k.train+test.json --eval_file data/ssj500k.dev.json --lang sl --shorthand sl_ssj --mode train --save_dir models/ner/ --save_name ssj500k --scheme bio --batch_size 128
+python -m stanfordnlp.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.hr-token.ft.sg.vec.xz --train_file data/hr500k.train+test.json --eval_file data/hr500k.dev.json --lang hr --shorthand hr_set --mode train --save_dir models/ner/ --save_name hr500k --scheme bio --batch_size 128
+python -m stanfordnlp.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.sr-token.ft.sg.vec.xz --train_file data/SETimes.SR.train+test.json --eval_file data/SETimes.SR.dev.json --lang sr --shorthand sr_set --mode train --save_dir models/ner/ --save_name SETimes.SR --scheme bio --batch_size 128
 ```
 
 ## English training

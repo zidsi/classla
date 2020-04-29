@@ -16,10 +16,11 @@ class PretrainedWordVocab(BaseVocab):
 class Pretrain:
     """ A loader and saver for pretrained embeddings. """
 
-    def __init__(self, filename=None, vec_filename=None, max_vocab=-1):
+    def __init__(self, filename=None, vec_filename=None, max_vocab=-1, save_to_file=True):
         self.filename = filename
         self._vec_filename = vec_filename
         self._max_vocab = max_vocab
+        self._save_to_file = save_to_file
 
     @property
     def vocab(self):

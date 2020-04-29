@@ -36,7 +36,7 @@ For tokenization of Slovenian, compliant with standard training data and referen
 ### Part-of-speech tagging
 
 For now, there are available pre-trained models for part-of-speech tagging for 
-- standard Slovenian http://hdl.handle.net/11356/1251 
+- standard Slovenian http://hdl.handle.net/11356/1312 
 - standard Croatian http://hdl.handle.net/11356/1252 
 - standard Serbian http://hdl.handle.net/11356/1253
 

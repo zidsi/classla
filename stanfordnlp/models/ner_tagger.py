@@ -238,6 +238,7 @@ def evaluate(args):
 
     # load data
     print("Loading data with batch size {}...".format(args['batch_size']))
+    # TODO
     doc = Document(json.load(open(args['eval_file'])))
     batch = DataLoader(doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
 

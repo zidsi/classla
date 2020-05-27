@@ -1,5 +1,5 @@
 """
-Pipeline that runs tokenize,mwt,pos,lemma,depparse
+Pipeline that runs tokenize,mwt,pos,lemma,depparse,ner
 """
 
 import io
@@ -15,12 +15,13 @@ from stanfordnlp.pipeline.mwt_processor import MWTProcessor
 from stanfordnlp.pipeline.pos_processor import POSProcessor
 from stanfordnlp.pipeline.lemma_processor import LemmaProcessor
 from stanfordnlp.pipeline.depparse_processor import DepparseProcessor
+from stanfordnlp.pipeline.ner_processor import NERProcessor
 from stanfordnlp.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_languages, build_default_config
 
 DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{MWT},{POS},{LEMMA},{DEPPARSE}'
 
 NAME_TO_PROCESSOR_CLASS = {TOKENIZE: TokenizeProcessor, MWT: MWTProcessor, POS: POSProcessor,
-                           LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor}
+                           LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor, NER: NERProcessor}
 
 PIPELINE_SETTINGS = ['lang', 'shorthand', 'mode']
 
@@ -46,7 +47,8 @@ PROCESSOR_SETTINGS = {
                  'char_rec_dropout', 'composite_deep_biaff_hidden_dim', 'deep_biaff_hidden_dim', 'distance', 'dropout',
                  'eval_interval', 'hidden_dim', 'linearization', 'log_step', 'lr', 'max_grad_norm', 'max_steps',
                  'max_steps_before_stop', 'num_layers', 'optim', 'pretrain', 'rec_dropout', 'sample_train', 'seed',
-                 'shorthand', 'tag_emb_dim', 'transformed_dim', 'word_dropout', 'word_emb_dim', 'wordvec_dir']
+                 'shorthand', 'tag_emb_dim', 'transformed_dim', 'word_dropout', 'word_emb_dim', 'wordvec_dir'],
+    'ner': ['batch_size']
 }
 
 PROCESSOR_SETTINGS_LIST = \

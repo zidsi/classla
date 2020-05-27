@@ -40,6 +40,12 @@ class TokenizeProcessor(UDProcessor):
         generate CoNLL-U output
         """
         conllu_output_string = ""
+
+        # TODO: This was added for input, that is already in CoNLL-U format.
+        #       The conll_file attribute is added manually do the Document instance in that case.
+        if doc.text is None:
+            return
+
         if isinstance(doc.text, str):
             sentences = [sent.rstrip(' ').split() for sent in doc.text.rstrip('\n').split('\n') if sent]
         elif isinstance(doc.text, list):

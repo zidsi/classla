@@ -35,10 +35,13 @@ class NERProcessor(UDProcessor):
         idx = 0
         for i, sent in enumerate(preds):
             for j, ner_pred in enumerate(sent):
+                ner_pred = 'NER=' + ner_pred
+
                 misc_val = misc[idx]
                 if misc_val != '_':
-                    preds[i][j] = ner_pred + ',' + misc_val
+                    preds[i][j] = ner_pred + '|' + misc_val
+                else:
+                    preds[i][j] = ner_pred
                 idx += 1
 
         batch.conll.set(['misc'], [y for x in preds for y in x])
-        #batch.doc.set([doc.NER], [y for x in preds for y in x], to_token=True)

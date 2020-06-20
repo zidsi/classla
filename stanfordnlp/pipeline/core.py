@@ -89,14 +89,15 @@ class PipelineRequirementsException(Exception):
 
 class Pipeline:
 
-    def __init__(self, processors=DEFAULT_PROCESSORS_LIST, lang='en', models_dir=DEFAULT_MODEL_DIR, treebank=None,
-                 use_gpu=True, **kwargs):
+    def __init__(self, processors=DEFAULT_PROCESSORS_LIST, lang='sl', input_type='standard',
+                 models_dir=DEFAULT_MODEL_DIR, treebank=None, use_gpu=True, **kwargs):
         shorthand = default_treebanks[lang] if treebank is None else treebank
         config = build_default_config(shorthand, models_dir)
         config.update(kwargs)
         self.config = config
         self.config['processors'] = processors
         self.config['lang'] = lang
+        self.config['input_type'] = input_type
         self.config['shorthand'] = shorthand
         self.config['models_dir'] = models_dir
         self.processor_names = self.config['processors'].split(',')
@@ -105,7 +106,8 @@ class Pipeline:
         self.use_gpu = torch.cuda.is_available() and use_gpu
         print("Use device: {}".format("gpu" if self.use_gpu else "cpu"))
         # configs that are the same for all processors
-        pipeline_level_configs = {'lang': self.config['lang'], 'shorthand': self.config['shorthand'], 'mode': 'predict'}
+        pipeline_level_configs = {'lang': self.config['lang'], 'shorthand': self.config['shorthand'], 'mode': 'predict',
+                                  'input_type': self.config['input_type']}
         self.standardize_config_values()
         # set up processors
         pipeline_reqs_exceptions = []

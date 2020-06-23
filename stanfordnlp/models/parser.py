@@ -38,6 +38,7 @@ def parse_args():
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
     parser.add_argument('--shorthand', type=str, help="Treebank shorthand")
+    parser.add_argument('--multi_root', dest='multi_root', action='store_true', help="Allow multiple roots in trees (JOS)")
 
     parser.add_argument('--hidden_dim', type=int, default=400)
     parser.add_argument('--char_hidden_dim', type=int, default=400)

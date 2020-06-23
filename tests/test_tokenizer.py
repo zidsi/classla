@@ -2,7 +2,7 @@
 Basic testing of tokenization
 """
 
-import stanfordnlp
+import classla
 
 from tests import *
 
@@ -80,13 +80,13 @@ EN_DOC_PRETOKENIZED_LIST_GOLD_TOKENS = """
 
 
 def test_tokenize():
-    nlp = stanfordnlp.Pipeline(processors='tokenize', models_dir=TEST_MODELS_DIR, lang='en')
+    nlp = classla.Pipeline(processors='tokenize', models_dir=TEST_MODELS_DIR, lang='en')
     doc = nlp(EN_DOC)
     assert EN_DOC_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
 
 
 def test_pretokenized():
-    nlp = stanfordnlp.Pipeline(**{'processors': 'tokenize', 'models_dir': '.', 'lang': 'en',
+    nlp = classla.Pipeline(**{'processors': 'tokenize', 'models_dir': '.', 'lang': 'en',
                                   'tokenize_pretokenized': True})
     doc = nlp(EN_DOC_PRETOKENIZED)
     assert EN_DOC_PRETOKENIZED_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])

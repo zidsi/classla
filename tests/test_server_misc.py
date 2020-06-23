@@ -2,7 +2,7 @@
 Misc tests for the server
 """
 
-import stanfordnlp.server as corenlp
+import classla.server as corenlp
 
 EN_DOC = "Joe Smith lives in California."
 

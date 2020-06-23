@@ -17,3 +17,6 @@ logs/
 
 params/*/*.json
 !params/*/default.json
+
+build/
+dist/

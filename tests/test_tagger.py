@@ -2,7 +2,7 @@
 Basic testing of part of speech tagging
 """
 
-import stanfordnlp
+import classla
 
 from tests import *
 
@@ -21,6 +21,6 @@ EN_DOC_GOLD = """
 
 
 def test_part_of_speech():
-    nlp = stanfordnlp.Pipeline(**{'processors': 'tokenize,pos', 'models_dir': TEST_MODELS_DIR, 'lang': 'en'})
+    nlp = classla.Pipeline(**{'processors': 'tokenize,pos', 'models_dir': TEST_MODELS_DIR, 'lang': 'en'})
     doc = nlp(EN_DOC)
     assert EN_DOC_GOLD == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])

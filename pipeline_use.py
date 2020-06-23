@@ -1,6 +1,6 @@
-import stanfordnlp
-from stanfordnlp.pipeline.doc import Document
-from stanfordnlp.models.common.conll import CoNLLFile
+import classla
+from classla.pipeline.doc import Document
+from classla.models.common.conll import CoNLLFile
 
 
 config = {
@@ -19,7 +19,7 @@ config = {
     'ner_forward_charlm_path': None, 'ner_backward_charlm_path': None,
     'use_gpu': True
 }
-nlp = stanfordnlp.Pipeline(**config)
+nlp = classla.Pipeline(**config)
 
 # Because we already have CoNLL-U formated input, we need to skip the tokenization step.
 # This is currently done by setting the Documents text parameter as None. After that we also

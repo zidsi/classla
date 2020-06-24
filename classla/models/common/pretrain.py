@@ -5,8 +5,6 @@ import os
 import lzma
 import numpy as np
 import torch
-# import sys
-# sys.path.insert(0, '../../../classla')
 
 from .vocab import BaseVocab, VOCAB_PREFIX
 

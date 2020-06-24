@@ -11,21 +11,49 @@ from pathlib import Path
 
 # set home dir for default
 HOME_DIR = str(Path.home())
-DEFAULT_MODEL_DIR = os.path.join(HOME_DIR, 'stanfordnlp_resources')
-DEFAULT_MODELS_URL = 'http://nlp.stanford.edu/software/stanfordnlp_models'
-DEFAULT_DOWNLOAD_VERSION = 'latest'
+DEFAULT_MODEL_DIR = os.path.join(HOME_DIR, 'classla_resources')
+DEFAULT_MODELS_URL = 'https://www.clarin.si/repository/xmlui/bitstream/handle'
+# DEFAULT_DOWNLOAD_VERSION = 'latest'
 
 # list of language shorthands
-conll_shorthands = ['af_afribooms', 'ar_padt', 'bg_btb', 'bxr_bdt', 'ca_ancora', 'cs_cac', 'cs_fictree', 'cs_pdt', 'cu_proiel', 'da_ddt', 'de_gsd', 'el_gdt', 'en_ewt', 'en_gum', 'en_lines', 'es_ancora', 'et_edt', 'eu_bdt', 'fa_seraji', 'fi_ftb', 'fi_tdt', 'fr_gsd', 'fro_srcmf', 'fr_sequoia', 'fr_spoken', 'ga_idt', 'gl_ctg', 'gl_treegal', 'got_proiel', 'grc_perseus', 'grc_proiel', 'he_htb', 'hi_hdtb', 'hr_set', 'hsb_ufal', 'hu_szeged', 'hy_armtdp', 'id_gsd', 'it_isdt', 'it_postwita', 'ja_gsd', 'kk_ktb', 'kmr_mg', 'ko_gsd', 'ko_kaist', 'la_ittb', 'la_perseus', 'la_proiel', 'lv_lvtb', 'nl_alpino', 'nl_lassysmall', 'no_bokmaal', 'no_nynorsklia', 'no_nynorsk', 'pl_lfg', 'pl_sz', 'pt_bosque', 'ro_rrt', 'ru_syntagrus', 'ru_taiga', 'sk_snk', 'sl_ssj', 'sl_sst', 'sme_giella', 'sr_set', 'sv_lines', 'sv_talbanken', 'tr_imst', 'ug_udt', 'uk_iu', 'ur_udtb', 'vi_vtb', 'zh_gsd']
+conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set']
 
 # all languages with mwt
-mwt_languages = ['ar_padt', 'ca_ancora', 'cs_cac', 'cs_fictree', 'cs_pdt', 'de_gsd', 'el_gdt', 'es_ancora', 'fa_seraji', 'fi_ftb', 'fr_gsd', 'fr_sequoia', 'gl_ctg', 'gl_treegal', 'he_htb', 'hy_armtdp', 'it_isdt', 'it_postwita', 'kk_ktb', 'pl_sz', 'pt_bosque', 'tr_imst']
+mwt_languages = []
 
 # default treebank for languages
-default_treebanks = {'af': 'af_afribooms', 'grc': 'grc_proiel', 'ar': 'ar_padt', 'hy': 'hy_armtdp', 'eu': 'eu_bdt', 'bg': 'bg_btb', 'bxr': 'bxr_bdt', 'ca': 'ca_ancora', 'zh': 'zh_gsd', 'hr': 'hr_set', 'cs': 'cs_pdt', 'da': 'da_ddt', 'nl': 'nl_alpino', 'en': 'en_ewt', 'et': 'et_edt', 'fi': 'fi_tdt', 'fr': 'fr_gsd', 'gl': 'gl_ctg', 'de': 'de_gsd', 'got': 'got_proiel', 'el': 'el_gdt', 'he': 'he_htb', 'hi': 'hi_hdtb', 'hu': 'hu_szeged', 'id': 'id_gsd', 'ga': 'ga_idt', 'it': 'it_isdt', 'ja': 'ja_gsd', 'kk': 'kk_ktb', 'ko': 'ko_kaist', 'kmr': 'kmr_mg', 'la': 'la_ittb', 'lv': 'lv_lvtb', 'sme': 'sme_giella', 'no_bokmaal': 'no_bokmaal', 'no_nynorsk': 'no_nynorsk', 'cu': 'cu_proiel', 'fro': 'fro_srcmf', 'fa': 'fa_seraji', 'pl': 'pl_lfg', 'pt': 'pt_bosque', 'ro': 'ro_rrt', 'ru': 'ru_syntagrus', 'sr': 'sr_set', 'sk': 'sk_snk', 'sl': 'sl_ssj', 'es': 'es_ancora', 'sv': 'sv_talbanken', 'tr': 'tr_imst', 'uk': 'uk_iu', 'hsb': 'hsb_ufal', 'ur': 'ur_udtb', 'ug': 'ug_udt', 'vi': 'vi_vtb'}
+default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set'}
 
 # map processor name to file ending
-processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 'tagger', 'lemma': 'lemmatizer', 'depparse': 'parser'}
+processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 'tagger', 'lemma': 'lemmatizer',
+                       'depparse': 'parser', 'ner': 'ner'}
+
+model_links = {
+    'sl_ssj': {
+        '_tagger': '11356/1312/ssj500k',
+        '_lemmatizer': '11356/1286/ssj500k+Sloleks_lemmatizer.pt',
+        '_parser': '11356/1258/ssj500k_ud',
+        '_ner': '11356/1321/ssj500k',
+        '.pretrain': '11356/1312/ssj500k.pretrain.pt',
+        '_ner.pretrain': '11356/1321/ssj500k.pretrain.pt'
+    },
+    'hr_hr500k': {
+        '_tagger': '11356/1252/hr500k',
+        '_lemmatizer': '11356/1287/hr500k+hrLex_lemmatizer.pt',
+        '_parser': '11356/1259/hr500k_ud',
+        '_ner': '11356/1322/hr500k',
+        '.pretrain': '11356/1252/hr500k.pretrain.pt',
+        '_ner.pretrain': '11356/1322/hr500k.pretrain.pt'
+    },
+    'sr_set': {
+        '_tagger': '11356/1253/SETimes.SR',
+        '_lemmatizer': '11356/1288/SETimes.SR+srLex_lemmatizer.pt',
+        '_parser': '11356/1260/SETimes.SR_ud',
+        '_ner': '11356/1323/SETimes.SR',
+        '.pretrain': '11356/1253/SETimes.SR.pretrain.pt',
+        '_ner.pretrain': '11356/1323/SETimes.SR.pretrain.pt'
+    }
+}
 
 # functions for handling configs
 
@@ -36,7 +64,7 @@ def build_default_config(treebank, models_path):
     if treebank in mwt_languages:
         default_config['processors'] = 'tokenize,mwt,pos,lemma,depparse'
     else:
-        default_config['processors'] = 'tokenize,pos,lemma,depparse'
+        default_config['processors'] = 'tokenize,ner,pos,lemma,depparse'
     if treebank == 'vi_vtb':
         default_config['lemma_use_identity'] = True
         default_config['lemma_batch_size'] = 5000
@@ -46,6 +74,10 @@ def build_default_config(treebank, models_path):
         default_config[f"{processor}_model_path"] = os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")
         if processor in ['pos', 'depparse']:
             default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
+        if processor in ['ner']:
+            default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}_ner.pretrain.pt")
+            default_config[f"{processor}_forward_charlm_path"] = None
+            default_config[f"{processor}_backward_charlm_path"] = None
     return default_config
 
 
@@ -58,10 +90,24 @@ def load_config(config_file_path):
             loaded_config[config_key] = config_value.rstrip().lstrip()
     return loaded_config
 
+# download a part of ud model (i.e. ner part, pos part)
+def download_ud_model_part(download_file_path, download_url):
+    print('Download location: ' + download_file_path)
+
+    # initiate download
+    r = requests.get(download_url, stream=True)
+    with open(download_file_path, 'wb') as f:
+        file_size = int(r.headers.get('content-length'))
+        default_chunk_size = 67108864
+        with tqdm(total=file_size, unit='B', unit_scale=True) as pbar:
+            for chunk in r.iter_content(chunk_size=default_chunk_size):
+                if chunk:
+                    f.write(chunk)
+                    f.flush()
+                    pbar.update(len(chunk))
 
 # download a ud models zip file
-def download_ud_model(lang_name, resource_dir=None, should_unzip=True, confirm_if_exists=False, force=False,
-                      version=DEFAULT_DOWNLOAD_VERSION):
+def download_ud_model(lang_name, resource_dir=None, should_unzip=True, confirm_if_exists=False, force=False):
     # ask if user wants to download
     if resource_dir is not None and os.path.exists(os.path.join(resource_dir, f"{lang_name}_models")):
         if confirm_if_exists:
@@ -90,33 +136,21 @@ def download_ud_model(lang_name, resource_dir=None, should_unzip=True, confirm_i
             download_dir = resource_dir
         if not os.path.exists(download_dir):
             os.makedirs(download_dir)
+        lang_dir = os.path.join(download_dir, lang_name + '_models')
+        if not os.path.exists(lang_dir):
+            os.makedirs(lang_dir)
+
         print('')
         print('Downloading models for: '+lang_name)
-        model_zip_file_name = f'{lang_name}_models.zip'
-        download_url = f'{DEFAULT_MODELS_URL}/{version}/{model_zip_file_name}'
-        download_file_path = os.path.join(download_dir, model_zip_file_name)
-        print('Download location: '+download_file_path)
+        for model_part_type, download_url_part in model_links[lang_name].items():
+            model_part_file_name = f'{lang_name}{model_part_type}.pt'
+            download_url = f'{DEFAULT_MODELS_URL}/{download_url_part}'
+            download_file_path = os.path.join(lang_dir, model_part_file_name)
+            download_ud_model_part(download_file_path, download_url)
 
-        # initiate download
-        r = requests.get(download_url, stream=True)
-        with open(download_file_path, 'wb') as f:
-            file_size = int(r.headers.get('content-length'))
-            default_chunk_size = 67108864
-            with tqdm(total=file_size, unit='B', unit_scale=True) as pbar:
-                for chunk in r.iter_content(chunk_size=default_chunk_size):
-                    if chunk:
-                        f.write(chunk)
-                        f.flush()
-                        pbar.update(len(chunk))
         # unzip models file
         print('')
-        print('Download complete.  Models saved to: '+download_file_path)
-        if should_unzip:
-            unzip_ud_model(lang_name, download_file_path, download_dir)
-        # remove the zipe file
-        print("Cleaning up...", end="")
-        os.remove(download_file_path)
-        print('Done.')
+        print('Download complete.  Models saved to: '+lang_dir)
 
 
 # unzip a ud models zip file
@@ -127,13 +161,12 @@ def unzip_ud_model(lang_name, zip_file_src, zip_file_target):
 
 
 # main download function
-def download(download_label, resource_dir=None, confirm_if_exists=False, force=False, version=DEFAULT_DOWNLOAD_VERSION):
+def download(download_label, resource_dir=None, confirm_if_exists=False, force=False):
     if download_label in conll_shorthands:
-        download_ud_model(download_label, resource_dir=resource_dir, confirm_if_exists=confirm_if_exists, force=force,
-                          version=version)
+        download_ud_model(download_label, resource_dir=resource_dir, confirm_if_exists=confirm_if_exists, force=force)
     elif download_label in default_treebanks:
         print(f'Using the default treebank "{default_treebanks[download_label]}" for language "{download_label}".')
         download_ud_model(default_treebanks[download_label], resource_dir=resource_dir,
-                          confirm_if_exists=confirm_if_exists, force=force, version=version)
+                          confirm_if_exists=confirm_if_exists, force=force)
     else:
         raise ValueError(f'The language or treebank "{download_label}" is not currently supported by this function. Please try again with other languages or treebanks.')

@@ -18,7 +18,7 @@ from classla.pipeline.depparse_processor import DepparseProcessor
 from classla.pipeline.ner_processor import NERProcessor
 from classla.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_languages, build_default_config
 
-DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{MWT},{POS},{LEMMA},{DEPPARSE}'
+DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{NER},{POS},{LEMMA},{DEPPARSE}'
 
 NAME_TO_PROCESSOR_CLASS = {TOKENIZE: TokenizeProcessor, MWT: MWTProcessor, POS: POSProcessor,
                            LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor, NER: NERProcessor}
@@ -89,8 +89,8 @@ class PipelineRequirementsException(Exception):
 
 class Pipeline:
 
-    def __init__(self, processors=DEFAULT_PROCESSORS_LIST, lang='sl', input_type='standard',
-                 models_dir=DEFAULT_MODEL_DIR, treebank=None, use_gpu=True, **kwargs):
+    def __init__(self, lang='sl', models_dir=DEFAULT_MODEL_DIR, processors=DEFAULT_PROCESSORS_LIST,
+                 input_type='standard', treebank=None, use_gpu=True, **kwargs):
         shorthand = default_treebanks[lang] if treebank is None else treebank
         config = build_default_config(shorthand, models_dir)
         config.update(kwargs)

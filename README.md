@@ -101,7 +101,7 @@ For UD depency parsing, the pre-trained models are also available for
 - standard Croatian http://hdl.handle.net/11356/1259
 - standard Serbian http://hdl.handle.net/11356/1260
 
-Parsing Slovenian data, once models are placed in the ```models/lemma/``` directory, can be performed as follows:
+Parsing Slovenian data, once models are placed in the ```models/depparse/ directory, can be performed as follows:
 
 ```
 python -m classla.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file data/pos.lemma.ssj500k_ud.dev.conllu --gold_file data/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp --mode predict

@@ -58,6 +58,7 @@ For now, there are available pre-trained models for part-of-speech tagging for
 - standard Slovenian http://hdl.handle.net/11356/1312 
 - standard Croatian http://hdl.handle.net/11356/1252 
 - standard Serbian http://hdl.handle.net/11356/1253
+- standard Bulgarian http://hdl.handle.net/11356/1326
 
 Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovenian, (2) Croatian, or (3) Serbian)
 
@@ -77,6 +78,7 @@ Similarly to PoS tagging, there are pre-trained models for lemmatisation availab
 - standard Slovenian http://hdl.handle.net/11356/1286
 - standard Croatian http://hdl.handle.net/11356/1287
 - standard Serbian http://hdl.handle.net/11356/1288
+- standard Bulgarian http://hdl.handle.net/11356/1327
 
 Running the lemmatiser for Slovenian, if models are placed in the ```models/lemma/``` directory, can be performed as follows:
 ```
@@ -100,8 +102,9 @@ For UD depency parsing, the pre-trained models are also available for
 - standard Slovenian http://hdl.handle.net/11356/1258
 - standard Croatian http://hdl.handle.net/11356/1259
 - standard Serbian http://hdl.handle.net/11356/1260
+- standard Bulgarian http://hdl.handle.net/11356/1328
 
-Parsing Slovenian data, once models are placed in the ```models/depparse/ directory, can be performed as follows:
+Parsing Slovenian data, once models are placed in the ```models/depparse/``` directory, can be performed as follows:
 
 ```
 python -m classla.models.parser --save_dir models/depparse/ --save_name ssj500k_ud --eval_file data/pos.lemma.ssj500k_ud.dev.conllu --gold_file data/pos.lemma.ssj500k_ud.dev.conllu --shorthand sl_ssj --output_file temp --mode predict

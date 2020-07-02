@@ -21,7 +21,7 @@ class ReldiTokenizer():
     def __init__(self, lang='sl', mode='standard'):
         """ Construct a reldi-based tokenizer by loading the reldi pipeline.
         """
-        if lang not in ['sl', 'hr', 'sr']:
+        if lang not in ['sl', 'hr', 'sr', 'bg', 'mk']:
             raise Exception("Reldi tokenizer is currently only allowed in Slovene, Croatian and Serbian pipelines.")
 
         check_reldi()

@@ -21,8 +21,7 @@ class NERProcessor(UDProcessor):
     def _set_up_model(self, config, use_gpu):
         # set up trainer
         self._args = {'charlm_forward_file': config['forward_charlm_path'], 'charlm_backward_file': config['backward_charlm_path']}
-        self._pretrain = Pretrain(config['pretrain_path'])
-        self._trainer = Trainer(args=self._args, pretrain=self.pretrain, model_file=config['model_path'], use_cuda=use_gpu)
+        self._trainer = Trainer(args=self._args, model_file=config['model_path'], use_cuda=use_gpu)
 
     def process(self, document):
         # set up a eval-only data loader and skip tag preprocessing

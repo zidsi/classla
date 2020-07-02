@@ -18,7 +18,7 @@ from classla.pipeline.depparse_processor import DepparseProcessor
 from classla.pipeline.ner_processor import NERProcessor
 from classla.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_languages, build_default_config
 
-DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{NER},{POS},{LEMMA},{DEPPARSE}'
+DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{POS},{LEMMA},{DEPPARSE}'
 
 NAME_TO_PROCESSOR_CLASS = {TOKENIZE: TokenizeProcessor, MWT: MWTProcessor, POS: POSProcessor,
                            LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor, NER: NERProcessor}
@@ -90,14 +90,13 @@ class PipelineRequirementsException(Exception):
 class Pipeline:
 
     def __init__(self, lang='sl', models_dir=DEFAULT_MODEL_DIR, processors=DEFAULT_PROCESSORS_LIST,
-                 input_type='standard', treebank=None, use_gpu=True, **kwargs):
+                 treebank=None, use_gpu=True, **kwargs):
         shorthand = default_treebanks[lang] if treebank is None else treebank
         config = build_default_config(shorthand, models_dir)
         config.update(kwargs)
         self.config = config
         self.config['processors'] = processors
         self.config['lang'] = lang
-        self.config['input_type'] = input_type
         self.config['shorthand'] = shorthand
         self.config['models_dir'] = models_dir
         self.processor_names = self.config['processors'].split(',')
@@ -106,8 +105,7 @@ class Pipeline:
         self.use_gpu = torch.cuda.is_available() and use_gpu
         print("Use device: {}".format("gpu" if self.use_gpu else "cpu"))
         # configs that are the same for all processors
-        pipeline_level_configs = {'lang': self.config['lang'], 'shorthand': self.config['shorthand'], 'mode': 'predict',
-                                  'input_type': self.config['input_type']}
+        pipeline_level_configs = {'lang': self.config['lang'], 'shorthand': self.config['shorthand'], 'mode': 'predict'}
         self.standardize_config_values()
         # set up processors
         pipeline_reqs_exceptions = []

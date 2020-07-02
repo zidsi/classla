@@ -22,7 +22,7 @@ class TokenizeProcessor(UDProcessor):
 
     def _set_up_model(self, config, use_gpu):
         # set up trainer
-        self._reldi_tokenizer = ReldiTokenizer(config.get('lang'), config.get('input_type'))
+        self._reldi_tokenizer = ReldiTokenizer(config.get('lang'))
         if config.get('pretokenized'):
             self._trainer = None
 

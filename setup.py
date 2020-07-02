@@ -20,7 +20,7 @@ packages = find_packages(exclude=['data', 'docs', 'extern_data', 'figures', 'sav
 packages.append('classla.submodules.reldi_tokeniser')
 
 setup(
-    name='classla-lkrsnik',
+    name='classla',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -31,11 +31,11 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     # The project's main homepage.
-    url='https://github.com/lkrsnik/classla-stanfordnlp.git',
+    url='https://github.com/clarinsi/classla-stanfordnlp.git',
 
     # Author details
-    author='Clarinsi',
-    author_email='luka.krsnik2@hotmail.com',
+    author='CLARIN.SI',
+    author_email='info@clarin.si',
 
     # Choose your license
     license='Apache License 2.0',

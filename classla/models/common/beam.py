@@ -81,7 +81,7 @@ class Beam(object):
 
         # bestScoresId is flattened beam x word array, so calculate which
         # word and beam each score came from
-        prevK = bestScoresId / numWords
+        prevK = bestScoresId // numWords
         self.prevKs.append(prevK)
         self.nextYs.append(bestScoresId - prevK * numWords)
         if copy_indices is not None:

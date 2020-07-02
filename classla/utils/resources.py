@@ -16,13 +16,13 @@ DEFAULT_MODELS_URL = 'https://www.clarin.si/repository/xmlui/bitstream/handle'
 # DEFAULT_DOWNLOAD_VERSION = 'latest'
 
 # list of language shorthands
-conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set']
+conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb']
 
 # all languages with mwt
 mwt_languages = []
 
 # default treebank for languages
-default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set'}
+default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set', 'bg': 'bg_btb'}
 
 # map processor name to file ending
 processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 'tagger', 'lemma': 'lemmatizer',
@@ -34,24 +34,27 @@ model_links = {
         '_lemmatizer': '11356/1286/ssj500k+Sloleks_lemmatizer.pt',
         '_parser': '11356/1258/ssj500k_ud',
         '_ner': '11356/1321/ssj500k',
-        '.pretrain': '11356/1312/ssj500k.pretrain.pt',
-        '_ner.pretrain': '11356/1321/ssj500k.pretrain.pt'
+        '.pretrain': '11356/1312/ssj500k.pretrain.pt'
     },
     'hr_hr500k': {
         '_tagger': '11356/1252/hr500k',
         '_lemmatizer': '11356/1287/hr500k+hrLex_lemmatizer.pt',
         '_parser': '11356/1259/hr500k_ud',
         '_ner': '11356/1322/hr500k',
-        '.pretrain': '11356/1252/hr500k.pretrain.pt',
-        '_ner.pretrain': '11356/1322/hr500k.pretrain.pt'
+        '.pretrain': '11356/1252/hr500k.pretrain.pt'
     },
     'sr_set': {
         '_tagger': '11356/1253/SETimes.SR',
         '_lemmatizer': '11356/1288/SETimes.SR+srLex_lemmatizer.pt',
         '_parser': '11356/1260/SETimes.SR_ud',
         '_ner': '11356/1323/SETimes.SR',
-        '.pretrain': '11356/1253/SETimes.SR.pretrain.pt',
-        '_ner.pretrain': '11356/1323/SETimes.SR.pretrain.pt'
+        '.pretrain': '11356/1253/SETimes.SR.pretrain.pt'
+    },
+    'bg_btb': {
+        '_tagger': '11356/1326/BTB',
+        '_lemmatizer': '11356/1327/BTB_lemmatizer.pt',
+        '_parser': '11356/1328/BTB_ud',
+        '.pretrain': '11356/1326/BTB.pretrain.pt'
     }
 }
 
@@ -75,7 +78,7 @@ def build_default_config(treebank, models_path):
         if processor in ['pos', 'depparse']:
             default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
         if processor in ['ner']:
-            default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}_ner.pretrain.pt")
+            default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
             default_config[f"{processor}_forward_charlm_path"] = None
             default_config[f"{processor}_backward_charlm_path"] = None
     return default_config

@@ -7,7 +7,6 @@ config = {
     'processors': 'tokenize,ner,pos,lemma,depparse',
     'tokenize_pretokenized': True,
     'lang': 'sl',
-    'input_type': 'nonstandard',
     'pos_batch_size': 1000,
     'ner_forward_charlm_path': None, 'ner_backward_charlm_path': None,
     'use_gpu': True

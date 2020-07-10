@@ -1,21 +1,32 @@
-# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) For Processing South Slavic Languages 
+# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) For Processing Slovene, Croatian, Serbian and Bulgarian
+
+## Description
+
+This pipeline allows for processing of Slovene, Croatian, Serbian and Bulgarian on the levels of
+
+- tokenization and sentence splitting
+- part-of-speech tagging
+- lemmatization
+- dependency parsing
+- named entity recognition
+
 ## Installation
 ### pip
-We recommend that you install Classla via pip, the Python package manager. To install, run:
+We recommend that you install CLASSLA via pip, the Python package manager. To install, run:
 ```bash
 pip install classla
 ```
-This will also help to resolve all dependencies.
+This will also resolve all dependencies.
 
-## Running Classla
+## Running CLASSLA
 ### Getting started
-To run your first Classla pipeline, follow these steps:
+To run the CLASSLA pipeline for the first time, follow these steps:
 ```python
 >>> import classla
->>> classla.download('sl')                            # to download models in Slovene
->>> nlp = classla.Pipeline('sl')                      # to initialize default Slovene pipeline
->>> doc = nlp("France Prešeren je rojen v Vrbi.")     # to run pipeline
->>> print(doc.conll_file.conll_as_string())           # to print output in conllu format
+>>> classla.download('sl')                            # download models for Slovene
+>>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline
+>>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
+>>> print(doc.conll_file.conll_as_string())           # print the output in CoNLL-U format
 # newpar id = 1
 # sent_id = 1.1
 # text = France Prešeren je rojen v Vrbi.
@@ -28,32 +39,40 @@ To run your first Classla pipeline, follow these steps:
 7	.	.	PUNCT	Z	_	4	punct	_	NER=O
 ```
 
-You can also look into ```pipeline_demo.py``` file for usage examples.
+You can also consult the ```pipeline_demo.py``` file for usage examples.
 
 ## Processors
 
-Classla pipeline is built from multiple units. These units are called processors. By default classla runs tokenize, ner, pos, lemma and depparse processors.
+The CLASSLA pipeline is built from multiple units. These units are called processors. By default CLASSLA runs the ```tokenize```, ```ner```, ```pos```, ```lemma``` and ```depparse``` processors.
 
-You can specify which processors classla runs, with ```processors``` attribute as in the following example.
+You can specify which processors `CLASSLA should run, via the ```processors``` attribute as in the following example, performing tokenization, named entity recognition, part-of-speech tagging and lemmatization.
 
 ```python
 >>> nlp = classla.Pipeline('sl', processors='tokenize,ner,pos,lemma')
 ```
 
-### Tokenization (tokenize)
+Another popular option might be to perform tokenization, part-of-speech tagging, lemmatization and dependency parsing.
 
-In case you already have tokenized text, you should split the text (with i.e. spaces) and pass attribute ```tokenize_pretokenized=True```.
+```python
+>>> nlp = classla.Pipeline('sl', processors='tokenize,pos,lemma,depparse')
+```
 
-By default classla uses a rule-based tokenizer - [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser).
+### Tokenization and sentence splitting
 
-Most important attributes:
+The tokenization and sentence splitting processor ```tokenize``` is the first processor and is required for any further processing.
+
+In case you already have tokenized text, you should separate tokens via spaces and pass the attribute ```tokenize_pretokenized=True```.
+
+By default CLASSLA uses a rule-based tokenizer - [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser).
+
+<!--Most important attributes:
 ```
 tokenize_pretokenized   - [boolean]     ignores tokenizer
-```
+```-->
 
-### Part-of-speech tagging (pos)
+### Part-of-speech tagging
 
-Pos tagging processor will create output, that will contain part-of-speech tags and other features presented on [universal dependencies webiste](https://universaldependencies.org/u/feat/index.html) . It is optional and requires you to use tokenize processor beforehand.
+The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org) . This processing is optional and requires you to use tokenize processor beforehand.
 
 <!--Most important attributes:
 ```
@@ -61,14 +80,14 @@ pos_model_path          - [str]         alternative path to model file
 pos_pretrain_path       - [str]         alternative path to pretrain file
 ```-->
 
-### Lemmatisation (lemma)
+### Lemmatisation
 
-Lemmatization processor will produce lemmas for each word in input. It requires the usage of both tokenize and pos processors.
+The lemmatization processor ```lemma``` will produce lemmas (basic forms) for each token in the input. It requires the usage of both the ```tokenize``` and ```pos``` processors.
 
-### Parsing (depparse)
+### Dependency parsing
 
-Parsing processor (named ```depparse``` in code) creates connections between words explained on [universal dependencies website](https://universaldependencies.org/introduction.html#:~:text=Universal%20Dependencies%20(UD)%20is%20a,from%20a%20language%20typology%20perspective.) . It requires tokenizer and pos processors.
+The dependency parsing processor ```depparse``` performs syntactic dependency parsing of sentences following the [Universal Dependencies formalism](https://universaldependencies.org/introduction.html#:~:text=Universal%20Dependencies%20(UD)%20is%20a,from%20a%20language%20typology%20perspective.). It requires the ```tokenize``` and ```pos``` processors.
 
-### NER (ner)
+### Named entity recognition
 
-Ner processor will try to find named entities in text. It requires tokenize processor.
+The named entity recognition processor ```ner``` identifies named entities in text following the IOB2 format. It requires only the ```tokenize``` processor.

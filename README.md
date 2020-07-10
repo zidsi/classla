@@ -21,7 +21,7 @@ This will also resolve all dependencies.
 ## Running CLASSLA
 ### Getting started
 To run the CLASSLA pipeline for the first time, follow these steps:
-```python
+```
 >>> import classla
 >>> classla.download('sl')                            # download models for Slovene
 >>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline
@@ -72,7 +72,7 @@ tokenize_pretokenized   - [boolean]     ignores tokenizer
 
 ### Part-of-speech tagging
 
-The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org) . This processing is optional and requires you to use tokenize processor beforehand.
+The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org) . This processing requires the usage of the ```tokenize``` processor.
 
 <!--Most important attributes:
 ```
@@ -80,7 +80,7 @@ pos_model_path          - [str]         alternative path to model file
 pos_pretrain_path       - [str]         alternative path to pretrain file
 ```-->
 
-### Lemmatisation
+### Lemmatization
 
 The lemmatization processor ```lemma``` will produce lemmas (basic forms) for each token in the input. It requires the usage of both the ```tokenize``` and ```pos``` processors.
 
@@ -90,4 +90,4 @@ The dependency parsing processor ```depparse``` performs syntactic dependency pa
 
 ### Named entity recognition
 
-The named entity recognition processor ```ner``` identifies named entities in text following the IOB2 format. It requires only the ```tokenize``` processor.
+The named entity recognition processor ```ner``` identifies named entities in text following the [IOB2](https://en.wikipedia.org/wiki/Inside–outside–beginning_(tagging)) format. It requires only the ```tokenize``` processor.

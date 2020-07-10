@@ -2,7 +2,7 @@
 Basic testing of multi-word-token expansion
 """
 
-import stanfordnlp
+import classla
 
 from tests import *
 
@@ -70,7 +70,7 @@ word: .        		token parent:26-.
 
 
 def test_mwt():
-    pipeline = stanfordnlp.Pipeline(processors='tokenize,mwt', models_dir=TEST_MODELS_DIR, lang='fr')
+    pipeline = classla.Pipeline(processors='tokenize,mwt', models_dir=TEST_MODELS_DIR, lang='fr')
     doc = pipeline(FR_MWT_SENTENCE)
     token_to_words = "\n".join(
         [f'token: {token.text.ljust(9)}\t\twords: {token.words}' for sent in doc.sentences for token in sent.tokens]

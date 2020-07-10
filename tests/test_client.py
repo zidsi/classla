@@ -3,7 +3,7 @@ Tests that call a running CoreNLPClient.
 """
 
 import pytest
-import stanfordnlp.server as corenlp
+import classla.server as corenlp
 import shlex
 import subprocess
 

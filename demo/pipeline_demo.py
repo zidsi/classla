@@ -6,8 +6,8 @@ import sys
 import argparse
 import os
 
-import stanfordnlp
-from stanfordnlp.utils.resources import DEFAULT_MODEL_DIR
+import classla
+from classla.utils.resources import DEFAULT_MODEL_DIR
 
 
 if __name__ == '__main__':
@@ -30,11 +30,11 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # download the models
-    stanfordnlp.download(args.lang, args.models_dir, confirm_if_exists=True)
+    classla.download(args.lang, args.models_dir, confirm_if_exists=True)
     # set up a pipeline
     print('---')
     print('Building pipeline...')
-    pipeline = stanfordnlp.Pipeline(models_dir=args.models_dir, lang=args.lang, use_gpu=(not args.cpu))
+    pipeline = classla.Pipeline(models_dir=args.models_dir, lang=args.lang, use_gpu=(not args.cpu))
     # process the document
     doc = pipeline(example_sentences[args.lang])
     # access nlp annotations

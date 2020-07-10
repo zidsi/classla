@@ -3,10 +3,10 @@ Test the requirements functionality for processors
 """
 
 import pytest
-import stanfordnlp
+import classla
 
-from stanfordnlp.pipeline.core import PipelineRequirementsException
-from stanfordnlp.pipeline.processor import ProcessorRequirementsException
+from classla.pipeline.core import PipelineRequirementsException
+from classla.pipeline.processor import ProcessorRequirementsException
 from tests import *
 
 
@@ -57,7 +57,7 @@ def test_missing_requirements():
     pipeline_fails = 0
     for bad_config, gold_exceptions in bad_config_lists:
         try:
-            stanfordnlp.Pipeline(**bad_config)
+            classla.Pipeline(**bad_config)
         except PipelineRequirementsException as e:
             pipeline_fails += 1
             assert isinstance(e, PipelineRequirementsException)

@@ -2,10 +2,10 @@
 Tests for starting a server in Python code
 """
 
-import stanfordnlp.server as corenlp
+import classla.server as corenlp
 import time
 
-from stanfordnlp.server.client import AnnotationException
+from classla.server.client import AnnotationException
 from tests import *
 
 EN_DOC = "Joe Smith lives in California."

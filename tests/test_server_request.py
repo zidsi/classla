@@ -4,9 +4,9 @@ Tests for setting request properties of servers
 
 import json
 import pytest
-import stanfordnlp.server as corenlp
+import classla.server as corenlp
 
-from stanfordnlp.protobuf import Document
+from classla.protobuf import Document
 from tests import TEST_WORKING_DIR
 
 EN_DOC = "Joe Smith lives in California."

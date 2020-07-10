@@ -23,8 +23,8 @@ This will also resolve all dependencies.
 To run the CLASSLA pipeline for the first time, follow these steps:
 ```
 >>> import classla
->>> classla.download('sl')                            # download models for Slovene
->>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline
+>>> classla.download('sl')                            # download models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian
+>>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
 >>> print(doc.conll_file.conll_as_string())           # print the output in CoNLL-U format
 # newpar id = 1
@@ -72,7 +72,7 @@ tokenize_pretokenized   - [boolean]     ignores tokenizer
 
 ### Part-of-speech tagging
 
-The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org) . This processing requires the usage of the ```tokenize``` processor.
+The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org). This processing requires the usage of the ```tokenize``` processor.
 
 <!--Most important attributes:
 ```

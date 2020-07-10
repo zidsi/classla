@@ -49,3 +49,7 @@ if __name__ == '__main__':
     print('dependency parse of first sentence: ')
     doc.sentences[0].print_dependencies()
     print('')
+    print('---')
+    print('CoNLL-U output:')
+    print(doc.conll_file.conll_as_string())
+    print('')

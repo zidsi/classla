@@ -54,6 +54,7 @@ model_links = {
         '_tagger': '11356/1326/BTB',
         '_lemmatizer': '11356/1327/BTB_lemmatizer.pt',
         '_parser': '11356/1328/BTB_ud',
+        '_ner': '11356/1329/BTB',
         '.pretrain': '11356/1326/BTB.pretrain.pt'
     }
 }

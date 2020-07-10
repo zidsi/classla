@@ -18,7 +18,7 @@ from classla.pipeline.depparse_processor import DepparseProcessor
 from classla.pipeline.ner_processor import NERProcessor
 from classla.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_languages, build_default_config
 
-DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{POS},{LEMMA},{DEPPARSE}'
+DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{NER},{POS},{LEMMA},{DEPPARSE}'
 
 NAME_TO_PROCESSOR_CLASS = {TOKENIZE: TokenizeProcessor, MWT: MWTProcessor, POS: POSProcessor,
                            LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor, NER: NERProcessor}

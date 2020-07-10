@@ -20,10 +20,10 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--cpu', action='store_true', help='Use cpu as the device.')
     args = parser.parse_args()
 
-    example_sentences = {"sl": "France Prešeren je rojen v Vrbi",
-                         "hr": "Ante Starčević rođen je u Velikom Žitniku",
-                         "sr": "Slobodan Jovanović rođen je u Novom Sadu",
-                         "bg": "Алеко Константинов е роден в Свищов"}
+    example_sentences = {"sl": "France Prešeren je rojen v Vrbi.",
+                         "hr": "Ante Starčević rođen je u Velikom Žitniku.",
+                         "sr": "Slobodan Jovanović rođen je u Novom Sadu.",
+                         "bg": "Алеко Константинов е роден в Свищов."}
 
     if args.lang not in example_sentences:
         print(f'Sorry, but we don\'t have a demo sentence for "{args.lang}" for the moment. Try one of these languages: {list(example_sentences.keys())}')

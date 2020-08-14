@@ -23,11 +23,13 @@ mwt_languages = []
 
 # default treebank for languages
 default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set', 'bg': 'bg_btb'}
+default_nonstandard_treebanks = {'sl': 'sl_nonstandard', 'hr': 'hr_nonstandard', 'sr': 'sr_nonstandard'}
 
 # map processor name to file ending
 processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 'tagger', 'lemma': 'lemmatizer',
                        'depparse': 'parser', 'ner': 'ner'}
 
+# TODO ADD NONSTANDARD LINKS HERE
 model_links = {
     'sl_ssj': {
         '_tagger': '11356/1312/ssj500k',
@@ -56,6 +58,21 @@ model_links = {
         '_parser': '11356/1328/BTB_ud',
         '_ner': '11356/1329/BTB',
         '.pretrain': '11356/1326/BTB.pretrain.pt'
+    },
+    'sl_nonstandard': {
+        '_tagger': '11356/1337/sl_nstd',
+        '_lemmatizer': '11356/1338/sl_all_Sloleks_lemmatizer.pt',
+        '_ner': '11356/1339/sl_nstd'
+    },
+    'hr_nonstandard': {
+        '_tagger': '11356/1331/hr_nstd',
+        '_lemmatizer': '11356/1333/hr_all_hrLex_lemmatizer.pt',
+        '_ner': '11356/1340/hr_nstd'
+    },
+    'sr_nonstandard': {
+        '_tagger': '11356/1332/sr_nstd',
+        '_lemmatizer': '11356/1334/sr_all_srLex_lemmatizer.pt',
+        '_ner': '11356/1341/sr_nstd'
     }
 }
 
@@ -63,23 +80,28 @@ model_links = {
 
 
 # given a language and models path, build a default configuration
-def build_default_config(treebank, models_path):
+def build_default_config(treebank, models_path, fallback_treebank):
     default_config = {}
-    if treebank in mwt_languages:
-        default_config['processors'] = 'tokenize,mwt,pos,lemma,depparse'
-    else:
-        default_config['processors'] = 'tokenize,ner,pos,lemma,depparse'
-    if treebank == 'vi_vtb':
-        default_config['lemma_use_identity'] = True
-        default_config['lemma_batch_size'] = 5000
+    default_config['processors'] = 'tokenize,ner,pos,lemma,depparse'
     treebank_dir = os.path.join(models_path, f"{treebank}_models")
+    fallback_treebank_dir = os.path.join(models_path, f"{fallback_treebank}_models") if fallback_treebank is not None else None
     for processor in default_config['processors'].split(','):
         model_file_ending = f"{processor_to_ending[processor]}.pt"
-        default_config[f"{processor}_model_path"] = os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")
+        if os.path.exists(os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")) or fallback_treebank is None:
+            default_config[f"{processor}_model_path"] = os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")
+        else:
+            default_config[f"{processor}_model_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}_{model_file_ending}")
         if processor in ['pos', 'depparse']:
-            default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
+            if os.path.exists(os.path.join(treebank_dir, f"{treebank}.pretrain.pt")):
+                default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
+            else:
+                default_config[f"{processor}_pretrain_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}.pretrain.pt")
+
         if processor in ['ner']:
-            default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
+            if os.path.exists(os.path.join(treebank_dir, f"{treebank}.pretrain.pt")):
+                default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
+            else:
+                default_config[f"{processor}_pretrain_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}.pretrain.pt")
             default_config[f"{processor}_forward_charlm_path"] = None
             default_config[f"{processor}_backward_charlm_path"] = None
     return default_config
@@ -165,12 +187,19 @@ def unzip_ud_model(lang_name, zip_file_src, zip_file_target):
 
 
 # main download function
-def download(download_label, resource_dir=None, confirm_if_exists=False, force=False):
+def download(download_label, resource_dir=None, confirm_if_exists=False, force=False, type='standard'):
     if download_label in conll_shorthands:
         download_ud_model(download_label, resource_dir=resource_dir, confirm_if_exists=confirm_if_exists, force=force)
     elif download_label in default_treebanks:
+        if type == 'nonstandard' and download_label not in default_nonstandard_treebanks:
+            raise ValueError(
+                f'The language or treebank "{download_label}" is not currently supported for nonstandard languages by this function. Please try again with standard type or other languages or treebanks.')
+
         print(f'Using the default treebank "{default_treebanks[download_label]}" for language "{download_label}".')
         download_ud_model(default_treebanks[download_label], resource_dir=resource_dir,
                           confirm_if_exists=confirm_if_exists, force=force)
+        if type == 'nonstandard':
+            download_ud_model(default_nonstandard_treebanks[download_label], resource_dir=resource_dir,
+                              confirm_if_exists=confirm_if_exists, force=force)
     else:
         raise ValueError(f'The language or treebank "{download_label}" is not currently supported by this function. Please try again with other languages or treebanks.')

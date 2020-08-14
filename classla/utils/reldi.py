@@ -18,7 +18,7 @@ def check_reldi():
 
 
 class ReldiTokenizer():
-    def __init__(self, lang='sl', mode='standard'):
+    def __init__(self, lang='sl', type='standard'):
         """ Construct a reldi-based tokenizer by loading the reldi pipeline.
         """
         if lang not in ['sl', 'hr', 'sr', 'bg', 'mk']:
@@ -28,7 +28,7 @@ class ReldiTokenizer():
         from classla.submodules.reldi_tokeniser import tokeniser
         self.nlp = tokeniser
         self.lang = lang
-        self.mode = mode
+        self.type = type
 
     def _reldi_tokenizer(self, input, par_id):
         """
@@ -69,6 +69,6 @@ class ReldiTokenizer():
         conllu_output_string = ''
         tokenizer = self.nlp.generate_tokenizer(self.lang)
         for par_id, text in enumerate(raw_text.split('\n')):
-            conllu_output_string += self._reldi_tokenizer(self.nlp.process[self.mode](tokenizer, text, self.lang), par_id + 1)
+            conllu_output_string += self._reldi_tokenizer(self.nlp.process[self.type](tokenizer, text, self.lang), par_id + 1)
 
         document.conll_file = conll.CoNLLFile(input_str=conllu_output_string)

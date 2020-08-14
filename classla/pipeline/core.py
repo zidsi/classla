@@ -92,6 +92,7 @@ class Pipeline:
 
     def __init__(self, lang='sl', models_dir=DEFAULT_MODEL_DIR, processors=DEFAULT_PROCESSORS_LIST,
                  treebank=None, use_gpu=True, type='standard', **kwargs):
+        assert type == 'standard' or type == 'nonstandard', 'Invalid value of attribute type. It should be either standard or nonstandard.'
         fallback_shorthand = None
         if type == 'standard':
             shorthand = default_treebanks[lang] if treebank is None else treebank

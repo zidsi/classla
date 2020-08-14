@@ -188,6 +188,7 @@ def unzip_ud_model(lang_name, zip_file_src, zip_file_target):
 
 # main download function
 def download(download_label, resource_dir=None, confirm_if_exists=False, force=False, type='standard'):
+    assert type == 'standard' or type == 'nonstandard', 'Invalid value of attribute type. It should be either standard or nonstandard.'
     if download_label in conll_shorthands:
         download_ud_model(download_label, resource_dir=resource_dir, confirm_if_exists=confirm_if_exists, force=force)
     elif download_label in default_treebanks:

@@ -14,6 +14,7 @@ HOME_DIR = str(Path.home())
 DEFAULT_MODEL_DIR = os.path.join(HOME_DIR, 'classla_resources')
 DEFAULT_MODELS_URL = 'https://www.clarin.si/repository/xmlui/bitstream/handle'
 # DEFAULT_DOWNLOAD_VERSION = 'latest'
+NONSTANDARD_PROCESSORS = ['pos', 'lemma', 'ner']
 
 # list of language shorthands
 conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb']
@@ -87,21 +88,18 @@ def build_default_config(treebank, models_path, fallback_treebank):
     fallback_treebank_dir = os.path.join(models_path, f"{fallback_treebank}_models") if fallback_treebank is not None else None
     for processor in default_config['processors'].split(','):
         model_file_ending = f"{processor_to_ending[processor]}.pt"
-        if os.path.exists(os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")) or fallback_treebank is None:
+        if os.path.exists(os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")) or fallback_treebank is None or processor in ['tokenize']:
             default_config[f"{processor}_model_path"] = os.path.join(treebank_dir, f"{treebank}_{model_file_ending}")
         else:
+            assert processor not in NONSTANDARD_PROCESSORS, "Nonstandard models not available! You may download them using 'classla.download(<LANGUAGE>, type='nonstandard')' command."
             default_config[f"{processor}_model_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}_{model_file_ending}")
-        if processor in ['pos', 'depparse']:
+        if processor in ['pos', 'depparse', 'ner']:
             if os.path.exists(os.path.join(treebank_dir, f"{treebank}.pretrain.pt")):
                 default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
             else:
                 default_config[f"{processor}_pretrain_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}.pretrain.pt")
 
         if processor in ['ner']:
-            if os.path.exists(os.path.join(treebank_dir, f"{treebank}.pretrain.pt")):
-                default_config[f"{processor}_pretrain_path"] = os.path.join(treebank_dir, f"{treebank}.pretrain.pt")
-            else:
-                default_config[f"{processor}_pretrain_path"] = os.path.join(fallback_treebank_dir, f"{fallback_treebank}.pretrain.pt")
             default_config[f"{processor}_forward_charlm_path"] = None
             default_config[f"{processor}_backward_charlm_path"] = None
     return default_config

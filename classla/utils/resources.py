@@ -17,7 +17,7 @@ DEFAULT_MODELS_URL = 'https://www.clarin.si/repository/xmlui/bitstream/handle'
 NONSTANDARD_PROCESSORS = ['pos', 'lemma', 'ner']
 
 # list of language shorthands
-conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb']
+conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb', 'sl_ssj_jos']
 
 # all languages with mwt
 mwt_languages = []
@@ -74,6 +74,13 @@ model_links = {
         '_tagger': '11356/1332/sr_nstd',
         '_lemmatizer': '11356/1334/sr_all_srLex_lemmatizer.pt',
         '_ner': '11356/1341/sr_nstd'
+    },
+    'sl_ssj_jos': {
+        '_tagger': '11356/1312/ssj500k',
+        '_lemmatizer': '11356/1286/ssj500k+Sloleks_lemmatizer.pt',
+        '_parser': '11356/1325/ssj500k_jos',
+        '_ner': '11356/1321/ssj500k',
+        '.pretrain': '11356/1312/ssj500k.pretrain.pt'
     }
 }
 

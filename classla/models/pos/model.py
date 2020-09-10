@@ -11,7 +11,7 @@ from classla.models.common.vocab import CompositeVocab
 from classla.models.common.char_model import CharacterModel
 
 class Tagger(nn.Module):
-    def __init__(self, args, vocab, emb_matrix=None, share_hid=False):
+    def __init__(self, args, vocab, emb_matrix=None, share_hid=False, constrain_via_lexicon=None):
         super().__init__()
 
         self.vocab = vocab
@@ -125,6 +125,11 @@ class Tagger(nn.Module):
         upos_hid = F.relu(self.upos_hid(self.drop(lstm_outputs)))
         upos_pred = self.upos_clf(self.drop(upos_hid))
 
+        # a3 = pad(upos_pred)
+        a3 = pad(upos_pred)
+        a4 = pad(upos_pred).max(2)
+        a5 = pad(upos_pred).max(2)[1]
+
         preds = [pad(upos_pred).max(2)[1]]
 
         upos = pack(upos).data
@@ -157,6 +162,8 @@ class Tagger(nn.Module):
         else:
             xpos_pred = clffunc(self.xpos_clf, xpos_hid)
             loss += self.crit(xpos_pred.view(-1, xpos_pred.size(-1)), xpos.view(-1))
+            if constrain_via_lexicon:
+                pass
             preds.append(pad(xpos_pred).max(2)[1])
 
         ufeats_preds = []

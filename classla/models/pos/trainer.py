@@ -7,6 +7,7 @@ import torch
 from torch import nn
 
 from classla.models.common.trainer import Trainer as BaseTrainer
+from classla.models.lemma.trainer import Trainer as LemmaTrainer
 from classla.models.common import utils, loss
 from classla.models.pos.model import Tagger
 from classla.models.pos.vocab import MultiVocab
@@ -25,14 +26,15 @@ def unpack_batch(batch, use_cuda):
 
 class Trainer(BaseTrainer):
     """ A trainer for training models. """
-    def __init__(self, args=None, vocab=None, pretrain=None, model_file=None, use_cuda=False):
+    def __init__(self, args=None, vocab=None, pretrain=None, model_file=None, use_cuda=False, constrain_via_lexicon=None):
         self.use_cuda = use_cuda
         if model_file is not None:
             # load everything from file
-            self.load(pretrain, model_file)
+            self.load(pretrain, model_file, constrain_via_lexicon=constrain_via_lexicon)
         else:
             assert all(var is not None for var in [args, vocab, pretrain])
             # build model from scratch
+            args['constrain_via_lexicon'] = constrain_via_lexicon
             self.args = args
             self.vocab = vocab
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb, share_hid=args['share_hid'])
@@ -96,7 +98,7 @@ class Trainer(BaseTrainer):
         except BaseException:
             print("[Warning: Saving failed... continuing anyway.]")
 
-    def load(self, pretrain, filename):
+    def load(self, pretrain, filename, constrain_via_lexicon=None):
         try:
             checkpoint = torch.load(filename, lambda storage, loc: storage)
         except BaseException:
@@ -104,6 +106,8 @@ class Trainer(BaseTrainer):
             sys.exit(1)
         self.args = checkpoint['config']
         self.vocab = MultiVocab.load_state_dict(checkpoint['vocab'])
+        if constrain_via_lexicon:
+            lemma_trainer = LemmaTrainer(model_file=constrain_via_lexicon)
         self.model = Tagger(self.args, self.vocab, emb_matrix=pretrain.emb, share_hid=self.args['share_hid'])
         self.model.load_state_dict(checkpoint['model'], strict=False)
 

@@ -31,6 +31,7 @@ def parse_args():
     parser.add_argument('--eval_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
+    parser.add_argument('--constrain_via_lexicon', type=str, default=None, help="Input location of lemmatization model.")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
@@ -217,7 +218,9 @@ def evaluate(args):
     # load model
     print("Loading model from: {}".format(model_file))
     use_cuda = args['cuda'] and not args['cpu']
-    trainer = Trainer(pretrain=pretrain, model_file=model_file, use_cuda=use_cuda)
+    constrain_via_lexicon = args['constrain_via_lexicon']
+
+    trainer = Trainer(pretrain=pretrain, model_file=model_file, use_cuda=use_cuda, constrain_via_lexicon=constrain_via_lexicon)
     loaded_args, vocab = trainer.args, trainer.vocab
 
     # load config

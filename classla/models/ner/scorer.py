@@ -21,12 +21,12 @@ def score_by_entity(pred_tag_sequences, gold_tag_sequences, verbose=True):
     """
     assert(len(gold_tag_sequences) == len(pred_tag_sequences)), \
         "Number of predicted tag sequences does not match gold sequences."
-    
+
     def decode_all(tag_sequences):
         # decode from all sequences, each sequence with a unique id
         ents = []
         for sent_id, tags in enumerate(tag_sequences):
-            for ent in decode_from_bioes(tags):
+            for ent in decode_from_bioes([e.upper() for e in tags]): # dirty hack given that predictions are uppercased due to a consistent bug in training data
                 ent['sent_id'] = sent_id
                 ents += [ent]
         return ents

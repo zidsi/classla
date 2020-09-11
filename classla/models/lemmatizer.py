@@ -37,7 +37,7 @@ def parse_args():
 
     parser.add_argument('--no_dict', dest='ensemble_dict', action='store_false', help='Do not ensemble dictionary with seq2seq. By default use ensemble.')
     parser.add_argument('--dict_only', action='store_true', help='Only train a dictionary-based lemmatizer.')
-    parser.add_argument('--external_dict', type=str, default=None, help='External dictionary in form (token, lemma, UPOS, feats)')
+    parser.add_argument('--external_dict', type=str, default=None, help='External dictionary in form (token, lemma, XPOS)')
 
     parser.add_argument('--hidden_dim', type=int, default=200)
     parser.add_argument('--emb_dim', type=int, default=50)
@@ -48,7 +48,7 @@ def parse_args():
     parser.add_argument('--beam_size', type=int, default=1)
 
     parser.add_argument('--attn_type', default='soft', choices=['soft', 'mlp', 'linear', 'deep'], help='Attention type')
-    parser.add_argument('--pos', action='store_true', help='Use UPOS in lemmatization.')
+    parser.add_argument('--pos', action='store_true', help='Use XPOS in lemmatization.')
     parser.add_argument('--pos_dim', type=int, default=50)
     parser.add_argument('--pos_dropout', type=float, default=0.5)
     parser.add_argument('--no_edit', dest='edit', action='store_false', help='Do not use edit classifier in lemmatization. By default use an edit classifier.')
@@ -125,17 +125,17 @@ def train(args):
     # train a dictionary-based lemmatizer
     trainer = Trainer(args=args, vocab=vocab, use_cuda=args['cuda'])
     print("[Training dictionary-based lemmatizer...]")
-    dict = train_batch.conll.get(['word', 'upos', 'feats', 'lemma'])
-    dict = [(e[0].lower(), e[1], e[2], e[3]) for e in dict]
+    dict = train_batch.conll.get(['word', 'xpos', 'lemma'])
+    dict = [(e[0].lower(), e[1], e[2]) for e in dict]
     if args.get('external_dict', None) is not None:
         extra_dict = []
         for line in open(args['external_dict']):
-            word,lemma,upos,feats = line.rstrip('\r\n').split('\t')
-            extra_dict.append((word.lower(),upos,feats,lemma))
-        dict += extra_dict
+            word,lemma,xpos = line.rstrip('\r\n').split('\t')
+            extra_dict.append((word.lower(),xpos,lemma))
+        dict = extra_dict + dict
     trainer.train_dict(dict)
     print("Evaluating on dev set...")
-    dev_preds = trainer.predict_dict([(e[0].lower(),e[1],e[2]) for e in dev_batch.conll.get(['word', 'upos', 'feats'])])
+    dev_preds = trainer.predict_dict([(e[0].lower(),e[1]) for e in dev_batch.conll.get(['word', 'xpos'])])
     dev_batch.conll.write_conll_with_lemmas(dev_preds, system_pred_file)
     _, _, dev_f = scorer.score(system_pred_file, gold_file)
     print("Dev F1 = {:.2f}".format(dev_f * 100))
@@ -173,9 +173,9 @@ def train(args):
             dev_edits = []
 
             # try speeding up dev eval
-            dict_preds = trainer.predict_dict([(e[0].lower(),e[1],e[2]) for e in dev_batch.conll.get(['word', 'upos', 'feats'])])
+            dict_preds = trainer.predict_dict([(e[0].lower(),e[1]) for e in dev_batch.conll.get(['word', 'xpos'])])
             if args.get('ensemble_dict', False):
-                skip = trainer.skip_seq2seq([(e[0].lower(),e[1],e[2]) for e in dev_batch.conll.get(['word', 'upos', 'feats'])])
+                skip = trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in dev_batch.conll.get(['word', 'xpos'])])
                 seq2seq_batch = DataLoader(args['eval_file'], args['batch_size'], args, vocab=vocab, evaluation=True, skip=skip)
             else:
                 seq2seq_batch = dev_batch
@@ -195,7 +195,7 @@ def train(args):
                     else:
                         preds1.append(dev_preds[i])
                         i += 1
-                dev_preds = trainer.ensemble([(e[0].lower(),e[1],e[2]) for e in dev_batch.conll.get(['word', 'upos', 'feats'])], preds1)
+                dev_preds = trainer.ensemble([(e[0].lower(),e[1]) for e in dev_batch.conll.get(['word', 'xpos'])], preds1)
             else:
                 dev_preds = trainer.postprocess(dev_batch.conll.get(['word']), dev_preds, edits=dev_edits)
 
@@ -252,13 +252,13 @@ def evaluate(args):
         print("{} ".format(args['lang']))
         sys.exit(0)
 
-    dict_preds = trainer.predict_dict([(e[0].lower(),e[1],e[2]) for e in batch.conll.get(['word', 'upos', 'feats'])])
+    dict_preds = trainer.predict_dict([(e[0].lower(),e[1]) for e in batch.conll.get(['word', 'xpos'])])
 
     if loaded_args.get('dict_only', False):
         preds = dict_preds
     else:
         if loaded_args.get('ensemble_dict', False):
-            skip = trainer.skip_seq2seq([(e[0].lower(),e[1],e[2]) for e in batch.conll.get(['word', 'upos', 'feats'])])
+            skip = trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in batch.conll.get(['word', 'xpos'])])
             seq2seq_batch = DataLoader(args['eval_file'], args['batch_size'], loaded_args, vocab=vocab, evaluation=True, skip=skip)
         else:
             seq2seq_batch = batch
@@ -282,7 +282,7 @@ def evaluate(args):
                 else:
                     preds1.append(preds[i])
                     i += 1
-            preds = trainer.ensemble([(e[0].lower(),e[1],e[2]) for e in batch.conll.get(['word', 'upos', 'feats'])], preds1)
+            preds = trainer.ensemble([(e[0].lower(),e[1]) for e in batch.conll.get(['word', 'xpos'])], preds1)
         else:
             preds = trainer.postprocess(batch.conll.get(['word']), preds, edits=edits)
 

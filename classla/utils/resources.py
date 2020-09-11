@@ -125,8 +125,15 @@ def load_config(config_file_path):
 def download_ud_model_part(download_file_path, download_url):
     print('Download location: ' + download_file_path)
 
-    # initiate download
-    r = requests.get(download_url, stream=True)
+    # initiate download - zip file if it exists, otherwise raw
+    download_url_zipped = download_url + '.zip'
+    r = requests.get(download_url_zipped, stream=True)
+    if 200 <= r.status_code < 300:
+        zipped_file_exists = True
+        download_file_path += '.zip'
+    else:
+        zipped_file_exists = False
+        r = requests.get(download_url, stream=True)
     with open(download_file_path, 'wb') as f:
         file_size = int(r.headers.get('content-length'))
         default_chunk_size = 67108864
@@ -136,6 +143,18 @@ def download_ud_model_part(download_file_path, download_url):
                     f.write(chunk)
                     f.flush()
                     pbar.update(len(chunk))
+
+    # if file is zipped unzip, rename it and delete zip afterwards
+    if zipped_file_exists:
+        print('Extracting downloaded file.')
+        download_directory = os.path.dirname(download_file_path)
+
+        with zipfile.ZipFile(download_file_path, 'r') as zip_ref:
+            zipped_file_names = zip_ref.namelist()
+            assert len(zipped_file_names) == 1, f'Zipped file {download_file_path} does not contain one file!'
+            zip_ref.extract(zipped_file_names[0], path=download_directory)
+            os.replace(os.path.join(download_directory, zipped_file_names[0]), download_file_path[:-4])
+        os.remove(download_file_path)
 
 # download a ud models zip file
 def download_ud_model(lang_name, resource_dir=None, should_unzip=True, confirm_if_exists=False, force=False):

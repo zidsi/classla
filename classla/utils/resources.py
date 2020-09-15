@@ -77,7 +77,7 @@ model_links = {
     },
     'sl_ssj_jos': {
         '_tagger': '11356/1312/ssj500k',
-        '_lemmatizer': '11356/1354/ssj500k+Sloleks_lemmatizer.pt',
+        '_lemmatizer': '11356/1354/ssj500k_Sloleks_lemmatizer.pt',
         '_parser': '11356/1325/ssj500k_jos',
         '_ner': '11356/1321/ssj500k',
         '.pretrain': '11356/1312/ssj500k.pretrain.pt'

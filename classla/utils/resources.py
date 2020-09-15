@@ -34,50 +34,50 @@ processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 't
 model_links = {
     'sl_ssj': {
         '_tagger': '11356/1312/ssj500k',
-        '_lemmatizer': '11356/1286/ssj500k+Sloleks_lemmatizer.pt',
+        '_lemmatizer': '11356/1354/ssj500k_Sloleks_lemmatizer.pt',
         '_parser': '11356/1258/ssj500k_ud',
         '_ner': '11356/1321/ssj500k',
         '.pretrain': '11356/1312/ssj500k.pretrain.pt'
     },
     'hr_hr500k': {
-        '_tagger': '11356/1252/hr500k',
-        '_lemmatizer': '11356/1287/hr500k+hrLex_lemmatizer.pt',
+        '_tagger': '11356/1348/hr500k',
+        '_lemmatizer': '11356/1357/hr500k_hrLex_lemmatizer.pt',
         '_parser': '11356/1259/hr500k_ud',
         '_ner': '11356/1322/hr500k',
-        '.pretrain': '11356/1252/hr500k.pretrain.pt'
+        '.pretrain': '11356/1348/hr500k.pretrain.pt'
     },
     'sr_set': {
-        '_tagger': '11356/1253/SETimes.SR',
-        '_lemmatizer': '11356/1288/SETimes.SR+srLex_lemmatizer.pt',
+        '_tagger': '11356/1349/SETimes.SR',
+        '_lemmatizer': '11356/1355/SETimes.SR_srLex_lemmatizer.pt',
         '_parser': '11356/1260/SETimes.SR_ud',
         '_ner': '11356/1323/SETimes.SR',
-        '.pretrain': '11356/1253/SETimes.SR.pretrain.pt'
+        '.pretrain': '11356/1349/SETimes.SR.pretrain.pt'
     },
     'bg_btb': {
         '_tagger': '11356/1326/BTB',
-        '_lemmatizer': '11356/1327/BTB_lemmatizer.pt',
+        '_lemmatizer': '11356/1353/BTB_lemmatizer.pt',
         '_parser': '11356/1328/BTB_ud',
         '_ner': '11356/1329/BTB',
         '.pretrain': '11356/1326/BTB.pretrain.pt'
     },
     'sl_nonstandard': {
         '_tagger': '11356/1337/sl_nstd',
-        '_lemmatizer': '11356/1338/sl_all_Sloleks_lemmatizer.pt',
+        '_lemmatizer': '11356/1350/sl_all_Sloleks_lemmatizer.pt',
         '_ner': '11356/1339/sl_nstd'
     },
     'hr_nonstandard': {
         '_tagger': '11356/1331/hr_nstd',
-        '_lemmatizer': '11356/1333/hr_all_hrLex_lemmatizer.pt',
+        '_lemmatizer': '11356/1352/hr_all_hrLex_lemmatizer.pt',
         '_ner': '11356/1340/hr_nstd'
     },
     'sr_nonstandard': {
         '_tagger': '11356/1332/sr_nstd',
-        '_lemmatizer': '11356/1334/sr_all_srLex_lemmatizer.pt',
+        '_lemmatizer': '11356/1351/sr_all_srLex_lemmatizer.pt',
         '_ner': '11356/1341/sr_nstd'
     },
     'sl_ssj_jos': {
         '_tagger': '11356/1312/ssj500k',
-        '_lemmatizer': '11356/1286/ssj500k+Sloleks_lemmatizer.pt',
+        '_lemmatizer': '11356/1354/ssj500k+Sloleks_lemmatizer.pt',
         '_parser': '11356/1325/ssj500k_jos',
         '_ner': '11356/1321/ssj500k',
         '.pretrain': '11356/1312/ssj500k.pretrain.pt'
@@ -155,7 +155,6 @@ def download_ud_model_part(download_file_path, download_url):
             zip_ref.extract(zipped_file_names[0], path=download_directory)
             os.replace(os.path.join(download_directory, zipped_file_names[0]), download_file_path[:-4])
         os.remove(download_file_path)
-
 # download a ud models zip file
 def download_ud_model(lang_name, resource_dir=None, should_unzip=True, confirm_if_exists=False, force=False):
     # ask if user wants to download

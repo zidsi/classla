@@ -149,6 +149,15 @@ The pre-tagging is performed as defined in the section of running part-of-speech
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --train_file pretagged/pos.ssj500k.train+test.conllu --eval_file pretagged/pos.ssj500k.dev.conllu --output_file temp.lemma.sl --gold_file pretagged/pos.ssj500k.dev.conllu --external_dict ~/data/morphlex/Sloleks --mode train --num_epoch 30 --decay_epoch 20 --pos
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file hr500k+hrLex --train_file pretagged/pos.hr500k.train+test.conllu --eval_file pretagged/pos.hr500k.dev.conllu --output_file temp.lemma.hr --gold_file pretagged/pos.hr500k.dev.conllu --external_dict ~/data/morphlex/hrLex --mode train --num_epoch 30 --decay_epoch 20 --pos
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file SETimes.SR+srLex --train_file pretagged/pos.SETimes.SR.train+test.conllu --eval_file pretagged/pos.SETimes.SR.dev.conllu --output_file temp.lemma.sr --gold_file pretagged/pos.SETimes.SR.dev.conllu --external_dict ~/data/morphlex/srLex --mode train --num_epoch 30 --decay_epoch 20 --pos
+python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file BTB --train_file pretagged/pos.BTB-UD.train+test.conllu --eval_file pretagged/pos.BTB-UD.dev.conllu --output_file temp.lemma.bg --gold_file pretagged/pos.BTB-UD.dev.conllu --external_dict ~/data/morphlex/BTBUD --mode train --num_epoch 30 --decay_epoch 20 --pos
+```
+
+For training non-standard models, the commands are the following:
+
+```
+python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file sl_all_Sloleks --train_file pretagged/pos.sl_all.conllu --eval_file pretagged/pos.sl_all.dev.conllu --output_file temp.lemma.sl_all --gold_file pretagged/pos.sl_all.dev.conllu --external_dict ~/data/morphlex/Sloleks --mode train --num_epoch 30 --decay_epoch 20 --pos
+python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file hr_all_hrLex --train_file pretagged/pos.hr_all.conllu --eval_file pretagged/pos.hr_all.dev.conllu --output_file temp.lemma.hr_all --gold_file pretagged/pos.hr_all.dev.conllu --external_dict ~/data/morphlex/hbsLex_hr --mode train --num_epoch 30 --decay_epoch 20 --pos
+python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file sr_all_srLex --train_file pretagged/pos.sr_all.conllu --eval_file pretagged/pos.sr_all.dev.conllu --output_file temp.lemma.sr --gold_file pretagged/pos.sr_all.dev.conllu --external_dict ~/data/morphlex/hbsLex_sr --mode train --num_epoch 30 --decay_epoch 20 --pos
 ```
 
 ### Parsing

@@ -50,11 +50,11 @@ class LemmaProcessor(UDProcessor):
         if self.use_identity:
             preds = [ln[FIELD_TO_IDX['word']] for sent in batch.conll.sents for ln in sent if '-' not in ln[0]]
         elif self.config.get('dict_only', False):
-            preds = self.trainer.predict_dict(batch.conll.get(['word', 'upos']))
+            preds = self.trainer.predict_dict(batch.conll.get(['word', 'xpos']))
         else:
             if self.config.get('ensemble_dict', False):
                 # skip the seq2seq model when we can
-                skip = self.trainer.skip_seq2seq(batch.conll.get(['word', 'upos', 'feats']))
+                skip = self.trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in batch.conll.get(['word', 'xpos'])])
                 seq2seq_batch = DataLoader(doc, self.config['batch_size'], self.config, vocab=self.vocab,
                                            evaluation=True, skip=skip)
             else:
@@ -79,7 +79,7 @@ class LemmaProcessor(UDProcessor):
                     else:
                         preds1.append(preds[i])
                         i += 1
-                preds = self.trainer.ensemble([(e[0].lower(),e[1],e[2]) for e in batch.conll.get(['word', 'upos', 'feats'])], preds1)
+                preds = self.trainer.ensemble([(e[0].lower(),e[1]) for e in batch.conll.get(['word', 'xpos'])], preds1)
             else:
                 preds = self.trainer.postprocess(batch.conll.get(['word']), preds, edits=edits)
 

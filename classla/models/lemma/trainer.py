@@ -122,28 +122,28 @@ class Trainer(object):
         utils.change_lr(self.optimizer, new_lr)
 
     def train_dict(self, triples):
-        """ Train a dict lemmatizer given training (word, pos, feats, lemma) tuples. """
+        """ Train a dict lemmatizer given training (word, pos, lemma) tuples. """
         # accumulate counter
         ctr = Counter()
-        ctr.update([(p[0], p[1], p[2], p[3]) for p in triples])
+        ctr.update([(p[0], p[1], p[2]) for p in triples])
         # find the most frequent mappings
         for p, _ in ctr.most_common():
-            w, pos, feats, l = p
-            if (w,pos,feats) not in self.composite_dict:
-                self.composite_dict[(w,pos,feats)] = l
-            if (w, pos) not in self.fallback_dict:
-                self.fallback_dict[(w,pos)] = l
+            w, pos, l = p
+            if (w,pos) not in self.composite_dict:
+                self.composite_dict[(w,pos)] = l
+            #if (w, pos) not in self.fallback_dict:
+            #    self.fallback_dict[(w,pos)] = l
         return
 
     def predict_dict(self, pairs):
         """ Predict a list of lemmas using the dict model given (word, pos) pairs. """
         lemmas = []
         for p in pairs:
-            w, pos, feats = p
-            if (w,pos,feats) in self.composite_dict:
-                lemmas += [self.composite_dict[(w,pos,feats)]]
-            elif (w,pos) in self.fallback_dict:
-                lemmas += [self.fallback_dict[(w,pos)]]
+            w, pos = p
+            if (w,pos) in self.composite_dict:
+                lemmas += [self.composite_dict[(w,pos)]]
+            #elif (w,pos) in self.fallback_dict:
+            #    lemmas += [self.fallback_dict[(w,pos)]]
             else:
                 lemmas += [w]
         return lemmas
@@ -153,11 +153,11 @@ class Trainer(object):
 
         skip = []
         for p in pairs:
-            w, pos, feats = p
-            if (w,pos,feats) in self.composite_dict:
+            w, pos = p
+            if (w,pos) in self.composite_dict:
                 skip.append(True)
-            elif w in self.fallback_dict:
-                skip.append(True)
+            #elif w in self.fallback_dict:
+            #    skip.append(True)
             else:
                 skip.append(False)
         return skip
@@ -167,11 +167,11 @@ class Trainer(object):
         lemmas = []
         assert len(pairs) == len(other_preds)
         for p, pred in zip(pairs, other_preds):
-            w, pos, feats = p
-            if (w,pos,feats) in self.composite_dict:
-                lemmas += [self.composite_dict[(w,pos,feats)]]
-            elif (w,pos) in self.fallback_dict:
-                lemmas += [self.fallback_dict[(w,pos)]]
+            w, pos = p
+            if (w,pos) in self.composite_dict:
+                lemmas += [self.composite_dict[(w,pos)]]
+            #elif (w,pos) in self.fallback_dict:
+            #    lemmas += [self.fallback_dict[(w,pos)]]
             else:
                 lemmas += [pred]
         return lemmas

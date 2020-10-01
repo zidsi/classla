@@ -38,7 +38,7 @@ class Trainer(BaseTrainer):
             self.args = args
             self.vocab = vocab
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb, share_hid=args['share_hid'])
-        self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None else None
+        self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None and 'constrain_via_lexicon' in args else None
         self.inflectional_lexicon = None
         if self.constrain_via_lexicon:
             inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict

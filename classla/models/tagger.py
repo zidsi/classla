@@ -218,7 +218,6 @@ def evaluate(args):
     # load model
     print("Loading model from: {}".format(model_file))
     use_cuda = args['cuda'] and not args['cpu']
-    constrain_via_lexicon = args['constrain_via_lexicon']
 
     trainer = Trainer(args=args, pretrain=pretrain, model_file=model_file, use_cuda=use_cuda)
     loaded_args, vocab = trainer.args, trainer.vocab

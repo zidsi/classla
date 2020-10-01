@@ -220,7 +220,7 @@ def evaluate(args):
     use_cuda = args['cuda'] and not args['cpu']
     constrain_via_lexicon = args['constrain_via_lexicon']
 
-    trainer = Trainer(pretrain=pretrain, model_file=model_file, use_cuda=use_cuda, constrain_via_lexicon=constrain_via_lexicon)
+    trainer = Trainer(args=args, pretrain=pretrain, model_file=model_file, use_cuda=use_cuda)
     loaded_args, vocab = trainer.args, trainer.vocab
 
     # load config

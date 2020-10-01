@@ -10,6 +10,7 @@ from classla.models.common.trainer import Trainer as BaseTrainer
 from classla.models.lemma.trainer import Trainer as LemmaTrainer
 from classla.models.common import utils, loss
 from classla.models.pos.model import Tagger
+from classla.models.pos.postprocessor import InflectionalLexicon
 from classla.models.pos.vocab import MultiVocab
 
 def unpack_batch(batch, use_cuda):
@@ -26,18 +27,22 @@ def unpack_batch(batch, use_cuda):
 
 class Trainer(BaseTrainer):
     """ A trainer for training models. """
-    def __init__(self, args=None, vocab=None, pretrain=None, model_file=None, use_cuda=False, constrain_via_lexicon=None):
+    def __init__(self, args=None, vocab=None, pretrain=None, model_file=None, use_cuda=False):
         self.use_cuda = use_cuda
         if model_file is not None:
             # load everything from file
-            self.load(pretrain, model_file, constrain_via_lexicon=constrain_via_lexicon)
+            self.load(pretrain, model_file)
         else:
             assert all(var is not None for var in [args, vocab, pretrain])
             # build model from scratch
-            args['constrain_via_lexicon'] = constrain_via_lexicon
             self.args = args
             self.vocab = vocab
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb, share_hid=args['share_hid'])
+        self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None else None
+        self.inflectional_lexicon = None
+        if self.constrain_via_lexicon:
+            inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
+            self.inflectional_lexicon = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()
@@ -70,7 +75,7 @@ class Trainer(BaseTrainer):
 
         self.model.eval()
         batch_size = word.size(0)
-        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens)
+        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, inflectional_lexicon=self.inflectional_lexicon)
         upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
         xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
         feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
@@ -98,7 +103,7 @@ class Trainer(BaseTrainer):
         except BaseException:
             print("[Warning: Saving failed... continuing anyway.]")
 
-    def load(self, pretrain, filename, constrain_via_lexicon=None):
+    def load(self, pretrain, filename):
         try:
             checkpoint = torch.load(filename, lambda storage, loc: storage)
         except BaseException:
@@ -106,8 +111,6 @@ class Trainer(BaseTrainer):
             sys.exit(1)
         self.args = checkpoint['config']
         self.vocab = MultiVocab.load_state_dict(checkpoint['vocab'])
-        if constrain_via_lexicon:
-            lemma_trainer = LemmaTrainer(model_file=constrain_via_lexicon)
         self.model = Tagger(self.args, self.vocab, emb_matrix=pretrain.emb, share_hid=self.args['share_hid'])
         self.model.load_state_dict(checkpoint['model'], strict=False)
 

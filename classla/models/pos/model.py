@@ -89,7 +89,7 @@ class Tagger(nn.Module):
         self.drop = nn.Dropout(args['dropout'])
         self.worddrop = WordDropout(args['word_dropout'])
 
-    def forward(self, word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens):
+    def forward(self, word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, inflectional_lexicon=None):
         
         def pack(x):
             return pack_padded_sequence(x, sentlens, batch_first=True)
@@ -125,11 +125,6 @@ class Tagger(nn.Module):
         upos_hid = F.relu(self.upos_hid(self.drop(lstm_outputs)))
         upos_pred = self.upos_clf(self.drop(upos_hid))
 
-        # a3 = pad(upos_pred)
-        a3 = pad(upos_pred)
-        a4 = pad(upos_pred).max(2)
-        a5 = pad(upos_pred).max(2)[1]
-
         preds = [pad(upos_pred).max(2)[1]]
 
         upos = pack(upos).data
@@ -161,10 +156,13 @@ class Tagger(nn.Module):
             preds.append(torch.cat(xpos_preds, 2))
         else:
             xpos_pred = clffunc(self.xpos_clf, xpos_hid)
+            padded_xpos_pred = pad(xpos_pred)
+            if inflectional_lexicon is not None:
+                max_value = inflectional_lexicon.process(padded_xpos_pred, word)
+            else:
+                max_value = padded_xpos_pred.max(2)[1]
             loss += self.crit(xpos_pred.view(-1, xpos_pred.size(-1)), xpos.view(-1))
-            if constrain_via_lexicon:
-                pass
-            preds.append(pad(xpos_pred).max(2)[1])
+            preds.append(max_value)
 
         ufeats_preds = []
         ufeats = pack(ufeats).data

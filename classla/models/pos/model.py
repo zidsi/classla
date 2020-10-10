@@ -158,7 +158,7 @@ class Tagger(nn.Module):
             xpos_pred = clffunc(self.xpos_clf, xpos_hid)
             padded_xpos_pred = pad(xpos_pred)
             if inflectional_lexicon is not None:
-                max_value = inflectional_lexicon.process(padded_xpos_pred, word)
+                max_value = inflectional_lexicon.process(padded_xpos_pred, pretrained)
             else:
                 max_value = padded_xpos_pred.max(2)[1]
             loss += self.crit(xpos_pred.view(-1, xpos_pred.size(-1)), xpos.view(-1))

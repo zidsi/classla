@@ -23,7 +23,8 @@ def unpack_batch(batch, use_cuda):
     word_orig_idx = batch[9]
     sentlens = batch[10]
     wordlens = batch[11]
-    return inputs, orig_idx, word_orig_idx, sentlens, wordlens
+    word_string = batch[12]
+    return inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string
 
 class Trainer(BaseTrainer):
     """ A trainer for training models. """
@@ -51,7 +52,7 @@ class Trainer(BaseTrainer):
         self.optimizer = utils.get_optimizer(self.args['optim'], self.parameters, self.args['lr'], betas=(0.9, self.args['beta2']), eps=1e-6)
 
     def update(self, batch, eval=False):
-        inputs, orig_idx, word_orig_idx, sentlens, wordlens = unpack_batch(batch, self.use_cuda)
+        inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string = unpack_batch(batch, self.use_cuda)
         word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained = inputs
 
         if eval:
@@ -70,14 +71,17 @@ class Trainer(BaseTrainer):
         return loss_val
 
     def predict(self, batch, unsort=True):
-        inputs, orig_idx, word_orig_idx, sentlens, wordlens = unpack_batch(batch, self.use_cuda)
+        inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string = unpack_batch(batch, self.use_cuda)
         word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained = inputs
 
         self.model.eval()
         batch_size = word.size(0)
-        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, inflectional_lexicon=self.inflectional_lexicon)
+        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, inflectional_lexicon=self.inflectional_lexicon)
         upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
-        xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
+        if self.inflectional_lexicon is None:
+            xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
+        else:
+            xpos_seqs = preds[1]
         feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
 
         pred_tokens = [[[upos_seqs[i][j], xpos_seqs[i][j], feats_seqs[i][j]] for j in range(sentlens[i])] for i in range(batch_size)]

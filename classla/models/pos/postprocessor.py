@@ -16,41 +16,48 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
 
         # fills hypothesis_dictionary
         self.hypothesis_dictionary = {}
+        # fallback for when xpos tag in influectional lexicon is not in vocab
+        self.hypothesis_dictionary_fallback = {}
         self.extract_lexicon_data(lexicon, vocab['xpos'], pretrain.vocab)
 
         # fills closed_classes
         self.closed_classes = set()
+        self.xpos_vocab = vocab['xpos']
         self.create_closed_classes(vocab['xpos'], closed_classes_rules)
         super(SloveneInflectionalLexiconProcessor, self).__init__(lexicon, vocab, pretrain)
 
-    def process(self, padded_prediction, word_ids):
+    def process(self, padded_prediction, word_strings):
         predictions = []
 
         sorted, sorted_indices = torch.sort(padded_prediction, 2, True)
 
-        for sent_indices, sent_ids in zip(sorted_indices, word_ids):
+        for sent_indices, sent_strings in zip(sorted_indices, word_strings):
             sent_predictions = []
-            for word_indices, word_id in zip(sent_indices, sent_ids):
-                if int(word_id) in self.hypothesis_dictionary:
+            for word_indices, word_string in zip(sent_indices, sent_strings):
+                if word_string in self.hypothesis_dictionary:
                     for ind in word_indices:
-                        if int(ind) in self.hypothesis_dictionary[int(word_id)]:
-                            prediction = ind
+                        if int(ind) in self.hypothesis_dictionary[word_string]:
+                            prediction = self.xpos_vocab[int(ind)]
                             break
+                elif word_string in self.hypothesis_dictionary_fallback:
+                    prediction = self.hypothesis_dictionary_fallback[word_string][0]
                 else:
                     # in case word is a legit member of closed classes it should already be handled by hypothesis dict
                     for ind in word_indices:
                         if int(ind) not in self.closed_classes:
-                            prediction = ind
+                            prediction = self.xpos_vocab[int(ind)]
                             break
                 sent_predictions.append(prediction)
-            predictions.append(torch.stack(sent_predictions))
-        return torch.stack(predictions)
+            predictions.append(sent_predictions)
+        return predictions
 
     def extract_lexicon_data(self, lexicon, vocab_xpos, vocab_words):
         """ Creates hypothesis dictionary from lexicon. """
         for key in lexicon.keys():
-            if key[1] in vocab_xpos and key[0] in vocab_words:
-                self.hypothesis_dictionary.setdefault(vocab_words[key[0]], []).append(vocab_xpos[key[1]])
+            if key[1] in vocab_xpos:
+                self.hypothesis_dictionary.setdefault(key[0].lower(), []).append(vocab_xpos[key[1]])
+            else:
+                self.hypothesis_dictionary_fallback.setdefault(key[0].lower(), []).append(key[1])
 
     def create_closed_classes(self, vocab, closed_classes_rules):
         """ Fills a set of closed classes, that contains xpos ids that are not permitted. """
@@ -69,5 +76,5 @@ class InflectionalLexicon:
         assert shorthand in processors, f"Tag {shorthand} is not supported by inflectional lexicon."
         self.processor = processors[shorthand](lexicon, vocab, pretrain)
 
-    def process(self, padded_prediction, word_ids):
-        return self.processor.process(padded_prediction, word_ids)
+    def process(self, padded_prediction, word_strings):
+        return self.processor.process(padded_prediction, word_strings)

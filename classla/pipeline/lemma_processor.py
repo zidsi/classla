@@ -48,7 +48,7 @@ class LemmaProcessor(UDProcessor):
         else:
             batch = DataLoader(doc, self.config['batch_size'], self.config, evaluation=True, conll_only=True)
         if self.use_identity:
-            preds = [ln[FIELD_TO_IDX['word']] for sent in batch.conll.sents for ln in sent if '-' not in ln[0]]
+            preds = [ln[FIELD_TO_IDX['word']] for sent in batch.conll.sents for ln in sent['sent'] if '-' not in ln[0]]
         elif self.config.get('dict_only', False):
             preds = self.trainer.predict_dict(batch.conll.get(['word', 'xpos']))
         else:

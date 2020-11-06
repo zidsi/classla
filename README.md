@@ -1,4 +1,4 @@
-# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) for Processing Slovene, Croatian, Serbian and Bulgarian
+# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) for Processing Slovene, Croatian, Serbian, Macedonian and Bulgarian
 
 ## Description
 
@@ -10,7 +10,13 @@ This pipeline allows for processing of standard Slovene, Croatian, Serbian and B
 - dependency parsing
 - named entity recognition
 
-It allso allows for processing of non-standard (Internet) Slovene, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
+It also allows for (alpha) processing of standard Macedonian on the levels of 
+
+- tokenization and sentence splitting
+- part-of-speech tagging
+- lemmatization
+
+Finally, it allows for processing of non-standard (Internet) Slovene, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
 
 ## Installation
 ### pip
@@ -43,7 +49,7 @@ To run the CLASSLA pipeline for the first time on processing standard Slovene, f
 6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-loc|SpaceAfter=No
 7	.	.	PUNCT	Z	_	4	punct	_	NER=O
 ```
-You can find examples of standard language processing for [Croatian](#example-of-standard-croatian), [Serbian](#example-of-standard-serbian) and [Bulgarian](#example-of-standard-bulgarian) at the end of this document.
+You can find examples of standard language processing for [Croatian](#example-of-standard-croatian), [Serbian](#example-of-standard-serbian), [Macedonian](#example-of-standard-macedonian) and [Bulgarian](#example-of-standard-bulgarian) at the end of this document.
 
 ### Processing non-standard language
 
@@ -51,8 +57,8 @@ Processing non-standard Slovene differs to the above standard example just by an
 
 ```
 >>> import classla
->>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovene, use hr for $
->>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovene pipeline,$
+>>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovene, use hr for Croatian and sr for Serbian
+>>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovene pipeline, use hr for Croatian and sr for Serbian
 >>> doc = nlp("kva smo mi zurali zadnje leto v zagrebu...")     # run the pipeline
 >>> print(doc.conll_file.conll_as_string()) 
 1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O
@@ -230,5 +236,28 @@ The named entity recognition processor ```ner``` identifies named entities in te
 5	в	в	ADP	R	_	6	case	_	NER=O
 6	Свищов	свищов	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	iobj	NER=B-LOC|SpaceAfter=No
 7	.	.	PUNCT	punct	_	4	punct	_	NER=O
+
+```
+
+## Macedonian examples
+
+### Example of standard Macedonian
+
+```
+>>> import classla
+>>> nlp = classla.Pipeline('mk') # run classla.download('mk') beforehand if necessary
+>>> doc = nlp('Крсте Петков Мисирков е роден во Постол.')
+>>> print(doc.conll_file.conll_as_string())
+# newpar id = 1
+# sent_id = 1.1
+# text = Крсте Петков Мисирков е роден во Постол.
+1	Крсте	крсте	ADJ	Afpms-n	Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+2	Петков	петков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+3	Мисирков	мисирков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+4	е	сум	AUX	Vapip3s-n	Aspect=Prog|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres	_	_
+5	роден	роден	ADJ	Ap-ms-n	Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part	_	_	_	_
+6	во	во	ADP	Sps	AdpType=Prep	_	_	_	_
+7	Постол	постол	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	SpaceAfter=No
+8	.	.	PUNCT	Z	_	_	_	_	_
 
 ```

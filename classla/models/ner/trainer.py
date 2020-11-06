@@ -114,7 +114,7 @@ class Trainer(BaseTrainer):
         try:
             checkpoint = torch.load(filename, lambda storage, loc: storage)
         except BaseException:
-            print("Cannot load model from {}".format(filename))
+            print("Cannot load model from {} . Make sure to download models you are trying to use and set up path to them accordingly. Also check if specified language/treebank contains ner model.".format(filename))
             sys.exit(1)
         self.args = checkpoint['config']
         if args: self.args.update(args)

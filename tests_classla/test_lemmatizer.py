@@ -35,7 +35,6 @@ def test_identity_lemmatizer():
     nlp = classla.Pipeline(**{'processors': 'tokenize,lemma', 'models_dir': TEST_MODELS_DIR, 'lang': 'sl',
                                   'lemma_use_identity': True})
     doc = nlp(SL_DOC)
-    a = '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
     assert SL_DOC_IDENTITY_GOLD == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
 
 

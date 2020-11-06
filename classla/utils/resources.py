@@ -17,20 +17,19 @@ DEFAULT_MODELS_URL = 'https://www.clarin.si/repository/xmlui/bitstream/handle'
 NONSTANDARD_PROCESSORS = ['pos', 'lemma', 'ner']
 
 # list of language shorthands
-conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb', 'sl_ssj_jos']
+conll_shorthands = ['sl_ssj', 'hr_hr500k', 'sr_set', 'bg_btb', 'mk_1984', 'sl_ssj_jos']
 
 # all languages with mwt
 mwt_languages = []
 
 # default treebank for languages
-default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set', 'bg': 'bg_btb'}
+default_treebanks = {'sl': 'sl_ssj', 'hr': 'hr_hr500k', 'sr': 'sr_set', 'bg': 'bg_btb', 'mk': 'mk_1984'}
 default_nonstandard_treebanks = {'sl': 'sl_nonstandard', 'hr': 'hr_nonstandard', 'sr': 'sr_nonstandard'}
 
 # map processor name to file ending
 processor_to_ending = {'tokenize': 'tokenizer', 'mwt': 'mwt_expander', 'pos': 'tagger', 'lemma': 'lemmatizer',
                        'depparse': 'parser', 'ner': 'ner'}
 
-# TODO ADD NONSTANDARD LINKS HERE
 model_links = {
     'sl_ssj': {
         '_tagger': '11356/1312/ssj500k',
@@ -60,6 +59,11 @@ model_links = {
         '_ner': '11356/1329/BTB',
         '.pretrain': '11356/1326/BTB.pretrain.pt'
     },
+    'mk_1984': {
+        '_tagger': '11356/1373/mk',
+        '_lemmatizer': '11356/1374/mk_lemmatizer.pt',
+        '.pretrain': '11356/1373/mk.pretrain.pt'
+    },
     'sl_nonstandard': {
         '_tagger': '11356/1337/sl_nstd',
         '_lemmatizer': '11356/1350/sl_all_Sloleks_lemmatizer.pt',
@@ -88,9 +92,9 @@ model_links = {
 
 
 # given a language and models path, build a default configuration
-def build_default_config(treebank, models_path, fallback_treebank):
+def build_default_config(treebank, models_path, fallback_treebank, default_processors):
     default_config = {}
-    default_config['processors'] = 'tokenize,ner,pos,lemma,depparse'
+    default_config['processors'] = default_processors
     treebank_dir = os.path.join(models_path, f"{treebank}_models")
     fallback_treebank_dir = os.path.join(models_path, f"{fallback_treebank}_models") if fallback_treebank is not None else None
     for processor in default_config['processors'].split(','):

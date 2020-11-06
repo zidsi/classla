@@ -17,9 +17,13 @@ from classla.pipeline.lemma_processor import LemmaProcessor
 from classla.pipeline.depparse_processor import DepparseProcessor
 from classla.pipeline.ner_processor import NERProcessor
 from classla.utils.resources import DEFAULT_MODEL_DIR, default_treebanks, mwt_languages, build_default_config, \
-    default_nonstandard_treebanks
+    default_nonstandard_treebanks, model_links
 
 DEFAULT_PROCESSORS_LIST = f'{TOKENIZE},{NER},{POS},{LEMMA},{DEPPARSE}'
+
+SPECIAL_DEFAULT_PROCESSORS_LIST = {
+    'mk_1984': f'{TOKENIZE},{POS},{LEMMA}'
+}
 
 NAME_TO_PROCESSOR_CLASS = {TOKENIZE: TokenizeProcessor, MWT: MWTProcessor, POS: POSProcessor,
                            LEMMA: LemmaProcessor, DEPPARSE: DepparseProcessor, NER: NERProcessor}
@@ -90,17 +94,22 @@ class PipelineRequirementsException(Exception):
 
 class Pipeline:
 
-    def __init__(self, lang='sl', models_dir=DEFAULT_MODEL_DIR, processors=DEFAULT_PROCESSORS_LIST,
+    def __init__(self, lang='sl', models_dir=DEFAULT_MODEL_DIR, processors=None,
                  treebank=None, use_gpu=True, type='standard', **kwargs):
         assert type == 'standard' or type == 'nonstandard', 'Invalid value of attribute type. It should be either standard or nonstandard.'
+        assert lang in default_treebanks, f"Language with tag '{lang}' is not supported. Please read documentation (README), to see what we support."
+        assert treebank is None or treebank in model_links, f"Treebank with tag '{treebank}' is not supported. Please read documentation (README), to see what we support."
         fallback_shorthand = None
         if type == 'standard':
             shorthand = default_treebanks[lang] if treebank is None else treebank
         elif type == 'nonstandard':
             shorthand = default_nonstandard_treebanks[lang] if treebank is None else treebank
             fallback_shorthand = default_treebanks[lang] if treebank is None else treebank
+        # when default processors list is None set it up accordingly
+        if processors is None:
+            processors = DEFAULT_PROCESSORS_LIST if shorthand not in SPECIAL_DEFAULT_PROCESSORS_LIST else SPECIAL_DEFAULT_PROCESSORS_LIST[shorthand]
 
-        config = build_default_config(shorthand, models_dir, fallback_shorthand)
+        config = build_default_config(shorthand, models_dir, fallback_shorthand, DEFAULT_PROCESSORS_LIST)
         config.update(kwargs)
         self.config = config
         self.config['processors'] = processors

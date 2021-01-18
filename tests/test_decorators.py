@@ -3,11 +3,11 @@ Basic tests of the depparse processor boolean flags
 """
 import pytest
 
-import stanza
-from stanza.models.common.doc import Document
-from stanza.pipeline.core import PipelineRequirementsException
-from stanza.pipeline.processor import Processor, ProcessorVariant, register_processor, register_processor_variant, ProcessorRegisterException
-from stanza.utils.conll import CoNLL
+import classla
+from classla.models.common.doc import Document
+from classla.pipeline.core import PipelineRequirementsException
+from classla.pipeline.processor import Processor, ProcessorVariant, register_processor, register_processor_variant, ProcessorRegisterException
+from classla.utils.conll import CoNLL
 from tests import *
 
 pytestmark = pytest.mark.pipeline
@@ -72,7 +72,7 @@ class LowercaseProcessor(Processor):
         return doc
 
 def test_register_processor():
-    nlp = stanza.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors='tokenize,lowercase')
+    nlp = classla.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors='tokenize,lowercase')
     doc = nlp(EN_DOC)
     assert EN_DOC_LOWERCASE_TOKENS == '\n\n'.join(sent.tokens_string() for sent in doc.sentences)
 
@@ -94,7 +94,7 @@ class LOLTokenizer(ProcessorVariant):
         return Document([sentence], text)
 
 def test_register_processor_variant():
-    nlp = stanza.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors={"tokenize": "lol"}, package=None)
+    nlp = classla.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors={"tokenize": "lol"}, package=None)
     doc = nlp(EN_DOC)
     assert EN_DOC_LOL_TOKENS == '\n\n'.join(sent.tokens_string() for sent in doc.sentences)
 
@@ -115,7 +115,7 @@ class CoolLemmatizer(ProcessorVariant):
         return document
 
 def test_register_processor_variant_with_override():
-    nlp = stanza.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors={"tokenize": "ewt", "pos": "ewt", "lemma": "cool"}, package=None)
+    nlp = classla.Pipeline(dir=TEST_MODELS_DIR, lang='en', processors={"tokenize": "ewt", "pos": "ewt", "lemma": "cool"}, package=None)
     doc = nlp(EN_DOC)
     assert EN_DOC_COOL_LEMMAS == '\n\n'.join(sent.tokens_string() for sent in doc.sentences)
 

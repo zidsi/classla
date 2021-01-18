@@ -10,9 +10,9 @@ import os
 import pytest
 
 from pytest import fixture
-from stanza.protobuf import Document, Sentence, Token, DependencyGraph,\
+from classla.protobuf import Document, Sentence, Token, DependencyGraph,\
                              CorefChain
-from stanza.protobuf import parseFromDelimitedString, writeToDelimitedString, to_text
+from classla.protobuf import parseFromDelimitedString, writeToDelimitedString, to_text
 
 # set the marker for this module
 pytestmark = [pytest.mark.travis, pytest.mark.client]

@@ -20,12 +20,12 @@ import os
 import random
 import sys
 
-import stanza
+import classla
 
 import scripts.sentiment.process_utils as process_utils
 
 basedir = sys.argv[1]
-nlp = stanza.Pipeline('de', processors='tokenize')
+nlp = classla.Pipeline('de', processors='tokenize')
 
 text_files = glob.glob(os.path.join(basedir, "scare_v1.0.0_text/annotations/*txt"))
 text_id_map = {}

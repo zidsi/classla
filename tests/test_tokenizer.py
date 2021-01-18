@@ -3,7 +3,7 @@ Basic testing of tokenization
 """
 
 import pytest
-import stanza
+import classla
 
 from tests import *
 
@@ -121,19 +121,19 @@ ZH_DOC_GOLD_TOKENS = """
 """.strip()
 
 def test_tokenize():
-    nlp = stanza.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en')
+    nlp = classla.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en')
     doc = nlp(EN_DOC)
     assert EN_DOC_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_tokenize_ssplit_robustness():
-    nlp = stanza.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en')
+    nlp = classla.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en')
     doc = nlp(EN_DOC_WITH_EXTRA_WHITESPACE)
     assert EN_DOC_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_pretokenized():
-    nlp = stanza.Pipeline(**{'processors': 'tokenize', 'dir': TEST_MODELS_DIR, 'lang': 'en',
+    nlp = classla.Pipeline(**{'processors': 'tokenize', 'dir': TEST_MODELS_DIR, 'lang': 'en',
                                   'tokenize_pretokenized': True})
     doc = nlp(EN_DOC_PRETOKENIZED)
     assert EN_DOC_PRETOKENIZED_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
@@ -143,7 +143,7 @@ def test_pretokenized():
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_no_ssplit():
-    nlp = stanza.Pipeline(**{'processors': 'tokenize', 'dir': TEST_MODELS_DIR, 'lang': 'en',
+    nlp = classla.Pipeline(**{'processors': 'tokenize', 'dir': TEST_MODELS_DIR, 'lang': 'en',
                                   'tokenize_no_ssplit': True})
 
     doc = nlp(EN_DOC_NO_SSPLIT)
@@ -151,7 +151,7 @@ def test_no_ssplit():
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_spacy():
-    nlp = stanza.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en', tokenize_with_spacy=True)
+    nlp = classla.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='en', tokenize_with_spacy=True)
     doc = nlp(EN_DOC)
 
     # make sure the loaded tokenizer is actually spacy
@@ -160,7 +160,7 @@ def test_spacy():
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_sudachipy():
-    nlp = stanza.Pipeline(lang='ja', dir=TEST_MODELS_DIR, processors={'tokenize': 'sudachipy'}, package=None)
+    nlp = classla.Pipeline(lang='ja', dir=TEST_MODELS_DIR, processors={'tokenize': 'sudachipy'}, package=None)
     doc = nlp(JA_DOC)
 
     assert "SudachiPyTokenizer" == nlp.processors['tokenize']._variant.__class__.__name__
@@ -168,7 +168,7 @@ def test_sudachipy():
     assert all([doc.text[token._start_char: token._end_char] == token.text for sent in doc.sentences for token in sent.tokens])
 
 def test_jieba():
-    nlp = stanza.Pipeline(lang='zh', dir=TEST_MODELS_DIR, processors={'tokenize': 'jieba'}, package=None)
+    nlp = classla.Pipeline(lang='zh', dir=TEST_MODELS_DIR, processors={'tokenize': 'jieba'}, package=None)
     doc = nlp(ZH_DOC)
 
     assert "JiebaTokenizer" == nlp.processors['tokenize']._variant.__class__.__name__

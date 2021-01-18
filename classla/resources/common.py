@@ -47,6 +47,11 @@ def build_default_config(resources, lang, dir, load_list):
         # handle case when identity is specified as lemmatizer
         elif processor == LEMMA and package == 'identity':
             default_config[f"{LEMMA}_use_identity"] = True
+        elif processor == TOKENIZE:
+            assert 'library' in resources[lang][processor][package], "Tokenizer processor in resources.json should include attribute `library` with value `reldi` or `obeliks`"
+            default_config[f"{processor}_library"] = resources[lang][processor][package]['library']
+            assert 'type' in resources[lang][processor][package], "Tokenizer processor in resources.json should include attribute `type` with value `standard` or `nonstandard`"
+            default_config[f"{processor}_type"] = resources[lang][processor][package]['type']
         else:
             default_config[f"{processor}_model_path"] = os.path.join(
                 dir, lang, processor, package + '.pt'
@@ -74,6 +79,17 @@ def get_md5(path):
     data = open(path, 'rb').read()
     return hashlib.md5(data).hexdigest()
 
+def unzip_file(filename, zipped_filename):
+    """
+    Unzip only one file and name it as `filename`
+    """
+    logger.debug(f'Unzip: {zipped_filename} to {filename} ...')
+    with zipfile.ZipFile(zipped_filename) as rf:
+        files = zipfile.ZipFile.infolist(rf)
+        for file in files:
+            with open(filename, 'wb') as wf:
+                wf.write(rf.read(file.filename))
+
 def unzip(dir, filename):
     """
     Fully unzip a file `filename` that's in a directory `dir`.
@@ -98,6 +114,8 @@ def file_exists(path, md5):
     """
     Check if the file at `path` exists and match the provided md5 value.
     """
+    if os.path.exists(path):
+        new_md5 = get_md5(path)
     return os.path.exists(path) and get_md5(path) == md5
 
 def download_file(url, path):
@@ -105,7 +123,19 @@ def download_file(url, path):
     Download a URL into a file as specified by `path`.
     """
     verbose = logger.level in [0, 10, 20]
-    r = requests.get(url, stream=True)
+
+    # Try to get zipped file
+    zipped = True
+    r = requests.get(url + '.zip', stream=True)
+
+    # Zipped file not available
+    if not r.ok:
+        zipped = False
+        r = requests.get(url, stream=True)
+
+    if zipped:
+        normal_path = path
+        path += '.zip'
     with open(path, 'wb') as f:
         file_size = int(r.headers.get('content-length'))
         default_chunk_size = 131072
@@ -117,6 +147,10 @@ def download_file(url, path):
                     f.write(chunk)
                     f.flush()
                     pbar.update(len(chunk))
+
+    if zipped:
+        unzip_file(normal_path, path)
+        os.remove(path)
 
 def request_file(url, path, md5=None):
     """
@@ -149,7 +183,10 @@ def maintain_processor_list(resources, lang, package, processors):
             # check if keys and values can be found
             if key in resources[lang] and value in resources[lang][key]:
                 logger.debug(f'Found {key}: {value}.')
-                processor_list[key] = value
+                if 'duplicate' in resources[lang][key][value]:
+                    processor_list[key] = resources[lang][key][value]['duplicate']
+                else:
+                    processor_list[key] = value
             # allow values to be default in some cases
             elif key in resources[lang]['default_processors'] and value == 'default':
                 logger.debug(
@@ -198,7 +235,11 @@ def maintain_processor_list(resources, lang, package, processors):
                     flag = True
                     if key not in processor_list:
                         logger.debug(f'Found {key}: {package}.')
-                        processor_list[key] = package
+                        # Solve duplicates
+                        if 'duplicate' in resources[lang][key][package]:
+                            processor_list[key] = resources[lang][key][package]['duplicate']
+                        else:
+                            processor_list[key] = package
                     else:
                         logger.debug(
                             f'{key}: {package} is overwritten by '
@@ -333,10 +374,10 @@ def download(
     if resources_url.lower() in ('stanford', 'stanfordnlp'):
         resources_url = STANFORDNLP_RESOURCES_URL
     # make request
-    request_file(
-        f'{resources_url}/resources_{resources_version}.json',
-        os.path.join(dir, 'resources.json')
-    )
+    # request_file(
+    #     f'{resources_url}/resources_{resources_version}.json',
+    #     os.path.join(dir, 'resources.json')
+    # )
     # unpack results
     try:
         resources = json.load(open(os.path.join(dir, 'resources.json')))
@@ -354,40 +395,46 @@ def download(
     url = resources['url'] if model_url.lower() == 'default' else model_url
 
     # Default: download zipfile and unzip
-    if package == 'default' and (processors is None or len(processors) == 0):
-        logger.info(
-            f'Downloading default packages for language: {lang} ({lang_name})...'
-        )
-        request_file(
-            f'{url}/{resources_version}/{lang}/default.zip',
-            os.path.join(dir, lang, f'default.zip'),
-            md5=resources[lang]['default_md5']
-        )
-        unzip(os.path.join(dir, lang), 'default.zip')
+    # if package == 'default' and (processors is None or len(processors) == 0):
+    #     logger.info(
+    #         f'Downloading default packages for language: {lang} ({lang_name})...'
+    #     )
+    #     request_file(
+    #         f'{url}/{resources_version}/{lang}/default.zip',
+    #         os.path.join(dir, lang, f'default.zip'),
+    #         md5=resources[lang]['default_md5']
+    #     )
+    #     unzip(os.path.join(dir, lang), 'default.zip')
     # Customize: maintain download list
-    else:
-        download_list = maintain_processor_list(
-            resources, lang, package, processors
-        )
-        download_list = add_dependencies(resources, lang, download_list)
-        download_list = flatten_processor_list(download_list)
-        download_table = make_table(['Processor', 'Package'], download_list)
-        logger.info(
-            f'Downloading these customized packages for language: '
-            f'{lang} ({lang_name})...\n{download_table}'
-        )
+    # else:
+    # Translate default packages
+    if package == 'default' and (processors is None or len(processors) == 0):
+        processors = resources[lang]['default_processors']
 
-        # Download packages
-        for key, value in download_list:
-            try:
-                request_file(
-                    f'{url}/{resources_version}/{lang}/{key}/{value}.pt',
-                    os.path.join(dir, lang, key, f'{value}.pt'),
-                    md5=resources[lang][key][value]['md5']
-                )
-            except KeyError as e:
-                raise Exception(
-                    f'Cannot find the following processor and model name combination: '
-                    f'{key}, {value}. Please check if you have provided the correct model name.'
-                ) from e
+    download_list = maintain_processor_list(
+        resources, lang, package, processors
+    )
+    download_list = add_dependencies(resources, lang, download_list)
+    download_list = flatten_processor_list(download_list)
+    download_table = make_table(['Processor', 'Package'], download_list)
+    logger.info(
+        f'Downloading these customized packages for language: '
+        f'{lang} ({lang_name})...\n{download_table}'
+    )
+
+    # Download packages
+    for key, value in download_list:
+        if value not in resources[lang][key]:
+            continue
+        try:
+            request_file(
+                f'{url}/{resources[lang][key][value]["link"]}',
+                os.path.join(dir, lang, key, f'{value}.pt'),
+                md5=resources[lang][key][value]['md5']
+            )
+        except KeyError as e:
+            raise Exception(
+                f'Cannot find the following processor and model name combination: '
+                f'{key}, {value}. Please check if you have provided the correct model name.'
+            ) from e
     logger.info(f'Finished downloading models and saved to {dir}.')

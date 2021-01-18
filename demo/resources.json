@@ -1,0 +1,286 @@
+{
+  "bg": {
+    "depparse": {
+      "btb": {
+        "md5": "ddf666ab61c253ff8b2a92945524cd2e",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "btb"
+          }
+        ]
+      }
+    },
+    "lemma": {
+      "btb": {
+        "md5": "bac7e5171fe91ab215d735470375afa7"
+      }
+    },
+    "pos": {
+      "btb": {
+        "md5": "e1629e9a81dcef625c9b99d81d9fae93",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "btb"
+          }
+        ]
+      }
+    },
+    "pretrain": {
+      "btb": {
+        "md5": "c5453cea8e1c1a932d9e97823914310e"
+      }
+    },
+    "tokenize": {
+      "btb": {
+        "md5": "b02bd5c981a6784eb32716c53c0801c1"
+      }
+    },
+    "default_processors": {
+      "tokenize": "btb",
+      "lemma": "btb",
+      "pos": "btb",
+      "depparse": "btb"
+    },
+    "default_dependencies": {
+      "pos": [
+        {
+          "model": "pretrain",
+          "package": "btb"
+        }
+      ],
+      "depparse": [
+        {
+          "model": "pretrain",
+          "package": "btb"
+        }
+      ]
+    },
+    "default_md5": "c02265cf6afe09f0e189d2c297cd777a",
+    "lang_name": "Bulgarian"
+  },
+  "bulgarian": {
+    "alias": "bg"
+  },
+  "hr": {
+    "depparse": {
+      "set": {
+        "md5": "e51b4f62d5256288265c7916815e4679",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "set"
+          }
+        ]
+      }
+    },
+    "lemma": {
+      "set": {
+        "md5": "c7b6f4006d246d17dcd8747ca61fd58a"
+      }
+    },
+    "pos": {
+      "set": {
+        "md5": "8e84f5c8ebe38d3af95cb621e5452624",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "set"
+          }
+        ]
+      }
+    },
+    "pretrain": {
+      "set": {
+        "md5": "7b8d4ebb439a5323e897a87507298c6e"
+      }
+    },
+    "tokenize": {
+      "set": {
+        "md5": "05f2881a41169d2e3daaa9579e190f50"
+      }
+    },
+    "default_processors": {
+      "tokenize": "set",
+      "lemma": "set",
+      "pos": "set",
+      "depparse": "set"
+    },
+    "default_dependencies": {
+      "pos": [
+        {
+          "model": "pretrain",
+          "package": "set"
+        }
+      ],
+      "depparse": [
+        {
+          "model": "pretrain",
+          "package": "set"
+        }
+      ]
+    },
+    "default_md5": "013471e1251db03b1c8c7529e611b801",
+    "lang_name": "Croatian"
+  },
+  "croatian": {
+    "alias": "hr"
+  },
+  "sl": {
+    "depparse": {
+      "ssj": {
+        "md5": "eb10cbde390cf5f671119a06610effb5",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "ssj"
+          }
+        ]
+      },
+      "sst": {
+        "md5": "097f3e8eeb4ee76c68c67bc099a62fd4",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "sst"
+          }
+        ]
+      }
+    },
+    "lemma": {
+      "ssj": {
+        "md5": "c9972e29ca564b0a9370994d7eb1f193"
+      },
+      "sst": {
+        "md5": "9847da6612fbca01f6f5157b80222269"
+      }
+    },
+    "pos": {
+      "ssj": {
+        "md5": "c620501d7985fe5ec0898c8180d4e53f",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "ssj"
+          }
+        ]
+      },
+      "sst": {
+        "md5": "82643b09ff6753bc3e21644ddb0aed3c",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "sst"
+          }
+        ]
+      }
+    },
+    "pretrain": {
+      "ssj": {
+        "md5": "769a4c5b80d3cdf4efa0a6e3ca3c4868"
+      },
+      "sst": {
+        "md5": "769a4c5b80d3cdf4efa0a6e3ca3c4868"
+      }
+    },
+    "tokenize": {
+      "ssj": {
+        "md5": "6a0e554a92b64c3b642ed4ddc4e7f33f"
+      },
+      "sst": {
+        "md5": "eda934ea7dcbc612a4a0e8b777d0c159"
+      }
+    },
+    "default_processors": {
+      "tokenize": "ssj",
+      "lemma": "ssj",
+      "pos": "ssj",
+      "depparse": "ssj"
+    },
+    "default_dependencies": {
+      "pos": [
+        {
+          "model": "pretrain",
+          "package": "ssj"
+        }
+      ],
+      "depparse": [
+        {
+          "model": "pretrain",
+          "package": "ssj"
+        }
+      ]
+    },
+    "default_md5": "6a0f222de974ec1e0e69474a57942bc9",
+    "lang_name": "Slovenian"
+  },
+  "slovenian": {
+    "alias": "sl"
+  },
+  "sr": {
+    "depparse": {
+      "set": {
+        "md5": "d33b7794836814ef5309671b73f89c6f",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "set"
+          }
+        ]
+      }
+    },
+    "lemma": {
+      "set": {
+        "md5": "23e5bd97d978370c7f2d7310ab69a712"
+      }
+    },
+    "pos": {
+      "set": {
+        "md5": "03059e84420c7edfcc194ae7a2c808ca",
+        "dependencies": [
+          {
+            "model": "pretrain",
+            "package": "set"
+          }
+        ]
+      }
+    },
+    "pretrain": {
+      "set": {
+        "md5": "7a346f9e56f0fc60386efe6a361eaac6"
+      }
+    },
+    "tokenize": {
+      "set": {
+        "md5": "75daabfdfb2f75c4563483609057a554"
+      }
+    },
+    "default_processors": {
+      "tokenize": "set",
+      "lemma": "set",
+      "pos": "set",
+      "depparse": "set"
+    },
+    "default_dependencies": {
+      "pos": [
+        {
+          "model": "pretrain",
+          "package": "set"
+        }
+      ],
+      "depparse": [
+        {
+          "model": "pretrain",
+          "package": "set"
+        }
+      ]
+    },
+    "default_md5": "7f34f4b18320570477b8867588dddcaa",
+    "lang_name": "Serbian"
+  },
+  "serbian": {
+    "alias": "sr"
+  },
+  "url": "https://www.clarin.si/repository/xmlui/bitstream/handle"
+}

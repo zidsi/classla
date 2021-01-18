@@ -3,7 +3,7 @@ Basic testing of lemmatization
 """
 
 import pytest
-import stanza
+import classla
 
 from tests import *
 
@@ -33,7 +33,7 @@ California California
 
 
 def test_identity_lemmatizer():
-    nlp = stanza.Pipeline(**{'processors': 'tokenize,lemma', 'dir': TEST_MODELS_DIR, 'lang': 'en',
+    nlp = classla.Pipeline(**{'processors': 'tokenize,lemma', 'dir': TEST_MODELS_DIR, 'lang': 'en',
                                   'lemma_use_identity': True})
     doc = nlp(EN_DOC)
     word_lemma_pairs = []
@@ -42,7 +42,7 @@ def test_identity_lemmatizer():
     assert EN_DOC_IDENTITY_GOLD == "\n".join(word_lemma_pairs)
 
 def test_full_lemmatizer():
-    nlp = stanza.Pipeline(**{'processors': 'tokenize,pos,lemma', 'dir': TEST_MODELS_DIR, 'lang': 'en'})
+    nlp = classla.Pipeline(**{'processors': 'tokenize,pos,lemma', 'dir': TEST_MODELS_DIR, 'lang': 'en'})
     doc = nlp(EN_DOC)
     word_lemma_pairs = []
     for w in doc.iter_words():

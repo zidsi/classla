@@ -2,7 +2,7 @@
 Test some pieces of the depparse dataloader
 """
 import pytest
-from stanza.models.depparse.data import data_to_batches
+from classla.models.depparse.data import data_to_batches
 
 pytestmark = [pytest.mark.travis, pytest.mark.pipeline]
 

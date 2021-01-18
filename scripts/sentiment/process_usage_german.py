@@ -16,12 +16,12 @@ import glob
 import os
 import sys
 
-import stanza
+import classla
 
 import scripts.sentiment.process_utils as process_utils
 
 basedir = sys.argv[1]
-nlp = stanza.Pipeline('de', processors='tokenize')
+nlp = classla.Pipeline('de', processors='tokenize')
 
 num_short_items = 0
 snippets = []

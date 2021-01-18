@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 from collections import namedtuple
 
-import stanza
+import classla
 
 import scripts.sentiment.process_utils as process_utils
 
@@ -65,7 +65,7 @@ def main():
     for filename in glob.glob(xml_directory + '/xml/cet_*xml'):
         sentences.extend(get_phrases(filename))
 
-    nlp = stanza.Pipeline('zh', processors='tokenize')
+    nlp = classla.Pipeline('zh', processors='tokenize')
     snippets = []
     for sentence in sentences:
         doc = nlp(sentence.text)
@@ -79,7 +79,7 @@ def main():
                                snippets,
                                (process_utils.Split("train.txt", 0.8),
                                 process_utils.Split("dev.txt", 0.1),
-                                process_utils.Split("test.txt", 0.1)))
+                                process_utils.Split("test.tmp", 0.1)))
 
 
 if __name__ == "__main__":

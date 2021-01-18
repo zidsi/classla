@@ -3,8 +3,8 @@ Tests that call a running CoreNLPClient.
 """
 
 import pytest
-import stanza.server as corenlp
-import stanza.server.client as client
+import classla.server as corenlp
+import classla.server.client as client
 import shlex
 import subprocess
 import time

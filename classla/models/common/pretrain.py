@@ -123,15 +123,15 @@ class Pretrain:
 
 
 if __name__ == '__main__':
-    with open('test.txt', 'w') as fout:
+    with open('test.tmp', 'w') as fout:
         fout.write('3 2\na 1 1\nb -1 -1\nc 0 0\n')
     # 1st load: save to pt file
-    pretrain = Pretrain('test.pt', 'test.txt')
+    pretrain = Pretrain('test.pt', 'test.tmp')
     print(pretrain.emb)
     # verify pt file
     x = torch.load('test.pt')
     print(x)
     # 2nd load: load saved pt file
-    pretrain = Pretrain('test.pt', 'test.txt')
+    pretrain = Pretrain('test.pt', 'test.tmp')
     print(pretrain.emb)
 

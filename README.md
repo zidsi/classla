@@ -63,13 +63,13 @@ We welcome community contributions to Stanza in the form of bugfixes 🛠️ and
 
 Stanza supports Python 3.6 or later. We recommend that you install Stanza via [pip](https://pip.pypa.io/en/stable/installing/), the Python package manager. To install, simply run:
 ```bash
-pip install stanza
+pip install classla
 ```
 This should also help resolve all of the dependencies of Stanza, for instance [PyTorch](https://pytorch.org/) 1.3.0 or above.
 
 If you currently have a previous version of `stanza` installed, use:
 ```bash
-pip install stanza -U
+pip install classla -U
 ```
 
 ### Anaconda
@@ -77,7 +77,7 @@ pip install stanza -U
 To install Stanza via Anaconda, use the following conda command:
 
 ```bash
-conda install -c stanfordnlp stanza
+conda install -c stanfordnlp classla
 ```
 
 Note that for now installing Stanza via Anaconda does not work for Python 3.8. For Python 3.8 please use pip installation.
@@ -87,7 +87,7 @@ Note that for now installing Stanza via Anaconda does not work for Python 3.8. F
 Alternatively, you can also install from source of this git repository, which will give you more flexibility in developing on top of Stanza. For this option, run
 ```bash
 git clone https://github.com/stanfordnlp/stanza.git
-cd stanza
+cd classla
 pip install -e .
 ```
 
@@ -98,9 +98,9 @@ pip install -e .
 To run your first Stanza pipeline, simply following these steps in your Python interactive interpreter:
 
 ```python
->>> import stanza
->>> stanza.download('en')       # This downloads the English models for the neural pipeline
->>> nlp = stanza.Pipeline('en') # This sets up a default neural pipeline in English
+>>> import classla
+>>> classla.download('en')       # This downloads the English models for the neural pipeline
+>>> nlp = classla.Pipeline('en') # This sets up a default neural pipeline in English
 >>> doc = nlp("Barack Obama was born in Hawaii.  He was elected president in 2008.")
 >>> doc.sentences[0].print_dependencies()
 ```

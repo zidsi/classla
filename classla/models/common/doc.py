@@ -63,7 +63,7 @@ class Document(StanzaObject):
     """ A document class that stores attributes of a document and carries a list of sentences.
     """
 
-    def __init__(self, sentences, text=None):
+    def __init__(self, sentences, text=None, metasentences=None):
         """ Construct a document given a list of sentences in the form of lists of CoNLL-U dicts.
 
         Args:
@@ -76,7 +76,7 @@ class Document(StanzaObject):
         self._num_words = 0
 
         self.text = text
-        self._process_sentences(sentences)
+        self._process_sentences(sentences, metasentences=metasentences)
         self._ents = []
 
     @property
@@ -139,10 +139,11 @@ class Document(StanzaObject):
         """ Set the list of entities in this document. """
         self._ents = value
 
-    def _process_sentences(self, sentences):
+    def _process_sentences(self, sentences, metasentences=None):
         self.sentences = []
-        for tokens in sentences:
-            self.sentences.append(Sentence(tokens, doc=self))
+        metasentences = metasentences if metasentences else [None] * len(sentences)
+        for tokens, metadata in zip(sentences, metasentences):
+            self.sentences.append(Sentence(tokens, doc=self, metadata=metadata))
             begin_idx, end_idx = self.sentences[-1].tokens[0].start_char, self.sentences[-1].tokens[-1].end_char
             if all([self.text is not None, begin_idx is not None, end_idx is not None]): self.sentences[-1].text = self.text[begin_idx: end_idx]
 
@@ -331,7 +332,7 @@ class Sentence(StanzaObject):
     """ A sentence class that stores attributes of a sentence and carries a list of tokens.
     """
 
-    def __init__(self, tokens, doc=None):
+    def __init__(self, tokens, doc=None, metadata=None):
         """ Construct a setence given a list of tokens in the form of CoNLL-U dicts.
         """
         self._tokens = []
@@ -340,6 +341,7 @@ class Sentence(StanzaObject):
         self._text = None
         self._ents = []
         self._doc = doc
+        self._metadata = metadata
 
         self._process_tokens(tokens)
 
@@ -520,7 +522,7 @@ class Sentence(StanzaObject):
         ret = []
         for token in self.tokens:
             ret += token.to_dict()
-        return ret
+        return (ret, self._metadata)
 
     def __repr__(self):
         return json.dumps(self.to_dict(), indent=2, ensure_ascii=False)

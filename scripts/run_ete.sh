@@ -39,7 +39,7 @@ model_short=$short
 model_lang=$lang
 
 if [ ! -e saved_models/tokenize/${short}_tokenizer.pt ]; then
-    model_short=`python stanza/utils/select_backoff.py $treebank`
+    model_short=`python classla/utils/select_backoff.py $treebank`
     model_lang=$model_short
     echo 'using backoff model'
     echo $treebank' --> '$model_short
@@ -142,4 +142,4 @@ gold_file=${ETE_DATA_DIR}/${short}-ud-${set}.conllu
 # run official eval script
 echo 'running official eval script'
 # print out results
-python stanza/utils/conll18_ud_eval.py -v $gold_file $ete_file
+python classla/utils/conll18_ud_eval.py -v $gold_file $ete_file

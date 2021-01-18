@@ -18,6 +18,16 @@ DEPS = 'deps'
 MISC = 'misc'
 FIELD_TO_IDX = {ID: 0, TEXT: 1, LEMMA: 2, UPOS: 3, XPOS: 4, FEATS: 5, HEAD: 6, DEPREL: 7, DEPS: 8, MISC: 9}
 
+
+class ListMetadata:
+    def __init__(self, array, metadata):
+        self.list = array
+        self.metadata = metadata
+
+    def __iter__(self):
+        for el in self.list:
+            yield el
+
 class CoNLL:
 
     @staticmethod
@@ -27,7 +37,6 @@ class CoNLL:
         Output: a list of list of list for each token in each sentence in the data, where the innermost list represents
         all fields of a token.
         """
-        # f is open() or io.StringIO()
         doc, sent = [], []
         for line in f:
             line = line.strip()
@@ -106,12 +115,12 @@ class CoNLL:
         Output: CoNLL-U format data, which is a list of list of list for each token in each sentence in the data.
         """
         doc_conll = []
-        for sent_dict in doc_dict:
+        for sent_dict, metadata in doc_dict:
             sent_conll = []
             for token_dict in sent_dict:
                 token_conll = CoNLL.convert_token_dict(token_dict)
                 sent_conll.append(token_conll)
-            doc_conll.append(sent_conll)
+            doc_conll.append((sent_conll, metadata))
         return doc_conll
 
     @staticmethod
@@ -136,7 +145,8 @@ class CoNLL:
     def conll_as_string(doc):
         """ Dump the loaded CoNLL-U format list data to string. """
         return_string = ""
-        for sent in doc:
+        for sent, meta in doc:
+            return_string += meta if meta else ''
             for ln in sent:
                 return_string += ("\t".join(ln)+"\n")
             return_string += "\n"

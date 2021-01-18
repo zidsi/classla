@@ -2,8 +2,8 @@ import tempfile
 
 import pytest
 
-import stanza
-import stanza.models.common.utils as utils
+import classla
+import classla.models.common.utils as utils
 from tests import *
 
 pytestmark = [pytest.mark.travis, pytest.mark.pipeline]

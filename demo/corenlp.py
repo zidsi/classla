@@ -1,4 +1,4 @@
-from stanza.server import CoreNLPClient
+from classla.server import CoreNLPClient
 
 # example text
 print('---')

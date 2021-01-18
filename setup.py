@@ -8,31 +8,34 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-# read the version from stanza/_version.py
-version_file_contents = open(path.join(here, 'stanza/_version.py'), encoding='utf-8').read()
+# read the version from classla/_version.py
+version_file_contents = open(path.join(here, 'classla/_version.py'), encoding='utf-8').read()
 VERSION = re.compile('__version__ = \"(.*)\"').search(version_file_contents).group(1)
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+packages = find_packages(exclude=['data', 'docs', 'extern_data', 'figures', 'saved_models'])
+packages.append('classla.submodules.reldi_tokeniser')
+
 setup(
-    name='stanza',
+    name='classla',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
     version=VERSION,
 
-    description='A Python NLP Library for Many Human Languages, by the Stanford NLP Group',
+    description='Adapted Stanford NLP Python Library with improvements for specific languages.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     # The project's main homepage.
-    url='https://github.com/stanfordnlp/stanza',
+    url='https://github.com/clarinsi/classla-stanfordnlp.git',
 
     # Author details
-    author='Stanford Natural Language Processing Group',
-    author_email='jebolton@stanford.edu',
+    author='CLARIN.SI',
+    author_email='info@clarin.si',
 
     # Choose your license
     license='Apache License 2.0',
@@ -66,17 +69,17 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='natural-language-processing nlp natural-language-understanding stanford-nlp deep-learning',
+    keywords='natural-language-processing nlp natural-language-understanding stanford-nlp deep-learning clarinsi',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['data', 'docs', 'extern_data', 'figures', 'saved_models']),
+    packages=packages,
 
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm'],
+    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm', 'obeliks'],
 
     # List required Python versions
     python_requires='>=3.6',
@@ -94,6 +97,7 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     package_data={
+        'classla.submodules.reldi_tokeniser': ['*']
     },
 
     # Although 'package_data' is the preferred approach, in some case you may

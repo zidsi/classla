@@ -3,10 +3,10 @@ Test the semgrex interface
 """
 
 import pytest
-import stanza
-import stanza.server.semgrex as semgrex
-from stanza.protobuf import SemgrexRequest
-from stanza.models.common.doc import Document
+import classla
+import classla.server.semgrex as semgrex
+from classla.protobuf import SemgrexRequest
+from classla.models.common.doc import Document
 
 from tests import *
 

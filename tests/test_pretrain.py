@@ -4,7 +4,7 @@ import tempfile
 import pytest
 import numpy as np
 
-from stanza.models.common import pretrain
+from classla.models.common import pretrain
 from tests import *
 
 pytestmark = [pytest.mark.travis, pytest.mark.pipeline]

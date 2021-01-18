@@ -3,9 +3,9 @@ Basic tests of the data conversion
 """
 import pytest
 
-import stanza
-from stanza.utils.conll import CoNLL
-from stanza.models.common.doc import Document
+import classla
+from classla.utils.conll import CoNLL
+from classla.models.common.doc import Document
 from tests import *
 
 pytestmark = pytest.mark.pipeline

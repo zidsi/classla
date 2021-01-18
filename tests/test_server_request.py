@@ -4,9 +4,9 @@ Tests for setting request properties of servers
 
 import json
 import pytest
-import stanza.server as corenlp
+import classla.server as corenlp
 
-from stanza.protobuf import Document
+from classla.protobuf import Document
 from tests import TEST_WORKING_DIR, compare_ignoring_whitespace
 
 pytestmark = pytest.mark.client

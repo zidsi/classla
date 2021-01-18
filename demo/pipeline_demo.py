@@ -6,8 +6,8 @@ import sys
 import argparse
 import os
 
-import stanza
-from stanza.resources.common import DEFAULT_MODEL_DIR
+import classla
+from classla.resources.common import DEFAULT_MODEL_DIR
 
 
 if __name__ == '__main__':
@@ -30,11 +30,11 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # download the models
-    stanza.download(args.lang, dir=args.models_dir)
+    classla.download(args.lang, dir=args.models_dir)
     # set up a pipeline
     print('---')
     print('Building pipeline...')
-    pipeline = stanza.Pipeline(lang=args.lang, dir=args.models_dir, use_gpu=(not args.cpu))
+    pipeline = classla.Pipeline(lang=args.lang, dir=args.models_dir, use_gpu=(not args.cpu))
     # process the document
     doc = pipeline(example_sentences[args.lang])
     # access nlp annotations

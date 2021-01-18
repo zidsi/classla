@@ -26,7 +26,7 @@ import sys
 
 from enum import Enum
 
-import stanza
+import classla
 
 import scripts.sentiment.process_utils as process_utils
 
@@ -47,7 +47,7 @@ parser.add_argument('--split', type=lambda x: Split[x.upper()], default=Split.TR
 args = parser.parse_args()
 
 
-nlp = stanza.Pipeline('de', processors='tokenize')
+nlp = classla.Pipeline('de', processors='tokenize')
 
 
 with open(args.csv_filename, newline='') as fin:
@@ -88,13 +88,13 @@ if args.split is Split.TRAIN_DEV_TEST:
                                snippets,
                                (process_utils.Split("train.txt", 0.8),
                                 process_utils.Split("dev.txt", 0.1),
-                                process_utils.Split("test.txt", 0.1)))
+                                process_utils.Split("test.tmp", 0.1)))
 elif args.split is Split.TRAIN_DEV:
     process_utils.write_splits(args.out_dir,
                                snippets,
                                (process_utils.Split("train.txt", 0.9),
                                 process_utils.Split("dev.txt", 0.1)))
 elif args.split is Split.TEST:
-    process_utils.write_list(os.path.join(args.out_dir, "test.txt"), snippets)
+    process_utils.write_list(os.path.join(args.out_dir, "test.tmp"), snippets)
 else:
     raise ValueError("Unknown split method {}".format(args.split))

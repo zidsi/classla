@@ -3,7 +3,7 @@ Convert an input language name into its short code.
 """
 import sys
 
-from stanza.models.common.constant import lang2lcode
+from classla.models.common.constant import lang2lcode
 
 if len(sys.argv) <= 1:
     raise Exception("Language name not provided.")

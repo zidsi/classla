@@ -1,8 +1,8 @@
 import pytest
 
-import stanza
+import classla
 from tests import *
-from stanza.models.common.doc import Document, ID, TEXT, NER
+from classla.models.common.doc import Document, ID, TEXT, NER
 
 pytestmark = [pytest.mark.travis, pytest.mark.pipeline]
 

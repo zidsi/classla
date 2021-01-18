@@ -7,7 +7,7 @@ import pytest
 import shutil
 import tempfile
 
-import stanza
+import classla
 
 pytestmark = [pytest.mark.travis, pytest.mark.client]
 
@@ -18,7 +18,7 @@ def test_install_corenlp():
 
         # the download method doesn't install over existing directories
         shutil.rmtree(test_dir)
-        stanza.install_corenlp(dir=test_dir, url='http://nlp.stanford.edu/software/')
+        classla.install_corenlp(dir=test_dir, url='http://nlp.stanford.edu/software/')
 
         assert os.path.isdir(test_dir), "Installation destination directory not found."
         jar_files = [f for f in os.listdir(test_dir) \
@@ -33,7 +33,7 @@ def test_download_corenlp_models():
     version = "4.1.0"
 
     with tempfile.TemporaryDirectory(dir=".") as test_dir:
-        stanza.download_corenlp_models(model=model_name, version=version, dir=test_dir)
+        classla.download_corenlp_models(model=model_name, version=version, dir=test_dir)
 
         dest_file = os.path.join(test_dir, f"stanford-corenlp-{version}-models-{model_name}.jar")
         assert os.path.isfile(dest_file), "Downloaded model file not found."

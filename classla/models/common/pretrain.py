@@ -6,6 +6,8 @@ import re
 
 import lzma
 import logging
+from collections import OrderedDict
+
 import numpy as np
 import torch
 
@@ -49,6 +51,21 @@ class Pretrain:
             except BaseException as e:
                 logger.warning("Pretrained file exists but cannot be loaded from {}, due to the following exception:\n\t{}".format(self.filename, e))
                 return self.read_pretrain()
+            # # TODO ERASE THIS!!!
+            # new_vocab = OrderedDict({
+            #     'lang': data['vocab'].lang,
+            #     'idx': data['vocab'].idx,
+            #     'cutoff': data['vocab'].cutoff,
+            #     'lower': data['vocab'].lower,
+            #     '_unit2id': data['vocab']._unit2id,
+            #     '_id2unit': data['vocab']._id2unit
+            # })
+            # data['vocab'] = new_vocab
+            # try:
+            #     torch.save(data, 'TEST.pt')
+            #     print("model saved to {}".format('TEST.pt'))
+            # except BaseException:
+            #     print("[Warning: Saving failed... continuing anyway.]")
             return PretrainedWordVocab.load_state_dict(data['vocab']), data['emb']
         else:
             return self.read_pretrain()

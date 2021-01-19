@@ -424,7 +424,7 @@ def download(
 
     # Download packages
     for key, value in download_list:
-        if value not in resources[lang][key]:
+        if value not in resources[lang][key] or key == 'tokenize':
             continue
         try:
             request_file(

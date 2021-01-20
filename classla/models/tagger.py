@@ -35,6 +35,7 @@ def parse_args():
     parser.add_argument('--eval_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
+    parser.add_argument('--constrain_via_lexicon', type=str, default=None, help="Input location of lemmatization model.")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
@@ -50,7 +51,7 @@ def parse_args():
     parser.add_argument('--transformed_dim', type=int, default=125)
     parser.add_argument('--num_layers', type=int, default=2)
     parser.add_argument('--char_num_layers', type=int, default=1)
-    parser.add_argument('--pretrain_max_vocab', type=int, default=250000)
+    parser.add_argument('--pretrain_max_vocab', type=int, default=-1)
     parser.add_argument('--word_dropout', type=float, default=0.33)
     parser.add_argument('--dropout', type=float, default=0.5)
     parser.add_argument('--rec_dropout', type=float, default=0, help="Recurrent dropout")
@@ -83,6 +84,8 @@ def parse_args():
     return args
 
 def main():
+    sys.setrecursionlimit(50000)
+
     args = parse_args()
 
     torch.manual_seed(args.seed)
@@ -106,12 +109,11 @@ def train(args):
     model_file = args['save_dir'] + '/' + args['save_name'] if args['save_name'] is not None \
             else '{}/{}_tagger.pt'.format(args['save_dir'], args['shorthand'])
 
-    # load pretrained vectors if needed
-    pretrain = None
-    if args['pretrain']:
-        vec_file = args['wordvec_file'] if args['wordvec_file'] else utils.get_wordvec_file(args['wordvec_dir'], args['shorthand'])
-        pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
-        pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
+    # load pretrained vectors
+    vec_file = args['wordvec_file']
+
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+    pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
 
     # load data
     print("Loading data with batch size {}...".format(args['batch_size']))
@@ -217,14 +219,13 @@ def evaluate(args):
     model_file = args['save_dir'] + '/' + args['save_name'] if args['save_name'] is not None \
             else '{}/{}_tagger.pt'.format(args['save_dir'], args['shorthand'])
 
-    # load pretrain; note that we allow the pretrain_file to be non-existent
     pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
     pretrain = Pretrain(pretrain_file)
 
     # load model
     print("Loading model from: {}".format(model_file))
     use_cuda = args['cuda'] and not args['cpu']
-    trainer = Trainer(pretrain=pretrain, model_file=model_file, use_cuda=use_cuda)
+    trainer = Trainer(args=args, pretrain=pretrain, model_file=model_file, use_cuda=use_cuda)
     loaded_args, vocab = trainer.args, trainer.vocab
 
     # load config

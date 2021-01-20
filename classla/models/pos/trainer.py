@@ -8,8 +8,10 @@ import torch
 from torch import nn
 
 from classla.models.common.trainer import Trainer as BaseTrainer
+from classla.models.lemma.trainer import Trainer as LemmaTrainer
 from classla.models.common import utils, loss
 from classla.models.pos.model import Tagger
+from classla.models.pos.postprocessor import InflectionalLexicon
 from classla.models.pos.vocab import MultiVocab
 
 logger = logging.getLogger('classla')
@@ -24,7 +26,8 @@ def unpack_batch(batch, use_cuda):
     word_orig_idx = batch[9]
     sentlens = batch[10]
     wordlens = batch[11]
-    return inputs, orig_idx, word_orig_idx, sentlens, wordlens
+    word_string = batch[12]
+    return inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string
 
 class Trainer(BaseTrainer):
     """ A trainer for training models. """
@@ -38,6 +41,12 @@ class Trainer(BaseTrainer):
             self.args = args
             self.vocab = vocab
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb if pretrain is not None else None, share_hid=args['share_hid'])
+
+        self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None and 'constrain_via_lexicon' in args else None
+        self.inflectional_lexicon = None
+        if self.constrain_via_lexicon:
+            inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
+            self.inflectional_lexicon = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()
@@ -46,7 +55,7 @@ class Trainer(BaseTrainer):
         self.optimizer = utils.get_optimizer(self.args['optim'], self.parameters, self.args['lr'], betas=(0.9, self.args['beta2']), eps=1e-6)
 
     def update(self, batch, eval=False):
-        inputs, orig_idx, word_orig_idx, sentlens, wordlens = unpack_batch(batch, self.use_cuda)
+        inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string = unpack_batch(batch, self.use_cuda)
         word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained = inputs
 
         if eval:
@@ -65,14 +74,17 @@ class Trainer(BaseTrainer):
         return loss_val
 
     def predict(self, batch, unsort=True):
-        inputs, orig_idx, word_orig_idx, sentlens, wordlens = unpack_batch(batch, self.use_cuda)
+        inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string = unpack_batch(batch, self.use_cuda)
         word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained = inputs
 
         self.model.eval()
         batch_size = word.size(0)
-        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens)
+        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, inflectional_lexicon=self.inflectional_lexicon)
         upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
-        xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
+        if self.inflectional_lexicon is None:
+            xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
+        else:
+            xpos_seqs = preds[1]
         feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
 
         pred_tokens = [[[upos_seqs[i][j], xpos_seqs[i][j], feats_seqs[i][j]] for j in range(sentlens[i])] for i in range(batch_size)]

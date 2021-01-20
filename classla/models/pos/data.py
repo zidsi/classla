@@ -26,11 +26,8 @@ class DataLoader:
             self.vocab = self.init_vocab(data)
         else:
             self.vocab = vocab
-        
-        # handle pretrain; pretrain vocab is used when args['pretrain'] == True and pretrain is not None
-        self.pretrain_vocab = None
-        if pretrain is not None and args['pretrain']:
-            self.pretrain_vocab = pretrain.vocab
+
+        self.pretrain_vocab = pretrain.vocab
 
         # filter and sample data
         if args.get('sample_train', 1.0) < 1.0 and not self.eval:
@@ -70,11 +67,8 @@ class DataLoader:
             processed_sent += [vocab['upos'].map([w[1] for w in sent])]
             processed_sent += [vocab['xpos'].map([w[2] for w in sent])]
             processed_sent += [vocab['feats'].map([w[3] for w in sent])]
-            if pretrain_vocab is not None:
-                # always use lowercase lookup in pretrained vocab
-                processed_sent += [pretrain_vocab.map([w[0].lower() for w in sent])]
-            else:
-                processed_sent += [[PAD_ID] * len(sent)]
+            processed_sent += [pretrain_vocab.map([w[0] for w in sent])]
+            processed_sent += [[w[0].lower() for w in sent]]
             processed.append(processed_sent)
         return processed
 
@@ -90,7 +84,7 @@ class DataLoader:
         batch = self.data[key]
         batch_size = len(batch)
         batch = list(zip(*batch))
-        assert len(batch) == 6
+        assert len(batch) == 7
 
         # sort sentences by lens for easy RNN operations
         lens = [len(x) for x in batch[0]]
@@ -114,8 +108,9 @@ class DataLoader:
         xpos = get_long_tensor(batch[3], batch_size)
         ufeats = get_long_tensor(batch[4], batch_size)
         pretrained = get_long_tensor(batch[5], batch_size)
+        word_string = batch[6]
         sentlens = [len(x) for x in batch[0]]
-        return words, words_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, orig_idx, word_orig_idx, sentlens, word_lens
+        return words, words_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, orig_idx, word_orig_idx, sentlens, word_lens, word_string
 
     def __iter__(self):
         for i in range(self.__len__()):

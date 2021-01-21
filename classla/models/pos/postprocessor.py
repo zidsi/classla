@@ -66,7 +66,7 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
                 self.closed_classes.add(vocab[key])
 
 
-processors = {"ssj": SloveneInflectionalLexiconProcessor}
+processors = {"ssj": SloveneInflectionalLexiconProcessor, "sl_ssj": SloveneInflectionalLexiconProcessor}
 
 
 class InflectionalLexicon:

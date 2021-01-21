@@ -114,7 +114,7 @@ class DataLoader:
             yield self.__getitem__(i)
 
     def load_doc(self, doc):
-        data = doc.get([TEXT, UPOS, LEMMA])
+        data = doc.get([TEXT, XPOS, LEMMA])
         data = self.resolve_none(data)
         return data
 

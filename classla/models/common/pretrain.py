@@ -60,7 +60,9 @@ class Pretrain:
             #     '_unit2id': data['vocab']._unit2id,
             #     '_id2unit': data['vocab']._id2unit
             # })
-            # data['vocab'] = new_vocab
+            # data['vocab']['_unit2id'] = {k: v for i, (k, v) in enumerate(data['vocab']['_unit2id'].items()) if i < 250000}
+            # data['vocab']['_id2unit'] = data['vocab']['_id2unit'][:250000]
+            # data['emb'] = data['emb'][:250000, :]
             # try:
             #     torch.save(data, 'TEST.pt')
             #     print("model saved to {}".format('TEST.pt'))

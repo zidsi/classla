@@ -46,6 +46,7 @@ class Trainer(BaseTrainer):
         self.inflectional_lexicon = None
         if self.constrain_via_lexicon:
             inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
+            args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
             self.inflectional_lexicon = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:

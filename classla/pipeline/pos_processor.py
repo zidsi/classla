@@ -1,6 +1,7 @@
 """
 Processor for performing part-of-speech tagging
 """
+import os
 
 from classla.models.common import doc
 from classla.models.common.pretrain import Pretrain
@@ -21,8 +22,14 @@ class POSProcessor(UDProcessor):
     def _set_up_model(self, config, use_gpu):
         # get pretrained word vectors
         self._pretrain = Pretrain(config['pretrain_path']) if 'pretrain_path' in config else None
+
+        if 'use_lexicon' in self.config and self.config['use_lexicon']:
+            assert 'lemma_model_path' in self.pipeline.config, 'If `pos_use_lexicon` tag is used, you must add lemma processor to processors!'
+            arg = {'constrain_via_lexicon': self.pipeline.config['lemma_model_path']}
+        else:
+            arg = None
         # set up trainer
-        self._trainer = Trainer(pretrain=self.pretrain, model_file=config['model_path'], use_cuda=use_gpu)
+        self._trainer = Trainer(args=arg, pretrain=self.pretrain, model_file=config['model_path'], use_cuda=use_gpu)
 
     def process(self, document):
         batch = DataLoader(

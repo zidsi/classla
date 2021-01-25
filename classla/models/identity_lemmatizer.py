@@ -39,8 +39,9 @@ def main():
 
     if args['mode'] == 'train':
         print("[No training is required; will only generate evaluation output...]")
-    
-    document = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    document = Document(doc, metasentences=metasentences)
     batch = DataLoader(document, args['batch_size'], args, evaluation=True, conll_only=True)
     system_pred_file = args['output_file']
     gold_file = args['gold_file']

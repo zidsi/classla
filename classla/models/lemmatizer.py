@@ -101,12 +101,14 @@ def main():
 def train(args):
     # load data
     print("[Loading data with batch size {}...]".format(args['batch_size']))
-    train_doc = Document(CoNLL.conll2dict(input_file=args['train_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['train_file'])
+    train_doc = Document(doc, metasentences=metasentences)
     train_batch = DataLoader(train_doc, args['batch_size'], args, evaluation=False)
     vocab = train_batch.vocab
     args['vocab_size'] = vocab['char'].size
     args['pos_vocab_size'] = vocab['pos'].size
-    dev_doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    dev_doc = Document(doc, metasentences=metasentences)
     dev_batch = DataLoader(dev_doc, args['batch_size'], args, vocab=vocab, evaluation=True)
 
     utils.ensure_dir(args['model_dir'])
@@ -186,7 +188,8 @@ def train(args):
             # try ensembling with dict if necessary
             if args.get('ensemble_dict', False):
                 skip = trainer.skip_seq2seq([(e[0].lower(), e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
-                dev_doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+                doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+                dev_doc = Document(doc, metasentences=metasentences)
                 seq2seq_batch = DataLoader(dev_doc, args['batch_size'], args, vocab=vocab, evaluation=True, skip=skip)
                 # print("[Ensembling dict with seq2seq model...]")
                 # dev_preds = trainer.ensemble(dev_batch.doc.get([TEXT, UPOS]), dev_preds)
@@ -253,7 +256,8 @@ def evaluate(args):
 
     # laod data
     print("Loading data with batch size {}...".format(args['batch_size']))
-    doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    doc = Document(doc, metasentences=metasentences)
     batch = DataLoader(doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
 
     # skip eval if dev data does not exist
@@ -270,7 +274,8 @@ def evaluate(args):
     else:
         if loaded_args.get('ensemble_dict', False):
             skip = trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in batch.doc.get([TEXT, XPOS])])
-            dev_doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+            doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+            dev_doc = Document(doc, metasentences=metasentences)
             seq2seq_batch = DataLoader(dev_doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True, skip=skip)
         else:
             seq2seq_batch = batch

@@ -9,7 +9,7 @@ from torch import nn
 
 from classla.models.common.trainer import Trainer as BaseTrainer
 from classla.models.common import utils, loss
-from classla.models.common.chuliu_edmonds import chuliu_edmonds_one_root
+from classla.models.common.chuliu_edmonds import chuliu_edmonds, chuliu_edmonds_one_root
 from classla.models.depparse.model import Parser
 from classla.models.pos.vocab import MultiVocab
 
@@ -35,6 +35,7 @@ class Trainer(BaseTrainer):
             # load everything from file
             self.load(model_file, pretrain)
         else:
+            assert all(var is not None for var in [args, vocab, pretrain])
             # build model from scratch
             self.args = args
             self.vocab = vocab
@@ -72,7 +73,10 @@ class Trainer(BaseTrainer):
         self.model.eval()
         batch_size = word.size(0)
         _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, lemma, head, deprel, word_orig_idx, sentlens, wordlens)
-        head_seqs = [chuliu_edmonds_one_root(adj[:l, :l])[1:] for adj, l in zip(preds[0], sentlens)] # remove attachment for the root
+        if 'multi_root' in self.args and self.args['multi_root']:
+            head_seqs = [chuliu_edmonds(adj[:l, :l])[1:] for adj, l in zip(preds[0], sentlens)]
+        else:
+            head_seqs = [chuliu_edmonds_one_root(adj[:l, :l])[1:] for adj, l in zip(preds[0], sentlens)] # remove attachment for the root
         deprel_seqs = [self.vocab['deprel'].unmap([preds[1][i][j+1][h] for j, h in enumerate(hs)]) for i, hs in enumerate(head_seqs)]
 
         pred_tokens = [[[str(head_seqs[i][j]), deprel_seqs[i][j]] for j in range(sentlens[i]-1)] for i in range(batch_size)]

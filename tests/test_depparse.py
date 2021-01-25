@@ -72,7 +72,8 @@ def test_depparse_with_pretagged_doc():
     nlp = classla.Pipeline(**{'processors': 'depparse', 'dir': TEST_MODELS_DIR, 'lang': 'en',
                                   'depparse_pretagged': True})
 
-    doc = classla.Document(CoNLL.conll2dict(input_str=EN_DOC_CONLLU_PRETAGGED))
+    doc, metasentences = CoNLL.conll2dict(input_file=EN_DOC_CONLLU_PRETAGGED)
+    doc = classla.Document(doc, metasentences=metasentences)
     processed_doc = nlp(doc)
 
     assert EN_DOC_DEPENDENCY_PARSES_GOLD == '\n\n'.join(

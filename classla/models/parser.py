@@ -42,6 +42,7 @@ def parse_args():
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
     parser.add_argument('--shorthand', type=str, help="Treebank shorthand")
+    parser.add_argument('--multi_root', dest='multi_root', action='store_true', help="Allow multiple roots in trees (JOS)")
 
     parser.add_argument('--hidden_dim', type=int, default=400)
     parser.add_argument('--char_hidden_dim', type=int, default=400)
@@ -84,6 +85,8 @@ def parse_args():
     return args
 
 def main():
+    sys.setrecursionlimit(50000)
+
     args = parse_args()
 
     torch.manual_seed(args.seed)
@@ -116,10 +119,12 @@ def train(args):
 
     # load data
     print("Loading data with batch size {}...".format(args['batch_size']))
-    train_doc = Document(CoNLL.conll2dict(input_file=args['train_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['train_file'])
+    train_doc = Document(doc, metasentences=metasentences)
     train_batch = DataLoader(train_doc, args['batch_size'], args, pretrain, evaluation=False)
     vocab = train_batch.vocab
-    dev_doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    dev_doc = Document(doc, metasentences=metasentences)
     dev_batch = DataLoader(dev_doc, args['batch_size'], args, pretrain, vocab=vocab, evaluation=True, sort_during_eval=True)
 
     # pred and gold path
@@ -232,7 +237,8 @@ def evaluate(args):
 
     # load data
     print("Loading data with batch size {}...".format(args['batch_size']))
-    doc = Document(CoNLL.conll2dict(input_file=args['eval_file']))
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    doc = Document(doc, metasentences=metasentences)
     batch = DataLoader(doc, args['batch_size'], loaded_args, pretrain, vocab=vocab, evaluation=True, sort_during_eval=True)
 
     if len(batch) > 0:

@@ -37,15 +37,18 @@ class CoNLL:
         Output: a list of list of list for each token in each sentence in the data, where the innermost list represents
         all fields of a token.
         """
-        doc, sent = [], []
+        doc, sent, metadata = [], [], ''
         for line in f:
+            raw_line = line
             line = line.strip()
             if len(line) == 0:
                 if len(sent) > 0:
-                    doc.append(sent)
+                    doc.append((sent, metadata))
+                    metadata = ''
                     sent = []
             else:
                 if line.startswith('#'): # skip comment line
+                    metadata += raw_line
                     continue
                 array = line.split('\t')
                 if ignore_gapping and '.' in array[0]:
@@ -54,7 +57,7 @@ class CoNLL:
                         f"Cannot parse CoNLL line: expecting {FIELD_NUM} fields, {len(array)} found."
                 sent += [array]
         if len(sent) > 0:
-            doc.append(sent)
+            doc.append((sent, metadata))
         return doc
 
     @staticmethod
@@ -64,13 +67,15 @@ class CoNLL:
         Output: a list of list of dictionaries for each token in each sentence in the document.
         """
         doc_dict = []
-        for sent_conll in doc_conll:
+        metadata_list = []
+        for sent_conll, metadata in doc_conll:
             sent_dict = []
             for token_conll in sent_conll:
                 token_dict = CoNLL.convert_conll_token(token_conll)
                 sent_dict.append(token_dict)
+            metadata_list.append(metadata)
             doc_dict.append(sent_dict)
-        return doc_dict
+        return doc_dict, metadata_list
 
     @staticmethod
     def convert_conll_token(token_conll):

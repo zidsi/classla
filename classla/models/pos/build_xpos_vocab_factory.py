@@ -61,7 +61,8 @@ for sh, fn in zip(shorthands, fullnames):
         mapping[key].append(sh)
         continue
 
-    doc = Document(CoNLL.conll2dict(input_file='data/pos/{}.train.in.conllu'.format(sh)))
+    doc, metasentences = CoNLL.conll2dict(input_file='data/pos/{}.train.in.conllu'.format(sh))
+    doc = Document(doc, metasentences=metasentences)
     data = doc.get([TEXT, UPOS, XPOS, FEATS], as_sentences=True)
     print(f'Original length = {len(data)}')
     data = filter_data(data, idx=2)

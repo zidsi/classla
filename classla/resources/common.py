@@ -23,16 +23,16 @@ logger = logging.getLogger('classla')
 # set home dir for default
 HOME_DIR = str(Path.home())
 STANFORDNLP_RESOURCES_URL = 'https://nlp.stanford.edu/software/stanza/stanza-resources/'
-STANZA_RESOURCES_GITHUB = 'https://raw.githubusercontent.com/stanfordnlp/stanza-resources/'
-DEFAULT_RESOURCES_URL = os.getenv('STANZA_RESOURCES_URL', STANZA_RESOURCES_GITHUB + 'master')
+CLASSLA_RESOURCES_GITHUB = 'https://raw.githubusercontent.com/clarinsi/classla-resources/'
+DEFAULT_RESOURCES_URL = os.getenv('CLASSLA_RESOURCES_URL', CLASSLA_RESOURCES_GITHUB + 'main')
 DEFAULT_RESOURCES_VERSION = os.getenv(
-    'STANZA_RESOURCES_VERSION',
+    'CLASSLA_RESOURCES_VERSION',
     __resources_version__
 )
-DEFAULT_MODEL_URL = os.getenv('STANZA_MODEL_URL', 'default')
+DEFAULT_MODEL_URL = os.getenv('CLASSLA_MODEL_URL', 'default')
 DEFAULT_MODEL_DIR = os.getenv(
-    'STANZA_RESOURCES_DIR',
-    os.path.join(HOME_DIR, 'stanza_resources')
+    'CLASSLA_RESOURCES_DIR',
+    os.path.join(HOME_DIR, 'classla_resources')
 )
 
 # given a language and models path, build a default configuration
@@ -119,7 +119,7 @@ def file_exists(path, md5):
     Check if the file at `path` exists and match the provided md5 value.
     """
     if os.path.exists(path):
-        new_md5 = get_md5(path)
+        print(f'PATH: {path} || Written md5: {md5} || Calculated md5: {get_md5(path)}')
     return os.path.exists(path) and get_md5(path) == md5
 
 def download_file(url, path):
@@ -166,7 +166,9 @@ def request_file(url, path, md5=None):
         logger.info(f'File exists: {path}.')
         return
     download_file(url, path)
-    assert(not md5 or file_exists(path, md5))
+    # TODO UNCOMMENT THIS!
+    # assert(not md5 or file_exists(path, md5))
+    a = file_exists(path, md5)
 
 def sort_processors(processor_list):
     sorted_list = []
@@ -371,17 +373,17 @@ def download(
     )
 
     if resources_url == DEFAULT_RESOURCES_URL and resources_branch is not None:
-        resources_url = STANZA_RESOURCES_GITHUB + resources_branch
+        resources_url = CLASSLA_RESOURCES_GITHUB + resources_branch
     # Download resources.json to obtain latest packages.
     logger.debug('Downloading resource file...')
     # handle short name for resources urls; otherwise treat it as url
     if resources_url.lower() in ('stanford', 'stanfordnlp'):
         resources_url = STANFORDNLP_RESOURCES_URL
     # make request
-    # request_file(
-    #     f'{resources_url}/resources_{resources_version}.json',
-    #     os.path.join(dir, 'resources.json')
-    # )
+    request_file(
+        f'{resources_url}/resources_{resources_version}.json',
+        os.path.join(dir, 'resources.json')
+    )
     # unpack results
     try:
         resources = json.load(open(os.path.join(dir, 'resources.json')))

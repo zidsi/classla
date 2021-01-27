@@ -84,7 +84,7 @@ class Trainer(BaseTrainer):
         tag_seqs = []
         for i in range(bs):
             tags, _ = viterbi_decode(scores[i, :sentlens[i]], trans)
-            tags = self.vocab['tag'].unmap(tags)
+            tags = [e.upper() for e in self.vocab['tag'].unmap(tags)] # uppercased tags, dirty hack to have unified NER tags, to be removed once training datasets are corrected
             tag_seqs += [tags]
 
         if unsort:

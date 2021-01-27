@@ -53,6 +53,10 @@ def build_default_config(resources, lang, dir, load_list):
             assert 'type' in resources[lang][processor][package], "Tokenizer processor in resources.json should include attribute `type` with value `standard` or `nonstandard`"
             default_config[f"{processor}_type"] = resources[lang][processor][package]['type']
         else:
+            if processor == NER:
+                default_config[f"{processor}_forward_charlm_path"] = None
+                default_config[f"{processor}_backward_charlm_path"] = None
+                logger.debug(f'Skipping {NER} charlm...')
             default_config[f"{processor}_model_path"] = os.path.join(
                 dir, lang, processor, package + '.pt'
             )

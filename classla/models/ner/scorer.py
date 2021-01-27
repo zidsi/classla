@@ -28,7 +28,7 @@ def score_by_entity(pred_tag_sequences, gold_tag_sequences, verbose=True):
         # decode from all sequences, each sequence with a unique id
         ents = []
         for sent_id, tags in enumerate(tag_sequences):
-            for ent in decode_from_bioes(tags):
+            for ent in decode_from_bioes([e.upper() for e in tags]): # dirty hack given that predictions are uppercased due to a consistent bug in training data
                 ent['sent_id'] = sent_id
                 ents += [ent]
         return ents

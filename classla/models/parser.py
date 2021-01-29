@@ -38,6 +38,7 @@ def parse_args():
     parser.add_argument('--eval_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
+    parser.add_argument('--pretrain_file', type=str, default=None, help='Input file containing pretrained data.')
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
@@ -114,7 +115,8 @@ def train(args):
     pretrain = None
     if args['pretrain']:
         vec_file = args['wordvec_file'] if args['wordvec_file'] else utils.get_wordvec_file(args['wordvec_dir'], args['shorthand'])
-        pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+        pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand']) if args['pretrain_file'] is None \
+            else args['pretrain_file']
         pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
 
     # load data
@@ -221,7 +223,8 @@ def evaluate(args):
             else '{}/{}_parser.pt'.format(args['save_dir'], args['shorthand'])
 
     # load pretrain; note that we allow the pretrain_file to be non-existent
-    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand']) if args['pretrain_file'] is None \
+        else args['pretrain_file']
     pretrain = Pretrain(pretrain_file)
 
     # load model

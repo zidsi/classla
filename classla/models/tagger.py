@@ -35,6 +35,7 @@ def parse_args():
     parser.add_argument('--eval_file', type=str, default=None, help='Input file for data loader.')
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
+    parser.add_argument('--pretrain_file', type=str, default=None, help='Input file containing pretrained data.')
     parser.add_argument('--constrain_via_lexicon', type=str, default=None, help="Input location of lemmatization model.")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
@@ -112,7 +113,8 @@ def train(args):
     # load pretrained vectors
     vec_file = args['wordvec_file']
 
-    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand']) if args['pretrain_file'] is None \
+        else args['pretrain_file']
     pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
 
     # load data
@@ -221,7 +223,8 @@ def evaluate(args):
     model_file = args['save_dir'] + '/' + args['save_name'] if args['save_name'] is not None \
             else '{}/{}_tagger.pt'.format(args['save_dir'], args['shorthand'])
 
-    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand'])
+    pretrain_file = '{}/{}.pretrain.pt'.format(args['save_dir'], args['shorthand']) if args['pretrain_file'] is None \
+        else args['pretrain_file']
     pretrain = Pretrain(pretrain_file)
 
     # load model

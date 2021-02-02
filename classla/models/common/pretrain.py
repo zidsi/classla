@@ -51,23 +51,6 @@ class Pretrain:
             except BaseException as e:
                 logger.warning("Pretrained file exists but cannot be loaded from {}, due to the following exception:\n\t{}".format(self.filename, e))
                 return self.read_pretrain()
-            # # TODO ERASE THIS!!!
-            # new_vocab = OrderedDict({
-            #     'lang': data['vocab'].lang,
-            #     'idx': data['vocab'].idx,
-            #     'cutoff': data['vocab'].cutoff,
-            #     'lower': data['vocab'].lower,
-            #     '_unit2id': data['vocab']._unit2id,
-            #     '_id2unit': data['vocab']._id2unit
-            # })
-            # data['vocab']['_unit2id'] = {k: v for i, (k, v) in enumerate(data['vocab']['_unit2id'].items()) if i < 250000}
-            # data['vocab']['_id2unit'] = data['vocab']['_id2unit'][:250000]
-            # data['emb'] = data['emb'][:250000, :]
-            # try:
-            #     torch.save(data, 'TEST.pt')
-            #     print("model saved to {}".format('TEST.pt'))
-            # except BaseException:
-            #     print("[Warning: Saving failed... continuing anyway.]")
             return PretrainedWordVocab.load_state_dict(data['vocab']), data['emb']
         else:
             return self.read_pretrain()

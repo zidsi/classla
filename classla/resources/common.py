@@ -118,8 +118,8 @@ def file_exists(path, md5):
     """
     Check if the file at `path` exists and match the provided md5 value.
     """
-    if os.path.exists(path):
-        print(f'PATH: {path} || Written md5: {md5} || Calculated md5: {get_md5(path)}')
+    # if os.path.exists(path):
+    #     print(f'PATH: {path} || Written md5: {md5} || Calculated md5: {get_md5(path)}')
     return os.path.exists(path) and get_md5(path) == md5
 
 def download_file(url, path):
@@ -166,9 +166,7 @@ def request_file(url, path, md5=None):
         logger.info(f'File exists: {path}.')
         return
     download_file(url, path)
-    # TODO UNCOMMENT THIS!
-    # assert(not md5 or file_exists(path, md5))
-    a = file_exists(path, md5)
+    assert(not md5 or file_exists(path, md5))
 
 def sort_processors(processor_list):
     sorted_list = []

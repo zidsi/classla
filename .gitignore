@@ -7,7 +7,7 @@
 *.toklabels
 
 data/
-stanza_test/
+classla_test/
 saved_models/
 logs/
 log/

@@ -1,159 +1,294 @@
-<div align="center"><img src="https://github.com/stanfordnlp/stanza/raw/dev/images/stanza-logo.png" height="100px"/></div>
+### __NOTE: When you download new classla version you HAVE TO re-download models. All previously downloaded models will not be used anymore. We suggest you delete them, since they are not used. Default location of these models is at `~/classla_resources`.__
 
-<h2 align="center">Stanza: A Python NLP Library for Many Human Languages</h2>
+# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) for Processing Slovene, Croatian, Serbian, Macedonian and Bulgarian
 
-<div align="center">
-    <a href="https://travis-ci.com/stanfordnlp/stanza">
-        <img alt="Travis Status" src="https://travis-ci.com/stanfordnlp/stanza.svg?token=RPNzRzNDQRoq2x3J2juj&branch=master">
-    </a>
-    <a href="https://pypi.org/project/stanza/">
-        <img alt="PyPI Version" src="https://img.shields.io/pypi/v/stanza?color=blue">
-    </a>
-    <a href="https://anaconda.org/stanfordnlp/stanza">
-        <img alt="Conda Versions" src="https://img.shields.io/conda/vn/stanfordnlp/stanza?color=blue&label=conda">
-    </a>
-    <a href="https://pypi.org/project/stanza/">
-        <img alt="Python Versions" src="https://img.shields.io/pypi/pyversions/stanza?colorB=blue">
-    </a>
-</div>
+## Description
 
-The Stanford NLP Group's official Python NLP library. It contains support for running various accurate natural language processing tools on 60+ languages and for accessing the Java Stanford CoreNLP software from Python. For detailed information please visit our [official website](https://stanfordnlp.github.io/stanza/).
+This pipeline allows for processing of standard Slovene, Croatian, Serbian and Bulgarian on the levels of
 
-🔥 &nbsp;A new collection of **biomedical** and **clinical** English model packages are now available, supporting syntactic analysis and named entity recognition (NER) from biomedical literature text and clinical notes. For more information, check out our [Biomedical models documentation page](https://stanfordnlp.github.io/stanza/biomed.html).
+- tokenization and sentence splitting
+- part-of-speech tagging
+- lemmatization
+- dependency parsing
+- named entity recognition
 
-### References
+It also allows for (alpha) processing of standard Macedonian on the levels of 
 
-If you use this library in your research, please kindly cite our [ACL2020 Stanza system demo paper](https://arxiv.org/abs/2003.07082):
+- tokenization and sentence splitting
+- part-of-speech tagging
+- lemmatization
 
-```bibtex
-@inproceedings{qi2020stanza,
-    title={Stanza: A {Python} Natural Language Processing Toolkit for Many Human Languages},
-    author={Qi, Peng and Zhang, Yuhao and Zhang, Yuhui and Bolton, Jason and Manning, Christopher D.},
-    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics: System Demonstrations",
-    year={2020}
-}
-```
-
-If you use our biomedical and clinical models, please also cite our [Stanza Biomedical Models description paper](https://arxiv.org/abs/2007.14640):
-
-```bibtex
-@article{zhang2020biomedical,
-  title={Biomedical and Clinical English Model Packages in the Stanza Python NLP Library},
-  author={Zhang, Yuhao and Zhang, Yuhui and Qi, Peng and Manning, Christopher D. and Langlotz, Curtis P.},
-  journal={arXiv preprint arXiv:2007.14640},
-  year={2020}
-}
-```
-
-The PyTorch implementation of the neural pipeline in this repository is due to [Peng Qi](http://qipeng.me), [Yuhao Zhang](http://yuhao.im), and [Yuhui Zhang](https://cs.stanford.edu/~yuhuiz/), with help from [Jason Bolton](mailto:jebolton@stanford.edu) and [Tim Dozat](https://web.stanford.edu/~tdozat/).
-
-If you use the CoreNLP software through Stanza, please cite the CoreNLP software package and the respective modules as described [here](https://stanfordnlp.github.io/CoreNLP/#citing-stanford-corenlp-in-papers) ("Citing Stanford CoreNLP in papers"). The CoreNLP client is mostly written by [Arun Chaganty](http://arun.chagantys.org/), and [Jason Bolton](mailto:jebolton@stanford.edu) spearheaded merging the two projects together.
-
-## Issues and Usage Q&A
-
-To ask questions, report issues or request features 🤔, please use the [GitHub Issue Tracker](https://github.com/stanfordnlp/stanza/issues). Before creating a new issue, please make sure to search for existing issues that may solve your problem, or visit the [Frequently Asked Questions (FAQ) page](https://stanfordnlp.github.io/stanza/faq.html) on our website.
-
-## Contributing to Stanza
-
-We welcome community contributions to Stanza in the form of bugfixes 🛠️ and enhancements 💡! If you want to contribute, please first read [our contribution guideline](CONTRIBUTING.md).
+Finally, it allows for processing of non-standard (Internet) Slovene, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
 
 ## Installation
-
 ### pip
-
-Stanza supports Python 3.6 or later. We recommend that you install Stanza via [pip](https://pip.pypa.io/en/stable/installing/), the Python package manager. To install, simply run:
+We recommend that you install CLASSLA via pip, the Python package manager. To install, run:
 ```bash
 pip install classla
 ```
-This should also help resolve all of the dependencies of Stanza, for instance [PyTorch](https://pytorch.org/) 1.3.0 or above.
+This will also resolve all dependencies.
 
-If you currently have a previous version of `stanza` installed, use:
-```bash
-pip install classla -U
+## Running CLASSLA
+
+### Getting started
+
+To run the CLASSLA pipeline for the first time on processing standard Slovene, follow these steps:
+
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> classla.download('sl')                                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> nlp = classla.Pipeline('sl')                                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> doc = nlp("France Prešeren je rojen v Vrbi.")                     # run the pipeline
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))   # print the output in CoNLL-U format
+# newpar id = 1
+# sent_id = 1.1
+# text = France Prešeren je rojen v Vrbi.
+1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	4	nsubj	_	NER=B-per
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat_name	_	NER=I-per
+3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	cop	_	NER=O
+4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	NER=O
+5	v	v	ADP	Sl	Case=Loc	6	case	_	NER=O
+6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-loc|SpaceAfter=No
+7	.	.	PUNCT	Z	_	4	punct	_	NER=O
+```
+You can find examples of standard language processing for [Croatian](#example-of-standard-croatian), [Serbian](#example-of-standard-serbian), [Macedonian](#example-of-standard-macedonian) and [Bulgarian](#example-of-standard-bulgarian) at the end of this document.
+
+### Processing non-standard language
+
+Processing non-standard Slovene differs to the above standard example just by an additional argument ```type="nonstandard"```:
+
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> classla.download('sl', package='nonstandard')        # download non-standard models for Slovene, use hr for Croatian and sr for Serbian
+>>> nlp = classla.Pipeline('sl', package='nonstandard')  # initialize the default non-standard Slovene pipeline, use hr for Croatian and sr for Serbian
+>>> doc = nlp("kva smo mi zurali zadnje leto v zagrebu...")     # run the pipeline
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))   # print the output in CoNLL-U format 
+1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O
+2	smo	biti	AUX	Va-r1p-n	Mood=Ind|Number=Plur|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
+3	mi	jaz	PRON	Pp1mpn	Case=Nom|Gender=Masc|Number=Plur|Person=1|PronType=Prs	nsubj	_	NER=O
+4	zurali	žurati	VERB	Vmpp-pm	Aspect=Imp|Gender=Masc|Number=Plur|VerbForm=Part	root	_	NER=O
+5	zadnje	zadnji	ADJ	Agpnsa	Case=Acc|Degree=Pos|Gender=Neut|Number=Sing	6	amod	_	NER=O
+6	leto	leto	NOUN	Ncnsa	Case=Acc|Gender=Neut|Number=Sing	4	obl	NER=O
+7	v	v	ADP	Sl	Case=Loc	8	case	_	NER=O
+8	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	NER=B-LOC|SpaceAfter=No
+9	...	.	PUNCT	Z	_	4	punct	_	NER=O
+
 ```
 
-### Anaconda
+You can find examples of non-standard language processing for [Croatian](#example-of-non-standard-croatian) and [Serbian](#example-of-non-standard-serbian)  at the end of this document.
 
-To install Stanza via Anaconda, use the following conda command:
+For additional usage examples you can also consult the ```pipeline_demo.py``` file.
 
-```bash
-conda install -c stanfordnlp classla
-```
+## Packages
+Classla has various packages for each language. Currently we have following packages:
+- Slovenian
+    - ssj - standard Slovenian model
+    - ssj_jos - standard Slovenian model with jos dependency parsing system
+    - nonstandard - nonstandard Slovenian model
+    
+- Croatian
+    - hr500k - standard Croatian model
+    - nonstandard - nonstandard Croatian model
+    
+- Serbian
+    - set - standard Serbian model
+    - nonstandard - nonstandard Serbian model
+    
+- Bulgarian
+    - btb - standard Bulgarian model
+    
+- Macedonian
+    - 1984 - standard Macedonian model
 
-Note that for now installing Stanza via Anaconda does not work for Python 3.8. For Python 3.8 please use pip installation.
+## Processors
 
-### From Source
+The CLASSLA pipeline is built from multiple units. These units are called processors. By default CLASSLA runs the ```tokenize```, ```ner```, ```pos```, ```lemma``` and ```depparse``` processors.
 
-Alternatively, you can also install from source of this git repository, which will give you more flexibility in developing on top of Stanza. For this option, run
-```bash
-git clone https://github.com/stanfordnlp/stanza.git
-cd classla
-pip install -e .
-```
-
-## Running Stanza
-
-### Getting Started with the neural pipeline
-
-To run your first Stanza pipeline, simply following these steps in your Python interactive interpreter:
+You can specify which processors CLASSLA should run, via the ```processors``` attribute as in the following example, performing tokenization, named entity recognition, part-of-speech tagging and lemmatization.
 
 ```python
+>>> nlp = classla.Pipeline('sl', processors='tokenize,ner,pos,lemma')
+```
+
+Another popular option might be to perform tokenization, part-of-speech tagging, lemmatization and dependency parsing.
+
+```python
+>>> nlp = classla.Pipeline('sl', processors='tokenize,pos,lemma,depparse')
+```
+
+### Tokenization and sentence splitting
+
+The tokenization and sentence splitting processor ```tokenize``` is the first processor and is required for any further processing.
+
+In case you already have tokenized text, you should separate tokens via spaces and pass the attribute ```tokenize_pretokenized=True```.
+
+By default CLASSLA uses a rule-based tokenizer - [obeliks](https://github.com/clarinsi/obeliks) for slovenian standard package (ssj) and slovenian jos package (ssj_jos). All other packages use [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser).
+
+<!--Most important attributes:
+```
+tokenize_pretokenized   - [boolean]     ignores tokenizer
+```-->
+
+### Part-of-speech tagging
+
+The POS tagging processor ```pos``` will general output that contains morphosyntactic description following the [MULTEXT-East standard](http://nl.ijs.si/ME/V6/msd/html/msd.lang-specific.html) and universal part-of-speech tags and universal features following the [Universal Dependencies standard](https://universaldependencies.org). This processing requires the usage of the ```tokenize``` processor.
+
+<!--Most important attributes:
+```
+pos_model_path          - [str]         alternative path to model file
+pos_pretrain_path       - [str]         alternative path to pretrain file
+```-->
+
+### Lemmatization
+
+The lemmatization processor ```lemma``` will produce lemmas (basic forms) for each token in the input. It requires the usage of both the ```tokenize``` and ```pos``` processors.
+
+### Dependency parsing
+
+The dependency parsing processor ```depparse``` performs syntactic dependency parsing of sentences following the [Universal Dependencies formalism](https://universaldependencies.org/introduction.html#:~:text=Universal%20Dependencies%20(UD)%20is%20a,from%20a%20language%20typology%20perspective.). It requires the ```tokenize``` and ```pos``` processors.
+
+### Named entity recognition
+
+The named entity recognition processor ```ner``` identifies named entities in text following the [IOB2](https://en.wikipedia.org/wiki/Inside–outside–beginning_(tagging)) format. It requires only the ```tokenize``` processor.
+
+## Croatian examples
+
+### Example of standard Croatian 
+
+```
 >>> import classla
->>> classla.download('en')       # This downloads the English models for the neural pipeline
->>> nlp = classla.Pipeline('en') # This sets up a default neural pipeline in English
->>> doc = nlp("Barack Obama was born in Hawaii.  He was elected president in 2008.")
->>> doc.sentences[0].print_dependencies()
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('hr') # run classla.download('hr') beforehand if necessary
+>>> doc = nlp("Ante Starčević rođen je u Velikom Žitniku.")
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+# newpar id = 1
+# sent_id = 1.1
+# text = Ante Starčević rođen je u Velikom Žitniku.
+1	Ante	Ante	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	nsubj_pass	_	NER=B-PER
+2	Starčević	Starčević	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
+4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux_pass	_	NER=O
+5	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
+6	Velikom	velik	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Singamod	_	NER=B-LOC
+7	Žitniku	Žitnik	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	3	obl	NER=I-LOC|SpaceAfter=No
+8	.	.	PUNCT	Z	_	3	punct	_	NER=O
+
+```
+### Example of non-standard Croatian
+
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('hr', type='nonstandard') # run classla.download('hr', type='nonstandard') beforehand if necessary
+>>> doc = nlp("kaj sam ja tulumaril jucer u ljubljani...")
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+1	kaj	što	PRON	Pi3n-a	Case=Acc|Gender=Neut|PronType=Int,Rel	4	obj	NER=O
+2	sam	biti	AUX	Var1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	aux	_	NER=O
+3	ja	ja	PRON	Pp1-sn	Case=Nom|Number=Sing|Person=1|PronType=Prs	4	nsubj	_	NER=O
+4	tulumaril	tulumariti	VERB	Vmp-sm	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	0	root	_	NER=O
+5	jucer	jučer	ADV	Rgp	Degree=Pos	4	advmod	_	NER=O
+6	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
+7	ljubljani	Ljubljana	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
+8	...	.	PUNCT	Z	_	4	punct	_	NER=O
+
 ```
 
-The last command will print out the words in the first sentence in the input string (or [`Document`](https://stanfordnlp.github.io/stanza/data_objects.html#document), as it is represented in Stanza), as well as the indices for the word that governs it in the Universal Dependencies parse of that sentence (its "head"), along with the dependency relation between the words. The output should look like:
+## Serbian examples
+
+### Example of standard Serbian
 
 ```
-('Barack', '4', 'nsubj:pass')
-('Obama', '1', 'flat')
-('was', '4', 'aux:pass')
-('born', '0', 'root')
-('in', '6', 'case')
-('Hawaii', '4', 'obl')
-('.', '4', 'punct')
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('sr') # run classla.download('sr') beforehand if necessary
+>>> doc = nlp("Slobodan Jovanović rođen je u Novom Sadu.")
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+# newpar id = 1
+# sent_id = 1.1
+# text = Slobodan Jovanović rođen je u Novom Sadu.
+1	Slobodan	Slobodan	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	nsubj	_	NER=B-PER
+2	Jovanović	Jovanović	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
+4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux	_	NER=O
+5	u	u	ADP	Sl	Case=Loc	6	case	_	NER=O
+6	Novom	nov	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Singobl	_	NER=B-LOC
+7	Sadu	Sad	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	6	flat	NER=I-LOC|SpaceAfter=No
+8	.	.	PUNCT	Z	_	3	punct	_	NER=O
+
 ```
 
-See [our getting started guide](https://stanfordnlp.github.io/stanza/installation_usage.html#getting-started) for more details.
+### Example of non-standard Serbian
 
-### Accessing Java Stanford CoreNLP software
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('sr', type='nonstandard') # run classla.download('sr', type='nonstandard') beforehand if necessary
+>>> doc = nlp("ne mogu da verujem kakvo je zezanje bilo prosle godine u zagrebu...")
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+# newpar id = 1
+# sent_id = 1.1
+# text = ne mogu da verujem kakvo je zezanje bilo prosle godine u zagrebu...
+1	ne	ne	PART	Qz	Polarity=Neg	2	advmod	_	NER=O
+2	mogu	moći	VERB	Vmr1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	root	_	NER=O
+3	da	da	SCONJ	Cs	_	4	mark	_	NER=O
+4	verujem	verovati	VERB	Vmr1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	2	xcomp	_	NER=O
+5	kakvo	kakav	DET	Pi-nsn	Case=Nom|Gender=Neut|Number=Sing|PronType=Int,Rel	ccomp	_	NER=O
+6	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux	_	NER=O
+7	zezanje	zezanje	NOUN	Ncnsn	Case=Nom|Gender=Neut|Number=Sing	5	nsubj	NER=O
+8	bilo	biti	AUX	Vap-sn	Gender=Neut|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	5	cop	_	NER=O
+9	prosle	prošli	ADJ	Agpfsgy	Case=Gen|Definite=Def|Degree=Pos|Gender=Fem|Number=Sing	10	amod	_	NER=O
+10	godine	godina	NOUN	Ncfsg	Case=Gen|Gender=Fem|Number=Sing	8	obl	_	NER=O
+11	u	u	ADP	Sl	Case=Loc	12	case	_	NER=O
+12	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	8	obl	NER=B-LOC|SpaceAfter=No
+13	...	.	PUNCT	Z	_	2	punct	_	NER=O
 
-Aside from the neural pipeline, this package also includes an official wrapper for acessing the Java Stanford CoreNLP software with Python code.
+```
 
-There are a few initial setup steps.
+## Bulgarian examples
 
-* Download [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) and models for the language you wish to use
-* Put the model jars in the distribution folder
-* Tell the Python code where Stanford CoreNLP is located by setting the `CORENLP_HOME` environment variable (e.g., in *nix): `export CORENLP_HOME=/path/to/stanford-corenlp-4.1.0`
+### Example of standard Bulgarian
 
-We provide [comprehensive examples](https://stanfordnlp.github.io/stanza/corenlp_client.html) in our documentation that show how one can use CoreNLP through Stanza and extract various annotations from it.
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('bg') # run classla.download('bg') beforehand if necessary
+>>> doc = nlp("Алеко Константинов е роден в Свищов.")
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+# newpar id = 1
+# sent_id = 1.1
+# text = Алеко Константинов е роден в Свищов.
+1	Алеко	алеко	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	nsubj:pass	_	NER=B-PER
+2	Константинов	константинов	PROPN	Hmsi	Definite=Ind|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+3	е	съм	AUX	Vxitf-r3s	Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	4	aux:pass	_	NER=O
+4	роден	родя-(се)	VERB	Vpptcv--smi	Aspect=Perf|Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
+5	в	в	ADP	R	_	6	case	_	NER=O
+6	Свищов	свищов	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	iobj	NER=B-LOC|SpaceAfter=No
+7	.	.	PUNCT	punct	_	4	punct	_	NER=O
 
-### Online Colab Notebooks
+```
 
-To get your started, we also provide interactive Jupyter notebooks in the `demo` folder. You can also open these notebooks and run them interactively on [Google Colab](https://colab.research.google.com). To view all available notebooks, follow these steps:
+## Macedonian examples
 
-* Go to the [Google Colab website](https://colab.research.google.com)
-* Navigate to `File` -> `Open notebook`, and choose `GitHub` in the pop-up menu
-* Note that you do **not** need to give Colab access permission to your github account
-* Type `stanfordnlp/stanza` in the search bar, and click enter
+### Example of standard Macedonian
 
-### Trained Models for the Neural Pipeline
+```
+>>> import classla
+>>> from classla.utils.conll import CoNLL
+>>> nlp = classla.Pipeline('mk') # run classla.download('mk') beforehand if necessary
+>>> doc = nlp('Крсте Петков Мисирков е роден во Постол.')
+>>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+# newpar id = 1
+# sent_id = 1.1
+# text = Крсте Петков Мисирков е роден во Постол.
+1	Крсте	крсте	ADJ	Afpms-n	Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+2	Петков	петков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+3	Мисирков	мисирков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+4	е	сум	AUX	Vapip3s-n	Aspect=Prog|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres	_	_
+5	роден	роден	ADJ	Ap-ms-n	Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part	_	_	_	_
+6	во	во	ADP	Sps	AdpType=Prep	_	_	_	_
+7	Постол	постол	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	SpaceAfter=No
+8	.	.	PUNCT	Z	_	_	_	_	_
 
-We currently provide models for all of the [Universal Dependencies](https://universaldependencies.org/) treebanks v2.5, as well as NER models for a few widely-spoken languages. You can find instructions for downloading and using these models [here](https://stanfordnlp.github.io/stanza/models.html).
-
-### Batching To Maximize Pipeline Speed
-
-To maximize speed performance, it is essential to run the pipeline on batches of documents. Running a for loop on one sentence at a time will be very slow. The best approach at this time is to concatenate documents together, with each document separated by a blank line (i.e., two line breaks `\n\n`).  The tokenizer will recognize blank lines as sentence breaks. We are actively working on improving multi-document processing.
-
-## Training your own neural pipelines
-
-All neural modules in this library can be trained with your own data. The tokenizer, the multi-word token (MWT) expander, the POS/morphological features tagger, the lemmatizer and the dependency parser require [CoNLL-U](https://universaldependencies.org/format.html) formatted data, while the NER model requires the BIOES format. Currently, we do not support model training via the `Pipeline` interface. Therefore, to train your own models, you need to clone this git repository and run training from the source.
-
-For detailed step-by-step guidance on how to train and evaluate your own models, please visit our [training documentation](https://stanfordnlp.github.io/stanza/training.html).
-
-## LICENSE
-
-Stanza is released under the Apache License, Version 2.0. See the [LICENSE](https://github.com/stanfordnlp/stanza/blob/master/LICENSE) file for more details.
+```

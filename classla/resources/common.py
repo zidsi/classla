@@ -352,7 +352,7 @@ def process_pipeline_parameters(lang, dir, package, processors):
 
 # main download function
 def download(
-        lang='en',
+        lang='sl',
         dir=DEFAULT_MODEL_DIR,
         package='default',
         processors={},

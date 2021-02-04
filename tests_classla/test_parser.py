@@ -30,5 +30,4 @@ def test_parser():
     nlp = classla.Pipeline(
         **{'processors': 'tokenize,pos,lemma,depparse', 'dir': TEST_MODELS_DIR, 'lang': 'sl'})
     doc = nlp(SL_DOC)
-    a = CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict()))
-    assert SL_DOC_GOLD == CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict()))
+    assert SL_DOC_GOLD == doc.to_conll()

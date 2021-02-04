@@ -42,6 +42,4 @@ def test_identity_lemmatizer():
 def test_full_lemmatizer():
     nlp = classla.Pipeline(**{'processors': 'tokenize,pos,lemma', 'dir': TEST_MODELS_DIR, 'lang': 'sl'})
     doc = nlp(SL_DOC)
-    a = '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
-    b = CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict()))
     assert SL_DOC_LEMMATIZER_MODEL_GOLD == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])

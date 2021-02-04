@@ -137,7 +137,7 @@ def test_text(processed_doc):
 
 
 def test_conllu(processed_doc):
-    assert CoNLL.conll_as_string(CoNLL.convert_dict(processed_doc.to_dict())) == SL_DOC_CONLLU_GOLD
+    assert processed_doc.to_conll() == SL_DOC_CONLLU_GOLD
 
 
 def test_tokens(processed_doc):
@@ -149,6 +149,5 @@ def test_words(processed_doc):
 
 
 def test_dependency_parse(processed_doc):
-    a = "\n\n".join([sent.dependencies_string() for sent in processed_doc.sentences])
     assert "\n\n".join([sent.dependencies_string() for sent in processed_doc.sentences]) == \
            SL_DOC_DEPENDENCY_PARSES_GOLD

@@ -8,6 +8,7 @@ import json
 import pickle
 
 from classla.models.ner.utils import decode_from_bioes
+from classla.utils.conll import CoNLL
 
 multi_word_token_id = re.compile(r"([0-9]+)-([0-9]+)")
 multi_word_token_misc = re.compile(r".*MWT=Yes.*")
@@ -306,6 +307,11 @@ class Document(StanzaObject):
         """ Dumps the whole document into a list of list of dictionary for each token in each sentence in the doc.
         """
         return [sentence.to_dict() for sentence in self.sentences]
+
+    def to_conll(self):
+        """ Produces string output of CoNLLu type.
+        """
+        return CoNLL.conll_as_string(CoNLL.convert_dict(self.to_dict()))
 
     def __repr__(self):
         return json.dumps(self.to_dict(), indent=2, ensure_ascii=False)

@@ -99,4 +99,3 @@ def test_pretokenized():
     assert SL_DOC_PRETOKENIZED_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
     doc = nlp(SL_DOC_PRETOKENIZED_LIST)
     assert SL_DOC_PRETOKENIZED_LIST_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
-

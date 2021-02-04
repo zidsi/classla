@@ -36,21 +36,21 @@ To run the CLASSLA pipeline for the first time on processing standard Slovene, f
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
->>> classla.download('sl')                                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
->>> nlp = classla.Pipeline('sl')                                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
->>> doc = nlp("France Prešeren je rojen v Vrbi.")                     # run the pipeline
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))   # print the output in CoNLL-U format
+>>> classla.download('sl')                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
+>>> print(doc.to_conll())                             # print the output in CoNLL-U format
 # newpar id = 1
 # sent_id = 1.1
 # text = France Prešeren je rojen v Vrbi.
-1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	4	nsubj	_	NER=B-per
-2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat_name	_	NER=I-per
+1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	4	nsubj	_	NER=B-PER
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat_name	_	NER=I-PER
 3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	cop	_	NER=O
 4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	NER=O
 5	v	v	ADP	Sl	Case=Loc	6	case	_	NER=O
-6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-loc|SpaceAfter=No
+6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
 7	.	.	PUNCT	Z	_	4	punct	_	NER=O
+
 ```
 You can find examples of standard language processing for [Croatian](#example-of-standard-croatian), [Serbian](#example-of-standard-serbian), [Macedonian](#example-of-standard-macedonian) and [Bulgarian](#example-of-standard-bulgarian) at the end of this document.
 
@@ -60,11 +60,10 @@ Processing non-standard Slovene differs to the above standard example just by an
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
->>> classla.download('sl', package='nonstandard')        # download non-standard models for Slovene, use hr for Croatian and sr for Serbian
->>> nlp = classla.Pipeline('sl', package='nonstandard')  # initialize the default non-standard Slovene pipeline, use hr for Croatian and sr for Serbian
+>>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovene, use hr for Croatian and sr for Serbian
+>>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovene pipeline, use hr for Croatian and sr for Serbian
 >>> doc = nlp("kva smo mi zurali zadnje leto v zagrebu...")     # run the pipeline
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))   # print the output in CoNLL-U format 
+>>> print(doc.to_conll())                             # print the output in CoNLL-U format 
 1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O
 2	smo	biti	AUX	Va-r1p-n	Mood=Ind|Number=Plur|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
 3	mi	jaz	PRON	Pp1mpn	Case=Nom|Gender=Masc|Number=Plur|Person=1|PronType=Prs	nsubj	_	NER=O
@@ -80,27 +79,6 @@ Processing non-standard Slovene differs to the above standard example just by an
 You can find examples of non-standard language processing for [Croatian](#example-of-non-standard-croatian) and [Serbian](#example-of-non-standard-serbian)  at the end of this document.
 
 For additional usage examples you can also consult the ```pipeline_demo.py``` file.
-
-## Packages
-Classla has various packages for each language. Currently we have following packages:
-- Slovenian
-    - ssj - standard Slovenian model
-    - ssj_jos - standard Slovenian model with jos dependency parsing system
-    - nonstandard - nonstandard Slovenian model
-    
-- Croatian
-    - hr500k - standard Croatian model
-    - nonstandard - nonstandard Croatian model
-    
-- Serbian
-    - set - standard Serbian model
-    - nonstandard - nonstandard Serbian model
-    
-- Bulgarian
-    - btb - standard Bulgarian model
-    
-- Macedonian
-    - 1984 - standard Macedonian model
 
 ## Processors
 
@@ -124,7 +102,7 @@ The tokenization and sentence splitting processor ```tokenize``` is the first pr
 
 In case you already have tokenized text, you should separate tokens via spaces and pass the attribute ```tokenize_pretokenized=True```.
 
-By default CLASSLA uses a rule-based tokenizer - [obeliks](https://github.com/clarinsi/obeliks) for slovenian standard package (ssj) and slovenian jos package (ssj_jos). All other packages use [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser).
+By default CLASSLA uses a rule-based tokenizer - [obeliks](https://github.com/clarinsi/obeliks) for Slovenian standard language pipeline. In other cases we use [reldi-tokeniser](https://github.com/clarinsi/reldi-tokeniser).
 
 <!--Most important attributes:
 ```
@@ -159,20 +137,19 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('hr') # run classla.download('hr') beforehand if necessary
 >>> doc = nlp("Ante Starčević rođen je u Velikom Žitniku.")
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+>>> print(doc.to_conll())
 # newpar id = 1
 # sent_id = 1.1
 # text = Ante Starčević rođen je u Velikom Žitniku.
 1	Ante	Ante	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	nsubj_pass	_	NER=B-PER
-2	Starčević	Starčević	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+2	Starčević	Starčević	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat	_	NER=I-PER
 3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
-4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux_pass	_	NER=O
+4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux_pass	_	NER=O
 5	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
-6	Velikom	velik	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Singamod	_	NER=B-LOC
-7	Žitniku	Žitnik	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	3	obl	NER=I-LOC|SpaceAfter=No
+6	Velikom	velik	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing	7	amod	_	NER=B-LOC
+7	Žitniku	Žitnik	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	3	obl	_	NER=I-LOC|SpaceAfter=No
 8	.	.	PUNCT	Z	_	3	punct	_	NER=O
 
 ```
@@ -180,12 +157,14 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('hr', type='nonstandard') # run classla.download('hr', type='nonstandard') beforehand if necessary
 >>> doc = nlp("kaj sam ja tulumaril jucer u ljubljani...")
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
-1	kaj	što	PRON	Pi3n-a	Case=Acc|Gender=Neut|PronType=Int,Rel	4	obj	NER=O
-2	sam	biti	AUX	Var1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	aux	_	NER=O
+>>> print(doc.to_conll())
+# newpar id = 1
+# sent_id = 1.1
+# text = kaj sam ja tulumaril jucer u ljubljani...
+1	kaj	što	PRON	Pi3n-a	Case=Acc|Gender=Neut|PronType=Int,Rel	4	obj	_	NER=O
+2	sam	biti	AUX	Var1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
 3	ja	ja	PRON	Pp1-sn	Case=Nom|Number=Sing|Person=1|PronType=Prs	4	nsubj	_	NER=O
 4	tulumaril	tulumariti	VERB	Vmp-sm	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	0	root	_	NER=O
 5	jucer	jučer	ADV	Rgp	Degree=Pos	4	advmod	_	NER=O
@@ -201,20 +180,19 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('sr') # run classla.download('sr') beforehand if necessary
 >>> doc = nlp("Slobodan Jovanović rođen je u Novom Sadu.")
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+>>> print(doc.to_conll())
 # newpar id = 1
 # sent_id = 1.1
 # text = Slobodan Jovanović rođen je u Novom Sadu.
-1	Slobodan	Slobodan	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	nsubj	_	NER=B-PER
-2	Jovanović	Jovanović	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+1	Slobodan	Slobodan	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	nsubj	_	NER=B-PER
+2	Jovanović	Jovanović	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat	_	NER=I-PER
 3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
-4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux	_	NER=O
+4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux	_	NER=O
 5	u	u	ADP	Sl	Case=Loc	6	case	_	NER=O
-6	Novom	nov	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Singobl	_	NER=B-LOC
-7	Sadu	Sad	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	6	flat	NER=I-LOC|SpaceAfter=No
+6	Novom	nov	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing	3	obl	_	NER=B-LOC
+7	Sadu	Sad	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	6	flat	_	NER=I-LOC|SpaceAfter=No
 8	.	.	PUNCT	Z	_	3	punct	_	NER=O
 
 ```
@@ -223,10 +201,9 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('sr', type='nonstandard') # run classla.download('sr', type='nonstandard') beforehand if necessary
 >>> doc = nlp("ne mogu da verujem kakvo je zezanje bilo prosle godine u zagrebu...")
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+>>> print(doc.to_conll())
 # newpar id = 1
 # sent_id = 1.1
 # text = ne mogu da verujem kakvo je zezanje bilo prosle godine u zagrebu...
@@ -252,10 +229,9 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('bg') # run classla.download('bg') beforehand if necessary
 >>> doc = nlp("Алеко Константинов е роден в Свищов.")
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+>>> print(doc.to_conll())
 # newpar id = 1
 # sent_id = 1.1
 # text = Алеко Константинов е роден в Свищов.
@@ -275,10 +251,9 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ```
 >>> import classla
->>> from classla.utils.conll import CoNLL
 >>> nlp = classla.Pipeline('mk') # run classla.download('mk') beforehand if necessary
 >>> doc = nlp('Крсте Петков Мисирков е роден во Постол.')
->>> print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))
+>>> print(doc.to_conll())
 # newpar id = 1
 # sent_id = 1.1
 # text = Крсте Петков Мисирков е роден во Постол.
@@ -292,3 +267,11 @@ The named entity recognition processor ```ner``` identifies named entities in te
 8	.	.	PUNCT	Z	_	_	_	_	_
 
 ```
+
+## Training instructions
+
+[Training instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.train.md)
+
+## Superuser instructions
+
+[Superuser instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.superuser.md)

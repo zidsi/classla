@@ -51,5 +51,5 @@ if __name__ == '__main__':
     print('')
     print('---')
     print('CoNLL-U output:')
-    print(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))   # print the output in CoNLL-U format
+    print(doc.to_conll())   # print the output in CoNLL-U format
     print('')

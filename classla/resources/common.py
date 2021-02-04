@@ -354,7 +354,7 @@ def process_pipeline_parameters(lang, dir, package, processors):
 def download(
         lang='sl',
         dir=DEFAULT_MODEL_DIR,
-        package='default',
+        type='default',
         processors={},
         logging_level='INFO',
         verbose=None,
@@ -363,6 +363,7 @@ def download(
         resources_version=DEFAULT_RESOURCES_VERSION,
         model_url=DEFAULT_MODEL_URL
     ):
+    package = type
     # set global logging level
     set_logging_level(logging_level, verbose)
     # process different pipeline parameters

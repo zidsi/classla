@@ -12,7 +12,7 @@ class InflectionalLexiconProcessor(object):
 
 class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
     def __init__(self, lexicon, vocab, pretrain):
-        closed_classes_rules = ['P', 'S', 'C', 'Q']
+        closed_classes_rules = ['P', 'S', 'C', 'Q', 'Z']
 
         # fills hypothesis_dictionary
         self.hypothesis_dictionary = {}

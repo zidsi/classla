@@ -83,6 +83,9 @@ class ObeliksTrainer():
                 nt += 1
                 tok['id'] = tuple([nt])
                 tok['text'] = actual_val[0]
+                if match.group(1) == 'c':
+                    tok['upos'] = 'PUNCT'
+                    tok['xpos'] = 'Z'
                 if idx < len(para) and not para_concat[idx].isspace():
                     tok['misc'] = 'SpaceAfter=No'
                 doc_sent.append(tok)

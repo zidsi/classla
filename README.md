@@ -270,8 +270,8 @@ The named entity recognition processor ```ner``` identifies named entities in te
 
 ## Training instructions
 
-[Training instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.train.md)
+[Training instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/main/README.train.md)
 
 ## Superuser instructions
 
-[Superuser instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.superuser.md)
+[Superuser instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/main/README.superuser.md)

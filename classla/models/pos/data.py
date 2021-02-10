@@ -11,7 +11,7 @@ from classla.models.common.doc import *
 logger = logging.getLogger('classla')
 
 class DataLoader:
-    def __init__(self, doc, batch_size, args, pretrain, vocab=None, evaluation=False, sort_during_eval=False, skip=None):
+    def __init__(self, doc, batch_size, args, pretrain, vocab=None, evaluation=False, sort_during_eval=False):
         self.batch_size = batch_size
         self.args = args
         self.eval = evaluation
@@ -20,18 +20,6 @@ class DataLoader:
         self.doc = doc
 
         data = self.load_doc(self.doc)
-
-        if skip:
-            # assert len(data) == len(skip)
-            new_data = []
-            for sent in data:
-                new_sent = []
-                for x in sent:
-                    if x[1] != 'PUNCT':
-                        new_sent.append(x)
-                new_data.append(new_sent)
-
-            data = new_data
 
         # handle vocab
         if vocab is None:

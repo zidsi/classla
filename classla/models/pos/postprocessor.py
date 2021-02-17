@@ -1,6 +1,3 @@
-import torch
-
-
 class InflectionalLexiconProcessor(object):
     def __init__(self, lexicon, vocab, pretrain):
         pass
@@ -24,29 +21,33 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
         self.closed_classes = set()
         self.xpos_vocab = vocab['xpos']
         self.create_closed_classes(vocab['xpos'], closed_classes_rules)
+        self.closed_classes_inverse = [vocab['xpos'][el] for el in vocab['xpos'] if vocab['xpos'][el] not in self.closed_classes]
         super(SloveneInflectionalLexiconProcessor, self).__init__(lexicon, vocab, pretrain)
 
     def process(self, padded_prediction, word_strings):
         predictions = []
 
-        sorted, sorted_indices = torch.sort(padded_prediction, 2, True)
+        max_value = padded_prediction.max(2)[1]
 
-        for sent_indices, sent_strings in zip(sorted_indices, word_strings):
+        for sent_id, (sent_indices, sent_strings) in enumerate(zip(max_value, word_strings)):
             sent_predictions = []
-            for word_indices, word_string in zip(sent_indices, sent_strings):
+            for word_id, (word_prediction, word_string) in enumerate(zip(sent_indices, sent_strings)):
                 if word_string in self.hypothesis_dictionary:
-                    for ind in word_indices:
-                        if int(ind) in self.hypothesis_dictionary[word_string]:
-                            prediction = self.xpos_vocab[int(ind)]
-                            break
+                    # if only one possible prediction in hypothesis dictionary, take it!
+                    if len(self.hypothesis_dictionary[word_string]) == 1:
+                        prediction = self.hypothesis_dictionary[word_string][0]
+                    elif self.xpos_vocab[word_prediction.item()] in self.hypothesis_dictionary[word_string]:
+                        prediction = self.xpos_vocab[word_prediction.item()]
+                    else:
+                        optional_indices = [self.xpos_vocab[el] for el in self.hypothesis_dictionary[word_string]]
+                        prediction = self.xpos_vocab[optional_indices[padded_prediction[sent_id, word_id, optional_indices].argmax().item()]]
                 elif word_string in self.hypothesis_dictionary_fallback:
                     prediction = self.hypothesis_dictionary_fallback[word_string][0]
                 else:
-                    # in case word is a legit member of closed classes it should already be handled by hypothesis dict
-                    for ind in word_indices:
-                        if int(ind) not in self.closed_classes:
-                            prediction = self.xpos_vocab[int(ind)]
-                            break
+                    if word_prediction.item() not in self.closed_classes:
+                        prediction = self.xpos_vocab[word_prediction.item()]
+                    else:
+                        prediction = self.xpos_vocab[self.closed_classes_inverse[padded_prediction[sent_id, word_id, self.closed_classes_inverse].argmax().item()]]
                 sent_predictions.append(prediction)
             predictions.append(sent_predictions)
         return predictions
@@ -55,7 +56,7 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
         """ Creates hypothesis dictionary from lexicon. """
         for key in lexicon.keys():
             if key[1] in vocab_xpos:
-                self.hypothesis_dictionary.setdefault(key[0].lower(), []).append(vocab_xpos[key[1]])
+                self.hypothesis_dictionary.setdefault(key[0].lower(), []).append(key[1])
             else:
                 self.hypothesis_dictionary_fallback.setdefault(key[0].lower(), []).append(key[1])
 

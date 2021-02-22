@@ -179,7 +179,7 @@ class CompositeVocab(BaseVocab):
             if len(self._id2unit) == 0:
                 self._id2unit[0] = copy(VOCAB_PREFIX) # use an arbitrary key
 
-        self._id2unit = OrderedDict([(k, self._id2unit[k]) for k in sorted(self._id2unit.keys())])
+        self._id2unit = OrderedDict([(k, self._id2unit[k]) for k in sorted(self._id2unit.keys(), key=lambda x: x.casefold())])
         self._unit2id = {k: {w:i for i, w in enumerate(self._id2unit[k])} for k in self._id2unit}
 
     def lens(self):

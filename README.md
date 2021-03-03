@@ -18,8 +18,6 @@ It also allows for (alpha) processing of standard Macedonian on the levels of
 
 Finally, it allows for processing of non-standard (Internet) Slovenian, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
 
-__NOTE TO OLD USERS: When you download the new classla version, you HAVE TO re-download models. All previously downloaded models will not be used anymore. We suggest you delete the old models. Their default location is at `~/classla_resources`.__
-
 ## Installation
 ### pip
 We recommend that you install CLASSLA via pip, the Python package manager. To install, run:
@@ -27,6 +25,8 @@ We recommend that you install CLASSLA via pip, the Python package manager. To in
 pip install classla
 ```
 This will also resolve all dependencies.
+
+__NOTE TO EXISTING USERS__: Once you install this classla version, you will HAVE TO re-download the models. All previously downloaded models will not be used anymore. We suggest you delete the old models. Their default location is at `~/classla_resources`.
 
 ## Running CLASSLA
 

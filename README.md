@@ -1,10 +1,8 @@
-### __NOTE: When you download new classla version you HAVE TO re-download models. All previously downloaded models will not be used anymore. We suggest you delete them, since they are not used. Default location of these models is at `~/classla_resources`.__
-
-# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) for Processing Slovene, Croatian, Serbian, Macedonian and Bulgarian
+# A [CLASSLA](http://www.clarin.si/info/k-centre/) Fork of [Stanza](https://github.com/stanfordnlp/stanza) for Processing Slovenian, Croatian, Serbian, Macedonian and Bulgarian
 
 ## Description
 
-This pipeline allows for processing of standard Slovene, Croatian, Serbian and Bulgarian on the levels of
+This pipeline allows for processing of standard Slovenian, Croatian, Serbian and Bulgarian on the levels of
 
 - tokenization and sentence splitting
 - part-of-speech tagging
@@ -18,7 +16,9 @@ It also allows for (alpha) processing of standard Macedonian on the levels of
 - part-of-speech tagging
 - lemmatization
 
-Finally, it allows for processing of non-standard (Internet) Slovene, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
+Finally, it allows for processing of non-standard (Internet) Slovenian, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
+
+__NOTE TO OLD USERS: When you download the new classla version, you HAVE TO re-download models. All previously downloaded models will not be used anymore. We suggest you delete the old models. Their default location is at `~/classla_resources`.__
 
 ## Installation
 ### pip
@@ -32,12 +32,12 @@ This will also resolve all dependencies.
 
 ### Getting started
 
-To run the CLASSLA pipeline for the first time on processing standard Slovene, follow these steps:
+To run the CLASSLA pipeline for the first time on processing standard Slovenian, follow these steps:
 
 ```
 >>> import classla
->>> classla.download('sl')                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
->>> nlp = classla.Pipeline('sl')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> classla.download('sl')                            # download standard models for Slovenian, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> nlp = classla.Pipeline('sl')                      # initialize the default Slovenian pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
 >>> print(doc.to_conll())                             # print the output in CoNLL-U format
 # newpar id = 1
@@ -56,12 +56,12 @@ You can find examples of standard language processing for [Croatian](#example-of
 
 ### Processing non-standard language
 
-Processing non-standard Slovene differs to the above standard example just by an additional argument ```type="nonstandard"```:
+Processing non-standard Slovenian differs to the above standard example just by an additional argument ```type="nonstandard"```:
 
 ```
 >>> import classla
->>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovene, use hr for Croatian and sr for Serbian
->>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovene pipeline, use hr for Croatian and sr for Serbian
+>>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovenian, use hr for Croatian and sr for Serbian
+>>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovenian pipeline, use hr for Croatian and sr for Serbian
 >>> doc = nlp("kva smo mi zurali zadnje leto v zagrebu...")     # run the pipeline
 >>> print(doc.to_conll())                             # print the output in CoNLL-U format 
 1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O

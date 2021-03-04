@@ -6,7 +6,7 @@
 *.lem
 *.toklabels
 
-data/
+data
 classla_test/
 saved_models/
 logs/

@@ -17,7 +17,7 @@ SL_DOC_IDENTITY_GOLD = """
 <Token id=5;words=[<Word id=5;text=rodil;lemma=rodil>]>
 <Token id=6;words=[<Word id=6;text=v;lemma=v>]>
 <Token id=7;words=[<Word id=7;text=vrbi;lemma=vrbi>]>
-<Token id=8;words=[<Word id=8;text=.;lemma=.>]>
+<Token id=8;words=[<Word id=8;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 """.strip()
 
 SL_DOC_LEMMATIZER_MODEL_GOLD = """

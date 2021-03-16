@@ -8,6 +8,7 @@ import os
 
 from classla.pipeline._constants import *
 from classla.pipeline.processor import UDProcessor, register_processor
+from classla.utils.conll import CoNLL
 from classla.utils.obeliks import ObeliksTrainer
 from classla.models.common import doc
 from classla.utils.reldi import ReldiTrainer
@@ -62,13 +63,23 @@ class TokenizeProcessor(UDProcessor):
         raw_text = ' '.join([' '.join(sentence) for sentence in sentences])
         return raw_text, document
 
+    def process_pre_tokenized_conllu_text(self, input_src):
+        """
+        Pretokenized text in this case is provided in conllu format.
+        """
+
+        return CoNLL.conll2dict(input_str=input_src, generate_raw_text=True)
+
     def process(self, document):
         assert isinstance(document, str) or (self.config.get('pretokenized') or self.config.get('no_ssplit', False)), \
             "If neither 'pretokenized' or 'no_ssplit' option is enabled, the input to the TokenizerProcessor must be a string."
 
         if self.config.get('pretokenized'):
-            raw_text, document = self.process_pre_tokenized_text(document)
-            metadocument = None
+            if self.config.get('pretokenized') == 'conllu':
+                document, metadocument, raw_text = self.process_pre_tokenized_conllu_text(document)
+            else:
+                raw_text, document = self.process_pre_tokenized_text(document)
+                metadocument = None
         elif hasattr(self, '_variant'):
             return self._variant.process(document)
         else:

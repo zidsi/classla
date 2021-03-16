@@ -29,27 +29,32 @@ class ListMetadata:
         for el in self.list:
             yield el
 
-class CoNLL:
 
+class CoNLL:
     @staticmethod
-    def load_conll(f, ignore_gapping=True):
+    def load_conll(f, ignore_gapping=True, generate_raw_text=False):
         """ Load the file or string into the CoNLL-U format data.
         Input: file or string reader, where the data is in CoNLL-U format.
         Output: a list of list of list for each token in each sentence in the data, where the innermost list represents
         all fields of a token.
         """
-        doc, sent, metadata = [], [], ''
+        doc, sent, metadata, raw_text = [], [], '', ''
         for line in f:
             raw_line = line
             line = line.strip()
             if len(line) == 0:
                 if len(sent) > 0:
-                    doc.append((sent, metadata))
+                    if generate_raw_text:
+                        doc.append((sent, metadata, raw_text))
+                    else:
+                        doc.append((sent, metadata))
                     metadata = ''
                     sent = []
             else:
                 if line.startswith('#'): # skip comment line
                     metadata += raw_line
+                    if generate_raw_text and line.startswith('# text = '):
+                        raw_text = line[9:]
                     continue
                 array = line.split('\t')
                 if ignore_gapping and '.' in array[0]:
@@ -58,24 +63,35 @@ class CoNLL:
                         f"Cannot parse CoNLL line: expecting {FIELD_NUM} fields, {len(array)} found."
                 sent += [array]
         if len(sent) > 0:
-            doc.append((sent, metadata))
+            if generate_raw_text:
+                doc.append((sent, metadata, raw_text))
+            else:
+                doc.append((sent, metadata))
         return doc
 
     @staticmethod
-    def convert_conll(doc_conll):
+    def convert_conll(doc_conll, generate_raw_text=False):
         """ Convert the CoNLL-U format input data to a dictionary format output data.
         Input: list of token fields loaded from the CoNLL-U format data, where the outmost list represents a list of sentences, and the inside list represents all fields of a token.
         Output: a list of list of dictionaries for each token in each sentence in the document.
         """
         doc_dict = []
         metadata_list = []
-        for sent_conll, metadata in doc_conll:
+        raw_text_list = []
+        for sent in doc_conll:
+            if generate_raw_text:
+                sent_conll, metadata, raw_text = sent
+                raw_text_list.append(raw_text)
+            else:
+                sent_conll, metadata = sent
             sent_dict = []
             for token_conll in sent_conll:
                 token_dict = CoNLL.convert_conll_token(token_conll)
                 sent_dict.append(token_dict)
             metadata_list.append(metadata)
             doc_dict.append(sent_dict)
+        if generate_raw_text:
+            return doc_dict, metadata_list, ' '.join(raw_text_list)
         return doc_dict, metadata_list
 
     @staticmethod
@@ -101,7 +117,7 @@ class CoNLL:
         return token_dict
 
     @staticmethod
-    def conll2dict(input_file=None, input_str=None, ignore_gapping=True):
+    def conll2dict(input_file=None, input_str=None, ignore_gapping=True, generate_raw_text=False):
         """ Load the CoNLL-U format data from file or string into lists of dictionaries.
         """
         assert any([input_file, input_str]) and not all([input_file, input_str]), 'either input input file or input string'
@@ -109,8 +125,8 @@ class CoNLL:
             infile = io.StringIO(input_str)
         else:
             infile = open(input_file)
-        doc_conll = CoNLL.load_conll(infile, ignore_gapping)
-        doc_dict = CoNLL.convert_conll(doc_conll)
+        doc_conll = CoNLL.load_conll(infile, ignore_gapping, generate_raw_text)
+        doc_dict = CoNLL.convert_conll(doc_conll, generate_raw_text)
         return doc_dict
 
     @staticmethod
@@ -144,9 +160,6 @@ class CoNLL:
                 token_conll[FIELD_TO_IDX[MISC]] = f'NER={str(token_dict[key])}' if token_conll[FIELD_TO_IDX[MISC]] == '_' else f'NER={str(token_dict[key])}|{token_conll[FIELD_TO_IDX[MISC]]}'
             elif key in FIELD_TO_IDX:
                 token_conll[FIELD_TO_IDX[key]] = str(token_dict[key])
-        # # when a word (not mwt token) without head is found, we insert dummy head as required by the UD eval script
-        # if '-' not in token_conll[FIELD_TO_IDX[ID]] and HEAD not in token_dict:
-        #     token_conll[FIELD_TO_IDX[HEAD]] = str((token_dict[ID] if isinstance(token_dict[ID], int) else token_dict[ID][0]) - 1) # evaluation script requires head: int
         return token_conll
 
     @staticmethod

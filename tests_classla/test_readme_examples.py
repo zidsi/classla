@@ -235,3 +235,22 @@ def test_sl_inflectional():
     nlp = classla.Pipeline('sl', pos_use_lexicon=True, dir=TEST_MODELS_DIR)
     doc = nlp(SL_STANDARD)
     assert doc.to_conll().strip() == SL_STANDARD_CONLL
+
+def test_sl_pretokenized_conllu():
+    classla.download('sl', dir=TEST_MODELS_DIR)
+    nlp = classla.Pipeline('sl', tokenize_pretokenized='conllu', dir=TEST_MODELS_DIR)
+    conllu_pretokenized = """
+# newpar id = 1
+# sent_id = 1.1
+# text = France Prešeren je rojen v Vrbi.
+1	France	France	_	_	_	_	_	_	_
+2	Prešeren	Prešeren	_	_	_	_	_	_	_
+3	je	biti	_	_	_	_	_	_	_
+4	rojen	rojen	_	_	_	_	_	_	_
+5	v	v	_	_	_	_	_	_	_
+6	Vrbi	Vrba	_	_	_	_	_	_	SpaceAfter=No
+7	.	.	_	_	_	_	_	_	_
+
+"""
+    doc = nlp(conllu_pretokenized)
+    assert doc.to_conll().strip() == SL_STANDARD_CONLL

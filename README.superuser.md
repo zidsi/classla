@@ -50,7 +50,7 @@ Slovenian standard model also supports usage of inflectional lexicon. To use it,
 
 ```
 
-## Pretrain data
+## Pretokenized data
 
 In addition to ```tokenize_pretokenized=True``` you can set this attribute to ```tokenize_pretokenized='conllu'```. With this, you may pass pretokenized input string in conllu format (make sure it is formatted properly).
 

@@ -79,7 +79,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm', 'obeliks'],
+    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm', 'obeliks>=1.0.4'],
 
     # List required Python versions
     python_requires='>=3.6',

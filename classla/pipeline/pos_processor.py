@@ -34,7 +34,7 @@ class POSProcessor(UDProcessor):
 
     def predetermined_punctuations(self, seq):
         """ Determine if punctuation is already asigned by tokenizer. """
-        return [pos is not None for pos in seq]
+        return [pos == 'Z' for pos in seq]
 
     def process(self, document):
         batch = DataLoader(

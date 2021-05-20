@@ -89,7 +89,7 @@ class Tagger(nn.Module):
         self.drop = nn.Dropout(args['dropout'])
         self.worddrop = WordDropout(args['word_dropout'])
 
-    def forward(self, word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, inflectional_lexicon=None):
+    def forward(self, word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, postprocessor=None):
         
         def pack(x):
             return pack_padded_sequence(x, sentlens, batch_first=True)
@@ -157,8 +157,8 @@ class Tagger(nn.Module):
         else:
             xpos_pred = clffunc(self.xpos_clf, xpos_hid)
             padded_xpos_pred = pad(xpos_pred)
-            if inflectional_lexicon is not None:
-                max_value = inflectional_lexicon.process(padded_xpos_pred, word_string)
+            if postprocessor is not None:
+                max_value = postprocessor.process(padded_xpos_pred, word_string)
             else:
                 max_value = padded_xpos_pred.max(2)[1]
             loss += self.crit(xpos_pred.view(-1, xpos_pred.size(-1)), xpos.view(-1))

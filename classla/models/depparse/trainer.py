@@ -40,6 +40,21 @@ class Trainer(BaseTrainer):
             self.args = args
             self.vocab = vocab
             self.model = Parser(args, vocab, emb_matrix=pretrain.emb if pretrain is not None else None)
+
+        # update deprel vocab
+        new_id2unit = []
+        new_unit2id = {}
+        for i, v in enumerate(self.vocab._vocabs['deprel']._id2unit):
+            if '_' in v:
+                v = v.replace('_', ':')
+
+            # else:
+            new_id2unit.append(v)
+            new_unit2id[v] = i
+
+        self.vocab._vocabs['deprel']._id2unit = new_id2unit
+        self.vocab._vocabs['deprel']._unit2id = new_unit2id
+
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()

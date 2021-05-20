@@ -1,3 +1,7 @@
+import sys
+import unicodedata
+
+
 class InflectionalLexiconProcessor(object):
     def __init__(self, lexicon, vocab, pretrain):
         pass
@@ -79,3 +83,45 @@ class InflectionalLexicon:
 
     def process(self, padded_prediction, word_strings):
         return self.processor.process(padded_prediction, word_strings)
+
+
+class DefaultPostprocessor:
+    def __init__(self, vocab):
+        """Base class for data converters for sequence classification data sets."""
+        closed_classes_rules = ['Z']
+
+        # fills closed_classes
+        self.closed_classes = set()
+        self.xpos_vocab = vocab['xpos']
+        self.create_closed_classes(vocab['xpos'], closed_classes_rules)
+        self.closed_classes_inverse = [vocab['xpos'][el] for el in vocab['xpos'] if
+                                       vocab['xpos'][el] not in self.closed_classes]
+        self.punct = [chr(i) for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith('P')]
+
+    def is_punct(self, word_string):
+        return all([c in self.punct for c in word_string])
+
+    def process(self, padded_prediction, word_strings):
+        predictions = []
+
+        max_value = padded_prediction.max(2)[1]
+
+        for sent_id, (sent_indices, sent_strings) in enumerate(zip(max_value, word_strings)):
+            sent_predictions = []
+            for word_id, (word_prediction, word_string) in enumerate(zip(sent_indices, sent_strings)):
+                if self.is_punct(word_string):
+                    prediction = 'Z'
+                elif word_prediction.item() not in self.closed_classes:
+                    prediction = self.xpos_vocab[word_prediction.item()]
+                else:
+                    prediction = self.xpos_vocab[self.closed_classes_inverse[
+                        padded_prediction[sent_id, word_id, self.closed_classes_inverse].argmax().item()]]
+                sent_predictions.append(prediction)
+            predictions.append(sent_predictions)
+        return predictions
+
+    def create_closed_classes(self, vocab, closed_classes_rules):
+        """ Fills a set of closed classes, that contains xpos ids that are not permitted. """
+        for key in vocab:
+            if key[0] in closed_classes_rules:
+                self.closed_classes.add(vocab[key])

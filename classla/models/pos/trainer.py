@@ -11,7 +11,7 @@ from classla.models.common.trainer import Trainer as BaseTrainer
 from classla.models.lemma.trainer import Trainer as LemmaTrainer
 from classla.models.common import utils, loss
 from classla.models.pos.model import Tagger
-from classla.models.pos.postprocessor import InflectionalLexicon
+from classla.models.pos.postprocessor import InflectionalLexicon, DefaultPostprocessor
 from classla.models.pos.vocab import MultiVocab
 
 logger = logging.getLogger('classla')
@@ -43,11 +43,13 @@ class Trainer(BaseTrainer):
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb if pretrain is not None else None, share_hid=args['share_hid'])
 
         self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None and 'constrain_via_lexicon' in args else None
-        self.inflectional_lexicon = None
+        self.postprocessor = None
         if self.constrain_via_lexicon:
             inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
-            self.inflectional_lexicon = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain)
+            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain)
+        else:
+            self.postprocessor = DefaultPostprocessor(self.vocab)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()
@@ -80,9 +82,9 @@ class Trainer(BaseTrainer):
 
         self.model.eval()
         batch_size = word.size(0)
-        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, inflectional_lexicon=self.inflectional_lexicon)
+        _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, postprocessor=self.postprocessor)
         upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
-        if self.inflectional_lexicon is None:
+        if self.postprocessor is None:
             xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
         else:
             xpos_seqs = preds[1]

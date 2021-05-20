@@ -1,5 +1,5 @@
 """
-A basic demo of the Stanza neural pipeline.
+basic demo script
 """
 
 import sys
@@ -8,33 +8,33 @@ import os
 
 import classla
 from classla.resources.common import DEFAULT_MODEL_DIR
-
+from classla.utils.conll import CoNLL
 
 if __name__ == '__main__':
     # get arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--models_dir', help='location of models files | default: ~/stanza_resources',
+    parser.add_argument('-d', '--models_dir', help='location of models files | default: ~/classla_resources',
                         default=DEFAULT_MODEL_DIR)
     parser.add_argument('-l', '--lang', help='Demo language',
-                        default="en")
+                        default="sl")
     parser.add_argument('-c', '--cpu', action='store_true', help='Use cpu as the device.')
     args = parser.parse_args()
 
-    example_sentences = {"en": "Barack Obama was born in Hawaii.  He was elected president in 2008.",
-            "zh": "中国文化经历上千年的历史演变，是各区域、各民族古代文化长期相互交流、借鉴、融合的结果。",
-            "fr": "Van Gogh grandit au sein d'une famille de l'ancienne bourgeoisie. Il tente d'abord de faire carrière comme marchand d'art chez Goupil & C.",
-            "vi": "Trận Trân Châu Cảng (hay Chiến dịch Hawaii theo cách gọi của Bộ Tổng tư lệnh Đế quốc Nhật Bản) là một đòn tấn công quân sự bất ngờ được Hải quân Nhật Bản thực hiện nhằm vào căn cứ hải quân của Hoa Kỳ tại Trân Châu Cảng thuộc tiểu bang Hawaii vào sáng Chủ Nhật, ngày 7 tháng 12 năm 1941, dẫn đến việc Hoa Kỳ sau đó quyết định tham gia vào hoạt động quân sự trong Chiến tranh thế giới thứ hai."}
+    example_sentences = {"sl": "France Prešeren je rojen v Vrbi.",
+                         "hr": "Ante Starčević rođen je u Velikom Žitniku.",
+                         "sr": "Slobodan Jovanović rođen je u Novom Sadu.",
+                         "bg": "Алеко Константинов е роден в Свищов."}
 
     if args.lang not in example_sentences:
         print(f'Sorry, but we don\'t have a demo sentence for "{args.lang}" for the moment. Try one of these languages: {list(example_sentences.keys())}')
         sys.exit(1)
 
     # download the models
-    classla.download(args.lang, dir=args.models_dir)
+    classla.download(args.lang, args.models_dir)
     # set up a pipeline
     print('---')
     print('Building pipeline...')
-    pipeline = classla.Pipeline(lang=args.lang, dir=args.models_dir, use_gpu=(not args.cpu))
+    pipeline = classla.Pipeline(dir=args.models_dir, lang=args.lang, use_gpu=(not args.cpu))
     # process the document
     doc = pipeline(example_sentences[args.lang])
     # access nlp annotations
@@ -49,4 +49,7 @@ if __name__ == '__main__':
     print('dependency parse of first sentence: ')
     doc.sentences[0].print_dependencies()
     print('')
-
+    print('---')
+    print('CoNLL-U output:')
+    print(doc.to_conll())   # print the output in CoNLL-U format
+    print('')

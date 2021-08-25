@@ -176,6 +176,8 @@ class Trainer(object):
                 lemma = self.composite_dict[(w,pos)]
             elif w in self.word_dict:
                 lemma = self.word_dict[w]
+            elif any([c not in self.vocab['char'] for c in w]):
+                lemma = w
             else:
                 lemma = pred
             if lemma is None:
@@ -204,6 +206,16 @@ class Trainer(object):
             raise
         self.args = checkpoint['config']
         self.word_dict, self.composite_dict = checkpoint['dicts']
+
+        # temporary workaround for Bulgarian
+        if ('.', 'Z') not in self.composite_dict:
+            new_elements = {}
+            for k, v in self.composite_dict.items():
+                if k[1] == 'punct':
+                    new_elements[(k[0], 'Z')] = v
+            for k, v in new_elements.items():
+                self.composite_dict[k] = v
+
         if not self.args['dict_only']:
             self.model = Seq2SeqModel(self.args, use_cuda=use_cuda)
             self.model.load_state_dict(checkpoint['model'])

@@ -17,7 +17,7 @@ SL_DOC_GOLD_TOKENS = """
 <Token id=5;words=[<Word id=5;text=rojen>]>
 <Token id=6;words=[<Word id=6;text=v>]>
 <Token id=7;words=[<Word id=7;text=Vrbi>]>
-<Token id=8;words=[<Word id=8;text=.;upos=PUNCT;xpos=Z>]>
+<Token id=8;words=[<Word id=8;text=.>]>
 
 <Token id=1;words=[<Word id=1;text=Danes>]>
 <Token id=2;words=[<Word id=2;text=je>]>
@@ -26,13 +26,13 @@ SL_DOC_GOLD_TOKENS = """
 <Token id=5;words=[<Word id=5;text=največji>]>
 <Token id=6;words=[<Word id=6;text=slovenski>]>
 <Token id=7;words=[<Word id=7;text=pesnik>]>
-<Token id=8;words=[<Word id=8;text=.;upos=PUNCT;xpos=Z>]>
+<Token id=8;words=[<Word id=8;text=.>]>
 
 <Token id=1;words=[<Word id=1;text=Študiral>]>
 <Token id=2;words=[<Word id=2;text=je>]>
 <Token id=3;words=[<Word id=3;text=na>]>
 <Token id=4;words=[<Word id=4;text=Dunaju>]>
-<Token id=5;words=[<Word id=5;text=.;upos=PUNCT;xpos=Z>]>
+<Token id=5;words=[<Word id=5;text=.>]>
 """.strip()
 
 

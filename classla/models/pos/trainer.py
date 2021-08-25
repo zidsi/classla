@@ -41,15 +41,21 @@ class Trainer(BaseTrainer):
             self.args = args
             self.vocab = vocab
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb if pretrain is not None else None, share_hid=args['share_hid'])
+            self.dict = None
 
         self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None and 'constrain_via_lexicon' in args else None
         self.postprocessor = None
         if self.constrain_via_lexicon:
-            inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
-            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain)
+            if self.dict is None:
+                inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
+                xpos_only = True
+            else:
+                inflectional_lexicon = self.dict
+                xpos_only = False
+            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain, xpos_only)
         else:
-            self.postprocessor = DefaultPostprocessor(self.vocab)
+            self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()
@@ -83,12 +89,24 @@ class Trainer(BaseTrainer):
         self.model.eval()
         batch_size = word.size(0)
         _, preds = self.model(word, word_mask, wordchars, wordchars_mask, upos, xpos, ufeats, pretrained, word_orig_idx, sentlens, wordlens, word_string, postprocessor=self.postprocessor)
-        upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
+
+        # upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
+        # feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
+
         if self.postprocessor is None:
+            upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
             xpos_seqs = [self.vocab['xpos'].unmap(sent) for sent in preds[1].tolist()]
+            feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
         else:
+            upos_seqs = preds[0]
             xpos_seqs = preds[1]
-        feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
+            feats_seqs = preds[2]
+            # if self.postprocessor and self.postprocessor.processor and self.postprocessor.processor.hypothesis_dictionary_upos:
+            #     # upos_seqs = preds[0]
+            #     feats_seqs = preds[2]
+            # else:
+            #     # upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
+            #     feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
 
         pred_tokens = [[[upos_seqs[i][j], xpos_seqs[i][j], feats_seqs[i][j]] for j in range(sentlens[i])] for i in range(batch_size)]
         if unsort:
@@ -133,3 +151,4 @@ class Trainer(BaseTrainer):
             emb_matrix = pretrain.emb
         self.model = Tagger(self.args, self.vocab, emb_matrix=emb_matrix, share_hid=self.args['share_hid'])
         self.model.load_state_dict(checkpoint['model'], strict=False)
+        self.dict = checkpoint['dicts'] if 'dicts' in checkpoint else None

@@ -22,7 +22,7 @@ def check_reldi():
 
 
 class ObeliksTrainer():
-    def __init__(self, lang='sl', type='standard'):
+    def __init__(self, lang='sl', type='standard', annotate_pos=False):
         """ Construct a reldi-based tokenizer by loading the reldi pipeline.
         """
         if lang not in ['sl', 'hr', 'sr', 'bg', 'mk']:
@@ -33,6 +33,8 @@ class ObeliksTrainer():
         self.nlp = tokeniser
         self.lang = lang
         self.type = type
+
+        self.annotate_pos = annotate_pos
 
     def process_conllu(self, para, np):
         doc = []
@@ -83,7 +85,7 @@ class ObeliksTrainer():
                 nt += 1
                 tok['id'] = tuple([nt])
                 tok['text'] = actual_val[0]
-                if match.group(1) == 'c':
+                if match.group(1) == 'c' and self.annotate_pos:
                     tok['upos'] = 'PUNCT'
                     tok['xpos'] = 'Z'
                 if idx < len(para) and not para_concat[idx].isspace():

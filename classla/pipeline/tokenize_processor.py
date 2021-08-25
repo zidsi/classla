@@ -29,7 +29,7 @@ class TokenizeProcessor(UDProcessor):
     def _set_up_model(self, config, use_gpu):
         # set up trainer
         if os.path.basename(config['library']) == 'obeliks':
-            self._tokenizer = ObeliksTrainer(config.get('lang'), config.get('type'))
+            self._tokenizer = ObeliksTrainer(config.get('lang'), config.get('type'), 'pos' in [el[0] for el in self.pipeline.load_list])
         elif os.path.basename(config['library']) == 'reldi':
             self._tokenizer = ReldiTrainer(config.get('lang'), config.get('type'))
         else:

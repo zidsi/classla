@@ -5,12 +5,14 @@ Utilities for testing
 import os
 import re
 
+os.environ['CLASSLA_TEST_HOME'] = 'classla_test'
+
 # Environment Variables
 # set this to specify working directory of tests
 TEST_HOME_VAR = 'CLASSLA_TEST_HOME'
 
 # Global Variables
-# test working directory base name must be stanfordnlp_test
+# test working directory base name must be classla_test
 TEST_DIR_BASE_NAME = 'classla_test'
 
 # check the working dir is set and compliant

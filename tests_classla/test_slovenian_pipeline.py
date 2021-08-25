@@ -14,7 +14,7 @@ SL_DOC = "France Prešeren je bil rojen v Vrbi. Danes je poznan kot največji sl
 
 SL_DOC_TOKENS_GOLD = """
 <Token id=1;words=[<Word id=1;text=France;lemma=France;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=5;deprel=nsubj>]>
-<Token id=2;words=[<Word id=2;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=1;deprel=flat_name>]>
+<Token id=2;words=[<Word id=2;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=1;deprel=flat:name>]>
 <Token id=3;words=[<Word id=3;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin;head=5;deprel=aux>]>
 <Token id=4;words=[<Word id=4;text=bil;lemma=biti;upos=AUX;xpos=Va-p-sm;feats=Gender=Masc|Number=Sing|VerbForm=Part;head=5;deprel=cop>]>
 <Token id=5;words=[<Word id=5;text=rojen;lemma=rojen;upos=ADJ;xpos=Appmsnn;feats=Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part;head=0;deprel=root>]>
@@ -40,7 +40,7 @@ SL_DOC_TOKENS_GOLD = """
 
 SL_DOC_WORDS_GOLD = """
 <Word id=1;text=France;lemma=France;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=5;deprel=nsubj>
-<Word id=2;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=1;deprel=flat_name>
+<Word id=2;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing;head=1;deprel=flat:name>
 <Word id=3;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin;head=5;deprel=aux>
 <Word id=4;text=bil;lemma=biti;upos=AUX;xpos=Va-p-sm;feats=Gender=Masc|Number=Sing|VerbForm=Part;head=5;deprel=cop>
 <Word id=5;text=rojen;lemma=rojen;upos=ADJ;xpos=Appmsnn;feats=Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part;head=0;deprel=root>
@@ -66,7 +66,7 @@ SL_DOC_WORDS_GOLD = """
 
 SL_DOC_DEPENDENCY_PARSES_GOLD = """
 ('France', 5, 'nsubj')
-('Prešeren', 1, 'flat_name')
+('Prešeren', 1, 'flat:name')
 ('je', 5, 'aux')
 ('bil', 5, 'cop')
 ('rojen', 0, 'root')
@@ -95,7 +95,7 @@ SL_DOC_CONLLU_GOLD = """
 # sent_id = 1.1
 # text = France Prešeren je bil rojen v Vrbi.
 1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	5	nsubj	_	NER=B-PER
-2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat_name	_	NER=I-PER
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat:name	_	NER=I-PER
 3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	5	aux	_	NER=O
 4	bil	biti	AUX	Va-p-sm	Gender=Masc|Number=Sing|VerbForm=Part	5	cop	_	NER=O
 5	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	NER=O

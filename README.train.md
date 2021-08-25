@@ -54,11 +54,15 @@ For tokenization of Slovenian, compliant with standard training data and referen
 
 ### Part-of-speech tagging
 
-For now, there are available pre-trained models for part-of-speech tagging for 
-- standard Slovenian http://hdl.handle.net/11356/1312 
-- standard Croatian http://hdl.handle.net/11356/1252 
-- standard Serbian http://hdl.handle.net/11356/1253
-- standard Bulgarian http://hdl.handle.net/11356/1326
+For now, there are available off-the-shelf models for part-of-speech tagging for 
+- standard Slovenian http://hdl.handle.net/11356/1391
+- non-standard Slovenian http://hdl.handle.net/11356/1337
+- standard Croatian http://hdl.handle.net/11356/1393
+- non-standard Croatian http://hdl.handle.net/11356/1331
+- standard Serbian http://hdl.handle.net/11356/1392
+- non-standard Serbian http://hdl.handle.net/11356/1332
+- standard Bulgarian http://hdl.handle.net/11356/1394
+- standard Macedonian http://hdl.handle.net/11356/1395
 
 Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovenian, (2) Croatian, or (3) Serbian)
 
@@ -74,11 +78,15 @@ The input to part-of-speech tagging is a CONLLU-formated file.
 
 ### Lemmatisation
 
-Similarly to PoS tagging, there are pre-trained models for lemmatisation available as well for
-- standard Slovenian http://hdl.handle.net/11356/1286
-- standard Croatian http://hdl.handle.net/11356/1287
-- standard Serbian http://hdl.handle.net/11356/1288
-- standard Bulgarian http://hdl.handle.net/11356/1327
+Similarly to PoS tagging, there are off-the-shelf models for lemmatisation available as well for
+- standard Slovenian http://hdl.handle.net/11356/1412
+- non-standard Slovenian http://hdl.handle.net/11356/1350
+- standard Croatian http://hdl.handle.net/11356/1357
+- non-standard Croatian http://hdl.handle.net/11356/1352
+- standard Serbian http://hdl.handle.net/11356/1355
+- non-standard Serbian http://hdl.handle.net/11356/1351
+- standard Bulgarian http://hdl.handle.net/11356/1353
+- standard Macedonian http://hdl.handle.net/11356/1374
 
 Running the lemmatiser for Slovenian, if models are placed in the ```models/lemma/``` directory, can be performed as follows:
 ```
@@ -98,7 +106,7 @@ The input to lemmatisation is a CONLLU-formated file which was previously part-o
 
 ### Parsing
 
-For UD depency parsing, the pre-trained models are also available for
+For UD depency parsing, the off-the-shelf models are also available for
 - standard Slovenian http://hdl.handle.net/11356/1258
 - standard Croatian http://hdl.handle.net/11356/1259
 - standard Serbian http://hdl.handle.net/11356/1260
@@ -121,6 +129,16 @@ Again, leaving out the ```-gold_file``` argument, no evaluation will be performe
 The input to lemmatisation is a CONLLU-formated file which was previously part-of-speech tagged and lemmatised.
 
 ### NER
+
+For named entity recognition, the off-the-shelf models are also available for
+- standard Slovenian http://hdl.handle.net/11356/1321
+- non-standard Slovenian http://hdl.handle.net/11356/1339
+- standard Croatian http://hdl.handle.net/11356/1322
+- non-standard Croatian http://hdl.handle.net/11356/1340
+- standard Serbian http://hdl.handle.net/11356/1323
+- non-standard Serbian http://hdl.handle.net/11356/1341
+- standard Bulgarian http://hdl.handle.net/11356/1329
+
 
 ```
 python -m classla.models.ner_tagger --save_dir models/ner/ --save_name ssj500k --eval_file data/ssj500k.test.json --mode predict --output_file out.ner.sl

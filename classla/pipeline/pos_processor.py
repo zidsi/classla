@@ -25,8 +25,8 @@ class POSProcessor(UDProcessor):
 
         if 'use_lexicon' in self.config and self.config['use_lexicon']:
             assert 'lemma_model_path' in self.pipeline.config, 'If `pos_use_lexicon` tag is used, you must add lemma processor to processors!'
-            assert 'tokenize_library' in self.pipeline.config and self.pipeline.config['tokenize_library'] == 'obeliks', '`pos_use_lexicon` is currently supported only for `standard` and `standard_jos` type'
-            arg = {'constrain_via_lexicon': self.pipeline.config['lemma_model_path']}
+            preannotated_punct = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config['tokenize_pretokenized']) and self.pipeline.config['tokenize_library'] == 'obeliks'
+            arg = {'constrain_via_lexicon': self.pipeline.config['lemma_model_path'], 'preannotated_punct': preannotated_punct}
         else:
             arg = None
         # set up trainer

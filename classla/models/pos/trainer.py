@@ -53,7 +53,7 @@ class Trainer(BaseTrainer):
             else:
                 inflectional_lexicon = self.dict
                 xpos_only = False
-            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain, xpos_only)
+            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain, xpos_only, args['preannotated_punct'])
         else:
             self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]

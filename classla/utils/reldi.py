@@ -76,9 +76,13 @@ class ReldiTrainer():
         document = []
         metadocument = []
         tokenizer = self.nlp.generate_tokenizer(self.lang)
-        for par_id, text in enumerate(raw_text.split('\n')):
-            doc, metadoc = self._reldi_tokenizer(self.nlp.process[self.type](tokenizer, text, self.lang), par_id + 1)
+        par_id = 1
+        for text in raw_text.split('\n'):
+            if text == '' or text.isspace():
+                continue
+            doc, metadoc = self._reldi_tokenizer(self.nlp.process[self.type](tokenizer, text, self.lang), par_id)
             document += doc
             metadocument += metadoc
+            par_id += 1
 
         return raw_text, document, metadocument

@@ -3,7 +3,7 @@ import unicodedata
 
 
 class InflectionalLexiconProcessor(object):
-    def __init__(self, lexicon, vocab, pretrain):
+    def __init__(self, lexicon, vocab, pretrain, preannotated_punct=False):
         # fills hypothesis_dictionary_xpos
         self.hypothesis_dictionary_xpos = {}
         self.hypothesis_dictionary_upos = {}
@@ -107,10 +107,11 @@ class InflectionalLexiconProcessor(object):
 
 
 class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
-    def __init__(self, lexicon, vocab, pretrain):
+    def __init__(self, lexicon, vocab, pretrain, preannotated_punct=False):
         super(SloveneInflectionalLexiconProcessor, self).__init__(lexicon, vocab, pretrain)
         closed_classes_rules = ['P', 'S', 'C', 'Q', 'Z']
 
+        self.preannotated_punct = preannotated_punct
         self.xpos_vocab = vocab['xpos']
         self.upos_vocab = vocab['upos']
         self.feats_vocab = vocab['feats']
@@ -142,7 +143,9 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
                 elif word_string in self.hypothesis_dictionary_xpos_fallback:
                     prediction = self.hypothesis_dictionary_xpos_fallback[word_string][0]
                 else:
-                    if word_prediction.item() not in self.closed_classes:
+                    if not self.preannotated_punct and self.is_punct(word_string):
+                        prediction = 'Z'
+                    elif word_prediction.item() not in self.closed_classes:
                         prediction = self.xpos_vocab[word_prediction.item()]
                     else:
                         prediction = self.xpos_vocab[self.closed_classes_inverse[padded_prediction[sent_id, word_id, self.closed_classes_inverse].argmax().item()]]
@@ -235,12 +238,13 @@ processors = {"ssj": SloveneInflectionalLexiconProcessor, "sl_ssj": SloveneInfle
 
 
 class InflectionalLexicon:
-    def __init__(self, lexicon, shorthand, vocab, pretrain, xpos_only=True):
+    def __init__(self, lexicon, shorthand, vocab, pretrain, xpos_only=True, preannotated_punct=False):
         """Base class for data converters for sequence classification data sets."""
         self.shorthand = shorthand
         self.xpos_only = xpos_only
+        self.preannotated_punct = preannotated_punct
         assert shorthand in processors, f"Tag {shorthand} is not supported by inflectional lexicon."
-        self.processor = processors[shorthand](lexicon, vocab, pretrain)
+        self.processor = processors[shorthand](lexicon, vocab, pretrain, preannotated_punct)
         self.default_processor = DefaultPostprocessor(lexicon, vocab, pretrain)
 
     def process_xpos(self, padded_prediction, word_strings):
@@ -258,7 +262,7 @@ class InflectionalLexicon:
 
 
 class DefaultPostprocessor(InflectionalLexiconProcessor):
-    def __init__(self, lexicon, vocab, pretrain):
+    def __init__(self, lexicon, vocab, pretrain, preannotated_punct=False):
         super(DefaultPostprocessor, self).__init__(lexicon, vocab, pretrain)
 
     def process_xpos(self, padded_prediction, word_strings):

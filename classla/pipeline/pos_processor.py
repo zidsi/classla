@@ -23,18 +23,24 @@ class POSProcessor(UDProcessor):
         # get pretrained word vectors
         self._pretrain = Pretrain(config['pretrain_path']) if 'pretrain_path' in config else None
 
-        if 'use_lexicon' in self.config and self.config['use_lexicon']:
-            assert 'lemma_model_path' in self.pipeline.config, 'If `pos_use_lexicon` tag is used, you must add lemma processor to processors!'
-            preannotated_punct = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config['tokenize_pretokenized']) and self.pipeline.config['tokenize_library'] == 'obeliks'
-            arg = {'constrain_via_lexicon': self.pipeline.config['lemma_model_path'], 'preannotated_punct': preannotated_punct}
+        if 'punctuation_control' in self.config:
+            punctuation_control = self.config['punctuation_control']
         else:
-            arg = None
+            punctuation_control = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config[
+                'tokenize_pretokenized'])
+            self.config['punctuation_control'] = punctuation_control
+
+        arg = {'punctuation_control': punctuation_control}
+
+        if 'use_lexicon' in self.config and self.config['use_lexicon']:
+            arg['use_lexicon'] = True
+
         # set up trainer
         self._trainer = Trainer(args=arg, pretrain=self.pretrain, model_file=config['model_path'], use_cuda=use_gpu)
 
     def predetermined_punctuations(self, seq):
-        """ Determine if punctuation is already asigned by tokenizer. """
-        return [pos == 'Z' for pos in seq]
+        """ Determine if punctuation is already assigned by tokenizer. """
+        return [pos if pos[0] is not None else False for pos in seq]
 
     def process(self, document):
         batch = DataLoader(
@@ -44,9 +50,10 @@ class POSProcessor(UDProcessor):
         for i, b in enumerate(batch):
             preds += self.trainer.predict(b)
         preds = unsort(preds, batch.data_orig_idx)
-        if 'use_lexicon' in self.config:
+        if 'punctuation_control' in self.config and self.config['punctuation_control']:
             preds_flattened = []
-            skip = iter(self.predetermined_punctuations(batch.doc.get([doc.XPOS])))
+            # skip pos predictions for punctuations that were predicted by tokenizer
+            skip = iter(self.predetermined_punctuations(zip(batch.doc.get([doc.UPOS]), batch.doc.get([doc.XPOS]), batch.doc.get([doc.FEATS]))))
             for x in preds:
                 for y in x:
                     n = next(skip, None)
@@ -54,8 +61,9 @@ class POSProcessor(UDProcessor):
                     if not n:
                         preds_flattened.append(y)
                     else:
-                        preds_flattened.append(['PUNCT', 'Z', '_'])
+                        preds_flattened.append(n)
         else:
             preds_flattened = [y for x in preds for y in x]
+
         batch.doc.set([doc.UPOS, doc.XPOS, doc.FEATS], preds_flattened)
         return batch.doc

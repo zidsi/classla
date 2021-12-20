@@ -8,7 +8,6 @@ import torch
 from torch import nn
 
 from classla.models.common.trainer import Trainer as BaseTrainer
-from classla.models.lemma.trainer import Trainer as LemmaTrainer
 from classla.models.common import utils, loss
 from classla.models.pos.model import Tagger
 from classla.models.pos.postprocessor import InflectionalLexicon, DefaultPostprocessor
@@ -29,6 +28,7 @@ def unpack_batch(batch, use_cuda):
     word_string = batch[12]
     return inputs, orig_idx, word_orig_idx, sentlens, wordlens, word_string
 
+
 class Trainer(BaseTrainer):
     """ A trainer for training models. """
     def __init__(self, args=None, vocab=None, pretrain=None, model_file=None, use_cuda=False):
@@ -43,19 +43,19 @@ class Trainer(BaseTrainer):
             self.model = Tagger(args, vocab, emb_matrix=pretrain.emb if pretrain is not None else None, share_hid=args['share_hid'])
             self.dict = None
 
-        self.constrain_via_lexicon = args['constrain_via_lexicon'] if args is not None and 'constrain_via_lexicon' in args else None
+        self.use_lexicon = args['use_lexicon'] if 'use_lexicon' in args else None
+        self.punctuation_control = args['punctuation_control']
         self.postprocessor = None
-        if self.constrain_via_lexicon:
+        if self.use_lexicon:
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
-            if self.dict is None:
-                inflectional_lexicon = LemmaTrainer(model_file=self.constrain_via_lexicon).composite_dict
-                xpos_only = True
-            else:
-                inflectional_lexicon = self.dict
-                xpos_only = False
-            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain, xpos_only, args['preannotated_punct'])
+            inflectional_lexicon = self.dict
+            self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain,
+                                                     args['punctuation_control'])
         else:
-            self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
+            if self.punctuation_control:
+                self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
+            else:
+                self.postprocessor = None
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]
         if self.use_cuda:
             self.model.cuda()
@@ -101,12 +101,6 @@ class Trainer(BaseTrainer):
             upos_seqs = preds[0]
             xpos_seqs = preds[1]
             feats_seqs = preds[2]
-            # if self.postprocessor and self.postprocessor.processor and self.postprocessor.processor.hypothesis_dictionary_upos:
-            #     # upos_seqs = preds[0]
-            #     feats_seqs = preds[2]
-            # else:
-            #     # upos_seqs = [self.vocab['upos'].unmap(sent) for sent in preds[0].tolist()]
-            #     feats_seqs = [self.vocab['feats'].unmap(sent) for sent in preds[2].tolist()]
 
         pred_tokens = [[[upos_seqs[i][j], xpos_seqs[i][j], feats_seqs[i][j]] for j in range(sentlens[i])] for i in range(batch_size)]
         if unsort:
@@ -152,3 +146,17 @@ class Trainer(BaseTrainer):
         self.model = Tagger(self.args, self.vocab, emb_matrix=emb_matrix, share_hid=self.args['share_hid'])
         self.model.load_state_dict(checkpoint['model'], strict=False)
         self.dict = checkpoint['dicts'] if 'dicts' in checkpoint else None
+
+    @staticmethod
+    def load_influectial_lexicon(filename):
+        try:
+            checkpoint = torch.load(filename, lambda storage, loc: storage)
+        except BaseException:
+            logger.error("Cannot load model from {}".format(filename))
+            raise
+
+        inf_lexicon = {}
+        for entry in checkpoint['dicts']:
+            inf_lexicon[(entry[0], entry[1])] = entry[4]
+
+        return inf_lexicon

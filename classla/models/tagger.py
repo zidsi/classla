@@ -36,7 +36,7 @@ def parse_args():
     parser.add_argument('--output_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--pretrain_file', type=str, default=None, help='Input file containing pretrained data.')
-    parser.add_argument('--constrain_via_lexicon', type=str, default=None, help="Input location of lemmatization model.")
+    parser.add_argument('--use_lexicon', type=str, default=None, help="Input location of lemmatization model.")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')

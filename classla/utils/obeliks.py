@@ -4,8 +4,7 @@ Utilities related to using reldi in the pipeline.
 import re
 
 from obeliks.rules import tokenize
-from obeliks.tokenizer import normalize, preprocess_tokens, index_of
-
+from obeliks.tokenizer import normalize, preprocess_tokens, index_of, parse_attribs
 
 
 def check_reldi():
@@ -25,12 +24,9 @@ class ObeliksTrainer():
     def __init__(self, lang='sl', type='standard', annotate_pos=False):
         """ Construct a reldi-based tokenizer by loading the reldi pipeline.
         """
-        if lang not in ['sl', 'hr', 'sr', 'bg', 'mk']:
-            raise Exception("Reldi tokenizer is currently only allowed in Slovene, Croatian and Serbian pipelines.")
+        if lang not in ['sl']:
+            raise Exception("Obeliks tokenizer is currently only allowed in Slovene.")
 
-        check_reldi()
-        from classla.submodules.reldi_tokeniser import tokeniser
-        self.nlp = tokeniser
         self.lang = lang
         self.type = type
 
@@ -51,7 +47,7 @@ class ObeliksTrainer():
 
         org_text = preprocess_tokens(tokens)
 
-        token_regex = re.compile(r'<S/>|</?s>|<([wc])>([^<]+)</[wc]>')
+        token_regex = re.compile(r'<S/>|</?s>|<([wc]([\s]*|[\s]+[^>]*))>([^<]+)</[wc]>')
         idx = 0
         ns = 1
         nt = 0
@@ -75,7 +71,8 @@ class ObeliksTrainer():
                 pass
             else:
                 tok = {}
-                val = match.group(2)
+                attribs = parse_attribs(match.group(2))
+                val = match.group(3)
                 actual_val = ['']
                 idx_of_token = index_of(para, val, idx, actual_val)
                 if idx_of_token == -1:
@@ -83,11 +80,16 @@ class ObeliksTrainer():
                 idx = max(idx, idx_of_token + len(actual_val[0]))
                 idx_of_token += 1
                 nt += 1
+
                 tok['id'] = tuple([nt])
                 tok['text'] = actual_val[0]
-                if match.group(1) == 'c' and self.annotate_pos:
-                    tok['upos'] = 'PUNCT'
-                    tok['xpos'] = 'Z'
+                if 'lemma' in attribs:
+                    tok['lemma'] = attribs['lemma']
+                if 'xpos' in attribs:
+                    tok['xpos'] = attribs['xpos']
+                if 'upos' in attribs:
+                    tok['upos'] = attribs['upos']
+
                 if idx < len(para) and not para_concat[idx].isspace():
                     tok['misc'] = 'SpaceAfter=No'
                 doc_sent.append(tok)
@@ -113,6 +115,7 @@ class ObeliksTrainer():
             metadoc += new_metadoc
 
         return doc, metadoc
+
     def run(self, text=None, pass_newdoc_id=False):
         text = text.splitlines()
 

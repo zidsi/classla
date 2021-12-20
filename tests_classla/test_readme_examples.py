@@ -40,7 +40,7 @@ SL_NONSTANDARD_CONLL = """
 6	leto	leto	NOUN	Ncnsa	Case=Acc|Gender=Neut|Number=Sing	4	obl	_	NER=O
 7	v	v	ADP	Sl	Case=Loc	8	case	_	NER=O
 8	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
-9	...	.	PUNCT	Z	_	4	punct	_	NER=O
+9	...	...	PUNCT	Z	_	4	punct	_	NER=O
 
 """.strip()
 
@@ -74,7 +74,7 @@ HR_NONSTANDARD_CONLL = """
 5	jucer	jučer	ADV	Rgp	Degree=Pos	4	advmod	_	NER=O
 6	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
 7	ljubljani	Ljubljana	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
-8	...	.	PUNCT	Z	_	4	punct	_	NER=O
+8	...	...	PUNCT	Z	_	4	punct	_	NER=O
 
 """.strip()
 
@@ -113,7 +113,7 @@ SR_NONSTANDARD_CONLL = """
 10	godine	godina	NOUN	Ncfsg	Case=Gen|Gender=Fem|Number=Sing	8	obl	_	NER=O
 11	u	u	ADP	Sl	Case=Loc	12	case	_	NER=O
 12	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	8	obl	_	NER=B-LOC|SpaceAfter=No
-13	...	.	PUNCT	Z	_	2	punct	_	NER=O
+13	...	...	PUNCT	Z	_	2	punct	_	NER=O
 
 """.strip()
 

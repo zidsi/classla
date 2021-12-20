@@ -35,7 +35,8 @@ class LemmaProcessor(UDProcessor):
             self.config['batch_size'] = LemmaProcessor.DEFAULT_BATCH_SIZE
         else:
             self._use_identity = False
-            self._trainer = Trainer(model_file=config['model_path'], use_cuda=use_gpu)
+            # add pos_model_path for inf. lexicon load and pos_punctuation_control to see wether lemmas are transfered or not
+            self._trainer = Trainer(args={'pos_model_path': self.pipeline.config['pos_model_path'], 'pos_punctuation_control': self.pipeline.processors['pos'].config['punctuation_control']}, model_file=config['model_path'], use_cuda=use_gpu)
 
     def _set_up_requires(self):
         if self.config.get('pos') and not self.use_identity:
@@ -55,7 +56,7 @@ class LemmaProcessor(UDProcessor):
         else:
             if self.config.get('ensemble_dict', False):
                 # skip the seq2seq model when we can
-                skip = self.trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in batch.doc.get([doc.TEXT, doc.XPOS])])
+                skip = self.trainer.skip_seq2seq([(e[0].lower(),e[1],e[2]) for e in batch.doc.get([doc.TEXT, doc.XPOS, doc.LEMMA])])
                 seq2seq_batch = DataLoader(document, self.config['batch_size'], self.config, vocab=self.vocab,
                                            evaluation=True, skip=skip)
             else:
@@ -80,7 +81,7 @@ class LemmaProcessor(UDProcessor):
                     else:
                         preds1.append(preds[i])
                         i += 1
-                preds = self.trainer.ensemble([(e[0].lower(),e[1]) for e in batch.doc.get([doc.TEXT, doc.XPOS])], preds1)
+                preds = self.trainer.ensemble([(e[0].lower(),e[1],e[2]) for e in batch.doc.get([doc.TEXT, doc.XPOS, doc.LEMMA])], preds1)
             else:
                 preds = self.trainer.postprocess(batch.doc.get([doc.TEXT]), preds, edits=edits)
 

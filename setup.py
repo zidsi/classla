@@ -17,7 +17,6 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 packages = find_packages(exclude=['data', 'docs', 'extern_data', 'figures', 'saved_models'])
-packages.append('classla.submodules.reldi_tokeniser')
 
 setup(
     name='classla',
@@ -79,7 +78,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm', 'obeliks>=1.1.1'],
+    install_requires=['numpy', 'protobuf', 'requests', 'torch>=1.3.0', 'tqdm', 'obeliks>=1.1.3', 'reldi-tokeniser'],
 
     # List required Python versions
     python_requires='>=3.6',
@@ -91,13 +90,6 @@ setup(
     extras_require={
         'dev': ['check-manifest'],
         'test': ['coverage'],
-    },
-
-    # If there are data files included in your packages that need to be
-    # installed, specify them here.  If using Python 2.6 or less, then these
-    # have to be included in MANIFEST.in as well.
-    package_data={
-        'classla.submodules.reldi_tokeniser': ['*']
     },
 
     # Although 'package_data' is the preferred approach, in some case you may

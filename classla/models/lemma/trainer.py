@@ -60,7 +60,7 @@ class Trainer(object):
 
             if len(self.composite_dict) == 0:
                 self.composite_dict = PosTrainer.load_influectial_lexicon(args['pos_model_path'])
-        self.punctuation_control = args['pos_punctuation_control']
+        self.tagging_control = args['pos_tagging_control']
 
     def update(self, batch, eval=False):
         inputs, orig_idx = unpack_batch(batch, self.use_cuda)
@@ -163,7 +163,7 @@ class Trainer(object):
         skip = []
         for p in pairs:
             w, pos, lemma = p
-            if self.punctuation_control and lemma:
+            if self.tagging_control and lemma:
                 skip.append(True)
             elif (w,pos) in self.composite_dict:
                 skip.append(True)
@@ -179,7 +179,7 @@ class Trainer(object):
         assert len(pairs) == len(other_preds)
         for p, pred in zip(pairs, other_preds):
             w, pos, lemm = p
-            if self.punctuation_control and lemm:
+            if self.tagging_control and lemm:
                 lemma = lemm
             elif (w,pos) in self.composite_dict:
                 lemma = self.composite_dict[(w,pos)]

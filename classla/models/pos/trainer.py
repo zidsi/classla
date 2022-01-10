@@ -44,15 +44,15 @@ class Trainer(BaseTrainer):
             self.dict = None
 
         self.use_lexicon = args['use_lexicon'] if 'use_lexicon' in args else None
-        self.punctuation_control = args['punctuation_control']
+        self.tagging_control = args['tagging_control']
         self.postprocessor = None
         if self.use_lexicon:
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
             inflectional_lexicon = self.dict
             self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain,
-                                                     args['punctuation_control'])
+                                                     args['tagging_control'])
         else:
-            if self.punctuation_control:
+            if self.tagging_control:
                 self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
             else:
                 self.postprocessor = None

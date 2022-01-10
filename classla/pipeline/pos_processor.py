@@ -23,14 +23,14 @@ class POSProcessor(UDProcessor):
         # get pretrained word vectors
         self._pretrain = Pretrain(config['pretrain_path']) if 'pretrain_path' in config else None
 
-        if 'punctuation_control' in self.config:
-            punctuation_control = self.config['punctuation_control']
+        if 'tagging_control' in self.config:
+            tagging_control = self.config['tagging_control']
         else:
-            punctuation_control = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config[
+            tagging_control = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config[
                 'tokenize_pretokenized'])
-            self.config['punctuation_control'] = punctuation_control
+            self.config['tagging_control'] = tagging_control
 
-        arg = {'punctuation_control': punctuation_control}
+        arg = {'tagging_control': tagging_control}
 
         if 'use_lexicon' in self.config and self.config['use_lexicon']:
             arg['use_lexicon'] = True
@@ -50,7 +50,7 @@ class POSProcessor(UDProcessor):
         for i, b in enumerate(batch):
             preds += self.trainer.predict(b)
         preds = unsort(preds, batch.data_orig_idx)
-        if 'punctuation_control' in self.config and self.config['punctuation_control']:
+        if 'tagging_control' in self.config and self.config['tagging_control']:
             preds_flattened = []
             # skip pos predictions for punctuations that were predicted by tokenizer
             skip = iter(self.predetermined_punctuations(zip(batch.doc.get([doc.UPOS]), batch.doc.get([doc.XPOS]), batch.doc.get([doc.FEATS]))))

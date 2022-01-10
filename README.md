@@ -18,6 +18,20 @@ It also allows for (alpha) processing of standard Macedonian on the levels of
 
 Finally, it allows for processing of non-standard (Internet) Slovenian, Croatian and Serbian on the same levels as standard language (all models are tailored to non-standard language except for dependency parsing where the standard module is used).
 
+## Difference to Stanza
+
+The differences of this pipeline to the original Stanza pipeline are the following:
+
+- usage of rule-based tokenizers, [obeliks](https://pypi.org/project/obeliks/) for standard Slovenian and [reldi-tokeniser](https://pypi.org/project/reldi-tokeniser/) for the remaining variants and languages (Stanza uses ML-based tokenization trained on UD data)
+- pre-tagging and pre-lemmatization on the level of tokenizers for the following phenomena: punctuation, symbol, e-mail, URL, mention, hashtag, emoticon, emoji
+- optional control of the tagger for Slovenian via an inflectional lexicon on the levels of XPOS, UPOS, FEATS (documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md))
+- usage of external inflectional lexicons for lookup lemmatization, seq2seq being used very infrequently on OOVs only (Stanza uses only UD training data for lookup lemmatization)
+- morphosyntactic tagging models based on larger quantities of training data than is available in UD (training data morphosyntactically tagged, but not UD-parsed)
+- lemmatization models based on larger quantities of training data than is available in UD (training data lemmatized, but not UD-parsed)
+- named entity recognition models for all languages except Macedonian (Stanza does not cover named entity recognition for any of the languages supported by classla)
+- Macedonian models (Macedonian is not available in UD yet)
+- non-standard models for Croatian, Slovenian, Serbian (there is not UD data for these varieties)
+
 ## Installation
 ### pip
 We recommend that you install CLASSLA via pip, the Python package manager. To install, run:

@@ -28,12 +28,14 @@ In Slovenian it is possible to replace UD dependency parsing system with JOS par
 
 ## Usage of inflectional lexicon
 
-Slovenian standard model also supports usage of inflectional lexicon. To use it, `pos_use_lexicon` must be set to `True`.
+Slovenian standard morphosyntactic tagging model also supports usage of an inflectional lexicon. To use it, `pos_use_lexicon` must be set to `True`.
 
-### Example of inflectional lexicon usage
+The inflectional lexicon usage limits the tags appied to a token covered by the lexicon to conform to the hypotheses in the lexicon. Furthermore, it disallows for any token to be a closed-class token, except for those defined like that in the inflectional lexicon.
+
+### Example of ```pos_use_lexicon``` usage
 ```
 >>> import classla
->>> nlp = classla.Pipeline('sl', pos_use_lexicon=True)  # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> nlp = classla.Pipeline('sl', pos_use_lexicon=True)
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")       # run the pipeline
 >>> print(doc.to_conll())                               # print the output in CoNLL-U format
 # newpar id = 1
@@ -49,8 +51,9 @@ Slovenian standard model also supports usage of inflectional lexicon. To use it,
 
 ```
 
-## Usage of tagging control
-Tagging control is used by default, unless you are using pretokenized text. You may override default setting by using `pos_tagging_control` attribute.
+## Usage of tagging control via the tokenizer
+
+Tagging control via the tokenizer is used by default, unless you are using pretokenized text. The tokenizer gives LEMMA, XPOS, UPOS and FEATS information for phenomena such as punctuation, symbols, e-mails, URLs, mentions, hashtags, emoticons and emojis. You may override default setting by using the boolean `pos_tagging_control` attribute.
 
 ### Example of `pos_tagging_control` usage
 ```
@@ -73,7 +76,7 @@ Tagging control is used by default, unless you are using pretokenized text. You 
 
 ## Pretokenized data
 
-In addition to ```tokenize_pretokenized=True``` you can set this attribute to ```tokenize_pretokenized='conllu'```. With this, you may pass pretokenized input string in conllu format (make sure it is formatted properly).
+In addition to ```tokenize_pretokenized=True```, which expects space-separated tokens, you can set this attribute to ```tokenize_pretokenized='conllu'```. With this, you may pass pretokenized input string in conllu format (make sure it is formatted properly).
 
 ### Example of ```tokenize_pretokenized='conllu'```
 ```

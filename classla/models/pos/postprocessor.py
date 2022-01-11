@@ -82,7 +82,7 @@ class InflectionalLexiconProcessor(object):
     def create_closed_classes_xpos(self, vocab, closed_classes_rules):
         """ Fills a set of closed classes, that contains xpos ids that are not permitted. """
         for key in vocab:
-            if key[0] in closed_classes_rules:
+            if key[0] in closed_classes_rules or key == 'punct' and key in closed_classes_rules:
                 self.closed_classes_xpos.add(vocab[key])
 
     def create_closed_classes_upos(self, vocab, closed_classes_rules):

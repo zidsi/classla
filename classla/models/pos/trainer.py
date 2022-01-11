@@ -53,7 +53,7 @@ class Trainer(BaseTrainer):
                                                      args['lemma_pretag'])
         else:
             if self.pos_lemma_pretag:
-                self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
+                self.postprocessor = DefaultPostprocessor(None, self.vocab, None, pos_lemma_pretag=self.pos_lemma_pretag)
             else:
                 self.postprocessor = None
         self.parameters = [p for p in self.model.parameters() if p.requires_grad]

@@ -44,15 +44,15 @@ class Trainer(BaseTrainer):
             self.dict = None
 
         self.use_lexicon = args['use_lexicon'] if 'use_lexicon' in args else None
-        self.tagging_control = args['tagging_control']
+        self.pos_lemma_pretag = args['lemma_pretag']
         self.postprocessor = None
         if self.use_lexicon:
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']
             inflectional_lexicon = self.dict
             self.postprocessor = InflectionalLexicon(inflectional_lexicon, args['shorthand'], self.vocab, pretrain,
-                                                     args['tagging_control'])
+                                                     args['lemma_pretag'])
         else:
-            if self.tagging_control:
+            if self.pos_lemma_pretag:
                 self.postprocessor = DefaultPostprocessor(None, self.vocab, None)
             else:
                 self.postprocessor = None

@@ -35,8 +35,8 @@ class LemmaProcessor(UDProcessor):
             self.config['batch_size'] = LemmaProcessor.DEFAULT_BATCH_SIZE
         else:
             self._use_identity = False
-            # add pos_model_path for inf. lexicon load and pos_tagging_control to see wether lemmas are transfered or not
-            self._trainer = Trainer(args={'pos_model_path': self.pipeline.config['pos_model_path'], 'pos_tagging_control': self.pipeline.processors['pos'].config['tagging_control']}, model_file=config['model_path'], use_cuda=use_gpu)
+            # add pos_model_path for inf. lexicon load and pos_lemma_pretag to see wether lemmas are transfered or not
+            self._trainer = Trainer(args={'pos_model_path': self.pipeline.config['pos_model_path'], 'pos_lemma_pretag': self.pipeline.processors['pos'].config['lemma_pretag']}, model_file=config['model_path'], use_cuda=use_gpu)
 
     def _set_up_requires(self):
         if self.config.get('pos') and not self.use_identity:

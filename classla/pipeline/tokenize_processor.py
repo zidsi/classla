@@ -86,16 +86,16 @@ class TokenizeProcessor(UDProcessor):
             raw_text, document, metadocument = self._tokenizer.tokenize(document)
         # clean unnecessary attributes
 
-        tagging_control = (not ('pos' in self.pipeline.processors and self.pipeline.processors['pos'].config['tagging_control']))
-        if tagging_control or 'pos' not in self.pipeline.processors or 'lemma' not in self.pipeline.processors:
+        pos_lemma_pretag = (not ('pos' in self.pipeline.processors and self.pipeline.processors['pos'].config['lemma_pretag']))
+        if pos_lemma_pretag or 'pos' not in self.pipeline.processors or 'lemma' not in self.pipeline.processors:
             for sent in document:
                 for token in sent:
-                    if 'xpos' in token and ('pos' not in self.pipeline.processors or tagging_control):
+                    if 'xpos' in token and ('pos' not in self.pipeline.processors or pos_lemma_pretag):
                         del token['xpos']
                         del token['upos']
                         if 'feats' in token:
                             del token['feats']
-                    if 'lemma' in token and ('lemma' not in self.pipeline.processors or tagging_control):
+                    if 'lemma' in token and ('lemma' not in self.pipeline.processors or pos_lemma_pretag):
                         del token['lemma']
 
         return doc.Document(document, raw_text, metasentences=metadocument)

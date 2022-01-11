@@ -53,12 +53,12 @@ The inflectional lexicon usage limits the tags appied to a token covered by the 
 
 ## Usage of tagging control via the tokenizer
 
-Tagging control via the tokenizer is used by default, unless you are using pretokenized text. The tokenizer gives LEMMA, XPOS, UPOS and FEATS information for phenomena such as punctuation, symbols, e-mails, URLs, mentions, hashtags, emoticons and emojis. You may override default setting by using the boolean `pos_tagging_control` attribute.
+Tagging control via the tokenizer is used by default, unless you are using pretokenized text. The tokenizer gives LEMMA, XPOS, UPOS and FEATS information for phenomena such as punctuation, symbols, e-mails, URLs, mentions, hashtags, emoticons and emojis. You may override default setting by using the boolean `pos_lemma_pretag` attribute.
 
-### Example of `pos_tagging_control` usage
+### Example of `pos_lemma_pretag` usage
 ```
 >>> import classla
->>> nlp = classla.Pipeline('sl', pos_tagging_control=False)  # initialize the default Slovene pipeline
+>>> nlp = classla.Pipeline('sl', pos_lemma_pretag=False)  # initialize the default Slovene pipeline
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")       # run the pipeline
 >>> print(doc.to_conll())                               # print the output in CoNLL-U format
 # newpar id = 1

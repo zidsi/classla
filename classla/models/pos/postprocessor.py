@@ -3,7 +3,7 @@ import unicodedata
 
 
 class InflectionalLexiconProcessor(object):
-    def __init__(self, lexicon, vocab, pretrain, tagging_control=False):
+    def __init__(self, lexicon, vocab, pretrain, pos_lemma_pretag=False):
         # fills hypothesis_dictionary_xpos
         self.hypothesis_dictionary_xpos = {}
         self.hypothesis_dictionary_upos = {}
@@ -13,8 +13,8 @@ class InflectionalLexiconProcessor(object):
         self.hypothesis_dictionary_upos_fallback = {}
         self.hypothesis_dictionary_feats_fallback = {}
 
-        closed_classes_xpos_rules = ['Z', 'punct'] if tagging_control else []
-        closed_classes_upos_rules = ['PUNCT', 'SYM'] if tagging_control else []
+        closed_classes_xpos_rules = ['Z', 'punct'] if pos_lemma_pretag else []
+        closed_classes_upos_rules = ['PUNCT', 'SYM'] if pos_lemma_pretag else []
 
         self.closed_classes_xpos = set()
         self.closed_classes_upos = set()
@@ -93,8 +93,8 @@ class InflectionalLexiconProcessor(object):
 
 
 class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
-    def __init__(self, lexicon, vocab, pretrain, tagging_control=False):
-        super(SloveneInflectionalLexiconProcessor, self).__init__(lexicon, vocab, pretrain, tagging_control)
+    def __init__(self, lexicon, vocab, pretrain, pos_lemma_pretag=False):
+        super(SloveneInflectionalLexiconProcessor, self).__init__(lexicon, vocab, pretrain, pos_lemma_pretag)
         closed_classes_xpos_rules = ['P', 'S', 'C', 'Q']
         closed_classes_upos_rules = ['PRON', 'DET', 'ADP', 'CCONJ', 'SCONJ', 'PART']
 
@@ -217,12 +217,12 @@ processors = {"ssj": SloveneInflectionalLexiconProcessor, "sl_ssj": SloveneInfle
 
 
 class InflectionalLexicon:
-    def __init__(self, lexicon, shorthand, vocab, pretrain, tagging_control=False):
+    def __init__(self, lexicon, shorthand, vocab, pretrain, pos_lemma_pretag=False):
         """Base class for data converters for sequence classification data sets."""
         self.shorthand = shorthand
         assert shorthand in processors, f"Tag {shorthand} is not supported by inflectional lexicon."
-        self.processor = processors[shorthand](lexicon, vocab, pretrain, tagging_control)
-        self.default_processor = DefaultPostprocessor(lexicon, vocab, pretrain, tagging_control)
+        self.processor = processors[shorthand](lexicon, vocab, pretrain, pos_lemma_pretag)
+        self.default_processor = DefaultPostprocessor(lexicon, vocab, pretrain, pos_lemma_pretag)
 
     def process_xpos(self, padded_prediction, word_strings):
         return self.processor.process_xpos(padded_prediction, word_strings)
@@ -235,8 +235,8 @@ class InflectionalLexicon:
 
 
 class DefaultPostprocessor(InflectionalLexiconProcessor):
-    def __init__(self, lexicon, vocab, pretrain, tagging_control=False):
-        super(DefaultPostprocessor, self).__init__(lexicon, vocab, pretrain, tagging_control)
+    def __init__(self, lexicon, vocab, pretrain, pos_lemma_pretag=False):
+        super(DefaultPostprocessor, self).__init__(lexicon, vocab, pretrain, pos_lemma_pretag)
 
     def process_xpos(self, padded_prediction, word_strings):
         return super(DefaultPostprocessor, self).process_xpos(padded_prediction, word_strings)

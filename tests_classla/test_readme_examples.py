@@ -236,9 +236,9 @@ def test_sl_inflectional():
     doc = nlp(SL_STANDARD)
     assert doc.to_conll().strip() == SL_STANDARD_CONLL
 
-def test_sl_tagging_control():
+def test_sl_pos_lemma_pretag():
     classla.download('sl', dir=TEST_MODELS_DIR)
-    nlp = classla.Pipeline('sl', pos_tagging_control=False, dir=TEST_MODELS_DIR)
+    nlp = classla.Pipeline('sl', pos_lemma_pretag=False, dir=TEST_MODELS_DIR)
     doc = nlp(SL_STANDARD)
     assert doc.to_conll().strip() == SL_STANDARD_CONLL
 

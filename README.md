@@ -23,7 +23,7 @@ Finally, it allows for processing of non-standard (Internet) Slovenian, Croatian
 The differences of this pipeline to the original Stanza pipeline are the following:
 
 - usage of language-specific rule-based tokenizers, [obeliks](https://pypi.org/project/obeliks/) for standard Slovenian and [reldi-tokeniser](https://pypi.org/project/reldi-tokeniser/) for the remaining varieties and languages (Stanza uses inferior machine-learning-based tokenization trained on UD data)
-- default pre-tagging and pre-lemmatization on the level of tokenizers for the following phenomena: punctuation, symbol, e-mail, URL, mention, hashtag, emoticon, emoji (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#usage-of-tagging-control))
+- default pre-tagging and pre-lemmatization on the level of tokenizers for the following phenomena: punctuation, symbol, e-mail, URL, mention, hashtag, emoticon, emoji (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#usage-of-tagging-control-via-the-tokenizer))
 - optional control of the tagger for Slovenian via an inflectional lexicon on the levels of XPOS, UPOS, FEATS (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#usage-of-inflectional-lexicon)), this control also limits annotation with closed-class categories only to closed-class forms from the inflectional lexicon
 - usage of external inflectional lexicons for lookup lemmatization, seq2seq being used very infrequently on OOVs only (Stanza uses only UD training data for lookup lemmatization)
 - morphosyntactic tagging models based on larger quantities of training data than is available in UD (training data that are morphosyntactically tagged, but not UD-parsed)

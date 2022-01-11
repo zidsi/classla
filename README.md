@@ -28,6 +28,7 @@ The differences of this pipeline to the original Stanza pipeline are the followi
 - usage of external inflectional lexicons for lookup lemmatization, seq2seq being used very infrequently on OOVs only (Stanza uses only UD training data for lookup lemmatization)
 - morphosyntactic tagging models based on larger quantities of training data than is available in UD (training data that are morphosyntactically tagged, but not UD-parsed)
 - lemmatization models based on larger quantities of training data than is available in UD (training data that are lemmatized, but not UD-parsed)
+- optional JOS-project-based parsing of Slovenian (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#jos-dependency-parsing-system))
 - named entity recognition models for all languages except Macedonian (Stanza does not cover named entity recognition for any of the languages supported by classla)
 - Macedonian models (Macedonian is not available in UD yet)
 - non-standard models for Croatian, Slovenian, Serbian (there is no UD data for these varieties)

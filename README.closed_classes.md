@@ -1,6 +1,6 @@
 # Documentation on how closed classes are dealt with
 
-Depending on the status of the two parameters, ```pos_tagging_control``` and ```pos_use_lexicon```, different XPOS and UPOS are considered to be "closed class". Closed class control on the level of XPOS and UPOS are dealt with separately.
+Depending on the status of the two parameters, ```pos_tagging_control``` and ```pos_use_lexicon```, different XPOS and UPOS are considered to be "closed class". The control of the closed classes comes from the tokenizer (if ```pos_tagging_control``` is used) and from the inflectional lexicon (if ```pos_use_lexicon``` is used). The overall logic of closed classes is that tokens can be tagged as closed classes only by the two relevant information sources (tokenizer, lexicon). Closed class control on the level of XPOS and UPOS are dealt with separately.
 
 ## XPOS control
 

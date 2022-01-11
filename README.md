@@ -22,7 +22,7 @@ Finally, it allows for processing of non-standard (Internet) Slovenian, Croatian
 
 The differences of this pipeline to the original Stanza pipeline are the following:
 
-- usage of language-specific rule-based tokenizers, [obeliks](https://pypi.org/project/obeliks/) for standard Slovenian and [reldi-tokeniser](https://pypi.org/project/reldi-tokeniser/) for the remaining varieties and languages (Stanza uses inferior machine-learning-based tokenization trained on UD data)
+- usage of language-specific rule-based tokenizers and sentence splitters, [obeliks](https://pypi.org/project/obeliks/) for standard Slovenian and [reldi-tokeniser](https://pypi.org/project/reldi-tokeniser/) for the remaining varieties and languages (Stanza uses inferior machine-learning-based tokenization and sentence splitting trained on UD data)
 - default pre-tagging and pre-lemmatization on the level of tokenizers for the following phenomena: punctuation, symbol, e-mail, URL, mention, hashtag, emoticon, emoji (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#usage-of-tagging-control-via-the-tokenizer))
 - optional control of the tagger for Slovenian via an inflectional lexicon on the levels of XPOS, UPOS, FEATS (usage documented [here](https://github.com/clarinsi/classla/blob/master/README.superuser.md#usage-of-inflectional-lexicon))
 - closed class handling depending on the usage of the options described in the last two bullets, as documented [here](https://github.com/clarinsi/classla/blob/master/README.closed_classes.md)
@@ -33,6 +33,8 @@ The differences of this pipeline to the original Stanza pipeline are the followi
 - named entity recognition models for all languages except Macedonian (Stanza does not cover named entity recognition for any of the languages supported by classla)
 - Macedonian models (Macedonian is not available in UD yet)
 - non-standard models for Croatian, Slovenian, Serbian (there is no UD data for these varieties)
+
+The above modifications led to some important improvements in the tool’s performance in comparison to original Stanza. For standard Slovenian, for example, running the full classla pipeline increases sentence segmentation F1 scores to 99.52 (94.29% error reduction), lemmatization to 99.17 (68.8% error reduction), XPOS tagging  to 97.38 (46.75% error reduction), UPOS tagging to 98.69 (23.4% error reduction), and LAS to 92.05 (23.56% error reduction).  See official [Stanza performance](https://stanfordnlp.github.io/stanza/performance.html) (evaluated on different data splits) for comparison.
 
 ## Installation
 ### pip

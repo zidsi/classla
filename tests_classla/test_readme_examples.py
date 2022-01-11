@@ -129,7 +129,7 @@ BG_STANDARD_CONLL = """
 4	роден	родя-(се)	VERB	Vpptcv--smi	Aspect=Perf|Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
 5	в	в	ADP	R	_	6	case	_	NER=O
 6	Свищов	свищов	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	iobj	_	NER=B-LOC|SpaceAfter=No
-7	.	.	PUNCT	Z	_	4	punct	_	NER=O
+7	.	.	PUNCT	punct	_	4	punct	_	NER=O
 
 """.strip()
 
@@ -233,6 +233,12 @@ def test_sl_standard_jos():
 def test_sl_inflectional():
     classla.download('sl', dir=TEST_MODELS_DIR)
     nlp = classla.Pipeline('sl', pos_use_lexicon=True, dir=TEST_MODELS_DIR)
+    doc = nlp(SL_STANDARD)
+    assert doc.to_conll().strip() == SL_STANDARD_CONLL
+
+def test_sl_tagging_control():
+    classla.download('sl', dir=TEST_MODELS_DIR)
+    nlp = classla.Pipeline('sl', pos_tagging_control=False, dir=TEST_MODELS_DIR)
     doc = nlp(SL_STANDARD)
     assert doc.to_conll().strip() == SL_STANDARD_CONLL
 

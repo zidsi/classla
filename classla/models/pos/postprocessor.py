@@ -13,7 +13,7 @@ class InflectionalLexiconProcessor(object):
         self.hypothesis_dictionary_upos_fallback = {}
         self.hypothesis_dictionary_feats_fallback = {}
 
-        closed_classes_xpos_rules = ['Z'] if tagging_control else []
+        closed_classes_xpos_rules = ['Z', 'punct'] if tagging_control else []
         closed_classes_upos_rules = ['PUNCT', 'SYM'] if tagging_control else []
 
         self.closed_classes_xpos = set()

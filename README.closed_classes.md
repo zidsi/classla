@@ -4,7 +4,7 @@ Depending on the status of the two parameters, ```pos_lemma_pretag``` and ```pos
 
 ## XPOS control
 
-This decision diagram defines the list of closed classes depending on the combination of the two relevant parameters. Important is to not that the first two options are available only for Slovenian. Also, for Bulgarian, the `Z` XPOS tag is `punct`.
+This decision diagram defines the list of closed classes depending on the combination of the two relevant parameters. Important is to not that the first two options are available only for Slovenian. The `punct` tag is the Bulgarian variant of the `Z` tag.
 
 ```
 pos_lemma_pretag==True &  pos_use_lexicon==True || closed_classes_xpos = ['P', 'S', 'C', 'Q', 'Z', 'punct']

@@ -28,6 +28,7 @@ START_CHAR = 'start_char'
 END_CHAR = 'end_char'
 TYPE = 'type'
 SENTIMENT = 'sentiment'
+SRL = 'srl'
 
 def _readonly_setter(self, name):
     full_classname = self.__class__.__module__
@@ -178,6 +179,10 @@ class Document(StanzaObject):
                 units = sentence.tokens
             else:
                 units = sentence.words
+            if 'srl' in fields:
+                for unit in units:
+                    misc = {uni.split('=')[0]: uni.split('=')[1] for uni in unit.misc.split('|')} if unit.misc is not None else None
+                    unit.srl = misc['Deprel'] if misc is not None and 'Deprel' in misc else None
             for unit in units:
                 if len(fields) == 1:
                     cursent += [getattr(unit, fields[0])]

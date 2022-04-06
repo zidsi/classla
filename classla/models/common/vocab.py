@@ -25,6 +25,7 @@ class BaseVocab:
         if data is not None:
             self.build_vocab()
         self.state_attrs = ['lang', 'idx', 'cutoff', 'lower', '_unit2id', '_id2unit']
+        del self.data
 
     def build_vocab(self):
         raise NotImplementedError()

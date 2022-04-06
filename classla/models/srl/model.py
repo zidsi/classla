@@ -2,14 +2,10 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn.utils.rnn import pad_packed_sequence, pack_padded_sequence, pack_sequence, PackedSequence
+from torch.nn.utils.rnn import pad_packed_sequence, pack_padded_sequence, PackedSequence
 
-import classla.models.common.seq2seq_constant as constant
-from classla.models.common.biaffine import BiaffineScorer
 from classla.models.common.hlstm import HighwayLSTM
 from classla.models.common.dropout import WordDropout
-from classla.models.common.vocab import CompositeVocab
-from classla.models.common.char_model import CharacterModel
 
 
 class SRLTagger(nn.Module):
@@ -131,8 +127,5 @@ class SRLTagger(nn.Module):
 
         srl = pack(srl).data
         loss = self.crit(srl_pred.view(-1, srl_pred.size(-1)), srl.view(-1))
-
-        # padded_srl_pred = pad(srl_pred)
-        # preds = [padded_srl_pred.max(2)[1]]
 
         return loss, preds

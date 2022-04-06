@@ -7,61 +7,6 @@ from collections import Counter
 logger = logging.getLogger('classla')
 
 
-def score_by_entity(pred_tag_sequences, gold_tag_sequences, verbose=True):
-    """ Score predicted tags at the entity level.
-
-    Args:
-        pred_tags_sequences: a list of list of predicted tags for each word
-        gold_tags_sequences: a list of list of gold tags for each word
-        verbose: print log with results
-
-    Returns:
-        Precision, recall and F1 scores.
-    """
-    assert (len(gold_tag_sequences) == len(pred_tag_sequences)), \
-        "Number of predicted tag sequences does not match gold sequences."
-
-    def decode_all(tag_sequences):
-        # decode from all sequences, each sequence with a unique id
-        ents = []
-        for sent_id, tags in enumerate(tag_sequences):
-            for ent in [e.upper() for e in tags]:  # dirty hack given that predictions are uppercased due to a consistent bug in training data
-                ent['sent_id'] = sent_id
-                ents += [ent]
-        return ents
-
-    gold_ents = decode_all(gold_tag_sequences)
-    pred_ents = decode_all(pred_tag_sequences)
-
-    # scoring
-    correct_by_type = Counter()
-    guessed_by_type = Counter()
-    gold_by_type = Counter()
-
-    for p in pred_ents:
-        guessed_by_type[p['type']] += 1
-        if p in gold_ents:
-            correct_by_type[p['type']] += 1
-    for g in gold_ents:
-        gold_by_type[g['type']] += 1
-
-    prec_micro = 0.0
-    if sum(guessed_by_type.values()) > 0:
-        prec_micro = sum(correct_by_type.values()) * 1.0 / sum(guessed_by_type.values())
-    rec_micro = 0.0
-    if sum(gold_by_type.values()) > 0:
-        rec_micro = sum(correct_by_type.values()) * 1.0 / sum(gold_by_type.values())
-    f_micro = 0.0
-    if prec_micro + rec_micro > 0:
-        f_micro = 2.0 * prec_micro * rec_micro / (prec_micro + rec_micro)
-
-    if verbose:
-        logger.info("Prec.\tRec.\tF1")
-        logger.info("{:.2f}\t{:.2f}\t{:.2f}".format( \
-            prec_micro * 100, rec_micro * 100, f_micro * 100))
-    return prec_micro, rec_micro, f_micro
-
-
 def score_by_token(pred_tag_sequences, gold_tag_sequences, verbose=True):
     """ Score predicted tags at the token level.
 

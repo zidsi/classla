@@ -129,10 +129,10 @@ def parse_args():
     parser.add_argument('--max_steps', type=int, default=50000)
     parser.add_argument('--eval_interval', type=int, default=100)
     parser.add_argument('--max_steps_before_stop', type=int, default=3000)
-    parser.add_argument('--batch_size', type=int, default=5000)
+    parser.add_argument('--batch_size', type=int, default=256)
     parser.add_argument('--max_grad_norm', type=float, default=1.0, help='Gradient clipping.')
     parser.add_argument('--log_step', type=int, default=20, help='Print log every k steps.')
-    parser.add_argument('--save_dir', type=str, default='saved_models/depparse', help='Root dir for saving models.')
+    parser.add_argument('--save_dir', type=str, default='saved_models/srl', help='Root dir for saving models.')
     parser.add_argument('--save_name', type=str, default=None, help="File name to save the model")
 
     parser.add_argument('--seed', type=int, default=1234)
@@ -276,7 +276,8 @@ def evaluate(args):
 
     # load model
     use_cuda = args['cuda'] and not args['cpu']
-    trainer = Trainer(model_file=model_file, use_cuda=use_cuda)
+    pretrain = Pretrain(args['pretrain_file'], max_vocab=args['pretrain_max_vocab'])
+    trainer = Trainer(model_file=model_file, use_cuda=use_cuda, pretrain=pretrain, args=args)
     loaded_args, vocab = trainer.args, trainer.vocab
 
     # load config
@@ -286,18 +287,20 @@ def evaluate(args):
 
     # load data
     logger.info("Loading data with batch size {}...".format(args['batch_size']))
-    doc = Document(json.load(open(args['eval_file'])))
-    batch = DataLoader(doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    evaluate_doc = Document(doc, metasentences=metasentences)
+    batch = DataLoader(evaluate_doc, args['batch_size'], args, pretrain, vocab=vocab, evaluation=True)
     
     logger.info("Start evaluation...")
     preds = []
     for i, b in enumerate(batch):
         preds += trainer.predict(b)
 
-    gold_tags = batch.tags
-    _, _, score = scorer.score_by_entity(preds, gold_tags)
+    gold_tags = batch.srls
+    _, _, score = scorer.score_by_token(preds, gold_tags)
+    # _, _, score = scorer.score_by_entity(preds, gold_tags)
 
-    logger.info("NER tagger score:")
+    logger.info("SRL tagger score:")
     logger.info("{} {:.2f}".format(args['shorthand'], score*100))
 
 if __name__ == '__main__':

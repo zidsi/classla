@@ -2,16 +2,9 @@ from collections import Counter, OrderedDict
 
 from classla.models.common.vocab import BaseVocab, BaseMultiVocab
 from classla.models.common.vocab import VOCAB_PREFIX
-from classla.models.common.pretrain import PretrainedWordVocab
-from classla.models.pos.vocab import CharVocab, WordVocab
+from classla.models.lemma.vocab import Vocab
+from classla.models.pos.vocab import WordVocab
 
-class TagVocab(BaseVocab):
-    """ A vocab for the output tag sequence. """
-    def build_vocab(self):
-        counter = Counter([w[self.idx] for sent in self.data for w in sent])
-
-        self._id2unit = VOCAB_PREFIX + list(sorted(list(counter.keys()), key=lambda k: counter[k], reverse=True))
-        self._unit2id = {w:i for i, w in enumerate(self._id2unit)}
 
 class MultiVocab(BaseMultiVocab):
     def state_dict(self):
@@ -26,8 +19,8 @@ class MultiVocab(BaseMultiVocab):
 
     @classmethod
     def load_state_dict(cls, state_dict):
-        class_dict = {'PretrainedWordVocab': PretrainedWordVocab,
-                'TagVocab': TagVocab}
+        class_dict = {'WordVocab': WordVocab,
+                      'Vocab': Vocab}
         new = cls()
         assert '_key2class' in state_dict, "Cannot find class name mapping in state dict!"
         key2class = state_dict.pop('_key2class')

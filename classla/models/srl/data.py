@@ -2,14 +2,12 @@ import random
 import logging
 import torch
 
-from classla.models.common.data import map_to_ids, get_long_tensor, get_float_tensor, sort_all
-from classla.models.common.vocab import PAD_ID, VOCAB_PREFIX, ROOT_ID, CompositeVocab
-from classla.models.depparse.data import to_int
+from classla.models.common.data import get_long_tensor, sort_all
+from classla.models.common.vocab import PAD_ID
 from classla.models.lemma.vocab import Vocab
-from classla.models.pos.vocab import CharVocab, WordVocab
-from classla.models.srl.vocab import TagVocab, MultiVocab
+from classla.models.pos.vocab import WordVocab
+from classla.models.srl.vocab import MultiVocab
 from classla.models.common.doc import *
-from classla.models.srl.utils import is_bio_scheme, to_bio2, bio2_to_bioes
 
 logger = logging.getLogger('classla')
 
@@ -64,23 +62,6 @@ class DataLoader:
                             'srl': srlvocab
                             })
         return vocab
-
-    # def preprocess(self, data, vocab, args):
-    #     processed = []
-    #     if args.get('lowercase', True): # handle word case
-    #         case = lambda x: x.lower()
-    #     else:
-    #         case = lambda x: x
-    #     if args.get('char_lowercase', False): # handle character case
-    #         char_case = lambda x: x.lower()
-    #     else:
-    #         char_case = lambda x: x
-    #     for sent in data:
-    #         processed_sent = [vocab['word'].map([case(w[0]) for w in sent])]
-    #         processed_sent += [[vocab['char'].map([char_case(x) for x in w[0]]) for w in sent]]
-    #         processed_sent += [vocab['tag'].map([w[1] for w in sent])]
-    #         processed.append(processed_sent)
-    #     return processed
 
     def preprocess(self, data, vocab, pretrain, args):
         processed = []
@@ -164,53 +145,6 @@ class DataLoader:
                     if data[sent_idx][tok_idx][feat_idx] is None:
                         data[sent_idx][tok_idx][feat_idx] = '_'
         return data
-
-    def process_tags(self, sentences):
-        res = []
-        # check if tag conversion is needed
-        convert_to_bioes = False
-        is_bio = is_bio_scheme([x[1] for sent in sentences for x in sent])
-        if is_bio and self.args.get('scheme', 'bio').lower() == 'bioes':
-            convert_to_bioes = True
-            logger.debug("BIO tagging scheme found in input; converting into BIOES scheme...")
-        # process tags
-        for sent in sentences:
-            words, tags = zip(*sent)
-            # NER field sanity checking
-            if any([x is None or x == '_' for x in tags]):
-                raise Exception("NER tag not found for some input data.")
-            # first ensure BIO2 scheme
-            tags = to_bio2(tags)
-            # then convert to BIOES
-            if convert_to_bioes:
-                tags = bio2_to_bioes(tags)
-            res.append([[w,t] for w,t in zip(words, tags)])
-        return res
-
-    def process_chars(self, sents):
-        start_id, end_id = self.vocab['char'].unit2id('\n'), self.vocab['char'].unit2id(' ') # special token
-        start_offset, end_offset = 1, 1
-        chars_forward, chars_backward, charoffsets_forward, charoffsets_backward = [], [], [], []
-        # get char representation for each sentence
-        for sent in sents:
-            chars_forward_sent, chars_backward_sent, charoffsets_forward_sent, charoffsets_backward_sent = [start_id], [start_id], [], []
-            # forward lm
-            for word in sent:
-                chars_forward_sent += word
-                charoffsets_forward_sent = charoffsets_forward_sent + [len(chars_forward_sent)] # add each token offset in the last for forward lm
-                chars_forward_sent += [end_id]
-            # backward lm
-            for word in sent[::-1]:
-                chars_backward_sent += word[::-1]
-                charoffsets_backward_sent = [len(chars_backward_sent)] + charoffsets_backward_sent # add each offset in the first for backward lm
-                chars_backward_sent += [end_id]
-            # store each sentence
-            chars_forward.append(chars_forward_sent)
-            chars_backward.append(chars_backward_sent)
-            charoffsets_forward.append(charoffsets_forward_sent)
-            charoffsets_backward.append(charoffsets_backward_sent)
-        charlens = [len(sent) for sent in chars_forward] # forward lm and backward lm should have the same lengths
-        return chars_forward, chars_backward, charoffsets_forward, charoffsets_backward, charlens
 
     def reshuffle(self):
         data = [y for x in self.data for y in x]

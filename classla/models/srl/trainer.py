@@ -2,16 +2,13 @@
 A trainer class to handle training and testing of models.
 """
 
-import sys
 import logging
 import torch
-from torch import nn
 
 from classla.models.common.trainer import Trainer as BaseTrainer
-from classla.models.common import utils, loss
+from classla.models.common import utils
 from classla.models.srl.model import SRLTagger
 from classla.models.srl.vocab import MultiVocab
-from classla.models.common.crf import viterbi_decode
 
 logger = logging.getLogger('classla')
 
@@ -31,7 +28,7 @@ class Trainer(BaseTrainer):
         self.use_cuda = use_cuda
         if model_file is not None:
             # load everything from file
-            self.load(model_file, args)
+            self.load(model_file, pretrain=pretrain, args=args)
         else:
             assert all(var is not None for var in [args, vocab, pretrain])
             # build model from scratch
@@ -100,7 +97,7 @@ class Trainer(BaseTrainer):
         except:
             logger.warning("Saving failed... continuing anyway.")
 
-    def load(self, filename, args=None):
+    def load(self, filename, pretrain=None, args=None):
         try:
             checkpoint = torch.load(filename, lambda storage, loc: storage)
         except BaseException:
@@ -109,6 +106,6 @@ class Trainer(BaseTrainer):
         self.args = checkpoint['config']
         if args: self.args.update(args)
         self.vocab = MultiVocab.load_state_dict(checkpoint['vocab'])
-        self.model = SRLTagger(self.args, self.vocab)
+        self.model = SRLTagger(self.args, self.vocab, emb_matrix=pretrain.emb)
         self.model.load_state_dict(checkpoint['model'], strict=False)
 

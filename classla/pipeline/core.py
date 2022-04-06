@@ -22,6 +22,7 @@ from classla.pipeline.lemma_processor import LemmaProcessor
 from classla.pipeline.depparse_processor import DepparseProcessor
 from classla.pipeline.sentiment_processor import SentimentProcessor
 from classla.pipeline.ner_processor import NERProcessor
+from classla.pipeline.srl_processor import SRLProcessor
 from classla.resources.common import DEFAULT_MODEL_DIR, \
     maintain_processor_list, add_dependencies, build_default_config, set_logging_level, process_pipeline_parameters, sort_processors
 from classla.utils.helper_func import make_table

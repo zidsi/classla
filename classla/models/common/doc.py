@@ -553,6 +553,7 @@ class Token(StanzaObject):
         assert self._id and self._text, 'id and text should be included for the token'
         self._misc = token_entry.get(MISC, None)
         self._ner = token_entry.get(NER, None)
+        self._srl = token_entry.get(SRL, None)
         self._words = words if words is not None else []
         self._start_char = None
         self._end_char = None
@@ -636,10 +637,20 @@ class Token(StanzaObject):
         """ Set the token's NER tag. Example: 'B-ORG'"""
         self._ner = value if self._is_null(value) == False else None
 
+    @property
+    def srl(self):
+        """ Access the SRL tag of this token. Example: 'ACT'"""
+        return self._srl
+
+    @srl.setter
+    def srl(self, value):
+        """ Set the token's SRL tag. Example: 'ACT'"""
+        self._srl = value if self._is_null(value) == False else None
+
     def __repr__(self):
         return json.dumps(self.to_dict(), indent=2, ensure_ascii=False)
 
-    def to_dict(self, fields=[ID, TEXT, NER, MISC]):
+    def to_dict(self, fields=[ID, TEXT, NER, SRL, MISC]):
         """ Dumps the token into a list of dictionary for this token with its extended words
         if the token is a multi-word token.
         """
@@ -654,6 +665,8 @@ class Token(StanzaObject):
             word_dict = word.to_dict()
             if len(self.id) == 1 and NER in fields and getattr(self, NER) is not None: # propagate NER label to Word if it is a single-word token
                 word_dict[NER] = getattr(self, NER)
+            if len(self.id) == 1 and SRL in fields and getattr(self, SRL) is not None: # propagate SRL label to Word if it is a single-word token
+                word_dict[SRL] = getattr(self, SRL)
             ret.append(word_dict)
         return ret
 

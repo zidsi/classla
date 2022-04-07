@@ -17,6 +17,7 @@ DEPREL = 'deprel'
 DEPS = 'deps'
 MISC = 'misc'
 NER = 'ner'
+SRL = 'srl'
 FIELD_TO_IDX = {ID: 0, TEXT: 1, LEMMA: 2, UPOS: 3, XPOS: 4, FEATS: 5, HEAD: 6, DEPREL: 7, DEPS: 8, MISC: 9}
 
 
@@ -158,6 +159,8 @@ class CoNLL:
                 token_conll[FIELD_TO_IDX[key]] = '-'.join([str(x) for x in token_dict[key]]) if isinstance(token_dict[key], tuple) else str(token_dict[key])
             elif key == NER:
                 token_conll[FIELD_TO_IDX[MISC]] = f'NER={str(token_dict[key])}' if token_conll[FIELD_TO_IDX[MISC]] == '_' else f'NER={str(token_dict[key])}|{token_conll[FIELD_TO_IDX[MISC]]}'
+            elif key == SRL:
+                token_conll[FIELD_TO_IDX[MISC]] = f'SRL={str(token_dict[key])}' if token_conll[FIELD_TO_IDX[MISC]] == '_' else f'SRL={str(token_dict[key])}|{token_conll[FIELD_TO_IDX[MISC]]}'
             elif key in FIELD_TO_IDX:
                 token_conll[FIELD_TO_IDX[key]] = str(token_dict[key])
         return token_conll

@@ -297,6 +297,8 @@ def evaluate(args):
         preds += trainer.predict(b)
 
     gold_tags = batch.srls
+    batch.doc.set([SRL], [y if y != '_' else None for x in preds for y in x], to_token=True)
+    CoNLL.dict2conll(batch.doc.to_dict(), args['output_file'])
     _, _, score = scorer.score_by_token(preds, gold_tags)
     # _, _, score = scorer.score_by_entity(preds, gold_tags)
 

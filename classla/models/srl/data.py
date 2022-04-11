@@ -21,7 +21,7 @@ class DataLoader:
         self.preprocess_tags = preprocess_tags
 
         data = self.load_doc(self.doc)
-        self.srls = [[w[6] for w in sent] for sent in data]
+        self.srls = [[w[5] for w in sent] for sent in data]
 
         # handle vocab
         self.pretrain = pretrain
@@ -52,9 +52,9 @@ class DataLoader:
         wordvocab = WordVocab(data, self.args['shorthand'], cutoff=5, lower=True)
         pos_data = [w[1] for s in data for w in s]
         xposvocab = Vocab(pos_data, self.args['lang'])
-        lemmavocab = WordVocab(data, self.args['shorthand'], cutoff=5, idx=3, lower=True)
-        deprelvocab = WordVocab(data, self.args['shorthand'], idx=5)
-        srlvocab = WordVocab(data, self.args['shorthand'], idx=6)
+        lemmavocab = WordVocab(data, self.args['shorthand'], cutoff=5, idx=2, lower=True)
+        deprelvocab = WordVocab(data, self.args['shorthand'], idx=4)
+        srlvocab = WordVocab(data, self.args['shorthand'], idx=5)
         vocab = MultiVocab({'word': wordvocab,
                             'xpos': xposvocab,
                             'lemma': lemmavocab,
@@ -67,23 +67,22 @@ class DataLoader:
         processed = []
         for sent in data:
             processed_sent = [vocab['word'].map([w[0] for w in sent])]
-            processed_sent += [vocab['deprel'].map([w[5] for w in sent])]
+            processed_sent += [vocab['deprel'].map([w[4] for w in sent])]
             # Head word
-            processed_sent += [vocab['word'].map([sent[w[4]-1][0] if w[4] > 0 else '<ROOT>' for w in sent])]
-            processed_sent += [vocab['xpos'].map([w[2] for w in sent])]
-            processed_sent += [vocab['lemma'].map([w[3] for w in sent])]
+            processed_sent += [vocab['word'].map([sent[w[3]-1][0] if w[3] > 0 else '<ROOT>' for w in sent])]
+            processed_sent += [vocab['xpos'].map([w[1] for w in sent])]
+            processed_sent += [vocab['lemma'].map([w[2] for w in sent])]
             # head lemma
-            processed_sent += [vocab['lemma'].map([sent[w[4]-1][3] if w[4] > 0 else '<ROOT>' for w in sent])]
+            processed_sent += [vocab['lemma'].map([sent[w[3]-1][2] if w[3] > 0 else '<ROOT>' for w in sent])]
             # head xpos
-            processed_sent += [vocab['xpos'].map([sent[w[4]-1][2] if w[4] > 0 else '<UNK>' for w in sent])]
+            processed_sent += [vocab['xpos'].map([sent[w[3]-1][1] if w[3] > 0 else '<UNK>' for w in sent])]
 
             # pretrain word encodings
             processed_sent += [pretrain.vocab.map([w[0] for w in sent])]
-            processed_sent += [pretrain.vocab.map([sent[w[4]-1][0] if w[4] > 0 else '<ROOT>' for w in sent])]
+            processed_sent += [pretrain.vocab.map([sent[w[3]-1][0] if w[3] > 0 else '<ROOT>' for w in sent])]
 
-            processed_sent += [vocab['srl'].map([w[6] for w in sent])]
+            processed_sent += [vocab['srl'].map([w[5] for w in sent])]
 
-            # processed_sent += [[w[0].lower() for w in sent]]
             processed.append(processed_sent)
         return processed
 
@@ -133,7 +132,7 @@ class DataLoader:
 
     def load_doc(self, doc):
         # data = doc.get([TEXT, NER], as_sentences=True, from_token=True)
-        data = doc.get([TEXT, XPOS, FEATS, LEMMA, HEAD, DEPREL, SRL], as_sentences=True)
+        data = doc.get([TEXT, XPOS, LEMMA, HEAD, DEPREL, SRL], as_sentences=True)
         data = self.resolve_none(data)
         return data
 

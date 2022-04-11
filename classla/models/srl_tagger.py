@@ -40,58 +40,6 @@ def parse_args():
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--pretrain_file', type=str, default=None, help='Input file for data loader.')
 
-    # parser.add_argument('--mode', default='train', choices=['train', 'predict'])
-    # parser.add_argument('--lang', type=str, help='Language')
-    # parser.add_argument('--shorthand', type=str, help="Treebank shorthand")
-    #
-    # parser.add_argument('--transformed_dim', type=int, default=125)
-    # parser.add_argument('--hidden_dim', type=int, default=256)
-    # parser.add_argument('--deep_biaff_hidden_dim', type=int, default=400)
-    # parser.add_argument('--char_hidden_dim', type=int, default=100)
-    # parser.add_argument('--word_emb_dim', type=int, default=100)
-    # parser.add_argument('--char_emb_dim', type=int, default=100)
-    # parser.add_argument('--xpos_emb_dim', type=int, default=50)
-    # parser.add_argument('--deprel_emb_dim', type=int, default=50)
-    # parser.add_argument('--num_layers', type=int, default=1)
-    # parser.add_argument('--char_num_layers', type=int, default=1)
-    # parser.add_argument('--pretrain_max_vocab', type=int, default=100000)
-    # parser.add_argument('--word_dropout', type=float, default=0)
-    # parser.add_argument('--locked_dropout', type=float, default=0.0)
-    # parser.add_argument('--dropout', type=float, default=0.5)
-    # parser.add_argument('--rec_dropout', type=float, default=0, help="Word recurrent dropout")
-    # parser.add_argument('--char_rec_dropout', type=float, default=0, help="Character recurrent dropout")
-    # parser.add_argument('--char_dropout', type=float, default=0, help="Character-level language model dropout")
-    # parser.add_argument('--no_char', dest='char', action='store_false', help="Turn off character model.")
-    # parser.add_argument('--charlm', action='store_true', help="Turn on contextualized char embedding using character-level language model.")
-    # parser.add_argument('--charlm_save_dir', type=str, default='saved_models/charlm', help="Root dir for pretrained character-level language model.")
-    # parser.add_argument('--charlm_shorthand', type=str, default=None, help="Shorthand for character-level language model training corpus.")
-    # parser.add_argument('--char_lowercase', dest='char_lowercase', action='store_true', help="Use lowercased characters in charater model.")
-    # parser.add_argument('--no_lowercase', dest='lowercase', action='store_false', help="Use cased word vectors.")
-    # parser.add_argument('--no_emb_finetune', dest='emb_finetune', action='store_false', help="Turn off finetuning of the embedding matrix.")
-    # parser.add_argument('--no_input_transform', dest='input_transform', action='store_false', help="Do not use input transformation layer before tagger lstm.")
-    # parser.add_argument('--scheme', type=str, default='bioes', help="The tagging scheme to use: bio or bioes.")
-    #
-    # parser.add_argument('--sample_train', type=float, default=1.0, help='Subsample training data.')
-    # parser.add_argument('--optim', type=str, default='sgd', help='sgd, adagrad, adam or adamax.')
-    # parser.add_argument('--lr', type=float, default=0.1, help='Learning rate.')
-    # parser.add_argument('--min_lr', type=float, default=1e-4, help='Minimum learning rate to stop training.')
-    # parser.add_argument('--momentum', type=float, default=0, help='Momentum for SGD.')
-    # parser.add_argument('--lr_decay', type=float, default=0.5, help="LR decay rate.")
-    # parser.add_argument('--patience', type=int, default=3, help="Patience for LR decay.")
-    #
-    # parser.add_argument('--max_steps_before_stop', type=int, default=3000)
-    # parser.add_argument('--max_steps', type=int, default=200000)
-    # parser.add_argument('--eval_interval', type=int, default=500)
-    # parser.add_argument('--batch_size', type=int, default=32)
-    # parser.add_argument('--max_grad_norm', type=float, default=5.0, help='Gradient clipping.')
-    # parser.add_argument('--log_step', type=int, default=20, help='Print log every k steps.')
-    # parser.add_argument('--save_dir', type=str, default='saved_models/srl', help='Root dir for saving models.')
-    # parser.add_argument('--save_name', type=str, default=None, help="File name to save the model")
-    #
-    # parser.add_argument('--seed', type=int, default=1234)
-    # parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
-    # parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
-
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
     parser.add_argument('--shorthand', type=str, help="Treebank shorthand")
@@ -103,8 +51,12 @@ def parse_args():
     parser.add_argument('--deep_biaff_hidden_dim', type=int, default=400)
     parser.add_argument('--composite_deep_biaff_hidden_dim', type=int, default=100)
     parser.add_argument('--word_emb_dim', type=int, default=75)
+    parser.add_argument('--head_word_emb_dim', type=int, default=75)
+    parser.add_argument('--lemma_emb_dim', type=int, default=75)
+    parser.add_argument('--head_lemma_emb_dim', type=int, default=75)
     parser.add_argument('--char_emb_dim', type=int, default=100)
     parser.add_argument('--xpos_emb_dim', type=int, default=50)
+    parser.add_argument('--head_xpos_emb_dim', type=int, default=50)
     parser.add_argument('--deprel_emb_dim', type=int, default=50)
     parser.add_argument('--tag_emb_dim', type=int, default=50)
     parser.add_argument('--transformed_dim', type=int, default=125)
@@ -180,10 +132,6 @@ def train(args):
     dev_batch = DataLoader(dev_doc, args['batch_size'], args, pretrain, vocab=vocab, evaluation=True)
     dev_gold_tags = dev_batch.srls
 
-    # pred and gold path
-    system_pred_file = args['output_file']
-    gold_file = args['gold_file']
-
     # skip training if the language does not have training or dev data
     if len(train_batch) == 0 or len(dev_batch) == 0:
         logger.info("Skip training because no data available...")
@@ -195,14 +143,9 @@ def train(args):
     global_step = 0
     max_steps = args['max_steps']
     dev_score_history = []
-    best_dev_preds = []
     current_lr = args['lr']
     global_start_time = time.time()
     format_str = '{}: step {}/{}, loss = {:.6f} ({:.3f} sec/batch), lr: {:.6f}'
-
-    # if args['adapt_eval_interval']:
-    #     args['eval_interval'] = utils.get_adaptive_eval_interval(dev_batch.num_examples, 2000, args['eval_interval'])
-    #     print("Evaluating the model every {} steps...".format(args['eval_interval']))
 
     using_amsgrad = False
     last_best_step = 0
@@ -227,8 +170,6 @@ def train(args):
                 for batch in dev_batch:
                     preds = trainer.predict(batch)
                     dev_preds += preds
-                # dev_preds = utils.unsort(dev_preds, dev_batch.data_orig_idx)
-                # _, _, dev_score = scorer.score_by_entity(dev_preds, dev_gold_tags)
                 _, _, dev_score = scorer.score_by_token(dev_preds, dev_gold_tags)
 
                 train_loss = train_loss / args['eval_interval']  # avg loss per batch
@@ -240,7 +181,6 @@ def train(args):
                     last_best_step = global_step
                     trainer.save(model_file)
                     print("new best model saved.")
-                    best_dev_preds = dev_preds
 
                 dev_score_history += [dev_score]
                 print("")
@@ -300,7 +240,6 @@ def evaluate(args):
     batch.doc.set([SRL], [y if y != '_' else None for x in preds for y in x], to_token=True)
     CoNLL.dict2conll(batch.doc.to_dict(), args['output_file'])
     _, _, score = scorer.score_by_token(preds, gold_tags)
-    # _, _, score = scorer.score_by_entity(preds, gold_tags)
 
     logger.info("SRL tagger score:")
     logger.info("{} {:.2f}".format(args['shorthand'], score*100))

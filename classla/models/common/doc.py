@@ -182,7 +182,7 @@ class Document(StanzaObject):
             if 'srl' in fields:
                 for unit in units:
                     misc = {uni.split('=')[0]: uni.split('=')[1] for uni in unit.misc.split('|')} if unit.misc is not None else None
-                    unit.srl = misc['Deprel'] if misc is not None and 'Deprel' in misc else None
+                    unit.srl = misc['SRL'] if misc is not None and 'SRL' in misc else None
             for unit in units:
                 if len(fields) == 1:
                     cursent += [getattr(unit, fields[0])]

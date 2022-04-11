@@ -27,14 +27,6 @@ class SRLProcessor(UDProcessor):
         # get pretrained word vectors
         self._pretrain = Pretrain(config['pretrain_path']) if 'pretrain_path' in config else None
 
-        # if 'lemma_pretag' in self.config:
-        #     pos_lemma_pretag = self.config['lemma_pretag']
-        # else:
-        #     pos_lemma_pretag = (not 'tokenize_pretokenized' in self.pipeline.config or not self.pipeline.config[
-        #         'tokenize_pretokenized'])
-        #     self.config['lemma_pretag'] = pos_lemma_pretag
-        #
-        # arg = {'lemma_pretag': pos_lemma_pretag}
         arg = {}
 
         # set up trainer
@@ -45,27 +37,9 @@ class SRLProcessor(UDProcessor):
         return [pos if pos[0] is not None else False for pos in seq]
 
     def process(self, document):
-        batch = DataLoader(
-            document, self.config['batch_size'], self.config, self.pretrain, vocab=self.vocab, evaluation=True,
-            sort_during_eval=True)
+        batch = DataLoader(document, self.config['batch_size'], self.config, self.pretrain, vocab=self.vocab, evaluation=True)
         preds = []
         for i, b in enumerate(batch):
             preds += self.trainer.predict(b)
-        preds = unsort(preds, batch.data_orig_idx)
-        if 'lemma_pretag' in self.config and self.config['lemma_pretag']:
-            preds_flattened = []
-            # skip pos predictions for punctuations that were predicted by tokenizer
-            skip = iter(self.predetermined_punctuations(zip(batch.doc.get([doc.UPOS]), batch.doc.get([doc.XPOS]), batch.doc.get([doc.FEATS]))))
-            for x in preds:
-                for y in x:
-                    n = next(skip, None)
-                    assert n is not None
-                    if not n:
-                        preds_flattened.append(y)
-                    else:
-                        preds_flattened.append(n)
-        else:
-            preds_flattened = [y for x in preds for y in x]
-
-        batch.doc.set([doc.UPOS, doc.XPOS, doc.FEATS], preds_flattened)
+        batch.doc.set([doc.SRL], [y for x in preds for y in x], to_token=True)
         return batch.doc

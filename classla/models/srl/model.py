@@ -27,13 +27,13 @@ class SRLTagger(nn.Module):
             self.word_emb = nn.Embedding(len(vocab['word']), self.args['word_emb_dim'], padding_idx=0)
             input_size += self.args['word_emb_dim']
         if self.args['head_word_emb_dim'] > 0:
-            self.head_word_emb = nn.Embedding(len(vocab['word']), self.args['word_emb_dim'], padding_idx=0)
+            self.head_word_emb = nn.Embedding(len(vocab['word']), self.args['head_word_emb_dim'], padding_idx=0)
             input_size += self.args['head_word_emb_dim']
         if self.args['lemma_emb_dim'] > 0:
-            self.lemma_emb = nn.Embedding(len(vocab['lemma']), self.args['word_emb_dim'], padding_idx=0)
+            self.lemma_emb = nn.Embedding(len(vocab['lemma']), self.args['lemma_emb_dim'], padding_idx=0)
             input_size += self.args['lemma_emb_dim']
         if self.args['head_lemma_emb_dim'] > 0:
-            self.head_lemma_emb = nn.Embedding(len(vocab['lemma']), self.args['word_emb_dim'], padding_idx=0)
+            self.head_lemma_emb = nn.Embedding(len(vocab['lemma']), self.args['head_lemma_emb_dim'], padding_idx=0)
             input_size += self.args['head_lemma_emb_dim']
 
         if self.args['xpos_emb_dim'] > 0:
@@ -41,7 +41,7 @@ class SRLTagger(nn.Module):
             input_size += self.args['xpos_emb_dim']
 
         if self.args['head_xpos_emb_dim'] > 0:
-            self.head_xpos_embedding = nn.Embedding(len(vocab['xpos']), self.args['xpos_emb_dim'], padding_idx=0)
+            self.head_xpos_embedding = nn.Embedding(len(vocab['xpos']), self.args['head_xpos_emb_dim'], padding_idx=0)
             input_size += self.args['head_xpos_emb_dim']
 
         if self.args['deprel_emb_dim'] > 0:

@@ -44,7 +44,7 @@ class Trainer(BaseTrainer):
             self.dict = None
 
         self.use_lexicon = args['use_lexicon'] if 'use_lexicon' in args else None
-        self.pos_lemma_pretag = args['lemma_pretag']
+        self.pos_lemma_pretag = args['lemma_pretag'] if 'lemma_pretag' in args else None
         self.postprocessor = None
         if self.use_lexicon:
             args['shorthand'] = args['shorthand'] if 'shorthand' in args else self.args['shorthand']

@@ -183,6 +183,8 @@ def maintain_processor_list(resources, lang, package, processors):
         logger.debug(f'Processing parameter "processors"...')
         for key, value in processors.items():
             assert(key in PIPELINE_NAMES)
+            if key == 'srl':
+                assert(value == 'standard_jos'), "You may only run 'srl' with 'standard_jos' type."
             assert(isinstance(key, str) and isinstance(value, str))
             # check if keys and values can be found
             if key in resources[lang] and value in resources[lang][key]:

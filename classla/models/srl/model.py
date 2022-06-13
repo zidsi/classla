@@ -132,7 +132,10 @@ class SRLTagger(nn.Module):
             inputs += [head_pretrained_emb]
 
         def pad(x):
-            return pad_packed_sequence(PackedSequence(x, word_emb.batch_sizes), batch_first=True)[0]
+            if self.args['word_emb_dim'] > 0:
+                return pad_packed_sequence(PackedSequence(x, word_emb.batch_sizes), batch_first=True)[0]
+            else:
+                return pad_packed_sequence(PackedSequence(x, head_word_emb.batch_sizes), batch_first=True)[0]
 
         lstm_inputs = torch.cat([x.data for x in inputs], 1)
         lstm_inputs = self.worddrop(lstm_inputs, self.drop_replacement)

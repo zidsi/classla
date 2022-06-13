@@ -10,7 +10,7 @@ In Slovenian it is possible to replace UD dependency parsing system with JOS par
 ```
 >>> import classla
 >>> classla.download('sl', type='standard_jos')                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
->>> nlp = classla.Pipeline('sl', type='standard_jos')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> nlp = classla.Pipeline('sl', processors='tokenize,pos,lemma,depparse,ner,srl', type='standard_jos')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
 >>> print(doc.to_conll())                             # print the output in CoNLL-U format
 # newpar id = 1

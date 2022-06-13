@@ -6,34 +6,12 @@ import classla
 
 from tests_classla import *
 
+with open('test_data/slovenian.raw') as f:
+    SL_DOC = f.read()
 
-SL_DOC = "France Prešeren je bil rojen v Vrbi. Danes je poznan kot največji slovenski pesnik. Študiral je na Dunaju."
 
-SL_DOC_GOLD_TOKENS = """
-<Token id=1;words=[<Word id=1;text=France>]>
-<Token id=2;words=[<Word id=2;text=Prešeren>]>
-<Token id=3;words=[<Word id=3;text=je>]>
-<Token id=4;words=[<Word id=4;text=bil>]>
-<Token id=5;words=[<Word id=5;text=rojen>]>
-<Token id=6;words=[<Word id=6;text=v>]>
-<Token id=7;words=[<Word id=7;text=Vrbi>]>
-<Token id=8;words=[<Word id=8;text=.>]>
-
-<Token id=1;words=[<Word id=1;text=Danes>]>
-<Token id=2;words=[<Word id=2;text=je>]>
-<Token id=3;words=[<Word id=3;text=poznan>]>
-<Token id=4;words=[<Word id=4;text=kot>]>
-<Token id=5;words=[<Word id=5;text=največji>]>
-<Token id=6;words=[<Word id=6;text=slovenski>]>
-<Token id=7;words=[<Word id=7;text=pesnik>]>
-<Token id=8;words=[<Word id=8;text=.>]>
-
-<Token id=1;words=[<Word id=1;text=Študiral>]>
-<Token id=2;words=[<Word id=2;text=je>]>
-<Token id=3;words=[<Word id=3;text=na>]>
-<Token id=4;words=[<Word id=4;text=Dunaju>]>
-<Token id=5;words=[<Word id=5;text=.>]>
-""".strip()
+with open('test_data/slovenian.tokenizer') as f:
+    SL_DOC_GOLD_TOKENS = f.read()
 
 
 SL_DOC_PRETOKENIZED = \
@@ -89,6 +67,8 @@ SL_DOC_PRETOKENIZED_LIST_GOLD_TOKENS = """
 def test_tokenize():
     nlp = classla.Pipeline(processors='tokenize', dir=TEST_MODELS_DIR, lang='sl')
     doc = nlp(SL_DOC)
+    # with open('test_data/slovenian.tokenizer', 'w') as f:
+    #     f.write('\n\n'.join([sent.tokens_string() for sent in doc.sentences]))
     assert SL_DOC_GOLD_TOKENS == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
 
 

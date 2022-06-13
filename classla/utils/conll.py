@@ -154,15 +154,22 @@ class CoNLL:
         Output: CoNLL-U format token, which is a list for the token.
         """
         token_conll = ['_' for i in range(FIELD_NUM)]
+        misc_dict = {}
         for key in token_dict:
             if key == ID:
                 token_conll[FIELD_TO_IDX[key]] = '-'.join([str(x) for x in token_dict[key]]) if isinstance(token_dict[key], tuple) else str(token_dict[key])
             elif key == NER:
-                token_conll[FIELD_TO_IDX[MISC]] = f'NER={str(token_dict[key])}' if token_conll[FIELD_TO_IDX[MISC]] == '_' else f'NER={str(token_dict[key])}|{token_conll[FIELD_TO_IDX[MISC]]}'
+                misc_dict['NER'] = str(token_dict[key])
             elif key == SRL:
-                token_conll[FIELD_TO_IDX[MISC]] = f'SRL={str(token_dict[key])}' if token_conll[FIELD_TO_IDX[MISC]] == '_' else f'SRL={str(token_dict[key])}|{token_conll[FIELD_TO_IDX[MISC]]}'
+                misc_dict['SRL'] = str(token_dict[key])
+            elif key == MISC:
+                for misc in str(token_dict[key]).split('|'):
+                    misc_key, misc_val = misc.split('=')
+                    if misc_key not in [NER, SRL]:
+                        misc_dict[misc_key] = misc_val
             elif key in FIELD_TO_IDX:
                 token_conll[FIELD_TO_IDX[key]] = str(token_dict[key])
+        token_conll[FIELD_TO_IDX[MISC]] = '|'.join([k + '=' + v for k, v in sorted(misc_dict.items(), key=lambda item: item[0].lower())]) if misc_dict else '_'
         return token_conll
 
     @staticmethod

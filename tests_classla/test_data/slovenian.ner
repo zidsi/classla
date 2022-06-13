@@ -1,0 +1,2226 @@
+# newpar id = 1
+# sent_id = 1.1
+# text = France Prešeren
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+
+# newpar id = 2
+# sent_id = 2.1
+# text = France Prešeren, slovenski pesnik, * 3. december 1800, Vrba,[7] † 8. februar 1849, Kranj.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+3	,	_	_	_	_	_	_	_	NER=O
+4	slovenski	_	_	_	_	_	_	_	NER=O
+5	pesnik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	,	_	_	_	_	_	_	_	NER=O
+7	*	_	_	_	_	_	_	_	NER=O
+8	3.	_	_	_	_	_	_	_	NER=O
+9	december	_	_	_	_	_	_	_	NER=O
+10	1800	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	Vrba	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+13	,	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	[	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+15	7	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	]	_	_	_	_	_	_	_	NER=O
+17	†	_	_	_	_	_	_	_	NER=O
+18	8.	_	_	_	_	_	_	_	NER=O
+19	februar	_	_	_	_	_	_	_	NER=O
+20	1849	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+21	,	_	_	_	_	_	_	_	NER=O
+22	Kranj	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+23	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 3
+# sent_id = 3.1
+# text = France Prešeren se je rodil v kmečki družini.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	rodil	_	_	_	_	_	_	_	NER=O
+6	v	_	_	_	_	_	_	_	NER=O
+7	kmečki	_	_	_	_	_	_	_	NER=O
+8	družini	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 3.2
+# text = V osnovni šoli je bil tako priden, da so ga zapisali v zlato knjigo.
+1	V	_	_	_	_	_	_	_	NER=O
+2	osnovni	_	_	_	_	_	_	_	NER=O
+3	šoli	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	bil	_	_	_	_	_	_	_	NER=O
+6	tako	_	_	_	_	_	_	_	NER=O
+7	priden	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	da	_	_	_	_	_	_	_	NER=O
+10	so	_	_	_	_	_	_	_	NER=O
+11	ga	_	_	_	_	_	_	_	NER=O
+12	zapisali	_	_	_	_	_	_	_	NER=O
+13	v	_	_	_	_	_	_	_	NER=O
+14	zlato	_	_	_	_	_	_	_	NER=O
+15	knjigo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 3.3
+# text = Po uspešno zaključenem študiju na dunajski pravni fakulteti se je vrnil v Ljubljano, kjer je delal kot odvetnik.
+1	Po	_	_	_	_	_	_	_	NER=O
+2	uspešno	_	_	_	_	_	_	_	NER=O
+3	zaključenem	_	_	_	_	_	_	_	NER=O
+4	študiju	_	_	_	_	_	_	_	NER=O
+5	na	_	_	_	_	_	_	_	NER=O
+6	dunajski	_	_	_	_	_	_	_	NER=O
+7	pravni	_	_	_	_	_	_	_	NER=O
+8	fakulteti	_	_	_	_	_	_	_	NER=O
+9	se	_	_	_	_	_	_	_	NER=O
+10	je	_	_	_	_	_	_	_	NER=O
+11	vrnil	_	_	_	_	_	_	_	NER=O
+12	v	_	_	_	_	_	_	_	NER=O
+13	Ljubljano	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	kjer	_	_	_	_	_	_	_	NER=O
+16	je	_	_	_	_	_	_	_	NER=O
+17	delal	_	_	_	_	_	_	_	NER=O
+18	kot	_	_	_	_	_	_	_	NER=O
+19	odvetnik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 3.4
+# text = V tem času je napisal večino svojih pesmi, pri pisanju katerih ga je pomembno usmerjal prijatelj Matija Čop.
+1	V	_	_	_	_	_	_	_	NER=O
+2	tem	_	_	_	_	_	_	_	NER=O
+3	času	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	napisal	_	_	_	_	_	_	_	NER=O
+6	večino	_	_	_	_	_	_	_	NER=O
+7	svojih	_	_	_	_	_	_	_	NER=O
+8	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	pri	_	_	_	_	_	_	_	NER=O
+11	pisanju	_	_	_	_	_	_	_	NER=O
+12	katerih	_	_	_	_	_	_	_	NER=O
+13	ga	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	pomembno	_	_	_	_	_	_	_	NER=O
+16	usmerjal	_	_	_	_	_	_	_	NER=O
+17	prijatelj	_	_	_	_	_	_	_	NER=O
+18	Matija	_	_	_	_	_	_	_	NER=B-PER
+19	Čop	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+20	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 3.5
+# text = Prešeren je prvi Slovenec, ki se je po kakovosti svojega pisanja lahko kosal s sodobniki po Evropi, kjer je tedaj vladala romantična usmeritev.
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	prvi	_	_	_	_	_	_	_	NER=O
+4	Slovenec	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+5	,	_	_	_	_	_	_	_	NER=O
+6	ki	_	_	_	_	_	_	_	NER=O
+7	se	_	_	_	_	_	_	_	NER=O
+8	je	_	_	_	_	_	_	_	NER=O
+9	po	_	_	_	_	_	_	_	NER=O
+10	kakovosti	_	_	_	_	_	_	_	NER=O
+11	svojega	_	_	_	_	_	_	_	NER=O
+12	pisanja	_	_	_	_	_	_	_	NER=O
+13	lahko	_	_	_	_	_	_	_	NER=O
+14	kosal	_	_	_	_	_	_	_	NER=O
+15	s	_	_	_	_	_	_	_	NER=O
+16	sodobniki	_	_	_	_	_	_	_	NER=O
+17	po	_	_	_	_	_	_	_	NER=O
+18	Evropi	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+19	,	_	_	_	_	_	_	_	NER=O
+20	kjer	_	_	_	_	_	_	_	NER=O
+21	je	_	_	_	_	_	_	_	NER=O
+22	tedaj	_	_	_	_	_	_	_	NER=O
+23	vladala	_	_	_	_	_	_	_	NER=O
+24	romantična	_	_	_	_	_	_	_	NER=O
+25	usmeritev	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 4
+# sent_id = 4.1
+# text = Življenjska pot pesnika, nesrečno zaljubljenega v bogato Primičevo Julijo, ki ji je posvetil Sonetni venec (1834) in nekatere druge ljubezenske pesmi, je bila polna raznovrstnih preizkušenj.
+1	Življenjska	_	_	_	_	_	_	_	NER=O
+2	pot	_	_	_	_	_	_	_	NER=O
+3	pesnika	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+4	,	_	_	_	_	_	_	_	NER=O
+5	nesrečno	_	_	_	_	_	_	_	NER=O
+6	zaljubljenega	_	_	_	_	_	_	_	NER=O
+7	v	_	_	_	_	_	_	_	NER=O
+8	bogato	_	_	_	_	_	_	_	NER=O
+9	Primičevo	_	_	_	_	_	_	_	NER=B-PER
+10	Julijo	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	ki	_	_	_	_	_	_	_	NER=O
+13	ji	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	posvetil	_	_	_	_	_	_	_	NER=O
+16	Sonetni	_	_	_	_	_	_	_	NER=B-DERIV-PER
+17	venec	_	_	_	_	_	_	_	NER=O
+18	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+19	1834	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	)	_	_	_	_	_	_	_	NER=O
+21	in	_	_	_	_	_	_	_	NER=O
+22	nekatere	_	_	_	_	_	_	_	NER=O
+23	druge	_	_	_	_	_	_	_	NER=O
+24	ljubezenske	_	_	_	_	_	_	_	NER=O
+25	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	,	_	_	_	_	_	_	_	NER=O
+27	je	_	_	_	_	_	_	_	NER=O
+28	bila	_	_	_	_	_	_	_	NER=O
+29	polna	_	_	_	_	_	_	_	NER=O
+30	raznovrstnih	_	_	_	_	_	_	_	NER=O
+31	preizkušenj	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+32	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 4.2
+# text = Njegovi prijatelji so umirali eden za drugim, kot pesnik pa v času svojega življenja ni bil priznan.
+1	Njegovi	_	_	_	_	_	_	_	NER=O
+2	prijatelji	_	_	_	_	_	_	_	NER=O
+3	so	_	_	_	_	_	_	_	NER=O
+4	umirali	_	_	_	_	_	_	_	NER=O
+5	eden	_	_	_	_	_	_	_	NER=O
+6	za	_	_	_	_	_	_	_	NER=O
+7	drugim	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	kot	_	_	_	_	_	_	_	NER=O
+10	pesnik	_	_	_	_	_	_	_	NER=O
+11	pa	_	_	_	_	_	_	_	NER=O
+12	v	_	_	_	_	_	_	_	NER=O
+13	času	_	_	_	_	_	_	_	NER=O
+14	svojega	_	_	_	_	_	_	_	NER=O
+15	življenja	_	_	_	_	_	_	_	NER=O
+16	ni	_	_	_	_	_	_	_	NER=O
+17	bil	_	_	_	_	_	_	_	NER=O
+18	priznan	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+19	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 4.3
+# text = V zadnjih letih življenja se je vse bolj soočal z malodušjem, težavami z alkoholom, ki je nazadnje povzročil njegovo smrt.
+1	V	_	_	_	_	_	_	_	NER=O
+2	zadnjih	_	_	_	_	_	_	_	NER=O
+3	letih	_	_	_	_	_	_	_	NER=O
+4	življenja	_	_	_	_	_	_	_	NER=O
+5	se	_	_	_	_	_	_	_	NER=O
+6	je	_	_	_	_	_	_	_	NER=O
+7	vse	_	_	_	_	_	_	_	NER=O
+8	bolj	_	_	_	_	_	_	_	NER=O
+9	soočal	_	_	_	_	_	_	_	NER=O
+10	z	_	_	_	_	_	_	_	NER=O
+11	malodušjem	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	težavami	_	_	_	_	_	_	_	NER=O
+14	z	_	_	_	_	_	_	_	NER=O
+15	alkoholom	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	,	_	_	_	_	_	_	_	NER=O
+17	ki	_	_	_	_	_	_	_	NER=O
+18	je	_	_	_	_	_	_	_	NER=O
+19	nazadnje	_	_	_	_	_	_	_	NER=O
+20	povzročil	_	_	_	_	_	_	_	NER=O
+21	njegovo	_	_	_	_	_	_	_	NER=O
+22	smrt	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+23	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 5
+# sent_id = 5.1
+# text = France Prešeren danes velja za največjega slovenskega pesnika.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	danes	_	_	_	_	_	_	_	NER=O
+4	velja	_	_	_	_	_	_	_	NER=O
+5	za	_	_	_	_	_	_	_	NER=O
+6	največjega	_	_	_	_	_	_	_	NER=O
+7	slovenskega	_	_	_	_	_	_	_	NER=O
+8	pesnika	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 5.2
+# text = Del njegove pesmi Zdravljica, napisane leta 1844, je besedilo državne himne Republike Slovenije, obletnica njegove smrti pa osrednji državni kulturni praznik.
+1	Del	_	_	_	_	_	_	_	NER=O
+2	njegove	_	_	_	_	_	_	_	NER=O
+3	pesmi	_	_	_	_	_	_	_	NER=O
+4	Zdravljica	_	_	_	_	_	_	_	NER=B-MISC|SpaceAfter=No
+5	,	_	_	_	_	_	_	_	NER=O
+6	napisane	_	_	_	_	_	_	_	NER=O
+7	leta	_	_	_	_	_	_	_	NER=O
+8	1844	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	je	_	_	_	_	_	_	_	NER=O
+11	besedilo	_	_	_	_	_	_	_	NER=O
+12	državne	_	_	_	_	_	_	_	NER=O
+13	himne	_	_	_	_	_	_	_	NER=O
+14	Republike	_	_	_	_	_	_	_	NER=B-LOC
+15	Slovenije	_	_	_	_	_	_	_	NER=I-LOC|SpaceAfter=No
+16	,	_	_	_	_	_	_	_	NER=O
+17	obletnica	_	_	_	_	_	_	_	NER=O
+18	njegove	_	_	_	_	_	_	_	NER=O
+19	smrti	_	_	_	_	_	_	_	NER=O
+20	pa	_	_	_	_	_	_	_	NER=O
+21	osrednji	_	_	_	_	_	_	_	NER=O
+22	državni	_	_	_	_	_	_	_	NER=O
+23	kulturni	_	_	_	_	_	_	_	NER=O
+24	praznik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+25	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 5.3
+# text = V manjšem obsegu obeležujemo tudi obletnico njegovega rojstva kot Ta veseli dan kulture.
+1	V	_	_	_	_	_	_	_	NER=O
+2	manjšem	_	_	_	_	_	_	_	NER=O
+3	obsegu	_	_	_	_	_	_	_	NER=O
+4	obeležujemo	_	_	_	_	_	_	_	NER=O
+5	tudi	_	_	_	_	_	_	_	NER=O
+6	obletnico	_	_	_	_	_	_	_	NER=O
+7	njegovega	_	_	_	_	_	_	_	NER=O
+8	rojstva	_	_	_	_	_	_	_	NER=O
+9	kot	_	_	_	_	_	_	_	NER=O
+10	Ta	_	_	_	_	_	_	_	NER=O
+11	veseli	_	_	_	_	_	_	_	NER=O
+12	dan	_	_	_	_	_	_	_	NER=O
+13	kulture	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 6
+# sent_id = 6.1
+# text = Življenje
+1	Življenje	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 7
+# sent_id = 7.1
+# text = Mladost in šolanje
+1	Mladost	_	_	_	_	_	_	_	NER=O
+2	in	_	_	_	_	_	_	_	NER=O
+3	šolanje	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 8
+# sent_id = 8.1
+# text = Portret plavolasega moškega, domnevno Goldensteinov miniaturni portret Prešerna po spominu
+1	Portret	_	_	_	_	_	_	_	NER=O
+2	plavolasega	_	_	_	_	_	_	_	NER=O
+3	moškega	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+4	,	_	_	_	_	_	_	_	NER=O
+5	domnevno	_	_	_	_	_	_	_	NER=O
+6	Goldensteinov	_	_	_	_	_	_	_	NER=B-DERIV-PER
+7	miniaturni	_	_	_	_	_	_	_	NER=O
+8	portret	_	_	_	_	_	_	_	NER=O
+9	Prešerna	_	_	_	_	_	_	_	NER=B-MISC
+10	po	_	_	_	_	_	_	_	NER=I-MISC
+11	spominu	_	_	_	_	_	_	_	NER=I-MISC
+
+# newpar id = 9
+# sent_id = 9.1
+# text = France Prešeren se je rodil kot tretji otrok in prvi sin materi Mini, rojeni Svetina (pri Muhovcu)[8] v Žirovnici ter očetu Šimnu, po domače Ribčevemu (Hribčevemu), iz Vrbe na Gorenjskem.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	rodil	_	_	_	_	_	_	_	NER=O
+6	kot	_	_	_	_	_	_	_	NER=O
+7	tretji	_	_	_	_	_	_	_	NER=O
+8	otrok	_	_	_	_	_	_	_	NER=O
+9	in	_	_	_	_	_	_	_	NER=O
+10	prvi	_	_	_	_	_	_	_	NER=O
+11	sin	_	_	_	_	_	_	_	NER=O
+12	materi	_	_	_	_	_	_	_	NER=O
+13	Mini	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	rojeni	_	_	_	_	_	_	_	NER=O
+16	Svetina	_	_	_	_	_	_	_	NER=B-PER
+17	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	pri	_	_	_	_	_	_	_	NER=O
+19	Muhovcu	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+20	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+21	[	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+22	8	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+23	]	_	_	_	_	_	_	_	NER=O
+24	v	_	_	_	_	_	_	_	NER=O
+25	Žirovnici	_	_	_	_	_	_	_	NER=B-LOC
+26	ter	_	_	_	_	_	_	_	NER=O
+27	očetu	_	_	_	_	_	_	_	NER=O
+28	Šimnu	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+29	,	_	_	_	_	_	_	_	NER=O
+30	po	_	_	_	_	_	_	_	NER=O
+31	domače	_	_	_	_	_	_	_	NER=O
+32	Ribčevemu	_	_	_	_	_	_	_	NER=B-PER
+33	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+34	Hribčevemu	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+35	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+36	,	_	_	_	_	_	_	_	NER=O
+37	iz	_	_	_	_	_	_	_	NER=O
+38	Vrbe	_	_	_	_	_	_	_	NER=B-LOC
+39	na	_	_	_	_	_	_	_	NER=O
+40	Gorenjskem	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+41	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 9.2
+# text = Že zelo zgodaj je kazal izjemno nadarjenost, zato so ga leta 1808 poslali k stricu Jožefu, ki je kot duhovnik služboval na Kopanju pri Veliki Račni.
+1	Že	_	_	_	_	_	_	_	NER=O
+2	zelo	_	_	_	_	_	_	_	NER=O
+3	zgodaj	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	kazal	_	_	_	_	_	_	_	NER=O
+6	izjemno	_	_	_	_	_	_	_	NER=O
+7	nadarjenost	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	zato	_	_	_	_	_	_	_	NER=O
+10	so	_	_	_	_	_	_	_	NER=O
+11	ga	_	_	_	_	_	_	_	NER=O
+12	leta	_	_	_	_	_	_	_	NER=O
+13	1808	_	_	_	_	_	_	_	NER=O
+14	poslali	_	_	_	_	_	_	_	NER=O
+15	k	_	_	_	_	_	_	_	NER=O
+16	stricu	_	_	_	_	_	_	_	NER=O
+17	Jožefu	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+18	,	_	_	_	_	_	_	_	NER=O
+19	ki	_	_	_	_	_	_	_	NER=O
+20	je	_	_	_	_	_	_	_	NER=O
+21	kot	_	_	_	_	_	_	_	NER=O
+22	duhovnik	_	_	_	_	_	_	_	NER=O
+23	služboval	_	_	_	_	_	_	_	NER=O
+24	na	_	_	_	_	_	_	_	NER=O
+25	Kopanju	_	_	_	_	_	_	_	NER=B-LOC
+26	pri	_	_	_	_	_	_	_	NER=O
+27	Veliki	_	_	_	_	_	_	_	NER=B-LOC
+28	Račni	_	_	_	_	_	_	_	NER=I-LOC|SpaceAfter=No
+29	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 10
+# sent_id = 10.1
+# text = Od leta 1810 je obiskoval ljudsko šolo v Ribnici, kjer je bil kot odličnjak zapisan v zlato knjigo.
+1	Od	_	_	_	_	_	_	_	NER=O
+2	leta	_	_	_	_	_	_	_	NER=O
+3	1810	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	obiskoval	_	_	_	_	_	_	_	NER=O
+6	ljudsko	_	_	_	_	_	_	_	NER=O
+7	šolo	_	_	_	_	_	_	_	NER=O
+8	v	_	_	_	_	_	_	_	NER=O
+9	Ribnici	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+10	,	_	_	_	_	_	_	_	NER=O
+11	kjer	_	_	_	_	_	_	_	NER=O
+12	je	_	_	_	_	_	_	_	NER=O
+13	bil	_	_	_	_	_	_	_	NER=O
+14	kot	_	_	_	_	_	_	_	NER=O
+15	odličnjak	_	_	_	_	_	_	_	NER=O
+16	zapisan	_	_	_	_	_	_	_	NER=O
+17	v	_	_	_	_	_	_	_	NER=O
+18	zlato	_	_	_	_	_	_	_	NER=O
+19	knjigo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 10.2
+# text = Leta 1812 je šolanje nadaljeval v Ljubljani in leta 1813 začel obiskovati gimnazijo.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1812	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	šolanje	_	_	_	_	_	_	_	NER=O
+5	nadaljeval	_	_	_	_	_	_	_	NER=O
+6	v	_	_	_	_	_	_	_	NER=O
+7	Ljubljani	_	_	_	_	_	_	_	NER=B-LOC
+8	in	_	_	_	_	_	_	_	NER=O
+9	leta	_	_	_	_	_	_	_	NER=O
+10	1813	_	_	_	_	_	_	_	NER=O
+11	začel	_	_	_	_	_	_	_	NER=O
+12	obiskovati	_	_	_	_	_	_	_	NER=O
+13	gimnazijo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 10.3
+# text = Po končani gimnaziji je v Ljubljani zaključil še dva letnika tedanje »filozofije« in leta 1821 odpotoval na Dunaj, kjer je končal še tretji letnik, ki ga je moral izdelati za nadaljevanje študija.
+1	Po	_	_	_	_	_	_	_	NER=O
+2	končani	_	_	_	_	_	_	_	NER=O
+3	gimnaziji	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	v	_	_	_	_	_	_	_	NER=O
+6	Ljubljani	_	_	_	_	_	_	_	NER=B-LOC
+7	zaključil	_	_	_	_	_	_	_	NER=O
+8	še	_	_	_	_	_	_	_	NER=O
+9	dva	_	_	_	_	_	_	_	NER=O
+10	letnika	_	_	_	_	_	_	_	NER=O
+11	tedanje	_	_	_	_	_	_	_	NER=O
+12	»	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	filozofije	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	«	_	_	_	_	_	_	_	NER=O
+15	in	_	_	_	_	_	_	_	NER=O
+16	leta	_	_	_	_	_	_	_	NER=O
+17	1821	_	_	_	_	_	_	_	NER=O
+18	odpotoval	_	_	_	_	_	_	_	NER=O
+19	na	_	_	_	_	_	_	_	NER=O
+20	Dunaj	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+21	,	_	_	_	_	_	_	_	NER=O
+22	kjer	_	_	_	_	_	_	_	NER=O
+23	je	_	_	_	_	_	_	_	NER=O
+24	končal	_	_	_	_	_	_	_	NER=O
+25	še	_	_	_	_	_	_	_	NER=O
+26	tretji	_	_	_	_	_	_	_	NER=O
+27	letnik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+28	,	_	_	_	_	_	_	_	NER=O
+29	ki	_	_	_	_	_	_	_	NER=O
+30	ga	_	_	_	_	_	_	_	NER=O
+31	je	_	_	_	_	_	_	_	NER=O
+32	moral	_	_	_	_	_	_	_	NER=O
+33	izdelati	_	_	_	_	_	_	_	NER=O
+34	za	_	_	_	_	_	_	_	NER=O
+35	nadaljevanje	_	_	_	_	_	_	_	NER=O
+36	študija	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+37	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 10.4
+# text = Naslednje leto se je vpisal na dunajsko pravno fakulteto.
+1	Naslednje	_	_	_	_	_	_	_	NER=O
+2	leto	_	_	_	_	_	_	_	NER=O
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	vpisal	_	_	_	_	_	_	_	NER=O
+6	na	_	_	_	_	_	_	_	NER=O
+7	dunajsko	_	_	_	_	_	_	_	NER=O
+8	pravno	_	_	_	_	_	_	_	NER=O
+9	fakulteto	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 11
+# sent_id = 11.1
+# text = Matija Čop
+1	Matija	_	_	_	_	_	_	_	NER=B-PER
+2	Čop	_	_	_	_	_	_	_	NER=I-PER
+
+# newpar id = 12
+# sent_id = 12.1
+# text = Leta 1824 je domačim v pismu sporočil, da se je dokončno odločil za študij prava.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1824	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	domačim	_	_	_	_	_	_	_	NER=O
+5	v	_	_	_	_	_	_	_	NER=O
+6	pismu	_	_	_	_	_	_	_	NER=O
+7	sporočil	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	da	_	_	_	_	_	_	_	NER=O
+10	se	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	dokončno	_	_	_	_	_	_	_	NER=O
+13	odločil	_	_	_	_	_	_	_	NER=O
+14	za	_	_	_	_	_	_	_	NER=O
+15	študij	_	_	_	_	_	_	_	NER=O
+16	prava	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 12.2
+# text = Prišlo je do spora s starši, saj je mati želela, da bi postal duhovnik.
+1	Prišlo	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	do	_	_	_	_	_	_	_	NER=O
+4	spora	_	_	_	_	_	_	_	NER=O
+5	s	_	_	_	_	_	_	_	NER=O
+6	starši	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	saj	_	_	_	_	_	_	_	NER=O
+9	je	_	_	_	_	_	_	_	NER=O
+10	mati	_	_	_	_	_	_	_	NER=O
+11	želela	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	da	_	_	_	_	_	_	_	NER=O
+14	bi	_	_	_	_	_	_	_	NER=O
+15	postal	_	_	_	_	_	_	_	NER=O
+16	duhovnik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 12.3
+# text = Prešeren je pri odločitvi vztrajal, čeprav so mu domači in strici duhovniki odtegovali denarno pomoč.
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	pri	_	_	_	_	_	_	_	NER=O
+4	odločitvi	_	_	_	_	_	_	_	NER=O
+5	vztrajal	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	,	_	_	_	_	_	_	_	NER=O
+7	čeprav	_	_	_	_	_	_	_	NER=O
+8	so	_	_	_	_	_	_	_	NER=O
+9	mu	_	_	_	_	_	_	_	NER=O
+10	domači	_	_	_	_	_	_	_	NER=O
+11	in	_	_	_	_	_	_	_	NER=O
+12	strici	_	_	_	_	_	_	_	NER=O
+13	duhovniki	_	_	_	_	_	_	_	NER=O
+14	odtegovali	_	_	_	_	_	_	_	NER=O
+15	denarno	_	_	_	_	_	_	_	NER=O
+16	pomoč	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 12.4
+# text = Kljub temu mu je uspelo shajati, saj je bil od leta 1822 Knafljev štipendist, še vedno mu je pomagal stric Jožef, denar pa si je služil tudi kot domači učitelj v Klinkowströmovemu zavodu za katoliško mladino.
+1	Kljub	_	_	_	_	_	_	_	NER=O
+2	temu	_	_	_	_	_	_	_	NER=O
+3	mu	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	uspelo	_	_	_	_	_	_	_	NER=O
+6	shajati	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	saj	_	_	_	_	_	_	_	NER=O
+9	je	_	_	_	_	_	_	_	NER=O
+10	bil	_	_	_	_	_	_	_	NER=O
+11	od	_	_	_	_	_	_	_	NER=O
+12	leta	_	_	_	_	_	_	_	NER=O
+13	1822	_	_	_	_	_	_	_	NER=O
+14	Knafljev	_	_	_	_	_	_	_	NER=B-DERIV-PER
+15	štipendist	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	,	_	_	_	_	_	_	_	NER=O
+17	še	_	_	_	_	_	_	_	NER=O
+18	vedno	_	_	_	_	_	_	_	NER=O
+19	mu	_	_	_	_	_	_	_	NER=O
+20	je	_	_	_	_	_	_	_	NER=O
+21	pomagal	_	_	_	_	_	_	_	NER=O
+22	stric	_	_	_	_	_	_	_	NER=O
+23	Jožef	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+24	,	_	_	_	_	_	_	_	NER=O
+25	denar	_	_	_	_	_	_	_	NER=O
+26	pa	_	_	_	_	_	_	_	NER=O
+27	si	_	_	_	_	_	_	_	NER=O
+28	je	_	_	_	_	_	_	_	NER=O
+29	služil	_	_	_	_	_	_	_	NER=O
+30	tudi	_	_	_	_	_	_	_	NER=O
+31	kot	_	_	_	_	_	_	_	NER=O
+32	domači	_	_	_	_	_	_	_	NER=O
+33	učitelj	_	_	_	_	_	_	_	NER=O
+34	v	_	_	_	_	_	_	_	NER=O
+35	Klinkowströmovemu	_	_	_	_	_	_	_	NER=B-ORG
+36	zavodu	_	_	_	_	_	_	_	NER=I-ORG
+37	za	_	_	_	_	_	_	_	NER=I-ORG
+38	katoliško	_	_	_	_	_	_	_	NER=I-ORG
+39	mladino	_	_	_	_	_	_	_	NER=I-ORG|SpaceAfter=No
+40	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 12.5
+# text = To službo je moral zaradi svoje svobodomiselnosti in ker je gojencu, kasnejšemu pesniku in politiku Anastaziju Grünu (pravo ime Anton Alexander von Auersperg) - grofu Auerspergu, posojal prepovedane knjige, zapustiti.
+1	To	_	_	_	_	_	_	_	NER=O
+2	službo	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	moral	_	_	_	_	_	_	_	NER=O
+5	zaradi	_	_	_	_	_	_	_	NER=O
+6	svoje	_	_	_	_	_	_	_	NER=O
+7	svobodomiselnosti	_	_	_	_	_	_	_	NER=O
+8	in	_	_	_	_	_	_	_	NER=O
+9	ker	_	_	_	_	_	_	_	NER=O
+10	je	_	_	_	_	_	_	_	NER=O
+11	gojencu	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	kasnejšemu	_	_	_	_	_	_	_	NER=O
+14	pesniku	_	_	_	_	_	_	_	NER=O
+15	in	_	_	_	_	_	_	_	NER=O
+16	politiku	_	_	_	_	_	_	_	NER=O
+17	Anastaziju	_	_	_	_	_	_	_	NER=B-PER
+18	Grünu	_	_	_	_	_	_	_	NER=I-PER
+19	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	pravo	_	_	_	_	_	_	_	NER=O
+21	ime	_	_	_	_	_	_	_	NER=O
+22	Anton	_	_	_	_	_	_	_	NER=B-PER
+23	Alexander	_	_	_	_	_	_	_	NER=I-PER
+24	von	_	_	_	_	_	_	_	NER=I-PER
+25	Auersperg	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+26	)	_	_	_	_	_	_	_	NER=O
+27	-	_	_	_	_	_	_	_	NER=O
+28	grofu	_	_	_	_	_	_	_	NER=O
+29	Auerspergu	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+30	,	_	_	_	_	_	_	_	NER=O
+31	posojal	_	_	_	_	_	_	_	NER=O
+32	prepovedane	_	_	_	_	_	_	_	NER=O
+33	knjige	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+34	,	_	_	_	_	_	_	_	NER=O
+35	zapustiti	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+36	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 13
+# sent_id = 13.1
+# text = Med počitnicami se je vračal domov, kjer je obiskoval strice, leta 1824 pa se je v Ljubljani zaljubil v gostilničarjevo hčer Zaliko Dolenc.
+1	Med	_	_	_	_	_	_	_	NER=O
+2	počitnicami	_	_	_	_	_	_	_	NER=O
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	vračal	_	_	_	_	_	_	_	NER=O
+6	domov	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	kjer	_	_	_	_	_	_	_	NER=O
+9	je	_	_	_	_	_	_	_	NER=O
+10	obiskoval	_	_	_	_	_	_	_	NER=O
+11	strice	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	leta	_	_	_	_	_	_	_	NER=O
+14	1824	_	_	_	_	_	_	_	NER=O
+15	pa	_	_	_	_	_	_	_	NER=O
+16	se	_	_	_	_	_	_	_	NER=O
+17	je	_	_	_	_	_	_	_	NER=O
+18	v	_	_	_	_	_	_	_	NER=O
+19	Ljubljani	_	_	_	_	_	_	_	NER=B-LOC
+20	zaljubil	_	_	_	_	_	_	_	NER=O
+21	v	_	_	_	_	_	_	_	NER=O
+22	gostilničarjevo	_	_	_	_	_	_	_	NER=O
+23	hčer	_	_	_	_	_	_	_	NER=O
+24	Zaliko	_	_	_	_	_	_	_	NER=B-PER
+25	Dolenc	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+26	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 14
+# sent_id = 14.1
+# text = Ljubljana, Čop in Krajnska čbelica
+1	Ljubljana	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+2	,	_	_	_	_	_	_	_	NER=O
+3	Čop	_	_	_	_	_	_	_	NER=B-PER
+4	in	_	_	_	_	_	_	_	NER=O
+5	Krajnska	_	_	_	_	_	_	_	NER=B-LOC
+6	čbelica	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 15
+# sent_id = 15.1
+# text = Leta 1828 je dokončal študije in poleti odpotoval na Moravsko, nato pa se je vrnil v Ljubljano, kjer je pri odvetniku Leopoldu Baumgartnerju pričel opravljati obveznosti svoje prve službe kot odvetniški pripravnik.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1828	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	dokončal	_	_	_	_	_	_	_	NER=O
+5	študije	_	_	_	_	_	_	_	NER=O
+6	in	_	_	_	_	_	_	_	NER=O
+7	poleti	_	_	_	_	_	_	_	NER=O
+8	odpotoval	_	_	_	_	_	_	_	NER=O
+9	na	_	_	_	_	_	_	_	NER=O
+10	Moravsko	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	nato	_	_	_	_	_	_	_	NER=O
+13	pa	_	_	_	_	_	_	_	NER=O
+14	se	_	_	_	_	_	_	_	NER=O
+15	je	_	_	_	_	_	_	_	NER=O
+16	vrnil	_	_	_	_	_	_	_	NER=O
+17	v	_	_	_	_	_	_	_	NER=O
+18	Ljubljano	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+19	,	_	_	_	_	_	_	_	NER=O
+20	kjer	_	_	_	_	_	_	_	NER=O
+21	je	_	_	_	_	_	_	_	NER=O
+22	pri	_	_	_	_	_	_	_	NER=O
+23	odvetniku	_	_	_	_	_	_	_	NER=O
+24	Leopoldu	_	_	_	_	_	_	_	NER=B-PER
+25	Baumgartnerju	_	_	_	_	_	_	_	NER=I-PER
+26	pričel	_	_	_	_	_	_	_	NER=O
+27	opravljati	_	_	_	_	_	_	_	NER=O
+28	obveznosti	_	_	_	_	_	_	_	NER=O
+29	svoje	_	_	_	_	_	_	_	NER=O
+30	prve	_	_	_	_	_	_	_	NER=O
+31	službe	_	_	_	_	_	_	_	NER=O
+32	kot	_	_	_	_	_	_	_	NER=O
+33	odvetniški	_	_	_	_	_	_	_	NER=O
+34	pripravnik	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+35	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 15.2
+# text = Naslednjega leta je sprejel še neplačano delovno mesto pri državnem uradu.
+1	Naslednjega	_	_	_	_	_	_	_	NER=O
+2	leta	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	sprejel	_	_	_	_	_	_	_	NER=O
+5	še	_	_	_	_	_	_	_	NER=O
+6	neplačano	_	_	_	_	_	_	_	NER=O
+7	delovno	_	_	_	_	_	_	_	NER=O
+8	mesto	_	_	_	_	_	_	_	NER=O
+9	pri	_	_	_	_	_	_	_	NER=O
+10	državnem	_	_	_	_	_	_	_	NER=O
+11	uradu	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 16
+# sent_id = 16.1
+# text = V Ljubljani se je Prešeren spoprijateljil s profesorjem in knjižničarjem Matijem Čopom, rojakom iz Žirovnice, ki je dobro poznal tedanjo romantično književnost in miselnost ter govoril 19 jezikov.
+1	V	_	_	_	_	_	_	_	NER=O
+2	Ljubljani	_	_	_	_	_	_	_	NER=B-LOC
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+6	spoprijateljil	_	_	_	_	_	_	_	NER=O
+7	s	_	_	_	_	_	_	_	NER=O
+8	profesorjem	_	_	_	_	_	_	_	NER=O
+9	in	_	_	_	_	_	_	_	NER=O
+10	knjižničarjem	_	_	_	_	_	_	_	NER=O
+11	Matijem	_	_	_	_	_	_	_	NER=B-PER
+12	Čopom	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+13	,	_	_	_	_	_	_	_	NER=O
+14	rojakom	_	_	_	_	_	_	_	NER=O
+15	iz	_	_	_	_	_	_	_	NER=O
+16	Žirovnice	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+17	,	_	_	_	_	_	_	_	NER=O
+18	ki	_	_	_	_	_	_	_	NER=O
+19	je	_	_	_	_	_	_	_	NER=O
+20	dobro	_	_	_	_	_	_	_	NER=O
+21	poznal	_	_	_	_	_	_	_	NER=O
+22	tedanjo	_	_	_	_	_	_	_	NER=O
+23	romantično	_	_	_	_	_	_	_	NER=O
+24	književnost	_	_	_	_	_	_	_	NER=O
+25	in	_	_	_	_	_	_	_	NER=O
+26	miselnost	_	_	_	_	_	_	_	NER=O
+27	ter	_	_	_	_	_	_	_	NER=O
+28	govoril	_	_	_	_	_	_	_	NER=O
+29	19	_	_	_	_	_	_	_	NER=O
+30	jezikov	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+31	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 16.2
+# text = Prešeren je leta 1832 v Celovcu opravil sodno-odvetniški izpit.
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	leta	_	_	_	_	_	_	_	NER=O
+4	1832	_	_	_	_	_	_	_	NER=O
+5	v	_	_	_	_	_	_	_	NER=O
+6	Celovcu	_	_	_	_	_	_	_	NER=B-LOC
+7	opravil	_	_	_	_	_	_	_	NER=O
+8	sodno	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	-	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	odvetniški	_	_	_	_	_	_	_	NER=O
+11	izpit	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 17
+# sent_id = 17.1
+# text = France Prešeren je bil osrednji pesnik zbornika Krajnska čbelica, ki ga je urejal Miha Kastelic.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	je	_	_	_	_	_	_	_	NER=O
+4	bil	_	_	_	_	_	_	_	NER=O
+5	osrednji	_	_	_	_	_	_	_	NER=O
+6	pesnik	_	_	_	_	_	_	_	NER=O
+7	zbornika	_	_	_	_	_	_	_	NER=O
+8	Krajnska	_	_	_	_	_	_	_	NER=B-MISC
+9	čbelica	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+10	,	_	_	_	_	_	_	_	NER=O
+11	ki	_	_	_	_	_	_	_	NER=O
+12	ga	_	_	_	_	_	_	_	NER=O
+13	je	_	_	_	_	_	_	_	NER=O
+14	urejal	_	_	_	_	_	_	_	NER=O
+15	Miha	_	_	_	_	_	_	_	NER=B-PER
+16	Kastelic	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 17.2
+# text = Čbelica je izšla petkrat, in sicer leta 1830, 1831, 1832, 1834 in 1848.
+1	Čbelica	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	izšla	_	_	_	_	_	_	_	NER=O
+4	petkrat	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+5	,	_	_	_	_	_	_	_	NER=O
+6	in	_	_	_	_	_	_	_	NER=O
+7	sicer	_	_	_	_	_	_	_	NER=O
+8	leta	_	_	_	_	_	_	_	NER=O
+9	1830	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	,	_	_	_	_	_	_	_	NER=O
+11	1831	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	1832	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	1834	_	_	_	_	_	_	_	NER=O
+16	in	_	_	_	_	_	_	_	NER=O
+17	1848	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 17.3
+# text = V času izida četrtega zvezka je prišla v težave zaradi cenzure, ki so jo povzročili janzenisti in Jernej Kopitar.
+1	V	_	_	_	_	_	_	_	NER=O
+2	času	_	_	_	_	_	_	_	NER=O
+3	izida	_	_	_	_	_	_	_	NER=O
+4	četrtega	_	_	_	_	_	_	_	NER=O
+5	zvezka	_	_	_	_	_	_	_	NER=O
+6	je	_	_	_	_	_	_	_	NER=O
+7	prišla	_	_	_	_	_	_	_	NER=O
+8	v	_	_	_	_	_	_	_	NER=O
+9	težave	_	_	_	_	_	_	_	NER=O
+10	zaradi	_	_	_	_	_	_	_	NER=O
+11	cenzure	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	ki	_	_	_	_	_	_	_	NER=O
+14	so	_	_	_	_	_	_	_	NER=O
+15	jo	_	_	_	_	_	_	_	NER=O
+16	povzročili	_	_	_	_	_	_	_	NER=O
+17	janzenisti	_	_	_	_	_	_	_	NER=O
+18	in	_	_	_	_	_	_	_	NER=O
+19	Jernej	_	_	_	_	_	_	_	NER=B-PER
+20	Kopitar	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+21	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 17.4
+# text = Njihov spor zaradi nasprotujočih si mnenj glede nadaljnjega razvoja slovenske književnosti (čbeličarji s Prešernom in Čopom so se zavzemali za visoko književnost v slovenskem jeziku, janzenisti pa za književnost, osnovano na ljudskem slovstvu po zgledu Srbov, posebno Vuka Karadžića, ki ga je cenil Kopitar), je črkarska pravda, ki se je tedaj odvijala in se samo še poglabljala.
+1	Njihov	_	_	_	_	_	_	_	NER=O
+2	spor	_	_	_	_	_	_	_	NER=O
+3	zaradi	_	_	_	_	_	_	_	NER=O
+4	nasprotujočih	_	_	_	_	_	_	_	NER=O
+5	si	_	_	_	_	_	_	_	NER=O
+6	mnenj	_	_	_	_	_	_	_	NER=O
+7	glede	_	_	_	_	_	_	_	NER=O
+8	nadaljnjega	_	_	_	_	_	_	_	NER=O
+9	razvoja	_	_	_	_	_	_	_	NER=O
+10	slovenske	_	_	_	_	_	_	_	NER=O
+11	književnosti	_	_	_	_	_	_	_	NER=O
+12	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	čbeličarji	_	_	_	_	_	_	_	NER=O
+14	s	_	_	_	_	_	_	_	NER=O
+15	Prešernom	_	_	_	_	_	_	_	NER=B-PER
+16	in	_	_	_	_	_	_	_	NER=O
+17	Čopom	_	_	_	_	_	_	_	NER=B-PER
+18	so	_	_	_	_	_	_	_	NER=O
+19	se	_	_	_	_	_	_	_	NER=O
+20	zavzemali	_	_	_	_	_	_	_	NER=O
+21	za	_	_	_	_	_	_	_	NER=O
+22	visoko	_	_	_	_	_	_	_	NER=O
+23	književnost	_	_	_	_	_	_	_	NER=O
+24	v	_	_	_	_	_	_	_	NER=O
+25	slovenskem	_	_	_	_	_	_	_	NER=O
+26	jeziku	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+27	,	_	_	_	_	_	_	_	NER=O
+28	janzenisti	_	_	_	_	_	_	_	NER=O
+29	pa	_	_	_	_	_	_	_	NER=O
+30	za	_	_	_	_	_	_	_	NER=O
+31	književnost	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+32	,	_	_	_	_	_	_	_	NER=O
+33	osnovano	_	_	_	_	_	_	_	NER=O
+34	na	_	_	_	_	_	_	_	NER=O
+35	ljudskem	_	_	_	_	_	_	_	NER=O
+36	slovstvu	_	_	_	_	_	_	_	NER=O
+37	po	_	_	_	_	_	_	_	NER=O
+38	zgledu	_	_	_	_	_	_	_	NER=O
+39	Srbov	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+40	,	_	_	_	_	_	_	_	NER=O
+41	posebno	_	_	_	_	_	_	_	NER=O
+42	Vuka	_	_	_	_	_	_	_	NER=B-PER
+43	Karadžića	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+44	,	_	_	_	_	_	_	_	NER=O
+45	ki	_	_	_	_	_	_	_	NER=O
+46	ga	_	_	_	_	_	_	_	NER=O
+47	je	_	_	_	_	_	_	_	NER=O
+48	cenil	_	_	_	_	_	_	_	NER=O
+49	Kopitar	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+50	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+51	,	_	_	_	_	_	_	_	NER=O
+52	je	_	_	_	_	_	_	_	NER=O
+53	črkarska	_	_	_	_	_	_	_	NER=O
+54	pravda	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+55	,	_	_	_	_	_	_	_	NER=O
+56	ki	_	_	_	_	_	_	_	NER=O
+57	se	_	_	_	_	_	_	_	NER=O
+58	je	_	_	_	_	_	_	_	NER=O
+59	tedaj	_	_	_	_	_	_	_	NER=O
+60	odvijala	_	_	_	_	_	_	_	NER=O
+61	in	_	_	_	_	_	_	_	NER=O
+62	se	_	_	_	_	_	_	_	NER=O
+63	samo	_	_	_	_	_	_	_	NER=O
+64	še	_	_	_	_	_	_	_	NER=O
+65	poglabljala	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+66	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 18
+# sent_id = 18.1
+# text = Zahtevi, naj ima v črkopisu vsak glas svojo črko, ki jo je Kopitar kot nasprotnik tedanje pisave bohoričice podal v svoji slovnici, sta sledila slovničarja Franc Serafin Metelko in Peter Dajnko, ki sta objavila vsak svojo različico novega črkopisa, imenovana metelčica in dajnčica.
+1	Zahtevi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+2	,	_	_	_	_	_	_	_	NER=O
+3	naj	_	_	_	_	_	_	_	NER=O
+4	ima	_	_	_	_	_	_	_	NER=O
+5	v	_	_	_	_	_	_	_	NER=O
+6	črkopisu	_	_	_	_	_	_	_	NER=O
+7	vsak	_	_	_	_	_	_	_	NER=O
+8	glas	_	_	_	_	_	_	_	NER=O
+9	svojo	_	_	_	_	_	_	_	NER=O
+10	črko	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	ki	_	_	_	_	_	_	_	NER=O
+13	jo	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	Kopitar	_	_	_	_	_	_	_	NER=B-PER
+16	kot	_	_	_	_	_	_	_	NER=O
+17	nasprotnik	_	_	_	_	_	_	_	NER=O
+18	tedanje	_	_	_	_	_	_	_	NER=O
+19	pisave	_	_	_	_	_	_	_	NER=O
+20	bohoričice	_	_	_	_	_	_	_	NER=O
+21	podal	_	_	_	_	_	_	_	NER=O
+22	v	_	_	_	_	_	_	_	NER=O
+23	svoji	_	_	_	_	_	_	_	NER=O
+24	slovnici	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+25	,	_	_	_	_	_	_	_	NER=O
+26	sta	_	_	_	_	_	_	_	NER=O
+27	sledila	_	_	_	_	_	_	_	NER=O
+28	slovničarja	_	_	_	_	_	_	_	NER=O
+29	Franc	_	_	_	_	_	_	_	NER=B-PER
+30	Serafin	_	_	_	_	_	_	_	NER=I-PER
+31	Metelko	_	_	_	_	_	_	_	NER=I-PER
+32	in	_	_	_	_	_	_	_	NER=O
+33	Peter	_	_	_	_	_	_	_	NER=B-PER
+34	Dajnko	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+35	,	_	_	_	_	_	_	_	NER=O
+36	ki	_	_	_	_	_	_	_	NER=O
+37	sta	_	_	_	_	_	_	_	NER=O
+38	objavila	_	_	_	_	_	_	_	NER=O
+39	vsak	_	_	_	_	_	_	_	NER=O
+40	svojo	_	_	_	_	_	_	_	NER=O
+41	različico	_	_	_	_	_	_	_	NER=O
+42	novega	_	_	_	_	_	_	_	NER=O
+43	črkopisa	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+44	,	_	_	_	_	_	_	_	NER=O
+45	imenovana	_	_	_	_	_	_	_	NER=O
+46	metelčica	_	_	_	_	_	_	_	NER=O
+47	in	_	_	_	_	_	_	_	NER=O
+48	dajnčica	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+49	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 18.2
+# text = Pisavi sta bili neprimerni in prezapleteni.
+1	Pisavi	_	_	_	_	_	_	_	NER=O
+2	sta	_	_	_	_	_	_	_	NER=O
+3	bili	_	_	_	_	_	_	_	NER=O
+4	neprimerni	_	_	_	_	_	_	_	NER=O
+5	in	_	_	_	_	_	_	_	NER=O
+6	prezapleteni	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 18.3
+# text = Metelčica zato, ker jo je sestavljalo preveč zapletenih in nepotrebnih črk, prevzetih tudi iz cirilice.
+1	Metelčica	_	_	_	_	_	_	_	NER=O
+2	zato	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+3	,	_	_	_	_	_	_	_	NER=O
+4	ker	_	_	_	_	_	_	_	NER=O
+5	jo	_	_	_	_	_	_	_	NER=O
+6	je	_	_	_	_	_	_	_	NER=O
+7	sestavljalo	_	_	_	_	_	_	_	NER=O
+8	preveč	_	_	_	_	_	_	_	NER=O
+9	zapletenih	_	_	_	_	_	_	_	NER=O
+10	in	_	_	_	_	_	_	_	NER=O
+11	nepotrebnih	_	_	_	_	_	_	_	NER=O
+12	črk	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	,	_	_	_	_	_	_	_	NER=O
+14	prevzetih	_	_	_	_	_	_	_	NER=O
+15	tudi	_	_	_	_	_	_	_	NER=O
+16	iz	_	_	_	_	_	_	_	NER=O
+17	cirilice	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 18.4
+# text = Metelčica je bila tako leta 1833 z zakonom prepovedana.
+1	Metelčica	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	bila	_	_	_	_	_	_	_	NER=O
+4	tako	_	_	_	_	_	_	_	NER=O
+5	leta	_	_	_	_	_	_	_	NER=O
+6	1833	_	_	_	_	_	_	_	NER=O
+7	z	_	_	_	_	_	_	_	NER=O
+8	zakonom	_	_	_	_	_	_	_	NER=O
+9	prepovedana	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 18.5
+# text = Dajnčica, ki se je delno uveljavila na Štajerskem, pa je ostala v veljavi do 1838/39.
+1	Dajnčica	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+2	,	_	_	_	_	_	_	_	NER=O
+3	ki	_	_	_	_	_	_	_	NER=O
+4	se	_	_	_	_	_	_	_	NER=O
+5	je	_	_	_	_	_	_	_	NER=O
+6	delno	_	_	_	_	_	_	_	NER=O
+7	uveljavila	_	_	_	_	_	_	_	NER=O
+8	na	_	_	_	_	_	_	_	NER=O
+9	Štajerskem	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+10	,	_	_	_	_	_	_	_	NER=O
+11	pa	_	_	_	_	_	_	_	NER=O
+12	je	_	_	_	_	_	_	_	NER=O
+13	ostala	_	_	_	_	_	_	_	NER=O
+14	v	_	_	_	_	_	_	_	NER=O
+15	veljavi	_	_	_	_	_	_	_	NER=O
+16	do	_	_	_	_	_	_	_	NER=O
+17	1838	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	/	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+19	39	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 18.6
+# text = Prešeren je v abecedno vojno posegel s pesmimi, kot je denimo Sonet o kaši, iz Kopitarja, s katerim se nista najbolje razumela tudi zaradi zgoraj omenjenih razlik v pojmovanju slovstva, pa se je duhovito ponorčeval tudi s sonetom Apel in čevljar, ki se konča z znamenitim verzom: »Le čevlje sodi naj Kopitar!«
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	v	_	_	_	_	_	_	_	NER=O
+4	abecedno	_	_	_	_	_	_	_	NER=O
+5	vojno	_	_	_	_	_	_	_	NER=O
+6	posegel	_	_	_	_	_	_	_	NER=O
+7	s	_	_	_	_	_	_	_	NER=O
+8	pesmimi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	kot	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	denimo	_	_	_	_	_	_	_	NER=O
+13	Sonet	_	_	_	_	_	_	_	NER=B-MISC
+14	o	_	_	_	_	_	_	_	NER=I-MISC
+15	kaši	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+16	,	_	_	_	_	_	_	_	NER=O
+17	iz	_	_	_	_	_	_	_	NER=O
+18	Kopitarja	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+19	,	_	_	_	_	_	_	_	NER=O
+20	s	_	_	_	_	_	_	_	NER=O
+21	katerim	_	_	_	_	_	_	_	NER=O
+22	se	_	_	_	_	_	_	_	NER=O
+23	nista	_	_	_	_	_	_	_	NER=O
+24	najbolje	_	_	_	_	_	_	_	NER=O
+25	razumela	_	_	_	_	_	_	_	NER=O
+26	tudi	_	_	_	_	_	_	_	NER=O
+27	zaradi	_	_	_	_	_	_	_	NER=O
+28	zgoraj	_	_	_	_	_	_	_	NER=O
+29	omenjenih	_	_	_	_	_	_	_	NER=O
+30	razlik	_	_	_	_	_	_	_	NER=O
+31	v	_	_	_	_	_	_	_	NER=O
+32	pojmovanju	_	_	_	_	_	_	_	NER=O
+33	slovstva	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+34	,	_	_	_	_	_	_	_	NER=O
+35	pa	_	_	_	_	_	_	_	NER=O
+36	se	_	_	_	_	_	_	_	NER=O
+37	je	_	_	_	_	_	_	_	NER=O
+38	duhovito	_	_	_	_	_	_	_	NER=O
+39	ponorčeval	_	_	_	_	_	_	_	NER=O
+40	tudi	_	_	_	_	_	_	_	NER=O
+41	s	_	_	_	_	_	_	_	NER=O
+42	sonetom	_	_	_	_	_	_	_	NER=O
+43	Apel	_	_	_	_	_	_	_	NER=B-PER
+44	in	_	_	_	_	_	_	_	NER=O
+45	čevljar	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+46	,	_	_	_	_	_	_	_	NER=O
+47	ki	_	_	_	_	_	_	_	NER=O
+48	se	_	_	_	_	_	_	_	NER=O
+49	konča	_	_	_	_	_	_	_	NER=O
+50	z	_	_	_	_	_	_	_	NER=O
+51	znamenitim	_	_	_	_	_	_	_	NER=O
+52	verzom	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+53	:	_	_	_	_	_	_	_	NER=O
+54	»	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+55	Le	_	_	_	_	_	_	_	NER=O
+56	čevlje	_	_	_	_	_	_	_	NER=O
+57	sodi	_	_	_	_	_	_	_	NER=O
+58	naj	_	_	_	_	_	_	_	NER=O
+59	Kopitar	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+60	!	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+61	«	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 19
+# sent_id = 19.1
+# text = Življenjske preizkušnje, razmerje z Ano Jelovšek
+1	Življenjske	_	_	_	_	_	_	_	NER=O
+2	preizkušnje	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+3	,	_	_	_	_	_	_	_	NER=O
+4	razmerje	_	_	_	_	_	_	_	NER=O
+5	z	_	_	_	_	_	_	_	NER=O
+6	Ano	_	_	_	_	_	_	_	NER=B-PER
+7	Jelovšek	_	_	_	_	_	_	_	NER=I-PER
+
+# newpar id = 20
+# sent_id = 20.1
+# text = Julija Primic
+1	Julija	_	_	_	_	_	_	_	NER=O
+2	Primic	_	_	_	_	_	_	_	NER=B-PER
+
+# newpar id = 21
+# sent_id = 21.1
+# text = 6. aprila 1833 je Prešeren v trnovski cerkvi zagledal Julijo Primic, ki je prihajala iz bogate ljubljanske družine, in se vanjo zaljubil.
+1	6.	_	_	_	_	_	_	_	NER=O
+2	aprila	_	_	_	_	_	_	_	NER=O
+3	1833	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+6	v	_	_	_	_	_	_	_	NER=O
+7	trnovski	_	_	_	_	_	_	_	NER=O
+8	cerkvi	_	_	_	_	_	_	_	NER=O
+9	zagledal	_	_	_	_	_	_	_	NER=O
+10	Julijo	_	_	_	_	_	_	_	NER=B-PER
+11	Primic	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	ki	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	prihajala	_	_	_	_	_	_	_	NER=O
+16	iz	_	_	_	_	_	_	_	NER=O
+17	bogate	_	_	_	_	_	_	_	NER=O
+18	ljubljanske	_	_	_	_	_	_	_	NER=O
+19	družine	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	,	_	_	_	_	_	_	_	NER=O
+21	in	_	_	_	_	_	_	_	NER=O
+22	se	_	_	_	_	_	_	_	NER=O
+23	vanjo	_	_	_	_	_	_	_	NER=O
+24	zaljubil	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+25	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 21.2
+# text = Ta ljubezen je močno vplivala na pesnikovo nadaljnje življenje in ustvarjanje.
+1	Ta	_	_	_	_	_	_	_	NER=O
+2	ljubezen	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	močno	_	_	_	_	_	_	_	NER=O
+5	vplivala	_	_	_	_	_	_	_	NER=O
+6	na	_	_	_	_	_	_	_	NER=O
+7	pesnikovo	_	_	_	_	_	_	_	NER=O
+8	nadaljnje	_	_	_	_	_	_	_	NER=O
+9	življenje	_	_	_	_	_	_	_	NER=O
+10	in	_	_	_	_	_	_	_	NER=O
+11	ustvarjanje	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 21.3
+# text = Naslednje leto je postal odvetniški pripravnik pri starem prijatelju Blažu Crobathu.
+1	Naslednje	_	_	_	_	_	_	_	NER=O
+2	leto	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	postal	_	_	_	_	_	_	_	NER=O
+5	odvetniški	_	_	_	_	_	_	_	NER=O
+6	pripravnik	_	_	_	_	_	_	_	NER=O
+7	pri	_	_	_	_	_	_	_	NER=O
+8	starem	_	_	_	_	_	_	_	NER=O
+9	prijatelju	_	_	_	_	_	_	_	NER=O
+10	Blažu	_	_	_	_	_	_	_	NER=B-PER
+11	Crobathu	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+12	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 21.4
+# text = Večkrat je zaprosil za samostojno odvetniško mesto, vendar so mu avstrijske oblasti prošnje vedno znova zavračale, saj je bil zaradi svoje svobodomiselnosti označen kot politično sumljiv.
+1	Večkrat	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	zaprosil	_	_	_	_	_	_	_	NER=O
+4	za	_	_	_	_	_	_	_	NER=O
+5	samostojno	_	_	_	_	_	_	_	NER=O
+6	odvetniško	_	_	_	_	_	_	_	NER=O
+7	mesto	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	vendar	_	_	_	_	_	_	_	NER=O
+10	so	_	_	_	_	_	_	_	NER=O
+11	mu	_	_	_	_	_	_	_	NER=O
+12	avstrijske	_	_	_	_	_	_	_	NER=O
+13	oblasti	_	_	_	_	_	_	_	NER=O
+14	prošnje	_	_	_	_	_	_	_	NER=O
+15	vedno	_	_	_	_	_	_	_	NER=O
+16	znova	_	_	_	_	_	_	_	NER=O
+17	zavračale	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	,	_	_	_	_	_	_	_	NER=O
+19	saj	_	_	_	_	_	_	_	NER=O
+20	je	_	_	_	_	_	_	_	NER=O
+21	bil	_	_	_	_	_	_	_	NER=O
+22	zaradi	_	_	_	_	_	_	_	NER=O
+23	svoje	_	_	_	_	_	_	_	NER=O
+24	svobodomiselnosti	_	_	_	_	_	_	_	NER=O
+25	označen	_	_	_	_	_	_	_	NER=O
+26	kot	_	_	_	_	_	_	_	NER=O
+27	politično	_	_	_	_	_	_	_	NER=O
+28	sumljiv	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+29	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 21.5
+# text = Poleg tega Julija Primic njegove ljubezni ni sprejela in se leta 1839 poročila z bogatim plemiškim sinom Scheuchenstuehlom.
+1	Poleg	_	_	_	_	_	_	_	NER=O
+2	tega	_	_	_	_	_	_	_	NER=O
+3	Julija	_	_	_	_	_	_	_	NER=B-PER
+4	Primic	_	_	_	_	_	_	_	NER=I-PER
+5	njegove	_	_	_	_	_	_	_	NER=O
+6	ljubezni	_	_	_	_	_	_	_	NER=O
+7	ni	_	_	_	_	_	_	_	NER=O
+8	sprejela	_	_	_	_	_	_	_	NER=O
+9	in	_	_	_	_	_	_	_	NER=O
+10	se	_	_	_	_	_	_	_	NER=O
+11	leta	_	_	_	_	_	_	_	NER=O
+12	1839	_	_	_	_	_	_	_	NER=O
+13	poročila	_	_	_	_	_	_	_	NER=O
+14	z	_	_	_	_	_	_	_	NER=O
+15	bogatim	_	_	_	_	_	_	_	NER=O
+16	plemiškim	_	_	_	_	_	_	_	NER=O
+17	sinom	_	_	_	_	_	_	_	NER=O
+18	Scheuchenstuehlom	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+19	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 22
+# sent_id = 22.1
+# text = Leta 1835 je umrl Prešernov stric Jožef, ki ga je vedno podpiral.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1835	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	umrl	_	_	_	_	_	_	_	NER=O
+5	Prešernov	_	_	_	_	_	_	_	NER=B-PER
+6	stric	_	_	_	_	_	_	_	NER=O
+7	Jožef	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	ki	_	_	_	_	_	_	_	NER=O
+10	ga	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	vedno	_	_	_	_	_	_	_	NER=O
+13	podpiral	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 22.2
+# text = Poleti istega leta pa je v Savi utonil Matija Čop, kar je Prešerna zelo prizadelo.
+1	Poleti	_	_	_	_	_	_	_	NER=O
+2	istega	_	_	_	_	_	_	_	NER=O
+3	leta	_	_	_	_	_	_	_	NER=O
+4	pa	_	_	_	_	_	_	_	NER=O
+5	je	_	_	_	_	_	_	_	NER=O
+6	v	_	_	_	_	_	_	_	NER=O
+7	Savi	_	_	_	_	_	_	_	NER=B-LOC
+8	utonil	_	_	_	_	_	_	_	NER=O
+9	Matija	_	_	_	_	_	_	_	NER=B-PER
+10	Čop	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	kar	_	_	_	_	_	_	_	NER=O
+13	je	_	_	_	_	_	_	_	NER=O
+14	Prešerna	_	_	_	_	_	_	_	NER=B-PER
+15	zelo	_	_	_	_	_	_	_	NER=O
+16	prizadelo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 22.3
+# text = Njegovo smrt je očital tudi sebi, ker ni odšel z njim na kopanje, saj je bil mnenja, da bi ga lahko rešil, čeprav tudi sam ni znal dobro plavati.
+1	Njegovo	_	_	_	_	_	_	_	NER=O
+2	smrt	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	očital	_	_	_	_	_	_	_	NER=O
+5	tudi	_	_	_	_	_	_	_	NER=O
+6	sebi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	ker	_	_	_	_	_	_	_	NER=O
+9	ni	_	_	_	_	_	_	_	NER=O
+10	odšel	_	_	_	_	_	_	_	NER=O
+11	z	_	_	_	_	_	_	_	NER=O
+12	njim	_	_	_	_	_	_	_	NER=O
+13	na	_	_	_	_	_	_	_	NER=O
+14	kopanje	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+15	,	_	_	_	_	_	_	_	NER=O
+16	saj	_	_	_	_	_	_	_	NER=O
+17	je	_	_	_	_	_	_	_	NER=O
+18	bil	_	_	_	_	_	_	_	NER=O
+19	mnenja	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	,	_	_	_	_	_	_	_	NER=O
+21	da	_	_	_	_	_	_	_	NER=O
+22	bi	_	_	_	_	_	_	_	NER=O
+23	ga	_	_	_	_	_	_	_	NER=O
+24	lahko	_	_	_	_	_	_	_	NER=O
+25	rešil	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	,	_	_	_	_	_	_	_	NER=O
+27	čeprav	_	_	_	_	_	_	_	NER=O
+28	tudi	_	_	_	_	_	_	_	NER=O
+29	sam	_	_	_	_	_	_	_	NER=O
+30	ni	_	_	_	_	_	_	_	NER=O
+31	znal	_	_	_	_	_	_	_	NER=O
+32	dobro	_	_	_	_	_	_	_	NER=O
+33	plavati	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+34	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 22.4
+# text = Prijatelju je posvetil več pesmi, med drugim tudi pesnitev Krst pri Savici, ki ima pred samim začetkom tudi posvetilni sonet Matiji Čopu.
+1	Prijatelju	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	posvetil	_	_	_	_	_	_	_	NER=O
+4	več	_	_	_	_	_	_	_	NER=O
+5	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	,	_	_	_	_	_	_	_	NER=O
+7	med	_	_	_	_	_	_	_	NER=O
+8	drugim	_	_	_	_	_	_	_	NER=O
+9	tudi	_	_	_	_	_	_	_	NER=O
+10	pesnitev	_	_	_	_	_	_	_	NER=O
+11	Krst	_	_	_	_	_	_	_	NER=B-MISC
+12	pri	_	_	_	_	_	_	_	NER=I-MISC
+13	Savici	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	ki	_	_	_	_	_	_	_	NER=O
+16	ima	_	_	_	_	_	_	_	NER=O
+17	pred	_	_	_	_	_	_	_	NER=O
+18	samim	_	_	_	_	_	_	_	NER=O
+19	začetkom	_	_	_	_	_	_	_	NER=O
+20	tudi	_	_	_	_	_	_	_	NER=O
+21	posvetilni	_	_	_	_	_	_	_	NER=O
+22	sonet	_	_	_	_	_	_	_	NER=O
+23	Matiji	_	_	_	_	_	_	_	NER=B-MISC
+24	Čopu	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+25	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 23
+# sent_id = 23.1
+# text = V teh letih (okrog 1837) se je zapletel z Ano Jelovšek, služabnico pri Crobathovih, ki je bila tedaj še mladoletna.
+1	V	_	_	_	_	_	_	_	NER=O
+2	teh	_	_	_	_	_	_	_	NER=O
+3	letih	_	_	_	_	_	_	_	NER=O
+4	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+5	okrog	_	_	_	_	_	_	_	NER=O
+6	1837	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	)	_	_	_	_	_	_	_	NER=O
+8	se	_	_	_	_	_	_	_	NER=O
+9	je	_	_	_	_	_	_	_	NER=O
+10	zapletel	_	_	_	_	_	_	_	NER=O
+11	z	_	_	_	_	_	_	_	NER=O
+12	Ano	_	_	_	_	_	_	_	NER=B-PER
+13	Jelovšek	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	služabnico	_	_	_	_	_	_	_	NER=O
+16	pri	_	_	_	_	_	_	_	NER=O
+17	Crobathovih	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+18	,	_	_	_	_	_	_	_	NER=O
+19	ki	_	_	_	_	_	_	_	NER=O
+20	je	_	_	_	_	_	_	_	NER=O
+21	bila	_	_	_	_	_	_	_	NER=O
+22	tedaj	_	_	_	_	_	_	_	NER=O
+23	še	_	_	_	_	_	_	_	NER=O
+24	mladoletna	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+25	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 23.2
+# text = Imela sta tri otroke, in sicer: Terezijo (15. oktober 1839 – 14. maj 1840), Ernestino (18. december 1842 – 3. december 1917) in Franca (18. september 1845 – 17. avgust 1855).
+1	Imela	_	_	_	_	_	_	_	NER=O
+2	sta	_	_	_	_	_	_	_	NER=O
+3	tri	_	_	_	_	_	_	_	NER=O
+4	otroke	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+5	,	_	_	_	_	_	_	_	NER=O
+6	in	_	_	_	_	_	_	_	NER=O
+7	sicer	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	:	_	_	_	_	_	_	_	NER=O
+9	Terezijo	_	_	_	_	_	_	_	NER=O
+10	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+11	15.	_	_	_	_	_	_	_	NER=O
+12	oktober	_	_	_	_	_	_	_	NER=O
+13	1839	_	_	_	_	_	_	_	NER=O
+14	–	_	_	_	_	_	_	_	NER=O
+15	14.	_	_	_	_	_	_	_	NER=O
+16	maj	_	_	_	_	_	_	_	NER=O
+17	1840	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+19	,	_	_	_	_	_	_	_	NER=O
+20	Ernestino	_	_	_	_	_	_	_	NER=B-PER
+21	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+22	18.	_	_	_	_	_	_	_	NER=O
+23	december	_	_	_	_	_	_	_	NER=O
+24	1842	_	_	_	_	_	_	_	NER=O
+25	–	_	_	_	_	_	_	_	NER=O
+26	3.	_	_	_	_	_	_	_	NER=O
+27	december	_	_	_	_	_	_	_	NER=O
+28	1917	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+29	)	_	_	_	_	_	_	_	NER=O
+30	in	_	_	_	_	_	_	_	NER=O
+31	Franca	_	_	_	_	_	_	_	NER=B-PER
+32	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+33	18.	_	_	_	_	_	_	_	NER=O
+34	september	_	_	_	_	_	_	_	NER=O
+35	1845	_	_	_	_	_	_	_	NER=O
+36	–	_	_	_	_	_	_	_	NER=O
+37	17.	_	_	_	_	_	_	_	NER=O
+38	avgust	_	_	_	_	_	_	_	NER=O
+39	1855	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+40	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+41	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 23.3
+# text = Čeprav se zveza ni poglobila, je z njo in otroki vzdrževal stalne stike in jim po svojih močeh denarno pomagal.
+1	Čeprav	_	_	_	_	_	_	_	NER=O
+2	se	_	_	_	_	_	_	_	NER=O
+3	zveza	_	_	_	_	_	_	_	NER=O
+4	ni	_	_	_	_	_	_	_	NER=O
+5	poglobila	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	,	_	_	_	_	_	_	_	NER=O
+7	je	_	_	_	_	_	_	_	NER=O
+8	z	_	_	_	_	_	_	_	NER=O
+9	njo	_	_	_	_	_	_	_	NER=O
+10	in	_	_	_	_	_	_	_	NER=O
+11	otroki	_	_	_	_	_	_	_	NER=O
+12	vzdrževal	_	_	_	_	_	_	_	NER=O
+13	stalne	_	_	_	_	_	_	_	NER=O
+14	stike	_	_	_	_	_	_	_	NER=O
+15	in	_	_	_	_	_	_	_	NER=O
+16	jim	_	_	_	_	_	_	_	NER=O
+17	po	_	_	_	_	_	_	_	NER=O
+18	svojih	_	_	_	_	_	_	_	NER=O
+19	močeh	_	_	_	_	_	_	_	NER=O
+20	denarno	_	_	_	_	_	_	_	NER=O
+21	pomagal	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+22	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 23.4
+# text = Hči Ernestina Jelovšek je kasneje napisala Spomine, v katerih je opisala odnos med očetom in materjo.
+1	Hči	_	_	_	_	_	_	_	NER=O
+2	Ernestina	_	_	_	_	_	_	_	NER=B-PER
+3	Jelovšek	_	_	_	_	_	_	_	NER=I-PER
+4	je	_	_	_	_	_	_	_	NER=O
+5	kasneje	_	_	_	_	_	_	_	NER=O
+6	napisala	_	_	_	_	_	_	_	NER=O
+7	Spomine	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	v	_	_	_	_	_	_	_	NER=O
+10	katerih	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	opisala	_	_	_	_	_	_	_	NER=O
+13	odnos	_	_	_	_	_	_	_	NER=O
+14	med	_	_	_	_	_	_	_	NER=O
+15	očetom	_	_	_	_	_	_	_	NER=O
+16	in	_	_	_	_	_	_	_	NER=O
+17	materjo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 24
+# sent_id = 24.1
+# text = Prešeren je po smrti Matije Čopa tesneje prijateljeval z mladim Poljakom Emilom Korytkim, ki je bil zaradi sodelovanja pri narodnoprebudnem gibanju v domovini pregnan v Ljubljano.
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	po	_	_	_	_	_	_	_	NER=O
+4	smrti	_	_	_	_	_	_	_	NER=O
+5	Matije	_	_	_	_	_	_	_	NER=B-PER
+6	Čopa	_	_	_	_	_	_	_	NER=I-PER
+7	tesneje	_	_	_	_	_	_	_	NER=O
+8	prijateljeval	_	_	_	_	_	_	_	NER=O
+9	z	_	_	_	_	_	_	_	NER=O
+10	mladim	_	_	_	_	_	_	_	NER=O
+11	Poljakom	_	_	_	_	_	_	_	NER=B-PER
+12	Emilom	_	_	_	_	_	_	_	NER=B-PER
+13	Korytkim	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	ki	_	_	_	_	_	_	_	NER=O
+16	je	_	_	_	_	_	_	_	NER=O
+17	bil	_	_	_	_	_	_	_	NER=O
+18	zaradi	_	_	_	_	_	_	_	NER=O
+19	sodelovanja	_	_	_	_	_	_	_	NER=O
+20	pri	_	_	_	_	_	_	_	NER=O
+21	narodnoprebudnem	_	_	_	_	_	_	_	NER=O
+22	gibanju	_	_	_	_	_	_	_	NER=O
+23	v	_	_	_	_	_	_	_	NER=O
+24	domovini	_	_	_	_	_	_	_	NER=O
+25	pregnan	_	_	_	_	_	_	_	NER=O
+26	v	_	_	_	_	_	_	_	NER=O
+27	Ljubljano	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+28	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 24.2
+# text = Korytko se je ukvarjal z zbiranjem ljudskih pesmi, pri čemer mu je začel pomagati tudi Prešeren in tako razvil zanimanje tudi za tovrstno slovstvo.
+1	Korytko	_	_	_	_	_	_	_	NER=O
+2	se	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	ukvarjal	_	_	_	_	_	_	_	NER=O
+5	z	_	_	_	_	_	_	_	NER=O
+6	zbiranjem	_	_	_	_	_	_	_	NER=O
+7	ljudskih	_	_	_	_	_	_	_	NER=O
+8	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	pri	_	_	_	_	_	_	_	NER=O
+11	čemer	_	_	_	_	_	_	_	NER=O
+12	mu	_	_	_	_	_	_	_	NER=O
+13	je	_	_	_	_	_	_	_	NER=O
+14	začel	_	_	_	_	_	_	_	NER=O
+15	pomagati	_	_	_	_	_	_	_	NER=O
+16	tudi	_	_	_	_	_	_	_	NER=O
+17	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+18	in	_	_	_	_	_	_	_	NER=O
+19	tako	_	_	_	_	_	_	_	NER=O
+20	razvil	_	_	_	_	_	_	_	NER=O
+21	zanimanje	_	_	_	_	_	_	_	NER=O
+22	tudi	_	_	_	_	_	_	_	NER=O
+23	za	_	_	_	_	_	_	_	NER=O
+24	tovrstno	_	_	_	_	_	_	_	NER=O
+25	slovstvo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 24.3
+# text = Korytko je umrl leta 1839.
+1	Korytko	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	umrl	_	_	_	_	_	_	_	NER=O
+4	leta	_	_	_	_	_	_	_	NER=O
+5	1839	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 25
+# sent_id = 25.1
+# text = Leta 1839 se je vrnil domov Andrej Smole, ki je zaradi dolgov zapustil domovino in velik del svojega življenja preživel v tujini.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1839	_	_	_	_	_	_	_	NER=O
+3	se	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	vrnil	_	_	_	_	_	_	_	NER=O
+6	domov	_	_	_	_	_	_	_	NER=O
+7	Andrej	_	_	_	_	_	_	_	NER=B-PER
+8	Smole	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	ki	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	zaradi	_	_	_	_	_	_	_	NER=O
+13	dolgov	_	_	_	_	_	_	_	NER=O
+14	zapustil	_	_	_	_	_	_	_	NER=O
+15	domovino	_	_	_	_	_	_	_	NER=O
+16	in	_	_	_	_	_	_	_	NER=O
+17	velik	_	_	_	_	_	_	_	NER=O
+18	del	_	_	_	_	_	_	_	NER=O
+19	svojega	_	_	_	_	_	_	_	NER=O
+20	življenja	_	_	_	_	_	_	_	NER=O
+21	preživel	_	_	_	_	_	_	_	NER=O
+22	v	_	_	_	_	_	_	_	NER=O
+23	tujini	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+24	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 25.2
+# text = Prešeren ga je pogosto obiskoval na gradu Prežek na Dolenjskem.
+1	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+2	ga	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	pogosto	_	_	_	_	_	_	_	NER=O
+5	obiskoval	_	_	_	_	_	_	_	NER=O
+6	na	_	_	_	_	_	_	_	NER=O
+7	gradu	_	_	_	_	_	_	_	NER=O
+8	Prežek	_	_	_	_	_	_	_	NER=B-LOC
+9	na	_	_	_	_	_	_	_	NER=O
+10	Dolenjskem	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+11	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 25.3
+# text = Skupaj sta izdajala knjige (na primer pesmi Valentina Vodnika in Ta veseli dan ali Matiček se ženi Antona Tomaža Linharta), načrtovala pa sta tudi nov časopis, katerega objavo je zadrževala cenzura.
+1	Skupaj	_	_	_	_	_	_	_	NER=O
+2	sta	_	_	_	_	_	_	_	NER=O
+3	izdajala	_	_	_	_	_	_	_	NER=O
+4	knjige	_	_	_	_	_	_	_	NER=O
+5	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	na	_	_	_	_	_	_	_	NER=O
+7	primer	_	_	_	_	_	_	_	NER=O
+8	pesmi	_	_	_	_	_	_	_	NER=O
+9	Valentina	_	_	_	_	_	_	_	NER=B-PER
+10	Vodnika	_	_	_	_	_	_	_	NER=I-PER
+11	in	_	_	_	_	_	_	_	NER=O
+12	Ta	_	_	_	_	_	_	_	NER=B-MISC
+13	veseli	_	_	_	_	_	_	_	NER=I-MISC
+14	dan	_	_	_	_	_	_	_	NER=I-MISC
+15	ali	_	_	_	_	_	_	_	NER=I-MISC
+16	Matiček	_	_	_	_	_	_	_	NER=I-MISC
+17	se	_	_	_	_	_	_	_	NER=O
+18	ženi	_	_	_	_	_	_	_	NER=O
+19	Antona	_	_	_	_	_	_	_	NER=B-PER
+20	Tomaža	_	_	_	_	_	_	_	NER=I-PER
+21	Linharta	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+22	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+23	,	_	_	_	_	_	_	_	NER=O
+24	načrtovala	_	_	_	_	_	_	_	NER=O
+25	pa	_	_	_	_	_	_	_	NER=O
+26	sta	_	_	_	_	_	_	_	NER=O
+27	tudi	_	_	_	_	_	_	_	NER=O
+28	nov	_	_	_	_	_	_	_	NER=O
+29	časopis	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+30	,	_	_	_	_	_	_	_	NER=O
+31	katerega	_	_	_	_	_	_	_	NER=O
+32	objavo	_	_	_	_	_	_	_	NER=O
+33	je	_	_	_	_	_	_	_	NER=O
+34	zadrževala	_	_	_	_	_	_	_	NER=O
+35	cenzura	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+36	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 25.4
+# text = Smole je umrl leta 1840 na praznovanju svojega godu v Prešernovi prisotnosti.
+1	Smole	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	umrl	_	_	_	_	_	_	_	NER=O
+4	leta	_	_	_	_	_	_	_	NER=O
+5	1840	_	_	_	_	_	_	_	NER=O
+6	na	_	_	_	_	_	_	_	NER=O
+7	praznovanju	_	_	_	_	_	_	_	NER=O
+8	svojega	_	_	_	_	_	_	_	NER=O
+9	godu	_	_	_	_	_	_	_	NER=O
+10	v	_	_	_	_	_	_	_	NER=O
+11	Prešernovi	_	_	_	_	_	_	_	NER=B-LOC
+12	prisotnosti	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 26
+# sent_id = 26.1
+# text = Zaradi številnih izgub in neuslišane ljubezni do Primičeve Julije je Prešeren zapadel v krizo.
+1	Zaradi	_	_	_	_	_	_	_	NER=O
+2	številnih	_	_	_	_	_	_	_	NER=O
+3	izgub	_	_	_	_	_	_	_	NER=O
+4	in	_	_	_	_	_	_	_	NER=O
+5	neuslišane	_	_	_	_	_	_	_	NER=O
+6	ljubezni	_	_	_	_	_	_	_	NER=O
+7	do	_	_	_	_	_	_	_	NER=O
+8	Primičeve	_	_	_	_	_	_	_	NER=B-PER
+9	Julije	_	_	_	_	_	_	_	NER=I-PER
+10	je	_	_	_	_	_	_	_	NER=O
+11	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+12	zapadel	_	_	_	_	_	_	_	NER=O
+13	v	_	_	_	_	_	_	_	NER=O
+14	krizo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+15	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 26.2
+# text = Vdajal se je alkoholu in postajal čedalje bolj ravnodušen.
+1	Vdajal	_	_	_	_	_	_	_	NER=O
+2	se	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	alkoholu	_	_	_	_	_	_	_	NER=O
+5	in	_	_	_	_	_	_	_	NER=O
+6	postajal	_	_	_	_	_	_	_	NER=O
+7	čedalje	_	_	_	_	_	_	_	NER=O
+8	bolj	_	_	_	_	_	_	_	NER=O
+9	ravnodušen	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 26.3
+# text = Uteho je iskal v gostilnah in postal znan po priložnostnih kvantaških pesmih, ki so bile izjemno duhovite, a njegova pesniška ustvarjalnost je pešala.
+1	Uteho	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	iskal	_	_	_	_	_	_	_	NER=O
+4	v	_	_	_	_	_	_	_	NER=O
+5	gostilnah	_	_	_	_	_	_	_	NER=O
+6	in	_	_	_	_	_	_	_	NER=O
+7	postal	_	_	_	_	_	_	_	NER=O
+8	znan	_	_	_	_	_	_	_	NER=O
+9	po	_	_	_	_	_	_	_	NER=O
+10	priložnostnih	_	_	_	_	_	_	_	NER=O
+11	kvantaških	_	_	_	_	_	_	_	NER=O
+12	pesmih	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	,	_	_	_	_	_	_	_	NER=O
+14	ki	_	_	_	_	_	_	_	NER=O
+15	so	_	_	_	_	_	_	_	NER=O
+16	bile	_	_	_	_	_	_	_	NER=O
+17	izjemno	_	_	_	_	_	_	_	NER=O
+18	duhovite	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+19	,	_	_	_	_	_	_	_	NER=O
+20	a	_	_	_	_	_	_	_	NER=O
+21	njegova	_	_	_	_	_	_	_	NER=O
+22	pesniška	_	_	_	_	_	_	_	NER=O
+23	ustvarjalnost	_	_	_	_	_	_	_	NER=O
+24	je	_	_	_	_	_	_	_	NER=O
+25	pešala	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 27
+# sent_id = 27.1
+# text = Znova se je nesrečno zaljubil, tokrat v Jerico Podboj, hčerko gostilničarke Metke, v katere lokal je redno zahajal.
+1	Znova	_	_	_	_	_	_	_	NER=O
+2	se	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	nesrečno	_	_	_	_	_	_	_	NER=O
+5	zaljubil	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+6	,	_	_	_	_	_	_	_	NER=O
+7	tokrat	_	_	_	_	_	_	_	NER=O
+8	v	_	_	_	_	_	_	_	NER=O
+9	Jerico	_	_	_	_	_	_	_	NER=B-PER
+10	Podboj	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	hčerko	_	_	_	_	_	_	_	NER=O
+13	gostilničarke	_	_	_	_	_	_	_	NER=O
+14	Metke	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+15	,	_	_	_	_	_	_	_	NER=O
+16	v	_	_	_	_	_	_	_	NER=O
+17	katere	_	_	_	_	_	_	_	NER=O
+18	lokal	_	_	_	_	_	_	_	NER=O
+19	je	_	_	_	_	_	_	_	NER=O
+20	redno	_	_	_	_	_	_	_	NER=O
+21	zahajal	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+22	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 27.2
+# text = Jerici je posvetil tudi nekaj pesmi.
+1	Jerici	_	_	_	_	_	_	_	NER=B-PER
+2	je	_	_	_	_	_	_	_	NER=O
+3	posvetil	_	_	_	_	_	_	_	NER=O
+4	tudi	_	_	_	_	_	_	_	NER=O
+5	nekaj	_	_	_	_	_	_	_	NER=O
+6	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 28
+# sent_id = 28.1
+# text = Leta 1843 so začele izhajati Kmetijske in rokodelske novice veterinarja in politika Janeza Bleiweisa, ki so že naznanjale prihod novih časov za Slovence.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1843	_	_	_	_	_	_	_	NER=O
+3	so	_	_	_	_	_	_	_	NER=O
+4	začele	_	_	_	_	_	_	_	NER=O
+5	izhajati	_	_	_	_	_	_	_	NER=O
+6	Kmetijske	_	_	_	_	_	_	_	NER=B-ORG
+7	in	_	_	_	_	_	_	_	NER=I-ORG
+8	rokodelske	_	_	_	_	_	_	_	NER=I-ORG
+9	novice	_	_	_	_	_	_	_	NER=I-ORG
+10	veterinarja	_	_	_	_	_	_	_	NER=I-ORG
+11	in	_	_	_	_	_	_	_	NER=O
+12	politika	_	_	_	_	_	_	_	NER=O
+13	Janeza	_	_	_	_	_	_	_	NER=B-PER
+14	Bleiweisa	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+15	,	_	_	_	_	_	_	_	NER=O
+16	ki	_	_	_	_	_	_	_	NER=O
+17	so	_	_	_	_	_	_	_	NER=O
+18	že	_	_	_	_	_	_	_	NER=O
+19	naznanjale	_	_	_	_	_	_	_	NER=O
+20	prihod	_	_	_	_	_	_	_	NER=O
+21	novih	_	_	_	_	_	_	_	NER=O
+22	časov	_	_	_	_	_	_	_	NER=O
+23	za	_	_	_	_	_	_	_	NER=O
+24	Slovence	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+25	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 28.2
+# text = Bleiweis Prešerna ni povabil k sodelovanju, temveč je namesto njegovih poveličeval in objavljal dela pesnika Jovana Vesela Koseskega, čeprav je slednjega v umetniški vrednosti Prešeren presegal.
+1	Bleiweis	_	_	_	_	_	_	_	NER=B-PER
+2	Prešerna	_	_	_	_	_	_	_	NER=I-PER
+3	ni	_	_	_	_	_	_	_	NER=O
+4	povabil	_	_	_	_	_	_	_	NER=O
+5	k	_	_	_	_	_	_	_	NER=O
+6	sodelovanju	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	temveč	_	_	_	_	_	_	_	NER=O
+9	je	_	_	_	_	_	_	_	NER=O
+10	namesto	_	_	_	_	_	_	_	NER=O
+11	njegovih	_	_	_	_	_	_	_	NER=O
+12	poveličeval	_	_	_	_	_	_	_	NER=O
+13	in	_	_	_	_	_	_	_	NER=O
+14	objavljal	_	_	_	_	_	_	_	NER=O
+15	dela	_	_	_	_	_	_	_	NER=O
+16	pesnika	_	_	_	_	_	_	_	NER=O
+17	Jovana	_	_	_	_	_	_	_	NER=B-PER
+18	Vesela	_	_	_	_	_	_	_	NER=I-PER
+19	Koseskega	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+20	,	_	_	_	_	_	_	_	NER=O
+21	čeprav	_	_	_	_	_	_	_	NER=O
+22	je	_	_	_	_	_	_	_	NER=O
+23	slednjega	_	_	_	_	_	_	_	NER=O
+24	v	_	_	_	_	_	_	_	NER=O
+25	umetniški	_	_	_	_	_	_	_	NER=O
+26	vrednosti	_	_	_	_	_	_	_	NER=O
+27	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+28	presegal	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+29	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 28.3
+# text = Kasneje je Bleiweis vseeno objavil nekatere Prešernove pesmi, vendar na manj vidnih mestih v časopisu.
+1	Kasneje	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	Bleiweis	_	_	_	_	_	_	_	NER=B-PER
+4	vseeno	_	_	_	_	_	_	_	NER=O
+5	objavil	_	_	_	_	_	_	_	NER=O
+6	nekatere	_	_	_	_	_	_	_	NER=O
+7	Prešernove	_	_	_	_	_	_	_	NER=B-MISC
+8	pesmi	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+9	,	_	_	_	_	_	_	_	NER=O
+10	vendar	_	_	_	_	_	_	_	NER=O
+11	na	_	_	_	_	_	_	_	NER=O
+12	manj	_	_	_	_	_	_	_	NER=O
+13	vidnih	_	_	_	_	_	_	_	NER=O
+14	mestih	_	_	_	_	_	_	_	NER=O
+15	v	_	_	_	_	_	_	_	NER=O
+16	časopisu	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 28.4
+# text = Jovan Vesel Koseski je namreč pisal pesmi s kmečko tematiko, ki je bila razumljiva kmečkemu prebivalstvu, ki je bilo v tistih časih večinsko, medtem ko je Prešeren pisal visoko poezijo, ki so ji bili kos le redki.
+1	Jovan	_	_	_	_	_	_	_	NER=B-PER
+2	Vesel	_	_	_	_	_	_	_	NER=I-PER
+3	Koseski	_	_	_	_	_	_	_	NER=I-PER
+4	je	_	_	_	_	_	_	_	NER=O
+5	namreč	_	_	_	_	_	_	_	NER=O
+6	pisal	_	_	_	_	_	_	_	NER=O
+7	pesmi	_	_	_	_	_	_	_	NER=O
+8	s	_	_	_	_	_	_	_	NER=O
+9	kmečko	_	_	_	_	_	_	_	NER=O
+10	tematiko	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	ki	_	_	_	_	_	_	_	NER=O
+13	je	_	_	_	_	_	_	_	NER=O
+14	bila	_	_	_	_	_	_	_	NER=O
+15	razumljiva	_	_	_	_	_	_	_	NER=O
+16	kmečkemu	_	_	_	_	_	_	_	NER=O
+17	prebivalstvu	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	,	_	_	_	_	_	_	_	NER=O
+19	ki	_	_	_	_	_	_	_	NER=O
+20	je	_	_	_	_	_	_	_	NER=O
+21	bilo	_	_	_	_	_	_	_	NER=O
+22	v	_	_	_	_	_	_	_	NER=O
+23	tistih	_	_	_	_	_	_	_	NER=O
+24	časih	_	_	_	_	_	_	_	NER=O
+25	večinsko	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+26	,	_	_	_	_	_	_	_	NER=O
+27	medtem	_	_	_	_	_	_	_	NER=O
+28	ko	_	_	_	_	_	_	_	NER=O
+29	je	_	_	_	_	_	_	_	NER=O
+30	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+31	pisal	_	_	_	_	_	_	_	NER=O
+32	visoko	_	_	_	_	_	_	_	NER=O
+33	poezijo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+34	,	_	_	_	_	_	_	_	NER=O
+35	ki	_	_	_	_	_	_	_	NER=O
+36	so	_	_	_	_	_	_	_	NER=O
+37	ji	_	_	_	_	_	_	_	NER=O
+38	bili	_	_	_	_	_	_	_	NER=O
+39	kos	_	_	_	_	_	_	_	NER=O
+40	le	_	_	_	_	_	_	_	NER=O
+41	redki	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+42	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 29
+# sent_id = 29.1
+# text = Prva izdaja Poezij
+1	Prva	_	_	_	_	_	_	_	NER=O
+2	izdaja	_	_	_	_	_	_	_	NER=O
+3	Poezij	_	_	_	_	_	_	_	NER=B-MISC
+
+# newpar id = 30
+# sent_id = 30.1
+# text = France Prešeren je ponovno začel pisati pesmi, obenem pa je pripravljal izdajo pesniške zbirke z naslovom Poezije.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	je	_	_	_	_	_	_	_	NER=O
+4	ponovno	_	_	_	_	_	_	_	NER=O
+5	začel	_	_	_	_	_	_	_	NER=O
+6	pisati	_	_	_	_	_	_	_	NER=O
+7	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	obenem	_	_	_	_	_	_	_	NER=O
+10	pa	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	pripravljal	_	_	_	_	_	_	_	NER=O
+13	izdajo	_	_	_	_	_	_	_	NER=O
+14	pesniške	_	_	_	_	_	_	_	NER=O
+15	zbirke	_	_	_	_	_	_	_	NER=O
+16	z	_	_	_	_	_	_	_	NER=O
+17	naslovom	_	_	_	_	_	_	_	NER=O
+18	Poezije	_	_	_	_	_	_	_	NER=B-MISC|SpaceAfter=No
+19	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 30.2
+# text = Končno različico z najboljšimi pesmimi je leta 1846 oddal v pregled cenzuri.
+1	Končno	_	_	_	_	_	_	_	NER=O
+2	različico	_	_	_	_	_	_	_	NER=O
+3	z	_	_	_	_	_	_	_	NER=O
+4	najboljšimi	_	_	_	_	_	_	_	NER=O
+5	pesmimi	_	_	_	_	_	_	_	NER=O
+6	je	_	_	_	_	_	_	_	NER=O
+7	leta	_	_	_	_	_	_	_	NER=O
+8	1846	_	_	_	_	_	_	_	NER=O
+9	oddal	_	_	_	_	_	_	_	NER=O
+10	v	_	_	_	_	_	_	_	NER=O
+11	pregled	_	_	_	_	_	_	_	NER=O
+12	cenzuri	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+13	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 30.3
+# text = Tedanji cenzor Fran Miklošič je tisk odobril 22. julija tega leta, vendar je Prešeren moral črtati nekatere pesmi, med njimi Zdravljico (napisano leta 1844).
+1	Tedanji	_	_	_	_	_	_	_	NER=O
+2	cenzor	_	_	_	_	_	_	_	NER=O
+3	Fran	_	_	_	_	_	_	_	NER=B-PER
+4	Miklošič	_	_	_	_	_	_	_	NER=I-PER
+5	je	_	_	_	_	_	_	_	NER=O
+6	tisk	_	_	_	_	_	_	_	NER=O
+7	odobril	_	_	_	_	_	_	_	NER=O
+8	22.	_	_	_	_	_	_	_	NER=O
+9	julija	_	_	_	_	_	_	_	NER=O
+10	tega	_	_	_	_	_	_	_	NER=O
+11	leta	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	vendar	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	Prešeren	_	_	_	_	_	_	_	NER=B-PER
+16	moral	_	_	_	_	_	_	_	NER=O
+17	črtati	_	_	_	_	_	_	_	NER=O
+18	nekatere	_	_	_	_	_	_	_	NER=O
+19	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+20	,	_	_	_	_	_	_	_	NER=O
+21	med	_	_	_	_	_	_	_	NER=O
+22	njimi	_	_	_	_	_	_	_	NER=O
+23	Zdravljico	_	_	_	_	_	_	_	NER=B-MISC
+24	(	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+25	napisano	_	_	_	_	_	_	_	NER=O
+26	leta	_	_	_	_	_	_	_	NER=O
+27	1844	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+28	)	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+29	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 30.4
+# text = Poezije je ljubljanski tiskar Jožef Blaznik dotiskal decembra 1846, izšle pa so z letnico 1847.
+1	Poezije	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	ljubljanski	_	_	_	_	_	_	_	NER=O
+4	tiskar	_	_	_	_	_	_	_	NER=O
+5	Jožef	_	_	_	_	_	_	_	NER=B-PER
+6	Blaznik	_	_	_	_	_	_	_	NER=I-PER
+7	dotiskal	_	_	_	_	_	_	_	NER=O
+8	decembra	_	_	_	_	_	_	_	NER=O
+9	1846	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+10	,	_	_	_	_	_	_	_	NER=O
+11	izšle	_	_	_	_	_	_	_	NER=O
+12	pa	_	_	_	_	_	_	_	NER=O
+13	so	_	_	_	_	_	_	_	NER=O
+14	z	_	_	_	_	_	_	_	NER=O
+15	letnico	_	_	_	_	_	_	_	NER=O
+16	1847	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 31
+# sent_id = 31.1
+# text = Selitev v Kranj in smrt
+1	Selitev	_	_	_	_	_	_	_	NER=O
+2	v	_	_	_	_	_	_	_	NER=O
+3	Kranj	_	_	_	_	_	_	_	NER=B-LOC
+4	in	_	_	_	_	_	_	_	NER=O
+5	smrt	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 32
+# sent_id = 32.1
+# text = Leta 1846 je bila odobrena Prešernova prošnja, šesta po vrsti, za odvetniško mesto.
+1	Leta	_	_	_	_	_	_	_	NER=O
+2	1846	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	bila	_	_	_	_	_	_	_	NER=O
+5	odobrena	_	_	_	_	_	_	_	NER=O
+6	Prešernova	_	_	_	_	_	_	_	NER=O
+7	prošnja	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	šesta	_	_	_	_	_	_	_	NER=O
+10	po	_	_	_	_	_	_	_	NER=O
+11	vrsti	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	za	_	_	_	_	_	_	_	NER=O
+14	odvetniško	_	_	_	_	_	_	_	NER=O
+15	mesto	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 32.2
+# text = Oblast se je odločila, da ga namesti v Kranj, kamor se je preselil jeseni.
+1	Oblast	_	_	_	_	_	_	_	NER=O
+2	se	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	odločila	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+5	,	_	_	_	_	_	_	_	NER=O
+6	da	_	_	_	_	_	_	_	NER=O
+7	ga	_	_	_	_	_	_	_	NER=O
+8	namesti	_	_	_	_	_	_	_	NER=O
+9	v	_	_	_	_	_	_	_	NER=O
+10	Kranj	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+11	,	_	_	_	_	_	_	_	NER=O
+12	kamor	_	_	_	_	_	_	_	NER=O
+13	se	_	_	_	_	_	_	_	NER=O
+14	je	_	_	_	_	_	_	_	NER=O
+15	preselil	_	_	_	_	_	_	_	NER=O
+16	jeseni	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+17	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 32.3
+# text = Kot pisarja je zaposlil sina Andreja Smoleta, gospodinjila pa mu je sestra Katra Prešeren.
+1	Kot	_	_	_	_	_	_	_	NER=O
+2	pisarja	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	zaposlil	_	_	_	_	_	_	_	NER=O
+5	sina	_	_	_	_	_	_	_	NER=O
+6	Andreja	_	_	_	_	_	_	_	NER=B-PER
+7	Smoleta	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	gospodinjila	_	_	_	_	_	_	_	NER=O
+10	pa	_	_	_	_	_	_	_	NER=O
+11	mu	_	_	_	_	_	_	_	NER=O
+12	je	_	_	_	_	_	_	_	NER=O
+13	sestra	_	_	_	_	_	_	_	NER=O
+14	Katra	_	_	_	_	_	_	_	NER=B-PER
+15	Prešeren	_	_	_	_	_	_	_	NER=I-PER|SpaceAfter=No
+16	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 33
+# sent_id = 33.1
+# text = Po marčni revoluciji leta 1848 je lahko končno objavil Zdravljico.
+1	Po	_	_	_	_	_	_	_	NER=O
+2	marčni	_	_	_	_	_	_	_	NER=O
+3	revoluciji	_	_	_	_	_	_	_	NER=O
+4	leta	_	_	_	_	_	_	_	NER=O
+5	1848	_	_	_	_	_	_	_	NER=O
+6	je	_	_	_	_	_	_	_	NER=O
+7	lahko	_	_	_	_	_	_	_	NER=O
+8	končno	_	_	_	_	_	_	_	NER=O
+9	objavil	_	_	_	_	_	_	_	NER=O
+10	Zdravljico	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+11	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 33.2
+# text = Pesem je izšla v Bleiweisovih Novicah, nekatere pesmi pa je objavil še v zadnjem letniku Kranjske čbelice.
+1	Pesem	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	izšla	_	_	_	_	_	_	_	NER=O
+4	v	_	_	_	_	_	_	_	NER=O
+5	Bleiweisovih	_	_	_	_	_	_	_	NER=B-MISC
+6	Novicah	_	_	_	_	_	_	_	NER=I-MISC|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	nekatere	_	_	_	_	_	_	_	NER=O
+9	pesmi	_	_	_	_	_	_	_	NER=O
+10	pa	_	_	_	_	_	_	_	NER=O
+11	je	_	_	_	_	_	_	_	NER=O
+12	objavil	_	_	_	_	_	_	_	NER=O
+13	še	_	_	_	_	_	_	_	NER=O
+14	v	_	_	_	_	_	_	_	NER=O
+15	zadnjem	_	_	_	_	_	_	_	NER=O
+16	letniku	_	_	_	_	_	_	_	NER=O
+17	Kranjske	_	_	_	_	_	_	_	NER=B-ORG
+18	čbelice	_	_	_	_	_	_	_	NER=I-ORG|SpaceAfter=No
+19	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 33.3
+# text = Prešernovo pesniško ustvarjanje je tedaj zamrlo, pojavili pa so se tudi resnejši znaki bolezni.
+1	Prešernovo	_	_	_	_	_	_	_	NER=O
+2	pesniško	_	_	_	_	_	_	_	NER=O
+3	ustvarjanje	_	_	_	_	_	_	_	NER=O
+4	je	_	_	_	_	_	_	_	NER=O
+5	tedaj	_	_	_	_	_	_	_	NER=O
+6	zamrlo	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	pojavili	_	_	_	_	_	_	_	NER=O
+9	pa	_	_	_	_	_	_	_	NER=O
+10	so	_	_	_	_	_	_	_	NER=O
+11	se	_	_	_	_	_	_	_	NER=O
+12	tudi	_	_	_	_	_	_	_	NER=O
+13	resnejši	_	_	_	_	_	_	_	NER=O
+14	znaki	_	_	_	_	_	_	_	NER=O
+15	bolezni	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+16	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 33.4
+# text = Bil je zadolžen in brez denarja, saj ni izkoriščal možnosti za zaslužek, ki so se mu kot odvetniku ponujale, saj naj bi revne zastopal celo brezplačno.
+1	Bil	_	_	_	_	_	_	_	NER=O
+2	je	_	_	_	_	_	_	_	NER=O
+3	zadolžen	_	_	_	_	_	_	_	NER=O
+4	in	_	_	_	_	_	_	_	NER=O
+5	brez	_	_	_	_	_	_	_	NER=O
+6	denarja	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	saj	_	_	_	_	_	_	_	NER=O
+9	ni	_	_	_	_	_	_	_	NER=O
+10	izkoriščal	_	_	_	_	_	_	_	NER=O
+11	možnosti	_	_	_	_	_	_	_	NER=O
+12	za	_	_	_	_	_	_	_	NER=O
+13	zaslužek	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	,	_	_	_	_	_	_	_	NER=O
+15	ki	_	_	_	_	_	_	_	NER=O
+16	so	_	_	_	_	_	_	_	NER=O
+17	se	_	_	_	_	_	_	_	NER=O
+18	mu	_	_	_	_	_	_	_	NER=O
+19	kot	_	_	_	_	_	_	_	NER=O
+20	odvetniku	_	_	_	_	_	_	_	NER=O
+21	ponujale	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+22	,	_	_	_	_	_	_	_	NER=O
+23	saj	_	_	_	_	_	_	_	NER=O
+24	naj	_	_	_	_	_	_	_	NER=O
+25	bi	_	_	_	_	_	_	_	NER=O
+26	revne	_	_	_	_	_	_	_	NER=O
+27	zastopal	_	_	_	_	_	_	_	NER=O
+28	celo	_	_	_	_	_	_	_	NER=O
+29	brezplačno	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+30	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 33.5
+# text = V oporoki je priznal svoja preživela otroka in jima namenil skromni ostanek premoženja.
+1	V	_	_	_	_	_	_	_	NER=O
+2	oporoki	_	_	_	_	_	_	_	NER=O
+3	je	_	_	_	_	_	_	_	NER=O
+4	priznal	_	_	_	_	_	_	_	NER=O
+5	svoja	_	_	_	_	_	_	_	NER=O
+6	preživela	_	_	_	_	_	_	_	NER=O
+7	otroka	_	_	_	_	_	_	_	NER=O
+8	in	_	_	_	_	_	_	_	NER=O
+9	jima	_	_	_	_	_	_	_	NER=O
+10	namenil	_	_	_	_	_	_	_	NER=O
+11	skromni	_	_	_	_	_	_	_	NER=O
+12	ostanek	_	_	_	_	_	_	_	NER=O
+13	premoženja	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 34
+# sent_id = 34.1
+# text = Po njegovi smrti naj bi kranjski veljaki uničili nekaj Prešernove književne zapuščine.
+1	Po	_	_	_	_	_	_	_	NER=O
+2	njegovi	_	_	_	_	_	_	_	NER=O
+3	smrti	_	_	_	_	_	_	_	NER=O
+4	naj	_	_	_	_	_	_	_	NER=O
+5	bi	_	_	_	_	_	_	_	NER=O
+6	kranjski	_	_	_	_	_	_	_	NER=O
+7	veljaki	_	_	_	_	_	_	_	NER=O
+8	uničili	_	_	_	_	_	_	_	NER=O
+9	nekaj	_	_	_	_	_	_	_	NER=O
+10	Prešernove	_	_	_	_	_	_	_	NER=B-ORG
+11	književne	_	_	_	_	_	_	_	NER=I-ORG
+12	zapuščine	_	_	_	_	_	_	_	NER=I-ORG|SpaceAfter=No
+13	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 34.2
+# text = Verjetno gre za gostilniške in druge pesmi, ki so jih v tem času imeli za nespodobne.
+1	Verjetno	_	_	_	_	_	_	_	NER=O
+2	gre	_	_	_	_	_	_	_	NER=O
+3	za	_	_	_	_	_	_	_	NER=O
+4	gostilniške	_	_	_	_	_	_	_	NER=O
+5	in	_	_	_	_	_	_	_	NER=O
+6	druge	_	_	_	_	_	_	_	NER=O
+7	pesmi	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+8	,	_	_	_	_	_	_	_	NER=O
+9	ki	_	_	_	_	_	_	_	NER=O
+10	so	_	_	_	_	_	_	_	NER=O
+11	jih	_	_	_	_	_	_	_	NER=O
+12	v	_	_	_	_	_	_	_	NER=O
+13	tem	_	_	_	_	_	_	_	NER=O
+14	času	_	_	_	_	_	_	_	NER=O
+15	imeli	_	_	_	_	_	_	_	NER=O
+16	za	_	_	_	_	_	_	_	NER=O
+17	nespodobne	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+18	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 35
+# sent_id = 35.1
+# text = France Prešeren je umrl na četrtek, 8. februarja 1849.
+1	France	_	_	_	_	_	_	_	NER=B-PER
+2	Prešeren	_	_	_	_	_	_	_	NER=I-PER
+3	je	_	_	_	_	_	_	_	NER=O
+4	umrl	_	_	_	_	_	_	_	NER=O
+5	na	_	_	_	_	_	_	_	NER=O
+6	četrtek	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+7	,	_	_	_	_	_	_	_	NER=O
+8	8.	_	_	_	_	_	_	_	NER=O
+9	februarja	_	_	_	_	_	_	_	NER=O
+10	1849	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+11	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 35.2
+# text = Pokopali so ga 10. februarja v Kranju.
+1	Pokopali	_	_	_	_	_	_	_	NER=O
+2	so	_	_	_	_	_	_	_	NER=O
+3	ga	_	_	_	_	_	_	_	NER=O
+4	10.	_	_	_	_	_	_	_	NER=O
+5	februarja	_	_	_	_	_	_	_	NER=O
+6	v	_	_	_	_	_	_	_	NER=O
+7	Kranju	_	_	_	_	_	_	_	NER=B-LOC|SpaceAfter=No
+8	.	_	_	_	_	_	_	_	NER=O
+
+# newpar id = 36
+# sent_id = 36.1
+# text = Janez Bleiweis je spodbudil zbiranje prispevkov za postavitev spomenika Prešernu na kranjskem pokopališču.
+1	Janez	_	_	_	_	_	_	_	NER=B-PER
+2	Bleiweis	_	_	_	_	_	_	_	NER=I-PER
+3	je	_	_	_	_	_	_	_	NER=O
+4	spodbudil	_	_	_	_	_	_	_	NER=O
+5	zbiranje	_	_	_	_	_	_	_	NER=O
+6	prispevkov	_	_	_	_	_	_	_	NER=O
+7	za	_	_	_	_	_	_	_	NER=O
+8	postavitev	_	_	_	_	_	_	_	NER=O
+9	spomenika	_	_	_	_	_	_	_	NER=O
+10	Prešernu	_	_	_	_	_	_	_	NER=B-PER
+11	na	_	_	_	_	_	_	_	NER=O
+12	kranjskem	_	_	_	_	_	_	_	NER=O
+13	pokopališču	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+14	.	_	_	_	_	_	_	_	NER=O
+
+# sent_id = 36.2
+# text = Kljub temu da tedanji odziv med ljudstvom ni bil posebno navdušen, so leta 1852 v sedanjem Prešernovem gaju postavili spomenik pokojnemu pesniku, ki je v kasnejših letih pridobil sloves največjega med Slovenci.
+1	Kljub	_	_	_	_	_	_	_	NER=O
+2	temu	_	_	_	_	_	_	_	NER=O
+3	da	_	_	_	_	_	_	_	NER=O
+4	tedanji	_	_	_	_	_	_	_	NER=O
+5	odziv	_	_	_	_	_	_	_	NER=O
+6	med	_	_	_	_	_	_	_	NER=O
+7	ljudstvom	_	_	_	_	_	_	_	NER=O
+8	ni	_	_	_	_	_	_	_	NER=O
+9	bil	_	_	_	_	_	_	_	NER=O
+10	posebno	_	_	_	_	_	_	_	NER=O
+11	navdušen	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+12	,	_	_	_	_	_	_	_	NER=O
+13	so	_	_	_	_	_	_	_	NER=O
+14	leta	_	_	_	_	_	_	_	NER=O
+15	1852	_	_	_	_	_	_	_	NER=O
+16	v	_	_	_	_	_	_	_	NER=O
+17	sedanjem	_	_	_	_	_	_	_	NER=O
+18	Prešernovem	_	_	_	_	_	_	_	NER=B-LOC
+19	gaju	_	_	_	_	_	_	_	NER=I-LOC
+20	postavili	_	_	_	_	_	_	_	NER=O
+21	spomenik	_	_	_	_	_	_	_	NER=O
+22	pokojnemu	_	_	_	_	_	_	_	NER=O
+23	pesniku	_	_	_	_	_	_	_	NER=O|SpaceAfter=No
+24	,	_	_	_	_	_	_	_	NER=O
+25	ki	_	_	_	_	_	_	_	NER=O
+26	je	_	_	_	_	_	_	_	NER=O
+27	v	_	_	_	_	_	_	_	NER=O
+28	kasnejših	_	_	_	_	_	_	_	NER=O
+29	letih	_	_	_	_	_	_	_	NER=O
+30	pridobil	_	_	_	_	_	_	_	NER=O
+31	sloves	_	_	_	_	_	_	_	NER=O
+32	največjega	_	_	_	_	_	_	_	NER=O
+33	med	_	_	_	_	_	_	_	NER=O
+34	Slovenci	_	_	_	_	_	_	_	NER=B-PER|SpaceAfter=No
+35	.	_	_	_	_	_	_	_	NER=O
+

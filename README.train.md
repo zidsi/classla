@@ -145,6 +145,16 @@ python -m classla.models.ner_tagger --save_dir models/ner/ --save_name ssj500k -
 python -m classla.models.ner_tagger --save_dir models/ner/ --save_name hr500k --eval_file data/hr500k.test.json --mode predict --output_file out.ner.hr
 ```
 
+### SRL
+
+For named semantic role labeling, the off-the-shelf models are available for
+- standard Slovenian http://hdl.handle.net/11356/1586
+
+
+```
+python -m classla.models.srl_tagger --save_name ssj500k --eval_file data/dev_srl_jos.conllu --output_file out.srl.sl --gold_file data/dev_srl_jos.conllu --shorthand sl_ssj --mode predict --pretrain_file ~/classla_resources/sl/pretrain/standard.pt
+```
+
 ## Training your own models
 
 ### Part-of-speech tagging
@@ -152,7 +162,7 @@ python -m classla.models.ner_tagger --save_dir models/ner/ --save_name hr500k --
 Below are examples for training models for standard Slovene, Croatian and Serbian, assuming (1) CLARIN.SI embeddings and (2) corresponding training datasets (ssj500k, hr500k, SETimes.SR) are in the specified locations. Training is performed on train+test data, while dev is used for evaluation.
 
 ```
-python -m classla.models.tagger --save_dir models/pos/ --save_name ssj500k --wordvec_file ~/data/clarin.si-embed/embed.sl-token.ft.sg.vec.xz --train_file ../babushka-bench/datasets/sl/ssj500k/train+test.conllu --eval_file ../babushka-bench/datasets/sl/ssj500k/dev.conllu --gold_file ../babushka-bench/datasets/sl/ssj500k/dev.conllu --mode train --shorthand sl_ssj --output_file temp.sl
+python -m classla.models.tagger --save_dir models/pos/ --save_name ssj500k --wordvec_file ~/data/clarin.si-embed/embed.sl-token.ft.sg.vec.xz --train_file ../babushka-bench/datasets/sl/ssj500k/train+test.conllu --eval_file ../babushka-bench/datasets/sl/ssj500k/dev.conllu --gold_file ../babushka-bench/datasets/sl/ssj500k/dev.conllu --mode train --shorthand sl_ssj --output_file temp.sl --inflectional_lexicon_path ../Sloleks2.0.MTE/sloleks_clarin_2.0-en.ud.tbl
 python -m classla.models.tagger --save_dir models/pos/ --save_name hr500k --wordvec_file ~/data/clarin.si-embed/embed.hr-token.ft.sg.vec.xz --train_file ../babushka-bench/datasets/hr/hr500k/train+test.conllu --eval_file ../babushka-bench/datasets/hr/hr500k/dev.conllu --gold_file ../babushka-bench/datasets/hr/hr500k/dev.conllu --mode train --shorthand hr_set --output_file temp.hr
 python -m classla.models.tagger --save_dir models/pos/ --save_name SETimes.SR --wordvec_file ~/data/clarin.si-embed/embed.sr-token.ft.sg.vec.xz --train_file ../babushka-bench/datasets/sr/SETimes.SR/train+test.conllu --eval_file ../babushka-bench/datasets/sr/SETimes.SR/dev.conllu --gold_file ../babushka-bench/datasets/sr/SETimes.SR/dev.conllu --mode train --shorthand sr_set --output_file temp.sr
 ```
@@ -164,7 +174,7 @@ Given that the lemmatization process relies on XPOS, to make the training data a
 The pre-tagging is performed as defined in the section of running part-of-speech tagging. The commands for training the lemmatizers are given below.
 
 ```
-python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --train_file pretagged/pos.ssj500k.train+test.conllu --eval_file pretagged/pos.ssj500k.dev.conllu --output_file temp.lemma.sl --gold_file pretagged/pos.ssj500k.dev.conllu --external_dict ~/data/morphlex/Sloleks --mode train --num_epoch 30 --decay_epoch 20 --pos
+python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file ssj500k+Sloleks --train_file pretagged/pos.ssj500k.train+test.conllu --eval_file pretagged/pos.ssj500k.dev.conllu --output_file temp.lemma.sl --gold_file pretagged/pos.ssj500k.dev.conllu --mode train --num_epoch 30 --decay_epoch 20 --pos --pos_model_path ~/classla_resources/sl/pos/standard.pt
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file hr500k+hrLex --train_file pretagged/pos.hr500k.train+test.conllu --eval_file pretagged/pos.hr500k.dev.conllu --output_file temp.lemma.hr --gold_file pretagged/pos.hr500k.dev.conllu --external_dict ~/data/morphlex/hrLex --mode train --num_epoch 30 --decay_epoch 20 --pos
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file SETimes.SR+srLex --train_file pretagged/pos.SETimes.SR.train+test.conllu --eval_file pretagged/pos.SETimes.SR.dev.conllu --output_file temp.lemma.sr --gold_file pretagged/pos.SETimes.SR.dev.conllu --external_dict ~/data/morphlex/srLex --mode train --num_epoch 30 --decay_epoch 20 --pos
 python -m classla.models.lemmatizer --model_dir models/lemma/ --model_file BTB --train_file pretagged/pos.BTB-UD.train+test.conllu --eval_file pretagged/pos.BTB-UD.dev.conllu --output_file temp.lemma.bg --gold_file pretagged/pos.BTB-UD.dev.conllu --external_dict ~/data/morphlex/BTBUD --mode train --num_epoch 30 --decay_epoch 20 --pos
@@ -220,6 +230,12 @@ python -m classla.models.parser --save_dir models/depparse/ --save_name SETimes.
 python -m classla.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.sl-token.ft.sg.vec.xz --train_file data/ssj500k.train+test.json --eval_file data/ssj500k.dev.json --lang sl --shorthand sl_ssj --mode train --save_dir models/ner/ --save_name ssj500k --scheme bio --batch_size 128
 python -m classla.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.hr-token.ft.sg.vec.xz --train_file data/hr500k.train+test.json --eval_file data/hr500k.dev.json --lang hr --shorthand hr_set --mode train --save_dir models/ner/ --save_name hr500k --scheme bio --batch_size 128
 python -m classla.models.ner_tagger --wordvec_file ~/data/clarin.si-embed/embed.sr-token.ft.sg.vec.xz --train_file data/SETimes.SR.train+test.json --eval_file data/SETimes.SR.dev.json --lang sr --shorthand sr_set --mode train --save_dir models/ner/ --save_name SETimes.SR --scheme bio --batch_size 128
+```
+
+### SRL
+
+``` 
+python -m classla.models.srl_tagger --pretrain_file ~/classla_resources/sl/pretrain/standard.pt --train_file data/train+test_srl_jos.conllu --eval_file data/dev_srl_jos.conllu --gold_file data/srl/dev_srl_jos.conllu --lang sl --shorthand sl_ssj --mode train --save_name ssj500k --output_file temp.srl.sl
 ```
 
 ## English training

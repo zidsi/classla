@@ -29,7 +29,7 @@ from classla.models.common.doc import *
 from classla.utils.conll import CoNLL
 from classla.models import _training_logging
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='data/depparse', help='Root dir for saving models.')
     parser.add_argument('--wordvec_dir', type=str, default='extern_data/word2vec', help='Directory of word vectors.')
@@ -82,13 +82,13 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
     parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
     return args
 
-def main():
+def main(args=None):
     sys.setrecursionlimit(50000)
 
-    args = parse_args()
+    args = parse_args(args=args)
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)

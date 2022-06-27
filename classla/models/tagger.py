@@ -5,7 +5,7 @@ This tagger uses highway BiLSTM layers with character and word-level representat
 to produce consistant POS and UFeats predictions.
 For details please refer to paper: https://nlp.stanford.edu/pubs/qi2018universal.pdf.
 """
-
+import csv
 import sys
 import os
 import shutil
@@ -26,7 +26,7 @@ from classla.models.common.doc import *
 from classla.utils.conll import CoNLL
 from classla.models import _training_logging
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='data/pos', help='Root dir for saving models.')
     parser.add_argument('--wordvec_dir', type=str, default='extern_data/word2vec', help='Directory of word vectors.')
@@ -37,6 +37,7 @@ def parse_args():
     parser.add_argument('--gold_file', type=str, default=None, help='Output CoNLL-U file.')
     parser.add_argument('--pretrain_file', type=str, default=None, help='Input file containing pretrained data.')
     parser.add_argument('--use_lexicon', type=str, default=None, help="Input location of lemmatization model.")
+    parser.add_argument('--inflectional_lexicon_path', type=str, default=None, help="Input location of inflectional lexicon (i.e. sloleks).")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
@@ -81,13 +82,14 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
     parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
     return args
 
-def main():
+
+def main(args=None):
     sys.setrecursionlimit(50000)
 
-    args = parse_args()
+    args = parse_args(args=args)
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -105,6 +107,44 @@ def main():
     else:
         evaluate(args)
 
+
+def generate_new_composite_dict(path, train_batch):
+    # generate initial composite dictionary from all train data
+    dict = train_batch.doc.get([TEXT, XPOS, UPOS, FEATS, LEMMA])
+    composite_dict = set([(e[0].lower(), e[1], e[2], e[3], 0.0, e[4]) for e in dict])
+
+    # composite_dict = set()
+    clensed_composite_dict = set()
+
+    lemmas_frequencies = {}
+    # get lemma frequencies
+    with open(path) as csvfile:
+        spamreader = csv.reader(csvfile, delimiter='\t')
+        for row in spamreader:
+            lemmas_frequencies[row[1]] = float(row[3]) if row[1] not in lemmas_frequencies else lemmas_frequencies[row[1]] + float(row[3])
+
+    with open(path) as csvfile:
+        spamreader = csv.reader(csvfile, delimiter='\t')
+        for row in spamreader:
+            upos_ufeats = row[6].split()
+            composite_dict.add((row[0].lower(), row[2], upos_ufeats[0], ' '.join(sorted(upos_ufeats[1:], key=lambda x: x.lower())), float(row[3]), row[1]))
+
+    composite_dict = sorted(composite_dict, key=lambda x: x[4], reverse=True)
+    all_keys = {}
+
+    for el in composite_dict:
+        if (el[0], el[1], el[2], el[3]) not in all_keys:
+            all_keys[(el[0], el[1], el[2], el[3])] = el
+            clensed_composite_dict.add(el)
+        else:
+            if el[5] not in lemmas_frequencies or all_keys[(el[0], el[1], el[2], el[3])][5] not in lemmas_frequencies or lemmas_frequencies[all_keys[(el[0], el[1], el[2], el[3])][5]] < lemmas_frequencies[el[5]]:
+                clensed_composite_dict.discard(all_keys[(el[0], el[1], el[2], el[3])])
+                clensed_composite_dict.add(el)
+
+    clensed_composite_dict = [(el[0], el[1], el[2], el[3], el[5]) for el in clensed_composite_dict]
+    return clensed_composite_dict
+
+
 def train(args):
     utils.ensure_dir(args['save_dir'])
     model_file = args['save_dir'] + '/' + args['save_name'] if args['save_name'] is not None \
@@ -117,12 +157,17 @@ def train(args):
         else args['pretrain_file']
     pretrain = Pretrain(pretrain_file, vec_file, args['pretrain_max_vocab'])
 
+
     # load data
     print("Loading data with batch size {}...".format(args['batch_size']))
     doc, metasentences = CoNLL.conll2dict(input_file=args['train_file'])
     train_doc = Document(doc, metasentences=metasentences)
     train_batch = DataLoader(train_doc, args['batch_size'], args, pretrain, evaluation=False)
     vocab = train_batch.vocab
+
+    # create inflectional_lexicon
+    inflectional_lexicon = generate_new_composite_dict(args['inflectional_lexicon_path'], train_batch) if args['inflectional_lexicon_path'] else None
+
     doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
     dev_doc = Document(doc, metasentences=metasentences)
     dev_batch = DataLoader(dev_doc, args['batch_size'], args, pretrain, vocab=vocab, evaluation=True, sort_during_eval=True)
@@ -186,7 +231,7 @@ def train(args):
                 # save best model
                 if len(dev_score_history) == 0 or dev_score > max(dev_score_history):
                     last_best_step = global_step
-                    trainer.save(model_file)
+                    trainer.save(model_file, inflectional_lexicon=inflectional_lexicon)
                     print("new best model saved.")
                     best_dev_preds = dev_preds
 

@@ -58,7 +58,7 @@ class Trainer(object):
                 self.crit.cpu()
             self.optimizer = utils.get_optimizer(self.args['optim'], self.parameters, self.args['lr'])
 
-            if len(self.composite_dict) == 0:
+            if len(self.composite_dict) == 0 and 'pos_model_path' in args and args['pos_model_path'] is not None:
                 self.composite_dict = PosTrainer.load_influectial_lexicon(args['pos_model_path'])
         self.pos_lemma_pretag = args['pos_lemma_pretag']
 
@@ -162,7 +162,12 @@ class Trainer(object):
 
         skip = []
         for p in pairs:
-            w, pos, lemma = p
+            if len(p) == 3:
+                w, pos, lemma = p
+            else:
+                w, pos = p
+                lemma = None
+
             if self.pos_lemma_pretag and lemma:
                 skip.append(True)
             elif (w,pos) in self.composite_dict:
@@ -178,7 +183,12 @@ class Trainer(object):
         lemmas = []
         assert len(pairs) == len(other_preds)
         for p, pred in zip(pairs, other_preds):
-            w, pos, lemm = p
+            if len(p) == 3:
+                w, pos, lemm = p
+            else:
+                w, pos = p
+                lemm = None
+
             if self.pos_lemma_pretag and lemm:
                 lemma = lemm
             elif (w,pos) in self.composite_dict:
@@ -197,10 +207,13 @@ class Trainer(object):
     def save(self, filename):
         params = {
                 'model': self.model.state_dict() if self.model is not None else None,
-                'dicts': (self.word_dict, self.composite_dict),
                 'vocab': self.vocab.state_dict(),
                 'config': self.args
                 }
+
+        if len(self.composite_dict) > 0 and ('pos_model_path' not in self.args or self.args['pos_model_path'] is None):
+            params['dicts'] = (self.word_dict, self.composite_dict)
+
         try:
             torch.save(params, filename)
             logger.info("Model saved to {}".format(filename))

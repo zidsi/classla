@@ -27,7 +27,7 @@ from classla.models.common.doc import *
 from classla.utils.conll import CoNLL
 from classla.models import _training_logging
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='data/lemma', help='Directory for all lemma data.')
     parser.add_argument('--train_file', type=str, default=None, help='Input file for data loader.')
@@ -70,17 +70,19 @@ def parse_args():
     parser.add_argument('--log_step', type=int, default=20, help='Print log every k steps.')
     parser.add_argument('--model_dir', type=str, default='saved_models/lemma', help='Root dir for saving models.')
     parser.add_argument('--model_file', type=str, default='saved_models/lemma', help='File for saving models.')
+    parser.add_argument('--pos_lemma_pretag', type=bool, default=False, help='File for saving models.')
+    parser.add_argument('--pos_model_path', type=str, default=None, help='Location of pos model with inf. lexicon.')
 
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
     parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
     return args
 
-def main():
+def main(args=None):
     sys.setrecursionlimit(50000)
 
-    args = parse_args()
+    args = parse_args(args=args)
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -92,6 +94,10 @@ def main():
 
     args = vars(args)
     print("Running lemmatizer in {} mode".format(args['mode']))
+
+    # manually correct for training epochs
+    if args['lang'] in ['cs_pdt', 'ru_syntagrus']:
+        args['num_epoch'] = 30
 
     if args['mode'] == 'train':
         train(args)
@@ -112,7 +118,7 @@ def train(args):
     dev_batch = DataLoader(dev_doc, args['batch_size'], args, vocab=vocab, evaluation=True)
 
     utils.ensure_dir(args['model_dir'])
-    model_file = '{}/{}_lemmatizer.pt'.format(args['model_dir'], args['lang'])
+    model_file = '{}/{}_lemmatizer.pt'.format(args['model_dir'], args['model_file'])
 
     # pred and gold path
     system_pred_file = args['output_file']
@@ -134,14 +140,14 @@ def train(args):
     if args.get('external_dict', None) is not None:
         extra_dict = []
         for line in open(args['external_dict']):
-            word, lemma, xpos = line.rstrip('\r\n').split('\t')
-            extra_dict.append((word.lower(), xpos, lemma))
-            dict = extra_dict + dict
+            word,lemma,xpos = line.rstrip('\r\n').split('\t')
+            extra_dict.append((word.lower(),xpos,lemma))
+        dict = extra_dict + dict
     trainer.train_dict(dict)
     print("Evaluating on dev set...")
-    dev_preds = trainer.predict_dict([(e[0].lower(), e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
+    dev_preds = trainer.predict_dict([(e[0].lower(),e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
     dev_batch.doc.set([LEMMA], dev_preds)
-    CoNLL.dict2conll(dev_batch.doc.to_dict(), system_pred_file)
+    CoNLL.write_doc2conll(dev_batch.doc, system_pred_file)
     _, _, dev_f = scorer.score(system_pred_file, gold_file)
     print("Dev F1 = {:.2f}".format(dev_f * 100))
 
@@ -177,25 +183,20 @@ def train(args):
             dev_preds = []
             dev_edits = []
 
-            dict_preds = trainer.predict_dict([(e[0].lower(), e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
-            # for i, batch in enumerate(dev_batch):
-            #     preds, edits = trainer.predict(batch, args['beam_size'])
-            #     dev_preds += preds
-            #     if edits is not None:
-            #         dev_edits += edits
-            # dev_preds = trainer.postprocess(dev_batch.doc.get([TEXT]), dev_preds, edits=dev_edits)
-
-            # try ensembling with dict if necessary
+            # try speeding up dev eval
+            dict_preds = trainer.predict_dict([(e[0].lower(),e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
             if args.get('ensemble_dict', False):
-                skip = trainer.skip_seq2seq([(e[0].lower(), e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
+                skip = trainer.skip_seq2seq([(e[0].lower(),e[1]) for e in dev_batch.doc.get([TEXT, XPOS])])
                 doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
                 dev_doc = Document(doc, metasentences=metasentences)
                 seq2seq_batch = DataLoader(dev_doc, args['batch_size'], args, vocab=vocab, evaluation=True, skip=skip)
-                # print("[Ensembling dict with seq2seq model...]")
-                # dev_preds = trainer.ensemble(dev_batch.doc.get([TEXT, UPOS]), dev_preds)
             else:
                 seq2seq_batch = dev_batch
-
+            for i, b in enumerate(seq2seq_batch):
+                ps, es = trainer.predict(b, args['beam_size'])
+                dev_preds += ps
+                if es is not None:
+                    dev_edits += es
             if args.get('ensemble_dict', False):
                 dev_preds = trainer.postprocess([x for x, y in zip(dev_batch.doc.get([TEXT]), skip) if not y], dev_preds, edits=dev_edits)
                 print("[Ensembling dict with seq2seq lemmatizer...]")
@@ -211,9 +212,8 @@ def train(args):
             else:
                 dev_preds = trainer.postprocess(dev_batch.doc.get([TEXT]), dev_preds, edits=dev_edits)
 
-
             dev_batch.doc.set([LEMMA], dev_preds)
-            CoNLL.dict2conll(dev_batch.doc.to_dict(), system_pred_file)
+            CoNLL.write_doc2conll(dev_batch.doc, system_pred_file)
             _, _, dev_score = scorer.score(system_pred_file, gold_file)
 
             train_loss = train_loss / train_batch.num_examples * args['batch_size'] # avg loss per batch
@@ -243,7 +243,7 @@ def evaluate(args):
     # file paths
     system_pred_file = args['output_file']
     gold_file = args['gold_file']
-    model_file = '{}/{}.pt'.format(args['model_dir'], args['model_file'])
+    model_file = '{}/{}_lemmatizer.pt'.format(args['model_dir'], args['model_file'])
 
     # load model
     use_cuda = args['cuda'] and not args['cpu']
@@ -256,9 +256,7 @@ def evaluate(args):
 
     # laod data
     print("Loading data with batch size {}...".format(args['batch_size']))
-    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
-    doc = Document(doc, metasentences=metasentences)
-    batch = DataLoader(doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
+    batch = DataLoader(args['eval_file'], args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
 
     # skip eval if dev data does not exist
     if len(batch) == 0:
@@ -287,11 +285,9 @@ def evaluate(args):
             preds += ps
             if es is not None:
                 edits += es
-        # preds = trainer.postprocess(batch.doc.get([TEXT]), preds, edits=edits)
 
         if loaded_args.get('ensemble_dict', False):
-            preds = trainer.postprocess([x for x, y in zip(batch.doc.get([TEXT]), skip) if not y], preds,
-                                        edits=edits)
+            preds = trainer.postprocess([x for x, y in zip(batch.doc.get([TEXT]), skip) if not y], preds, edits=edits)
             print("[Ensembling dict with seq2seq lemmatizer...]")
             i = 0
             preds1 = []
@@ -301,15 +297,13 @@ def evaluate(args):
                 else:
                     preds1.append(preds[i])
                     i += 1
-            preds = trainer.ensemble([(e[0].lower(), e[1]) for e in batch.doc.get([TEXT, XPOS])], preds1)
+            preds = trainer.ensemble([(e[0].lower(),e[1]) for e in batch.doc.get([TEXT, XPOS])], preds1)
         else:
             preds = trainer.postprocess(batch.doc.get([TEXT]), preds, edits=edits)
-            print("[Ensembling dict with seq2seq lemmatizer...]")
-            # preds = trainer.ensemble(batch.doc.get([TEXT, UPOS]), preds)
 
     # write to file and score
     batch.doc.set([LEMMA], preds)
-    CoNLL.dict2conll(batch.doc.to_dict(), system_pred_file)
+    CoNLL.write_doc2conll(batch.doc, system_pred_file)
     if gold_file is not None:
         _, _, score = scorer.score(system_pred_file, gold_file)
 

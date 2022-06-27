@@ -1,0 +1,9 @@
+porečniki	porečnik	Ncmpi	0.000000		Noun Type=common Gender=masculine Number=plural Case=instrumental	NOUN Case=Ins Gender=Masc Number=Plur
+porečnikoma	porečnik	Ncmdd	0.000000		Noun Type=common Gender=masculine Number=dual Case=dative	NOUN Case=Dat Gender=Masc Number=Dual
+porečnikoma	porečnik	Ncmdi	0.000000		Noun Type=common Gender=masculine Number=dual Case=instrumental	NOUN Case=Ins Gender=Masc Number=Dual
+porečnikom	porečnik	Ncmsi	0.000000		Noun Type=common Gender=masculine Number=singular Case=instrumental	NOUN Case=Ins Gender=Masc Number=Sing
+porečnikom	porečnik	Ncmpd	0.000000		Noun Type=common Gender=masculine Number=plural Case=dative	NOUN Case=Dat Gender=Masc Number=Plur
+porečnikovkah	porečnikovka	Ncfdl	0.000000		Noun Type=common Gender=feminine Number=dual Case=locative	NOUN Case=Loc Gender=Fem Number=Dual
+porečnikovkah	porečnikovka	Ncfpl	0.000000		Noun Type=common Gender=feminine Number=plural Case=locative	NOUN Case=Loc Gender=Fem Number=Plur
+porečnikovkama	porečnikovka	Ncfdd	0.000000		Noun Type=common Gender=feminine Number=dual Case=dative	NOUN Case=Dat Gender=Fem Number=Dual
+porečnikovkama	porečnikovka	Ncfdi	0.000000		Noun Type=common Gender=feminine Number=dual Case=instrumental	NOUN Case=Ins Gender=Fem Number=Dual

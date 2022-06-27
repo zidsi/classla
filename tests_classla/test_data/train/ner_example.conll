@@ -1,0 +1,58 @@
+[
+[
+{"text": "A", "ner": "O"},
+{"text": "ne", "ner": "O"},
+{"text": "v", "ner": "O"},
+{"text": "glasbi", "ner": "O"},
+{"text": ",", "ner": "O"},
+{"text": "temveč", "ner": "O"},
+{"text": "v", "ner": "O"},
+{"text": "filmu", "ner": "O"},
+{"text": ".", "ner": "O"}
+],
+
+[
+{"text": "Harrisonov", "ner": "B-deriv-per"},
+{"text": "prijatelj", "ner": "O"},
+{"text": "Michael", "ner": "B-per"},
+{"text": "Palin", "ner": "I-per"},
+{"text": "iz", "ner": "O"},
+{"text": "ekipe", "ner": "O"},
+{"text": "Leteči", "ner": "B-misc"},
+{"text": "cirkus", "ner": "I-misc"},
+{"text": "Montyja", "ner": "I-misc"},
+{"text": "Pytona", "ner": "I-misc"},
+{"text": "mu", "ner": "O"},
+{"text": "je", "ner": "O"},
+{"text": "nekoč", "ner": "O"},
+{"text": "namreč", "ner": "O"},
+{"text": "potožil", "ner": "O"},
+{"text": ",", "ner": "O"},
+{"text": "da", "ner": "O"},
+{"text": "mu", "ner": "O"},
+{"text": "je", "ner": "O"},
+{"text": "zmanjkalo", "ner": "O"},
+{"text": "denarja", "ner": "O"},
+{"text": "za", "ner": "O"},
+{"text": "film", "ner": "O"},
+{"text": "The", "ner": "B-misc"},
+{"text": "Life", "ner": "I-misc"},
+{"text": "of", "ner": "I-misc"},
+{"text": "Brian", "ner": "I-misc"},
+{"text": ".", "ner": "O"}
+],
+
+[
+{"text": "Harrison", "ner": "B-per"},
+{"text": "je", "ner": "O"},
+{"text": "vzel", "ner": "O"},
+{"text": "hipoteko", "ner": "O"},
+{"text": "na", "ner": "O"},
+{"text": "hišo", "ner": "O"},
+{"text": "in", "ner": "O"},
+{"text": "postal", "ner": "O"},
+{"text": "filmski", "ner": "O"},
+{"text": "producent", "ner": "O"},
+{"text": ".", "ner": "O"}
+]
+]

@@ -107,7 +107,7 @@ class Trainer(BaseTrainer):
             pred_tokens = utils.unsort(pred_tokens, orig_idx)
         return pred_tokens
 
-    def save(self, filename, skip_modules=True):
+    def save(self, filename, skip_modules=True, inflectional_lexicon=None):
         model_state = self.model.state_dict()
         # skip saving modules like pretrained embeddings, because they are large and will be saved in a separate file
         if skip_modules:
@@ -119,6 +119,9 @@ class Trainer(BaseTrainer):
                 'vocab': self.vocab.state_dict(),
                 'config': self.args
                 }
+        if inflectional_lexicon:
+            params['dicts'] = inflectional_lexicon
+
         try:
             torch.save(params, filename)
             logger.info("Model saved to {}".format(filename))

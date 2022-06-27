@@ -1,0 +1,42 @@
+# sent_id = ssj7.37.178
+# text = Stvari so ponovno začele iti na bolje.
+1	Stvari	stvar	NOUN	Ncfpn	Case=Nom|Gender=Fem|Number=Plur	4	nsubj	_	_
+2	so	biti	AUX	Va-r3p-n	Mood=Ind|Number=Plur|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	aux	_	_
+3	ponovno	ponovno	ADV	Rgp	Degree=Pos	5	advmod	_	_
+4	začele	začeti	VERB	Vmep-pf	Aspect=Perf|Gender=Fem|Number=Plur|VerbForm=Part	0	root	_	_
+5	iti	iti	VERB	Vmbn	VerbForm=Inf	4	xcomp	_	_
+6	na	na	ADP	Sa	Case=Acc	7	case	_	_
+7	bolje	dobro	ADV	Rgc	Degree=Cmp	5	advmod	_	_
+8	.	.	PUNCT	Z	_	4	punct	_	_
+
+# sent_id = ssj7.37.180
+# text = Harrisonov prijatelj Michael Palin iz ekipe Leteči cirkus Montyja Pytona mu je nekoč namreč potožil, da mu je zmanjkalo denarja za film The Life of Brian.
+1	Harrisonov	Harrisonov	ADJ	Aspmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|Poss=Yes	2	amod	_	_
+2	prijatelj	prijatelj	NOUN	Ncmsn	Case=Nom|Gender=Masc|Number=Sing	15	nsubj	_	_
+3	Michael	Michael	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	2	nmod	_	_
+4	Palin	Palin	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	flat_name	_	_
+5	iz	iz	ADP	Sg	Case=Gen	6	case	_	_
+6	ekipe	ekipa	NOUN	Ncfsg	Case=Gen|Gender=Fem|Number=Sing	2	nmod	_	_
+7	Leteči	leteč	ADJ	Appmsny	Case=Nom|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	8	amod	_	_
+8	cirkus	cirkus	NOUN	Ncmsn	Case=Nom|Gender=Masc|Number=Sing	6	nmod	_	_
+9	Montyja	Monty	PROPN	Npmsg	Case=Gen|Gender=Masc|Number=Sing	8	nmod	_	_
+10	Pytona	Pyton	PROPN	Npmsg	Case=Gen|Gender=Masc|Number=Sing	9	flat_name	_	_
+11	mu	on	PRON	Pp3msd--y	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs|Variant=Short	15	iobj	_	_
+12	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	15	aux	_	_
+13	nekoč	nekoč	ADV	Rgp	Degree=Pos	15	advmod	_	_
+14	namreč	namreč	CCONJ	Cc	_	15	advmod	_	_
+15	potožil	potožiti	VERB	Vmep-sm	Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	_
+16	,	,	PUNCT	Z	_	20	punct	_	_
+17	da	da	SCONJ	Cs	_	20	mark	_	_
+18	mu	on	PRON	Pp3msd--y	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs|Variant=Short	20	iobj	_	_
+19	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	20	aux	_	_
+20	zmanjkalo	zmanjkati	VERB	Vmep-sn	Aspect=Perf|Gender=Neut|Number=Sing|VerbForm=Part	15	ccomp	_	_
+21	denarja	denar	NOUN	Ncmsg	Case=Gen|Gender=Masc|Number=Sing	20	obj	_	_
+22	za	za	ADP	Sa	Case=Acc	23	case	_	_
+23	film	film	NOUN	Ncmsan	Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing	21	nmod	_	_
+24	The	the	X	Xf	Foreign=Yes	25	nmod	_	_
+25	Life	life	NOUN	Ncmsn	Case=Nom|Gender=Masc|Number=Sing	23	nmod	_	_
+26	of	of	X	Xf	Foreign=Yes	27	nmod	_	_
+27	Brian	Brian	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	25	nmod	_	_
+28	.	.	PUNCT	Z	_	15	punct	_	_
+

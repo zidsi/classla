@@ -3,7 +3,7 @@ Basic testing of lemmatization
 """
 
 import classla
-from classla.utils.conll import CoNLL
+import classla.models.lemmatizer as trainer
 
 from tests_classla import *
 
@@ -41,3 +41,14 @@ def test_full_lemmatizer():
     # with open('test_data/slovenian.lemmatizer', 'w') as f:
     #     f.write('\n\n'.join([sent.tokens_string() for sent in doc.sentences]))
     assert SL_DOC_LEMMATIZER_MODEL_GOLD == '\n\n'.join([sent.tokens_string() for sent in doc.sentences])
+
+
+def test_lemmatizer_sloleks_trainer():
+    trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt', '--train_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
+                       '--eval_file', 'test_data/train/tagger_lemmatizer_parser_example.conll', '--output_file', 'test_data/train/data/lemmatizer', '--gold_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
+                       '--mode', 'train', '--num_epoch', '1', '--decay_epoch', '20',  '--pos', '--pos_model_path', 'classla_test/models/sl/pos/standard'])
+
+def test_lemmatizer_trainer():
+    trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt', '--train_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
+                       '--eval_file', 'test_data/train/tagger_lemmatizer_parser_example.conll', '--output_file', 'test_data/train/data/lemmatizer', '--gold_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
+                       '--mode', 'train', '--num_epoch', '1', '--decay_epoch', '20',  '--pos', '--external_dict', 'test_data/train/external_dict_example.tsv'])

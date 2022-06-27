@@ -192,3 +192,10 @@ class CoNLL:
         with open(filename, 'w') as outfile:
             outfile.write(conll_string)
         return
+
+    @staticmethod
+    def write_doc2conll(doc, filename):
+        """ Writes the doc as a conll file to the given filename
+        """
+        with open(filename, 'w', encoding='utf-8') as outfile:
+            outfile.write(CoNLL.conll_as_string(CoNLL.convert_dict(doc.to_dict())))

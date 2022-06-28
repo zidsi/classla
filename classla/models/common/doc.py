@@ -555,8 +555,8 @@ class Token(StanzaObject):
         self._ner = token_entry.get(NER, None)
         self._srl = token_entry.get(SRL, None)
         self._words = words if words is not None else []
-        self._start_char = None
-        self._end_char = None
+        self._start_char = token_entry.get(START_CHAR, None)
+        self._end_char = token_entry.get(END_CHAR, None)
 
         if self._misc is not None:
             self.init_from_misc()
@@ -700,6 +700,8 @@ class Word(StanzaObject):
         self._deprel = word_entry.get(DEPREL, None)
         self._deps = word_entry.get(DEPS, None)
         self._misc = word_entry.get(MISC, None)
+        self._start_char = word_entry.get(START_CHAR, None)
+        self._end_char = word_entry.get(END_CHAR, None)
         self._parent = None
 
         if self._misc is not None:

@@ -46,7 +46,7 @@ def test_full_lemmatizer():
 def test_lemmatizer_sloleks_trainer():
     trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt', '--train_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
                        '--eval_file', 'test_data/train/tagger_lemmatizer_parser_example.conll', '--output_file', 'test_data/train/data/lemmatizer', '--gold_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
-                       '--mode', 'train', '--num_epoch', '1', '--decay_epoch', '20',  '--pos', '--pos_model_path', 'classla_test/models/sl/pos/standard'])
+                       '--mode', 'train', '--num_epoch', '1', '--decay_epoch', '20',  '--pos', '--pos_model_path', 'classla_test/models/sl/pos/standard.pt'])
 
 def test_lemmatizer_trainer():
     trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt', '--train_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',

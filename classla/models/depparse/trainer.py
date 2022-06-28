@@ -36,7 +36,7 @@ class Trainer(BaseTrainer):
             self.load(model_file, pretrain)
 
             # ugly fix for <PAD> outputs
-            self.vocab._vocabs['deprel']._id2unit[0] = 'punct'
+            self.vocab._vocabs['deprel']._id2unit[0] = 'dep'
         else:
             assert all(var is not None for var in [args, vocab, pretrain])
             # build model from scratch

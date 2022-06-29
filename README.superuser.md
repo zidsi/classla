@@ -9,8 +9,8 @@ In Slovenian it is possible to replace UD dependency parsing system with JOS par
 ### Example of JOS dependency parsing for Slovenian 
 ```
 >>> import classla
->>> classla.download('sl', type='standard_jos')                            # download standard models for Slovene, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
->>> nlp = classla.Pipeline('sl', processors='tokenize,pos,lemma,depparse,ner,srl', type='standard_jos')                      # initialize the default Slovene pipeline, use hr for Croatian, sr for Serbian, bg for Bulgarian, mk for Macedonian
+>>> classla.download('sl', type='standard_jos')                            # download standard JOS models for Slovene
+>>> nlp = classla.Pipeline('sl', type='standard_jos')                      # initialize the Slovene pipeline with JOS dependency parsing
 >>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
 >>> print(doc.to_conll())                             # print the output in CoNLL-U format
 # newpar id = 1
@@ -107,5 +107,29 @@ In addition to ```tokenize_pretokenized=True```, which expects space-separated t
 5	v	v	ADP	Sl	Case=Loc	6	case	_	NER=O
 6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
 7	.	.	PUNCT	Z	_	4	punct	_	NER=O
+
+```
+
+## SRL tagging
+
+In Slovenian there is also an option to obtain semantic role labeling tags. In order to do that, JOS parsing system is required.
+
+### Example of SRL tagging for Slovenian 
+```
+>>> import classla
+>>> classla.download('sl', type='standard_jos')                            # download standard JOS models for Slovene
+>>> nlp = classla.Pipeline('sl', processors='tokenize,pos,lemma,depparse,ner,srl', type='standard_jos')                      # initialize the Slovene pipeline with JOS and SRL
+>>> doc = nlp("France Prešeren je rojen v Vrbi.")     # run the pipeline
+>>> print(doc.to_conll())                             # print the output in CoNLL-U format
+# newpar id = 1
+# sent_id = 1.1
+# text = France Prešeren je rojen v Vrbi.
+1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	Sb	_	NER=B-PER|SRL=ACT
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	Atr	_	NER=I-PER
+3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	0	Root	_	NER=O
+4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	3	Atr	_	NER=O|SRL=RESLT
+5	v	v	ADP	Sl	Case=Loc	6	Atr	_	NER=O
+6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	3	AdvO	_	NER=B-LOC|SpaceAfter=No|SRL=LOC
+7	.	.	PUNCT	Z	_	0	Root	_	NER=O
 
 ```

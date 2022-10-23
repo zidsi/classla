@@ -308,8 +308,8 @@ If you use this tool, please cite the following paper:
 
 ## Training instructions
 
-[Training instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/main/README.train.md)
+[Training instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.train.md)
 
 ## Superuser instructions
 
-[Superuser instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/main/README.superuser.md)
+[Superuser instructions](https://github.com/clarinsi/classla-stanfordnlp/blob/master/README.superuser.md)

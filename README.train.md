@@ -67,9 +67,9 @@ For now, there are available off-the-shelf models for part-of-speech tagging for
 Once you placed the PoS-tagging model files into the ```models/pos/``` path, you can run the following commands (for (1) Slovenian, (2) Croatian, or (3) Serbian)
 
 ```
-python -m classla.models.tagger --save_dir models/pos/ --save_name ssj500k --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --shorthand sl_ssj --mode predict
-python -m classla.models.tagger --save_dir models/pos/ --save_name hr500k --eval_file data/hr500k.dev.conllu --output_file temp --gold_file data/hr500k.dev.conllu --shorthand hr_set --mode predict
-python -m classla.models.tagger --save_dir models/pos/ --save_name SETimes.SR --eval_file data/SETimes.SR.dev.conllu --output_file temp --gold_file data/SETimes.SR.dev.conllu --shorthand sr_set --mode predict
+python -m classla.models.tagger --save_dir models/pos/ --save_name ssj500k --eval_file data/ssj500k.dev.conllu --output_file temp --gold_file data/ssj500k.dev.conllu --shorthand sl_ssj --mode predict --pretrain_file ~/classla_resources/sl/pretrain/standard.pt
+python -m classla.models.tagger --save_dir models/pos/ --save_name hr500k --eval_file data/hr500k.dev.conllu --output_file temp --gold_file data/hr500k.dev.conllu --shorthand hr_set --mode predict --pretrain_file ~/classla_resources/hr/pretrain/standard.pt
+python -m classla.models.tagger --save_dir models/pos/ --save_name SETimes.SR --eval_file data/SETimes.SR.dev.conllu --output_file temp --gold_file data/SETimes.SR.dev.conllu --shorthand sr_set --mode predict --pretrain_file ~/classla_resources/sr/pretrain/standard.pt
 ```
 
 If you do not want to evaluate the tagger, but just annotate a new file, you can leave out the ```--gold_file``` argument.

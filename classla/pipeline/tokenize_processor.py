@@ -92,7 +92,8 @@ class TokenizeProcessor(UDProcessor):
                 for token in sent:
                     if 'xpos' in token and ('pos' not in self.pipeline.processors or pos_lemma_pretag):
                         del token['xpos']
-                        del token['upos']
+                        if 'upos' in token:
+                            del token['upos']
                         if 'feats' in token:
                             del token['feats']
                     if 'lemma' in token and ('lemma' not in self.pipeline.processors or pos_lemma_pretag):

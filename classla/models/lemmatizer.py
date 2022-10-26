@@ -72,6 +72,7 @@ def parse_args(args=None):
     parser.add_argument('--model_file', type=str, default='saved_models/lemma', help='File for saving models.')
     parser.add_argument('--pos_lemma_pretag', type=bool, default=False, help='File for saving models.')
     parser.add_argument('--pos_model_path', type=str, default=None, help='Location of pos model with inf. lexicon.')
+    parser.add_argument('--pos_force_inf_lexicon', action='store_true', help='Boolean tag, that forces program to use inf. lexicon from POS model.')
 
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
@@ -247,7 +248,7 @@ def evaluate(args):
 
     # load model
     use_cuda = args['cuda'] and not args['cpu']
-    trainer = Trainer(model_file=model_file, use_cuda=use_cuda)
+    trainer = Trainer(args=args, model_file=model_file, use_cuda=use_cuda)
     loaded_args, vocab = trainer.args, trainer.vocab
 
     for k in args:
@@ -256,7 +257,9 @@ def evaluate(args):
 
     # laod data
     print("Loading data with batch size {}...".format(args['batch_size']))
-    batch = DataLoader(args['eval_file'], args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
+    doc, metasentences = CoNLL.conll2dict(input_file=args['eval_file'])
+    eval_doc = Document(doc, metasentences=metasentences)
+    batch = DataLoader(eval_doc, args['batch_size'], loaded_args, vocab=vocab, evaluation=True)
 
     # skip eval if dev data does not exist
     if len(batch) == 0:

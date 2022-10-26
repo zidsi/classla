@@ -52,3 +52,8 @@ def test_lemmatizer_trainer():
     trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt', '--train_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
                        '--eval_file', 'test_data/train/tagger_lemmatizer_parser_example.conll', '--output_file', 'test_data/train/data/lemmatizer', '--gold_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
                        '--mode', 'train', '--num_epoch', '1', '--decay_epoch', '20',  '--pos', '--external_dict', 'test_data/train/external_dict_example.tsv'])
+
+def test_lemmatizer_evaluation():
+    trainer.main(args=['--model_dir', 'test_data/train/data', '--model_file', 'ssj500k+Sloleks.pt',
+                       '--eval_file', 'test_data/train/tagger_lemmatizer_parser_example.conll', '--output_file', 'test_data/train/data/lemmatizer', '--gold_file', 'test_data/train/tagger_lemmatizer_parser_example.conll',
+                       '--mode', 'predict', '--pos_model_path', TEST_MODELS_DIR + '/sl/pos/standard.pt', '--pos_force_inf_lexicon'])

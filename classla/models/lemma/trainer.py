@@ -227,7 +227,7 @@ class Trainer(object):
             logger.error("Cannot load model from {}".format(filename))
             raise
         self.args = checkpoint['config']
-        self.word_dict, self.composite_dict = checkpoint['dicts']
+        self.word_dict, self.composite_dict = checkpoint['dicts'] if 'dicts' in checkpoint else {}, {}
 
         if not self.args['dict_only']:
             self.model = Seq2SeqModel(self.args, use_cuda=use_cuda)

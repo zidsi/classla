@@ -151,7 +151,7 @@ class Trainer(BaseTrainer):
         self.dict = checkpoint['dicts'] if 'dicts' in checkpoint else None
 
     @staticmethod
-    def load_influectial_lexicon(filename):
+    def load_inflectional_lexicon(filename):
         try:
             checkpoint = torch.load(filename, lambda storage, loc: storage)
         except BaseException:
@@ -160,6 +160,7 @@ class Trainer(BaseTrainer):
 
         inf_lexicon = {}
         for entry in checkpoint['dicts']:
-            inf_lexicon[(entry[0], entry[1])] = entry[4]
+            if (entry[0], entry[1]) not in inf_lexicon:
+                inf_lexicon[(entry[0], entry[1])] = entry[4]
 
         return inf_lexicon

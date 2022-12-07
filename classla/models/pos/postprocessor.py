@@ -178,12 +178,7 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
             for word_id, (word_string, word_xpos, word_upos) in enumerate(zip(sent_strings, sent_xpos, sent_upos)):
                 key_tuple = (word_string, word_xpos, word_upos)
                 if key_tuple in self.hypothesis_dictionary_feats:
-                    prediction_candidates = list(set(self.hypothesis_dictionary_feats[key_tuple]))
-                    # if only one possible prediction in hypothesis dictionary, take it!
-                    if len(prediction_candidates) == 1:
-                        prediction = prediction_candidates[0]
-                    else:
-                        raise Exception('Unexpected multiple options in "hypothesis_dictionary_feats"!')
+                    prediction = self.hypothesis_dictionary_feats[key_tuple][0]
                 else:
                     word_feat = []
                     for feat_id in range(len(padded_prediction)):

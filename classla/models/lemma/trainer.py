@@ -58,8 +58,8 @@ class Trainer(object):
                 self.crit.cpu()
             self.optimizer = utils.get_optimizer(self.args['optim'], self.parameters, self.args['lr'])
 
-            if args and 'pos_force_inf_lexicon' in args and args['pos_force_inf_lexicon'] or len(self.composite_dict) == 0 and args and 'pos_model_path' in args and args['pos_model_path'] is not None:
-                self.composite_dict = PosTrainer.load_influectial_lexicon(args['pos_model_path'])
+            if len(self.composite_dict) == 0 and args and 'pos_model_path' in args and args['pos_model_path'] is not None:
+                self.composite_dict = PosTrainer.load_inflectional_lexicon(args['pos_model_path'])
         self.pos_lemma_pretag = args['pos_lemma_pretag']
 
     def update(self, batch, eval=False):

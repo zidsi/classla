@@ -10,6 +10,7 @@ import sys
 import os
 import shutil
 import time
+from collections import Counter
 from datetime import datetime
 import argparse
 import numpy as np
@@ -38,6 +39,7 @@ def parse_args(args=None):
     parser.add_argument('--pretrain_file', type=str, default=None, help='Input file containing pretrained data.')
     parser.add_argument('--use_lexicon', type=str, default=None, help="Input location of lemmatization model.")
     parser.add_argument('--inflectional_lexicon_path', type=str, default=None, help="Input location of inflectional lexicon (i.e. sloleks).")
+    parser.add_argument('--lemma_pretag', action='store_true', help="Use pretag from tokenization processor.")
 
     parser.add_argument('--mode', default='train', choices=['train', 'predict'])
     parser.add_argument('--lang', type=str, help='Language')
@@ -108,41 +110,45 @@ def main(args=None):
         evaluate(args)
 
 
-def generate_new_composite_dict(path, train_batch):
+def generate_new_composite_dict(inflectional_lexicon_path, train_batch):
     # generate initial composite dictionary from all train data
-    dict = train_batch.doc.get([TEXT, XPOS, UPOS, FEATS, LEMMA])
-    composite_dict = set([(e[0].lower(), e[1], e[2], e[3], 0.0, e[4]) for e in dict])
-
-    # composite_dict = set()
-    clensed_composite_dict = set()
+    train_dict = train_batch.doc.get([TEXT, XPOS, UPOS, FEATS, LEMMA])
+    inflectional_dict = set()
 
     lemmas_frequencies = {}
     # get lemma frequencies
-    with open(path) as csvfile:
-        spamreader = csv.reader(csvfile, delimiter='\t')
-        for row in spamreader:
+    with open(inflectional_lexicon_path) as csvfile:
+        csv_reader = csv.reader(csvfile, delimiter='\t')
+        for row in csv_reader:
             lemmas_frequencies[row[1]] = float(row[3]) if row[1] not in lemmas_frequencies else lemmas_frequencies[row[1]] + float(row[3])
-
-    with open(path) as csvfile:
-        spamreader = csv.reader(csvfile, delimiter='\t')
-        for row in spamreader:
             upos_ufeats = row[6].split()
-            composite_dict.add((row[0].lower(), row[2], upos_ufeats[0], ' '.join(sorted(upos_ufeats[1:], key=lambda x: x.lower())), float(row[3]), row[1]))
+            inflectional_dict.add((row[0].lower(), row[2], upos_ufeats[0],
+                                '|'.join(sorted(upos_ufeats[1:], key=lambda x: x.lower())), float(row[3]), row[1]))
 
-    composite_dict = sorted(composite_dict, key=lambda x: x[4], reverse=True)
+    composite_dict = sorted(inflectional_dict, key=lambda x: x[4], reverse=True)
     all_keys = {}
 
+    cleaned_composite_dict = []
+    i = 0
     for el in composite_dict:
         if (el[0], el[1], el[2], el[3]) not in all_keys:
-            all_keys[(el[0], el[1], el[2], el[3])] = el
-            clensed_composite_dict.add(el)
+            all_keys[(el[0], el[1], el[2], el[3])] = (el, i)
+            cleaned_composite_dict.append((el[0], el[1], el[2], el[3], el[5]))
+            i += 1
         else:
-            if el[5] not in lemmas_frequencies or all_keys[(el[0], el[1], el[2], el[3])][5] not in lemmas_frequencies or lemmas_frequencies[all_keys[(el[0], el[1], el[2], el[3])][5]] < lemmas_frequencies[el[5]]:
-                clensed_composite_dict.discard(all_keys[(el[0], el[1], el[2], el[3])])
-                clensed_composite_dict.add(el)
+            if el[5] in lemmas_frequencies and all_keys[(el[0], el[1], el[2], el[3])][0][5] in lemmas_frequencies and \
+                    lemmas_frequencies[all_keys[(el[0], el[1], el[2], el[3])][0][5]] < lemmas_frequencies[el[5]]:
+                old_el, updating_index = all_keys[(el[0], el[1], el[2], el[3])]
+                all_keys[(el[0], el[1], el[2], el[3])] = (el, updating_index)
+                cleaned_composite_dict[updating_index] = (el[0], el[1], el[2], el[3], el[5])
 
-    clensed_composite_dict = [(el[0], el[1], el[2], el[3], el[5]) for el in clensed_composite_dict]
-    return clensed_composite_dict
+    train_dict = [(el[0], el[1], el[2], el[3], el[4]) if el[3] is not None else (el[0], el[1], el[2], '', el[4])
+                  for el in train_dict]
+    train_dict_most_common = Counter(train_dict).most_common()
+    filtered_train_dict = [el[0] for el in train_dict_most_common
+                           if (el[0][0], el[0][1], el[0][2], el[0][3]) not in all_keys]
+    cleaned_composite_dict.extend(filtered_train_dict)
+    return cleaned_composite_dict
 
 
 def train(args):

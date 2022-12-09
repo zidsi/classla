@@ -194,7 +194,7 @@ class SloveneInflectionalLexiconProcessor(InflectionalLexiconProcessor):
     def extract_lexicon_data(self, lexicon):
         """ Creates hypothesis dictionary from lexicon. """
         if lexicon is None:
-            raise Exception("You have to re-download Slovenian models. You can do this by using the following command: classla.download('sl')")
+            raise Exception("Inflectional lexicon is only supported for Slovenian standard models. If you are using other models, set `pos_use_lexicon` to `False` (or remove it). Otherwise, you have to re-download Slovenian models. You can do this by using the following command: classla.download('sl')")
         for key in lexicon:
             if key[1] in self.xpos_vocab:
                 self.hypothesis_dictionary_xpos.setdefault(key[0].lower(), []).append(key[1])

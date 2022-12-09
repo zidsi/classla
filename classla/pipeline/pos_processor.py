@@ -49,6 +49,10 @@ class POSProcessor(UDProcessor):
         preds = []
         for i, b in enumerate(batch):
             preds += self.trainer.predict(b)
+
+        if not preds:
+            return batch.doc
+
         preds = unsort(preds, batch.data_orig_idx)
         if 'lemma_pretag' in self.config and self.config['lemma_pretag']:
             preds_flattened = []

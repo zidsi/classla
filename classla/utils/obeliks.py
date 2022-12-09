@@ -35,6 +35,9 @@ class ObeliksTrainer():
         document = []
         metadocument = []
 
+        if raw_text == '' or raw_text.isspace():
+            return raw_text, document, metadocument
+
         for doc in obeliks.run(raw_text, object_output=True):
             for sentence in doc:
                 for word in sentence['sentence']:

@@ -138,6 +138,9 @@ class DataLoader:
     def chunk_batches(self, data):
         res = []
 
+        if not data:
+            return res
+
         if not self.eval:
             # sort sentences (roughly) by length for better memory utilization
             data = sorted(data, key = lambda x: len(x[0]), reverse=random.random() > .5)

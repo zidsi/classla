@@ -84,8 +84,17 @@ class Trainer(BaseTrainer):
         tag_seqs = []
         for i in range(bs):
             tags, _ = viterbi_decode(scores[i, :sentlens[i]], trans)
-            tags = [e.upper() for e in self.vocab['tag'].unmap(tags)] # uppercased tags, dirty hack to have unified NER tags, to be removed once training datasets are corrected
-            tag_seqs += [tags]
+            tag_names = []
+            used_tags = set()
+            # hand-fixed BIO tags that don't begin with B but I
+            for e in self.vocab['tag'].unmap(tags):
+                tag = e.upper()
+                entity_type = tag[2:]
+                if tag != 'O' and tag[0] == 'I' and entity_type not in used_tags:
+                    tag = 'B-' + entity_type
+                used_tags.add(entity_type)
+                tag_names.append(tag) # uppercased tags, dirty hack to have unified NER tags, to be removed once training datasets are corrected
+            tag_seqs += [tag_names]
 
         if unsort:
             tag_seqs = utils.unsort(tag_seqs, orig_idx)

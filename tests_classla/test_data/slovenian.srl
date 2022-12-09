@@ -978,7 +978,7 @@
 5	jo	on	PRON	Pp3fsa--y	Case=Acc|Gender=Fem|Number=Sing|Person=3|PronType=Prs|Variant=Short	7	Obj	_	SRL=PAT
 6	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	7	PPart	_	_
 7	sestavljalo	sestavljati	VERB	Vmpp-sn	Aspect=Imp|Gender=Neut|Number=Sing|VerbForm=Part	0	Root	_	_
-8	preveč	preveč	DET	Rgp	PronType=Ind	9	Atr	_	_
+8	preveč	preveliko	DET	Rgp	PronType=Ind	12	Atr	_	_
 9	zapletenih	zapleten	ADJ	Agpfpg	Case=Gen|Degree=Pos|Gender=Fem|Number=Plur	12	Atr	_	_
 10	in	in	CCONJ	Cc	_	11	Conj	_	_
 11	nepotrebnih	nepotreben	ADJ	Agpfpg	Case=Gen|Degree=Pos|Gender=Fem|Number=Plur	9	Coord	_	_

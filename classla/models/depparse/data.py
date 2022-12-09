@@ -28,6 +28,9 @@ def data_to_batches(data, batch_size, eval_mode, sort_during_eval, max_sentence_
     """
     res = []
 
+    if not data:
+        return res, None
+
     if not eval_mode:
         # sort sentences (roughly) by length for better memory utilization
         data = sorted(data, key = lambda x: len(x[0]), reverse=random.random() > .5)

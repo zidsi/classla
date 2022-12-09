@@ -146,8 +146,16 @@ class Document(StanzaObject):
         metasentences = metasentences if metasentences else [None] * len(sentences)
         for tokens, metadata in zip(sentences, metasentences):
             self.sentences.append(Sentence(tokens, doc=self, metadata=metadata))
-            begin_idx, end_idx = self.sentences[-1].tokens[0].start_char, self.sentences[-1].tokens[-1].end_char
-            if all([self.text is not None, begin_idx is not None, end_idx is not None]): self.sentences[-1].text = self.text[begin_idx: end_idx]
+            sentence_text = ''
+            if metadata:
+                split_metadata = metadata.split('\n')
+                for l in split_metadata:
+                    if len(l) > 9 and l[:9] == '# text = ':
+                        sentence_text = l[9:]
+                        self.sentences[-1].text = sentence_text
+            if not sentence_text:
+                begin_idx, end_idx = self.sentences[-1].tokens[0].start_char, self.sentences[-1].tokens[-1].end_char
+                if all([self.text is not None, begin_idx is not None, end_idx is not None]): self.sentences[-1].text = self.text[begin_idx: end_idx]
 
         self.num_tokens = sum([len(sentence.tokens) for sentence in self.sentences])
         self.num_words = sum([len(sentence.words) for sentence in self.sentences])

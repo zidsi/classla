@@ -120,10 +120,10 @@ def generate_new_composite_dict(inflectional_lexicon_path, train_batch):
     with open(inflectional_lexicon_path) as csvfile:
         csv_reader = csv.reader(csvfile, delimiter='\t')
         for row in csv_reader:
-            lemmas_frequencies[row[1]] = float(row[3]) if row[1] not in lemmas_frequencies else lemmas_frequencies[row[1]] + float(row[3])
-            upos_ufeats = row[6].split()
-            inflectional_dict.add((row[0].lower(), row[2], upos_ufeats[0],
-                                '|'.join(sorted(upos_ufeats[1:], key=lambda x: x.lower())), float(row[3]), row[1]))
+            if row[0] == 'FORM' and row[1] == 'LEMMA':   # ignore header line
+                continue
+            lemmas_frequencies[row[1]] = float(row[6]) if row[1] not in lemmas_frequencies else lemmas_frequencies[row[1]] + float(row[6])
+            inflectional_dict.add((row[0].lower(), row[3], row[4], row[5], float(row[6]), row[1]))
 
     composite_dict = sorted(inflectional_dict, key=lambda x: x[4], reverse=True)
     all_keys = {}

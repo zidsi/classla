@@ -159,6 +159,7 @@ class Trainer(BaseTrainer):
             raise
 
         inf_lexicon = {}
+        assert 'dicts' in checkpoint, Exception('Can not load inflectional dictionary. Make sure that your tagger model has it.')
         for entry in checkpoint['dicts']:
             if (entry[0], entry[1]) not in inf_lexicon:
                 inf_lexicon[(entry[0], entry[1])] = entry[4]

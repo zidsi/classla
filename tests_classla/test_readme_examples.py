@@ -32,14 +32,14 @@ SL_NONSTANDARD_CONLL = """
 # newpar id = 1
 # sent_id = 1.1
 # text = kva smo mi zurali zadnje leto v zagrebu...
-1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O
+1	kva	kaj	PRON	Pq-nsn	Case=Nom|Gender=Neut|Number=Sing|PronType=Int	4	nsubj	_	NER=O
 2	smo	biti	AUX	Va-r1p-n	Mood=Ind|Number=Plur|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
-3	mi	jaz	PRON	Pp1-sd--y	Case=Dat|Number=Plur|Person=1|PronType=Prs|Variant=Short	4	iobj	_	NER=O
+3	mi	jaz	PRON	Pp3msa--y	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs|Variant=Short	4	obj	_	NER=O
 4	zurali	zurati	VERB	Vmep-pm	Aspect=Perf|Gender=Masc|Number=Plur|VerbForm=Part	0	root	_	NER=O
 5	zadnje	zadnji	ADJ	Agpnsa	Case=Acc|Degree=Pos|Gender=Neut|Number=Sing	6	amod	_	NER=O
 6	leto	leto	NOUN	Ncnsa	Case=Acc|Gender=Neut|Number=Sing	4	obl	_	NER=O
 7	v	v	ADP	Sl	Case=Loc	8	case	_	NER=O
-8	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
+8	zagrebu	zagreb	NOUN	Ncmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
 9	...	...	PUNCT	Z	_	4	punct	_	NER=O
 
 """.strip()
@@ -156,13 +156,13 @@ SL_STANDARD_JOS_CONLL = """
 # newpar id = 1
 # sent_id = 1.1
 # text = France Prešeren je rojen v Vrbi.
-1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	Sb	_	NER=B-PER|SRL=ACT
-2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	Atr	_	NER=I-PER
-3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	0	Root	_	NER=O
-4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	3	Atr	_	NER=O|SRL=RESLT
-5	v	v	ADP	Sl	Case=Loc	6	Atr	_	NER=O
-6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	3	AdvO	_	NER=B-LOC|SpaceAfter=No|SRL=LOC
-7	.	.	PUNCT	Z	_	0	Root	_	NER=O
+1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	ena	_	NER=B-PER|SRL=PAT
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	dol	_	NER=I-PER
+3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	0	modra	_	NER=O
+4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	3	dol	_	NER=O|SRL=RESLT
+5	v	v	ADP	Sl	Case=Loc	6	dol	_	NER=O
+6	Vrbi	Vrba	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	3	štiri	_	NER=B-LOC|SpaceAfter=No|SRL=LOC
+7	.	.	PUNCT	Z	_	0	modra	_	NER=O
 
 """.strip()
 

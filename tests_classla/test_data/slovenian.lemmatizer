@@ -244,7 +244,7 @@
 <Token id=8;words=[<Word id=8;text=rojstva;lemma=rojstvo;upos=NOUN;xpos=Ncnsg;feats=Case=Gen|Gender=Neut|Number=Sing>]>
 <Token id=9;words=[<Word id=9;text=kot;lemma=kot;upos=SCONJ;xpos=Cs>]>
 <Token id=10;words=[<Word id=10;text=Ta;lemma=ta;upos=DET;xpos=Pd-msa;feats=Case=Nom|Gender=Masc|Number=Sing|PronType=Dem>]>
-<Token id=11;words=[<Word id=11;text=veseli;lemma=vesel;upos=ADJ;xpos=Agpmsay;feats=Case=Acc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing>]>
+<Token id=11;words=[<Word id=11;text=veseli;lemma=vesel;upos=ADJ;xpos=Agpmsny;feats=Case=Acc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=12;words=[<Word id=12;text=dan;lemma=dan;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=13;words=[<Word id=13;text=kulture;lemma=kultura;upos=NOUN;xpos=Ncfsg;feats=Case=Gen|Gender=Fem|Number=Sing>]>
 <Token id=14;words=[<Word id=14;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
@@ -297,10 +297,10 @@
 <Token id=28;words=[<Word id=28;text=Šimnu;lemma=Šimn;upos=PROPN;xpos=Npmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
 <Token id=29;words=[<Word id=29;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=30;words=[<Word id=30;text=po;lemma=po;upos=ADP;xpos=Sl;feats=Case=Loc>]>
-<Token id=31;words=[<Word id=31;text=domače;lemma=domač;upos=ADJ;xpos=Agpnsn;feats=Case=Loc|Degree=Pos|Gender=Neut|Number=Sing>]>
-<Token id=32;words=[<Word id=32;text=Ribčevemu;lemma=Ribčevem;upos=PROPN;xpos=Npmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
+<Token id=31;words=[<Word id=31;text=domače;lemma=domač;upos=ADJ;xpos=Agpnsa;feats=Case=Acc|Degree=Pos|Gender=Fem|Number=Sing>]>
+<Token id=32;words=[<Word id=32;text=Ribčevemu;lemma=Ribčev;upos=ADJ;xpos=Aspmsl;feats=Case=Loc|Degree=Pos|Gender=Masc|Number=Sing|Poss=Yes>]>
 <Token id=33;words=[<Word id=33;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
-<Token id=34;words=[<Word id=34;text=Hribčevemu;lemma=Hribčev;upos=ADJ;xpos=Aspmsl;feats=Case=Loc|Degree=Pos|Gender=Masc|Number=Sing|Poss=Yes>]>
+<Token id=34;words=[<Word id=34;text=Hribčevemu;lemma=Hribčev;upos=ADJ;xpos=Aspmsd;feats=Case=Loc|Degree=Pos|Gender=Masc|Number=Sing|Poss=Yes>]>
 <Token id=35;words=[<Word id=35;text=);lemma=);upos=PUNCT;xpos=Z>]>
 <Token id=36;words=[<Word id=36;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=37;words=[<Word id=37;text=iz;lemma=iz;upos=ADP;xpos=Sg;feats=Case=Gen>]>
@@ -583,7 +583,7 @@
 <Token id=22;words=[<Word id=22;text=gostilničarjevo;lemma=gostilničarjev;upos=ADJ;xpos=Aspfsa;feats=Case=Acc|Degree=Pos|Gender=Fem|Number=Sing|Poss=Yes>]>
 <Token id=23;words=[<Word id=23;text=hčer;lemma=hči;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=24;words=[<Word id=24;text=Zaliko;lemma=Zalika;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
-<Token id=25;words=[<Word id=25;text=Dolenc;lemma=Dolenc;upos=PROPN;xpos=Npfsa;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=25;words=[<Word id=25;text=Dolenc;lemma=Dolenc;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=26;words=[<Word id=26;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
 <Token id=1;words=[<Word id=1;text=Ljubljana;lemma=Ljubljana;upos=PROPN;xpos=Npfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
@@ -616,7 +616,7 @@
 <Token id=21;words=[<Word id=21;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=22;words=[<Word id=22;text=pri;lemma=pri;upos=ADP;xpos=Sl;feats=Case=Loc>]>
 <Token id=23;words=[<Word id=23;text=odvetniku;lemma=odvetnik;upos=NOUN;xpos=Ncmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
-<Token id=24;words=[<Word id=24;text=Leopoldu;lemma=Leopold;upos=PROPN;xpos=Npmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
+<Token id=24;words=[<Word id=24;text=Leopoldu;lemma=Leopold;upos=PROPN;xpos=Npmsd;feats=Case=Loc|Gender=Masc|Number=Sing>]>
 <Token id=25;words=[<Word id=25;text=Baumgartnerju;lemma=Baumgartner;upos=PROPN;xpos=Npmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
 <Token id=26;words=[<Word id=26;text=pričel;lemma=pričeti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=27;words=[<Word id=27;text=opravljati;lemma=opravljati;upos=VERB;xpos=Vmpn;feats=Aspect=Imp|VerbForm=Inf>]>
@@ -647,7 +647,7 @@
 <Token id=3;words=[<Word id=3;text=se;lemma=se;upos=PRON;xpos=Px------y;feats=PronType=Prs|Reflex=Yes|Variant=Short>]>
 <Token id=4;words=[<Word id=4;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=5;words=[<Word id=5;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
-<Token id=6;words=[<Word id=6;text=spoprijateljil;lemma=spoprijateljiti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
+<Token id=6;words=[<Word id=6;text=spoprijateljil;lemma=spoprijateljiti;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=7;words=[<Word id=7;text=s;lemma=z;upos=ADP;xpos=Si;feats=Case=Ins>]>
 <Token id=8;words=[<Word id=8;text=profesorjem;lemma=profesor;upos=NOUN;xpos=Ncmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
 <Token id=9;words=[<Word id=9;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
@@ -694,8 +694,8 @@
 <Token id=5;words=[<Word id=5;text=osrednji;lemma=osrednji;upos=ADJ;xpos=Agpmsny;feats=Case=Nom|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=6;words=[<Word id=6;text=pesnik;lemma=pesnik;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=7;words=[<Word id=7;text=zbornika;lemma=zbornik;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
-<Token id=8;words=[<Word id=8;text=Krajnska;lemma=krajnski;upos=ADJ;xpos=Agpmsg;feats=Case=Gen|Degree=Pos|Gender=Masc|Number=Sing>]>
-<Token id=9;words=[<Word id=9;text=čbelica;lemma=čbelic;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
+<Token id=8;words=[<Word id=8;text=Krajnska;lemma=krajnski;upos=ADJ;xpos=Agpfsn;feats=Case=Nom|Degree=Pos|Gender=Fem|Number=Sing>]>
+<Token id=9;words=[<Word id=9;text=čbelica;lemma=čbelica;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
 <Token id=10;words=[<Word id=10;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=11;words=[<Word id=11;text=ki;lemma=ki;upos=SCONJ;xpos=Cs>]>
 <Token id=12;words=[<Word id=12;text=ga;lemma=on;upos=PRON;xpos=Pp3msa--y;feats=Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs|Variant=Short>]>
@@ -773,12 +773,12 @@
 <Token id=25;words=[<Word id=25;text=slovenskem;lemma=slovenski;upos=ADJ;xpos=Agpmsl;feats=Case=Loc|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=26;words=[<Word id=26;text=jeziku;lemma=jezik;upos=NOUN;xpos=Ncmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
 <Token id=27;words=[<Word id=27;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
-<Token id=28;words=[<Word id=28;text=janzenisti;lemma=janzenist;upos=NOUN;xpos=Ncfsd;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=28;words=[<Word id=28;text=janzenisti;lemma=janzenist;upos=NOUN;xpos=Ncmpn;feats=Case=Nom|Gender=Masc|Number=Plur>]>
 <Token id=29;words=[<Word id=29;text=pa;lemma=pa;upos=CCONJ;xpos=Cc>]>
 <Token id=30;words=[<Word id=30;text=za;lemma=za;upos=ADP;xpos=Sa;feats=Case=Acc>]>
 <Token id=31;words=[<Word id=31;text=književnost;lemma=književnost;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=32;words=[<Word id=32;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
-<Token id=33;words=[<Word id=33;text=osnovano;lemma=osnovan;upos=ADJ;xpos=Appnsa;feats=Case=Acc|Degree=Pos|Gender=Neut|Number=Sing|VerbForm=Part>]>
+<Token id=33;words=[<Word id=33;text=osnovano;lemma=osnovan;upos=ADJ;xpos=Appfsa;feats=Case=Acc|Degree=Pos|Gender=Fem|Number=Sing|VerbForm=Part>]>
 <Token id=34;words=[<Word id=34;text=na;lemma=na;upos=ADP;xpos=Sl;feats=Case=Loc>]>
 <Token id=35;words=[<Word id=35;text=ljudskem;lemma=ljudski;upos=ADJ;xpos=Agpnsl;feats=Case=Loc|Degree=Pos|Gender=Neut|Number=Sing>]>
 <Token id=36;words=[<Word id=36;text=slovstvu;lemma=slovstvo;upos=NOUN;xpos=Ncnsl;feats=Case=Loc|Gender=Neut|Number=Sing>]>
@@ -857,7 +857,7 @@
 <Token id=42;words=[<Word id=42;text=novega;lemma=nov;upos=ADJ;xpos=Agpmsg;feats=Case=Gen|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=43;words=[<Word id=43;text=črkopisa;lemma=črkopis;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=44;words=[<Word id=44;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
-<Token id=45;words=[<Word id=45;text=imenovana;lemma=imenovan;upos=ADJ;xpos=Appfsn;feats=Case=Nom|Degree=Pos|Gender=Fem|Number=Sing|VerbForm=Part>]>
+<Token id=45;words=[<Word id=45;text=imenovana;lemma=imenovan;upos=ADJ;xpos=Appfsn;feats=Case=Nom|Degree=Pos|Gender=Fem|Number=Dual|VerbForm=Part>]>
 <Token id=46;words=[<Word id=46;text=metelčica;lemma=metelčica;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
 <Token id=47;words=[<Word id=47;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
 <Token id=48;words=[<Word id=48;text=dajnčica;lemma=dajnčica;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
@@ -878,7 +878,7 @@
 <Token id=5;words=[<Word id=5;text=jo;lemma=on;upos=PRON;xpos=Pp3fsa--y;feats=Case=Acc|Gender=Fem|Number=Sing|Person=3|PronType=Prs|Variant=Short>]>
 <Token id=6;words=[<Word id=6;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=7;words=[<Word id=7;text=sestavljalo;lemma=sestavljati;upos=VERB;xpos=Vmpp-sn;feats=Aspect=Imp|Gender=Neut|Number=Sing|VerbForm=Part>]>
-<Token id=8;words=[<Word id=8;text=preveč;lemma=preveliko;upos=DET;xpos=Rgp;feats=PronType=Ind>]>
+<Token id=8;words=[<Word id=8;text=preveč;lemma=preveč;upos=DET;xpos=Rgp;feats=PronType=Ind>]>
 <Token id=9;words=[<Word id=9;text=zapletenih;lemma=zapleten;upos=ADJ;xpos=Agpfpg;feats=Case=Gen|Degree=Pos|Gender=Fem|Number=Plur>]>
 <Token id=10;words=[<Word id=10;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
 <Token id=11;words=[<Word id=11;text=nepotrebnih;lemma=nepotreben;upos=ADJ;xpos=Agpfpg;feats=Case=Gen|Degree=Pos|Gender=Fem|Number=Plur>]>
@@ -890,7 +890,7 @@
 <Token id=17;words=[<Word id=17;text=cirilice;lemma=cirilica;upos=NOUN;xpos=Ncfsg;feats=Case=Gen|Gender=Fem|Number=Sing>]>
 <Token id=18;words=[<Word id=18;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
-<Token id=1;words=[<Word id=1;text=Metelčica;lemma=Metelčica;upos=PROPN;xpos=Npfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Metelčica;lemma=metelčica;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=3;words=[<Word id=3;text=bila;lemma=biti;upos=AUX;xpos=Va-p-sf;feats=Gender=Fem|Number=Sing|VerbForm=Part>]>
 <Token id=4;words=[<Word id=4;text=tako;lemma=tako;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
@@ -992,8 +992,8 @@
 <Token id=6;words=[<Word id=6;text=Ano;lemma=Ana;upos=PROPN;xpos=Npfsi;feats=Case=Ins|Gender=Fem|Number=Sing>]>
 <Token id=7;words=[<Word id=7;text=Jelovšek;lemma=Jelovšek;upos=PROPN;xpos=Npfsi;feats=Case=Ins|Gender=Fem|Number=Sing>]>
 
-<Token id=1;words=[<Word id=1;text=Julija;lemma=Julij;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
-<Token id=2;words=[<Word id=2;text=Primic;lemma=Primic;upos=PROPN;xpos=Npfsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Julija;lemma=Julij;upos=PROPN;xpos=Npmsg;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=2;words=[<Word id=2;text=Primic;lemma=Primic;upos=PROPN;xpos=Npfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
 
 <Token id=1;words=[<Word id=1;text=6.;lemma=6.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
 <Token id=2;words=[<Word id=2;text=aprila;lemma=april;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
@@ -1094,7 +1094,7 @@
 <Token id=15;words=[<Word id=15;text=bogatim;lemma=bogat;upos=ADJ;xpos=Agpmsi;feats=Case=Ins|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=16;words=[<Word id=16;text=plemiškim;lemma=plemiški;upos=ADJ;xpos=Agpmsi;feats=Case=Ins|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=17;words=[<Word id=17;text=sinom;lemma=sin;upos=NOUN;xpos=Ncmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
-<Token id=18;words=[<Word id=18;text=Scheuchenstuehlom;lemma=Scheuchenstuehel;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
+<Token id=18;words=[<Word id=18;text=Scheuchenstuehlom;lemma=Scheuchenstuehl;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
 <Token id=19;words=[<Word id=19;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
 <Token id=1;words=[<Word id=1;text=Leta;lemma=leto;upos=NOUN;xpos=Ncnsg;feats=Case=Gen|Gender=Neut|Number=Sing>]>
@@ -1165,7 +1165,7 @@
 <Token id=33;words=[<Word id=33;text=plavati;lemma=plavati;upos=VERB;xpos=Vmpn;feats=Aspect=Imp|VerbForm=Inf>]>
 <Token id=34;words=[<Word id=34;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
-<Token id=1;words=[<Word id=1;text=Prijatelju;lemma=prijatelj;upos=NOUN;xpos=Ncmsd;feats=Case=Dat|Gender=Masc|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Prijatelju;lemma=Prijatelj;upos=PROPN;xpos=Npmsd;feats=Case=Dat|Gender=Masc|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=3;words=[<Word id=3;text=posvetil;lemma=posvetiti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=4;words=[<Word id=4;text=več;lemma=več;upos=DET;xpos=Rgc;feats=PronType=Ind>]>
@@ -1174,7 +1174,7 @@
 <Token id=7;words=[<Word id=7;text=med;lemma=med;upos=ADP;xpos=Si;feats=Case=Ins>]>
 <Token id=8;words=[<Word id=8;text=drugim;lemma=drug;upos=ADJ;xpos=Mlpnsi;feats=Case=Ins|Gender=Neut|Number=Sing>]>
 <Token id=9;words=[<Word id=9;text=tudi;lemma=tudi;upos=PART;xpos=Q>]>
-<Token id=10;words=[<Word id=10;text=pesnitev;lemma=pesnitev;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=10;words=[<Word id=10;text=pesnitev;lemma=pesnitev;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=11;words=[<Word id=11;text=Krst;lemma=krst;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=12;words=[<Word id=12;text=pri;lemma=pri;upos=ADP;xpos=Sl;feats=Case=Loc>]>
 <Token id=13;words=[<Word id=13;text=Savici;lemma=Savica;upos=PROPN;xpos=Npfsl;feats=Case=Loc|Gender=Fem|Number=Sing>]>
@@ -1207,7 +1207,7 @@
 <Token id=14;words=[<Word id=14;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=15;words=[<Word id=15;text=služabnico;lemma=služabnica;upos=NOUN;xpos=Ncfsi;feats=Case=Ins|Gender=Fem|Number=Sing>]>
 <Token id=16;words=[<Word id=16;text=pri;lemma=pri;upos=ADP;xpos=Sl;feats=Case=Loc>]>
-<Token id=17;words=[<Word id=17;text=Crobathovih;lemma=Crobathov;upos=ADJ;xpos=Aspmpl;feats=Case=Loc|Degree=Pos|Gender=Masc|Number=Plur|Poss=Yes>]>
+<Token id=17;words=[<Word id=17;text=Crobathovih;lemma=Crobathov;upos=ADJ;xpos=Aspfpl;feats=Case=Loc|Degree=Pos|Gender=Fem|Number=Plur|Poss=Yes>]>
 <Token id=18;words=[<Word id=18;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=19;words=[<Word id=19;text=ki;lemma=ki;upos=SCONJ;xpos=Cs>]>
 <Token id=20;words=[<Word id=20;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
@@ -1228,7 +1228,7 @@
 <Token id=9;words=[<Word id=9;text=Terezijo;lemma=Terezija;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=10;words=[<Word id=10;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
 <Token id=11;words=[<Word id=11;text=15.;lemma=15.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
-<Token id=12;words=[<Word id=12;text=oktober;lemma=oktober;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=12;words=[<Word id=12;text=oktober;lemma=oktober;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=13;words=[<Word id=13;text=1839;lemma=1839;upos=NUM;xpos=Mdc;feats=NumForm=Digit|NumType=Card>]>
 <Token id=14;words=[<Word id=14;text=–;lemma=–;upos=PUNCT;xpos=Z>]>
 <Token id=15;words=[<Word id=15;text=14.;lemma=14.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
@@ -1236,18 +1236,18 @@
 <Token id=17;words=[<Word id=17;text=1840;lemma=1840;upos=NUM;xpos=Mdc;feats=NumForm=Digit|NumType=Card>]>
 <Token id=18;words=[<Word id=18;text=);lemma=);upos=PUNCT;xpos=Z>]>
 <Token id=19;words=[<Word id=19;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
-<Token id=20;words=[<Word id=20;text=Ernestino;lemma=Ernestino;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=20;words=[<Word id=20;text=Ernestino;lemma=Ernestina;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=21;words=[<Word id=21;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
 <Token id=22;words=[<Word id=22;text=18.;lemma=18.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
-<Token id=23;words=[<Word id=23;text=december;lemma=december;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=23;words=[<Word id=23;text=december;lemma=december;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=24;words=[<Word id=24;text=1842;lemma=1842;upos=NUM;xpos=Mdc;feats=NumForm=Digit|NumType=Card>]>
 <Token id=25;words=[<Word id=25;text=–;lemma=–;upos=PUNCT;xpos=Z>]>
 <Token id=26;words=[<Word id=26;text=3.;lemma=3.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
-<Token id=27;words=[<Word id=27;text=december;lemma=december;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=27;words=[<Word id=27;text=december;lemma=december;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=28;words=[<Word id=28;text=1917;lemma=1917;upos=NUM;xpos=Mdc;feats=NumForm=Digit|NumType=Card>]>
 <Token id=29;words=[<Word id=29;text=);lemma=);upos=PUNCT;xpos=Z>]>
 <Token id=30;words=[<Word id=30;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
-<Token id=31;words=[<Word id=31;text=Franca;lemma=Franc;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
+<Token id=31;words=[<Word id=31;text=Franca;lemma=Franc;upos=PROPN;xpos=Npmsay;feats=Animacy=Anim|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=32;words=[<Word id=32;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
 <Token id=33;words=[<Word id=33;text=18.;lemma=18.;upos=NUM;xpos=Mdo;feats=NumForm=Digit|NumType=Ord>]>
 <Token id=34;words=[<Word id=34;text=september;lemma=september;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
@@ -1313,7 +1313,7 @@
 <Token id=10;words=[<Word id=10;text=mladim;lemma=mlad;upos=ADJ;xpos=Agpmsi;feats=Case=Ins|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=11;words=[<Word id=11;text=Poljakom;lemma=Poljak;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
 <Token id=12;words=[<Word id=12;text=Emilom;lemma=Emil;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
-<Token id=13;words=[<Word id=13;text=Korytkim;lemma=Korytki;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
+<Token id=13;words=[<Word id=13;text=Korytkim;lemma=Korytek;upos=PROPN;xpos=Npmsi;feats=Case=Ins|Gender=Masc|Number=Sing>]>
 <Token id=14;words=[<Word id=14;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=15;words=[<Word id=15;text=ki;lemma=ki;upos=SCONJ;xpos=Cs>]>
 <Token id=16;words=[<Word id=16;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
@@ -1330,7 +1330,7 @@
 <Token id=27;words=[<Word id=27;text=Ljubljano;lemma=Ljubljana;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=28;words=[<Word id=28;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
-<Token id=1;words=[<Word id=1;text=Korytko;lemma=Korytko;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Korytko;lemma=Korytko;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=se;lemma=se;upos=PRON;xpos=Px------y;feats=PronType=Prs|Reflex=Yes|Variant=Short>]>
 <Token id=3;words=[<Word id=3;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=4;words=[<Word id=4;text=ukvarjal;lemma=ukvarjati;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
@@ -1357,7 +1357,7 @@
 <Token id=25;words=[<Word id=25;text=slovstvo;lemma=slovstvo;upos=NOUN;xpos=Ncnsa;feats=Case=Acc|Gender=Neut|Number=Sing>]>
 <Token id=26;words=[<Word id=26;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
-<Token id=1;words=[<Word id=1;text=Korytko;lemma=Korytka;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Korytko;lemma=Korytko;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=3;words=[<Word id=3;text=umrl;lemma=umreti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=4;words=[<Word id=4;text=leta;lemma=leto;upos=NOUN;xpos=Ncnsg;feats=Case=Gen|Gender=Neut|Number=Sing>]>
@@ -1408,13 +1408,13 @@
 <Token id=5;words=[<Word id=5;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
 <Token id=6;words=[<Word id=6;text=na;lemma=na;upos=ADP;xpos=Sa;feats=Case=Acc>]>
 <Token id=7;words=[<Word id=7;text=primer;lemma=primer;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
-<Token id=8;words=[<Word id=8;text=pesmi;lemma=pesem;upos=NOUN;xpos=Ncfsg;feats=Case=Gen|Gender=Fem|Number=Sing>]>
+<Token id=8;words=[<Word id=8;text=pesmi;lemma=pesem;upos=NOUN;xpos=Ncfpg;feats=Case=Gen|Gender=Fem|Number=Plur>]>
 <Token id=9;words=[<Word id=9;text=Valentina;lemma=Valentin;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=10;words=[<Word id=10;text=Vodnika;lemma=Vodnik;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=11;words=[<Word id=11;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
 <Token id=12;words=[<Word id=12;text=Ta;lemma=ta;upos=DET;xpos=Pd-msn;feats=Case=Nom|Gender=Masc|Number=Sing|PronType=Dem>]>
 <Token id=13;words=[<Word id=13;text=veseli;lemma=vesel;upos=ADJ;xpos=Agpmsny;feats=Case=Nom|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing>]>
-<Token id=14;words=[<Word id=14;text=dan;lemma=dan;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=14;words=[<Word id=14;text=dan;lemma=dan;upos=NOUN;xpos=Ncmsn;feats=Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=15;words=[<Word id=15;text=ali;lemma=ali;upos=CCONJ;xpos=Cc>]>
 <Token id=16;words=[<Word id=16;text=Matiček;lemma=Matiček;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=17;words=[<Word id=17;text=se;lemma=se;upos=PRON;xpos=Px------y;feats=PronType=Prs|Reflex=Yes|Variant=Short>]>
@@ -1431,7 +1431,7 @@
 <Token id=28;words=[<Word id=28;text=nov;lemma=nov;upos=ADJ;xpos=Agpmsan;feats=Case=Acc|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=29;words=[<Word id=29;text=časopis;lemma=časopis;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=30;words=[<Word id=30;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
-<Token id=31;words=[<Word id=31;text=katerega;lemma=kateri;upos=DET;xpos=Pq-msa;feats=Case=Acc|Gender=Masc|Number=Sing|PronType=Int>]>
+<Token id=31;words=[<Word id=31;text=katerega;lemma=kateri;upos=DET;xpos=Pq-msg;feats=Case=Gen|Gender=Masc|Number=Sing|PronType=Int>]>
 <Token id=32;words=[<Word id=32;text=objavo;lemma=objava;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=33;words=[<Word id=33;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=34;words=[<Word id=34;text=zadrževala;lemma=zadrževati;upos=VERB;xpos=Vmpp-sf;feats=Aspect=Imp|Gender=Fem|Number=Sing|VerbForm=Part>]>
@@ -1522,14 +1522,14 @@
 <Token id=14;words=[<Word id=14;text=Metke;lemma=Metka;upos=PROPN;xpos=Npfsg;feats=Case=Gen|Gender=Fem|Number=Sing>]>
 <Token id=15;words=[<Word id=15;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=16;words=[<Word id=16;text=v;lemma=v;upos=ADP;xpos=Sa;feats=Case=Acc>]>
-<Token id=17;words=[<Word id=17;text=katere;lemma=kateri;upos=DET;xpos=Pq-mpa;feats=Case=Acc|Gender=Fem|Number=Sing|PronType=Int>]>
+<Token id=17;words=[<Word id=17;text=katere;lemma=kateri;upos=DET;xpos=Pq-mpa;feats=Case=Acc|Gender=Masc|Number=Sing|PronType=Int>]>
 <Token id=18;words=[<Word id=18;text=lokal;lemma=lokal;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=19;words=[<Word id=19;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=20;words=[<Word id=20;text=redno;lemma=redno;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
 <Token id=21;words=[<Word id=21;text=zahajal;lemma=zahajati;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=22;words=[<Word id=22;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
-<Token id=1;words=[<Word id=1;text=Jerici;lemma=Jerici;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
+<Token id=1;words=[<Word id=1;text=Jerici;lemma=Jerica;upos=PROPN;xpos=Npfsd;feats=Case=Dat|Gender=Fem|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=3;words=[<Word id=3;text=posvetil;lemma=posvetiti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=4;words=[<Word id=4;text=tudi;lemma=tudi;upos=PART;xpos=Q>]>
@@ -1548,7 +1548,7 @@
 <Token id=9;words=[<Word id=9;text=novice;lemma=novica;upos=NOUN;xpos=Ncfpn;feats=Case=Nom|Gender=Fem|Number=Plur>]>
 <Token id=10;words=[<Word id=10;text=veterinarja;lemma=veterinar;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=11;words=[<Word id=11;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
-<Token id=12;words=[<Word id=12;text=politika;lemma=politik;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
+<Token id=12;words=[<Word id=12;text=politika;lemma=politika;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
 <Token id=13;words=[<Word id=13;text=Janeza;lemma=Janez;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=14;words=[<Word id=14;text=Bleiweisa;lemma=Bleiweis;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=15;words=[<Word id=15;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
@@ -1573,15 +1573,15 @@
 <Token id=8;words=[<Word id=8;text=temveč;lemma=temveč;upos=CCONJ;xpos=Cc>]>
 <Token id=9;words=[<Word id=9;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=10;words=[<Word id=10;text=namesto;lemma=namesto;upos=ADP;xpos=Sg;feats=Case=Gen>]>
-<Token id=11;words=[<Word id=11;text=njegovih;lemma=njegov;upos=DET;xpos=Ps3mpgsm;feats=Case=Gen|Gender=Neut|Gender[psor]=Masc|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs>]>
+<Token id=11;words=[<Word id=11;text=njegovih;lemma=njegov;upos=DET;xpos=Ps3npgsm;feats=Case=Gen|Gender=Neut|Gender[psor]=Masc|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs>]>
 <Token id=12;words=[<Word id=12;text=poveličeval;lemma=poveličevati;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=13;words=[<Word id=13;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
 <Token id=14;words=[<Word id=14;text=objavljal;lemma=objavljati;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
-<Token id=15;words=[<Word id=15;text=dela;lemma=delo;upos=NOUN;xpos=Ncnpa;feats=Case=Acc|Gender=Neut|Number=Sing>]>
+<Token id=15;words=[<Word id=15;text=dela;lemma=delo;upos=NOUN;xpos=Ncnpa;feats=Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=16;words=[<Word id=16;text=pesnika;lemma=pesnik;upos=NOUN;xpos=Ncmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=17;words=[<Word id=17;text=Jovana;lemma=Jovan;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=18;words=[<Word id=18;text=Vesela;lemma=Vesel;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
-<Token id=19;words=[<Word id=19;text=Koseskega;lemma=Koseski;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
+<Token id=19;words=[<Word id=19;text=Koseskega;lemma=Koseskega;upos=PROPN;xpos=Npmsg;feats=Case=Gen|Gender=Masc|Number=Sing>]>
 <Token id=20;words=[<Word id=20;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=21;words=[<Word id=21;text=čeprav;lemma=čeprav;upos=SCONJ;xpos=Cs>]>
 <Token id=22;words=[<Word id=22;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
@@ -1635,7 +1635,7 @@
 <Token id=22;words=[<Word id=22;text=v;lemma=v;upos=ADP;xpos=Sl;feats=Case=Loc>]>
 <Token id=23;words=[<Word id=23;text=tistih;lemma=tisti;upos=DET;xpos=Pd-mpl;feats=Case=Loc|Gender=Masc|Number=Plur|PronType=Dem>]>
 <Token id=24;words=[<Word id=24;text=časih;lemma=čas;upos=NOUN;xpos=Ncmpl;feats=Case=Loc|Gender=Masc|Number=Plur>]>
-<Token id=25;words=[<Word id=25;text=večinsko;lemma=večinsko;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
+<Token id=25;words=[<Word id=25;text=večinsko;lemma=večinski;upos=ADJ;xpos=Agpnsn;feats=Case=Nom|Degree=Pos|Gender=Neut|Number=Sing>]>
 <Token id=26;words=[<Word id=26;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=27;words=[<Word id=27;text=medtem;lemma=medtem;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
 <Token id=28;words=[<Word id=28;text=ko;lemma=ko;upos=SCONJ;xpos=Cs>]>
@@ -1656,7 +1656,7 @@
 
 <Token id=1;words=[<Word id=1;text=Prva;lemma=prvi;upos=ADJ;xpos=Mlofsn;feats=Case=Nom|Gender=Fem|Number=Sing|NumType=Ord>]>
 <Token id=2;words=[<Word id=2;text=izdaja;lemma=izdaja;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
-<Token id=3;words=[<Word id=3;text=Poezij;lemma=poezija;upos=NOUN;xpos=Ncfpg;feats=Case=Gen|Gender=Fem|Number=Plur>]>
+<Token id=3;words=[<Word id=3;text=Poezij;lemma=Poezij;upos=PROPN;xpos=Npmsn;feats=Case=Gen|Gender=Masc|Number=Plur>]>
 
 <Token id=1;words=[<Word id=1;text=France;lemma=France;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=Prešeren;lemma=Prešeren;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
@@ -1694,7 +1694,7 @@
 
 <Token id=1;words=[<Word id=1;text=Tedanji;lemma=tedanji;upos=ADJ;xpos=Agpmsny;feats=Case=Nom|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing>]>
 <Token id=2;words=[<Word id=2;text=cenzor;lemma=cenzor;upos=NOUN;xpos=Ncmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
-<Token id=3;words=[<Word id=3;text=Fran;lemma=Fran;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
+<Token id=3;words=[<Word id=3;text=Fran;lemma=Fran;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=4;words=[<Word id=4;text=Miklošič;lemma=Miklošič;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>
 <Token id=5;words=[<Word id=5;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=6;words=[<Word id=6;text=tisk;lemma=tisk;upos=NOUN;xpos=Ncmsan;feats=Animacy=Inan|Case=Acc|Gender=Masc|Number=Sing>]>
@@ -1714,7 +1714,7 @@
 <Token id=20;words=[<Word id=20;text=,;lemma=,;upos=PUNCT;xpos=Z>]>
 <Token id=21;words=[<Word id=21;text=med;lemma=med;upos=ADP;xpos=Si;feats=Case=Ins>]>
 <Token id=22;words=[<Word id=22;text=njimi;lemma=on;upos=PRON;xpos=Pp3mpi;feats=Case=Ins|Gender=Masc|Number=Plur|Person=3|PronType=Prs>]>
-<Token id=23;words=[<Word id=23;text=Zdravljico;lemma=zdravljica;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
+<Token id=23;words=[<Word id=23;text=Zdravljico;lemma=Zdravljice;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=24;words=[<Word id=24;text=(;lemma=(;upos=PUNCT;xpos=Z>]>
 <Token id=25;words=[<Word id=25;text=napisano;lemma=napisan;upos=ADJ;xpos=Appnsn;feats=Case=Nom|Degree=Pos|Gender=Neut|Number=Sing|VerbForm=Part>]>
 <Token id=26;words=[<Word id=26;text=leta;lemma=leto;upos=NOUN;xpos=Ncnsg;feats=Case=Gen|Gender=Neut|Number=Sing>]>
@@ -1807,7 +1807,7 @@
 <Token id=7;words=[<Word id=7;text=lahko;lemma=lahko;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
 <Token id=8;words=[<Word id=8;text=končno;lemma=končno;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
 <Token id=9;words=[<Word id=9;text=objavil;lemma=objaviti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
-<Token id=10;words=[<Word id=10;text=Zdravljico;lemma=zdravljica;upos=NOUN;xpos=Ncfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
+<Token id=10;words=[<Word id=10;text=Zdravljico;lemma=Zdravljice;upos=PROPN;xpos=Npfsa;feats=Case=Acc|Gender=Fem|Number=Sing>]>
 <Token id=11;words=[<Word id=11;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
 <Token id=1;words=[<Word id=1;text=Pesem;lemma=pesem;upos=NOUN;xpos=Ncfsn;feats=Case=Nom|Gender=Fem|Number=Sing>]>
@@ -1872,7 +1872,7 @@
 <Token id=23;words=[<Word id=23;text=saj;lemma=saj;upos=CCONJ;xpos=Cc>]>
 <Token id=24;words=[<Word id=24;text=naj;lemma=naj;upos=PART;xpos=Q>]>
 <Token id=25;words=[<Word id=25;text=bi;lemma=biti;upos=AUX;xpos=Va-c;feats=Mood=Cnd|VerbForm=Fin>]>
-<Token id=26;words=[<Word id=26;text=revne;lemma=reven;upos=ADJ;xpos=Agpmpa;feats=Case=Acc|Degree=Pos|Gender=Fem|Number=Plur>]>
+<Token id=26;words=[<Word id=26;text=revne;lemma=reven;upos=ADJ;xpos=Agpmpa;feats=Case=Acc|Degree=Pos|Gender=Masc|Number=Plur>]>
 <Token id=27;words=[<Word id=27;text=zastopal;lemma=zastopati;upos=VERB;xpos=Vmpp-sm;feats=Aspect=Imp|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=28;words=[<Word id=28;text=celo;lemma=celo;upos=PART;xpos=Q>]>
 <Token id=29;words=[<Word id=29;text=brezplačno;lemma=brezplačno;upos=ADV;xpos=Rgp;feats=Degree=Pos>]>
@@ -1883,8 +1883,8 @@
 <Token id=3;words=[<Word id=3;text=je;lemma=biti;upos=AUX;xpos=Va-r3s-n;feats=Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin>]>
 <Token id=4;words=[<Word id=4;text=priznal;lemma=priznati;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
 <Token id=5;words=[<Word id=5;text=svoja;lemma=svoj;upos=DET;xpos=Px-mda;feats=Case=Acc|Gender=Masc|Number=Dual|Poss=Yes|PronType=Prs|Reflex=Yes>]>
-<Token id=6;words=[<Word id=6;text=preživela;lemma=preživelo;upos=NOUN;xpos=Ncnpa;feats=Case=Acc|Gender=Neut|Number=Plur>]>
-<Token id=7;words=[<Word id=7;text=otroka;lemma=otrok;upos=NOUN;xpos=Ncmda;feats=Case=Acc|Gender=Masc|Number=Dual>]>
+<Token id=6;words=[<Word id=6;text=preživela;lemma=preživeti;upos=VERB;xpos=Vmep-dm;feats=Aspect=Perf|Gender=Masc|Number=Dual|VerbForm=Part>]>
+<Token id=7;words=[<Word id=7;text=otroka;lemma=otrok;upos=NOUN;xpos=Ncmsay;feats=Animacy=Anim|Case=Acc|Gender=Masc|Number=Sing>]>
 <Token id=8;words=[<Word id=8;text=in;lemma=in;upos=CCONJ;xpos=Cc>]>
 <Token id=9;words=[<Word id=9;text=jima;lemma=on;upos=PRON;xpos=Pp3mdd--y;feats=Case=Dat|Gender=Masc|Number=Dual|Person=3|PronType=Prs|Variant=Short>]>
 <Token id=10;words=[<Word id=10;text=namenil;lemma=nameniti;upos=VERB;xpos=Vmep-sm;feats=Aspect=Perf|Gender=Masc|Number=Sing|VerbForm=Part>]>
@@ -1923,7 +1923,7 @@
 <Token id=14;words=[<Word id=14;text=času;lemma=čas;upos=NOUN;xpos=Ncmsl;feats=Case=Loc|Gender=Masc|Number=Sing>]>
 <Token id=15;words=[<Word id=15;text=imeli;lemma=imeti;upos=VERB;xpos=Vmpp-pm;feats=Aspect=Imp|Gender=Masc|Number=Plur|VerbForm=Part>]>
 <Token id=16;words=[<Word id=16;text=za;lemma=za;upos=ADP;xpos=Sa;feats=Case=Acc>]>
-<Token id=17;words=[<Word id=17;text=nespodobne;lemma=nespodoben;upos=ADJ;xpos=Agpmpa;feats=Case=Acc|Degree=Pos|Gender=Masc|Number=Plur>]>
+<Token id=17;words=[<Word id=17;text=nespodobne;lemma=nespodoben;upos=ADJ;xpos=Agpfpa;feats=Case=Acc|Degree=Pos|Gender=Fem|Number=Plur>]>
 <Token id=18;words=[<Word id=18;text=.;lemma=.;upos=PUNCT;xpos=Z>]>
 
 <Token id=1;words=[<Word id=1;text=France;lemma=France;upos=PROPN;xpos=Npmsn;feats=Case=Nom|Gender=Masc|Number=Sing>]>

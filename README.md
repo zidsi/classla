@@ -62,7 +62,7 @@ To run the CLASSLA pipeline for the first time on processing standard Slovenian,
 # sent_id = 1.1
 # text = France Prešeren je rojen v Vrbi.
 1	France	France	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	4	nsubj	_	NER=B-PER
-2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat_name	_	NER=I-PER
+2	Prešeren	Prešeren	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat:name	_	NER=I-PER
 3	je	biti	AUX	Va-r3s-n	Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	cop	_	NER=O
 4	rojen	rojen	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	NER=O
 5	v	v	ADP	Sl	Case=Loc	6	case	_	NER=O
@@ -81,22 +81,46 @@ Processing non-standard Slovenian differs to the above standard example just by 
 >>> classla.download('sl', type='nonstandard')        # download non-standard models for Slovenian, use hr for Croatian and sr for Serbian
 >>> nlp = classla.Pipeline('sl', type='nonstandard')  # initialize the default non-standard Slovenian pipeline, use hr for Croatian and sr for Serbian
 >>> doc = nlp("kva smo mi zurali zadnje leto v zagrebu...")     # run the pipeline
->>> print(doc.to_conll())                             # print the output in CoNLL-U format 
+>>> print(doc.to_conll())                             # print the output in CoNLL-U format
+# newpar id = 1
+# sent_id = 1.1
+# text = kva smo mi zurali zadnje leto v zagrebu...
 1	kva	kaj	PRON	Pq-nsa	Case=Acc|Gender=Neut|Number=Sing|PronType=Int	4	obj	_	NER=O
 2	smo	biti	AUX	Va-r1p-n	Mood=Ind|Number=Plur|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
-3	mi	jaz	PRON	Pp1mpn	Case=Nom|Gender=Masc|Number=Plur|Person=1|PronType=Prs	nsubj	_	NER=O
-4	zurali	žurati	VERB	Vmpp-pm	Aspect=Imp|Gender=Masc|Number=Plur|VerbForm=Part	root	_	NER=O
+3	mi	jaz	PRON	Pp1mpn	Case=Nom|Gender=Masc|Number=Plur|Person=1|PronType=Prs	4	nsubj	_	NER=O
+4	zurali	zurati	VERB	Vmpp-pm	Aspect=Imp|Gender=Masc|Number=Plur|VerbForm=Part	0	root	_	NER=O
 5	zadnje	zadnji	ADJ	Agpnsa	Case=Acc|Degree=Pos|Gender=Neut|Number=Sing	6	amod	_	NER=O
-6	leto	leto	NOUN	Ncnsa	Case=Acc|Gender=Neut|Number=Sing	4	obl	NER=O
+6	leto	leto	NOUN	Ncnsa	Case=Acc|Gender=Neut|Number=Sing	4	obl	_	NER=O
 7	v	v	ADP	Sl	Case=Loc	8	case	_	NER=O
-8	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	NER=B-LOC|SpaceAfter=No
-9	...	.	PUNCT	Z	_	4	punct	_	NER=O
+8	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
+9	...	...	PUNCT	Z	_	4	punct	_	NER=O
 
 ```
 
 You can find examples of non-standard language processing for [Croatian](#example-of-non-standard-croatian) and [Serbian](#example-of-non-standard-serbian)  at the end of this document.
 
 For additional usage examples you can also consult the ```pipeline_demo.py``` file.
+
+### Processing online texts
+
+A special web processing mode for processing texts obtained from the internet can be activated with the ```type="web"``` argument:
+
+```
+>>> import classla
+>>> classla.download('sl', type='web')        # download web models for Slovenian, use hr for Croatian and sr for Serbian
+>>> nlp = classla.Pipeline('sl', type='web')  # initialize the default Slovenian web pipeline, use hr for Croatian and sr for Serbian
+>>> doc = nlp("Kdor hoce prenesti preko racunalnika http://t.co/LwWyzs0cA0")     # run the pipeline
+>>> print(doc.to_conll())                             # print the output in CoNLL-U format
+# newpar id = 1
+# sent_id = 1.1
+# text = Kdor hoce prenesti preko racunalnika http://t.co/LwWyzs0cA0
+1	Kdor	kdor	PRON	Pr-msn	Case=Nom|Gender=Masc|Number=Sing|PronType=Rel	2	nsubj	_	NER=O
+2	hoce	hoteti	VERB	Vmpr3s-n	Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin	0	root	_	NER=O
+3	prenesti	prenesti	VERB	Vmen	Aspect=Perf|VerbForm=Inf	2	xcomp	_	NER=O
+4	preko	preko	ADP	Sg	Case=Gen	5	case	_	NER=O
+5	racunalnika	računalnik	NOUN	Ncmsg	Case=Gen|Gender=Masc|Number=Sing	3	obl	_	NER=O
+6	http://t.co/LwWyzs0cA0	http://t.co/LwWyzs0cA0	SYM	Xw	_	5	nmod	_	NER=O
+```
 
 ## Processors
 
@@ -181,10 +205,10 @@ If you use this tool, please cite the following paper:
 # newpar id = 1
 # sent_id = 1.1
 # text = Ante Starčević rođen je u Velikom Žitniku.
-1	Ante	Ante	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	nsubj_pass	_	NER=B-PER
+1	Ante	Ante	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	3	nsubj	_	NER=B-PER
 2	Starčević	Starčević	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat	_	NER=I-PER
 3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
-4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux_pass	_	NER=O
+4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux	_	NER=O
 5	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
 6	Velikom	velik	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing	7	amod	_	NER=B-LOC
 7	Žitniku	Žitnik	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	3	obl	_	NER=I-LOC|SpaceAfter=No
@@ -201,14 +225,14 @@ If you use this tool, please cite the following paper:
 # newpar id = 1
 # sent_id = 1.1
 # text = kaj sam ja tulumaril jucer u ljubljani...
-1	kaj	što	PRON	Pi3n-a	Case=Acc|Gender=Neut|PronType=Int,Rel	4	obj	_	NER=O
+1	kaj	što	PRON	Pq3n-a	Case=Acc|Gender=Neut|PronType=Int,Rel	4	obj	_	NER=O
 2	sam	biti	AUX	Var1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	4	aux	_	NER=O
 3	ja	ja	PRON	Pp1-sn	Case=Nom|Number=Sing|Person=1|PronType=Prs	4	nsubj	_	NER=O
 4	tulumaril	tulumariti	VERB	Vmp-sm	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	0	root	_	NER=O
 5	jucer	jučer	ADV	Rgp	Degree=Pos	4	advmod	_	NER=O
 6	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
 7	ljubljani	Ljubljana	PROPN	Npfsl	Case=Loc|Gender=Fem|Number=Sing	4	obl	_	NER=B-LOC|SpaceAfter=No
-8	...	.	PUNCT	Z	_	4	punct	_	NER=O
+8	...	...	PUNCT	Z	_	4	punct	_	NER=O
 
 ```
 
@@ -228,9 +252,9 @@ If you use this tool, please cite the following paper:
 2	Jovanović	Jovanović	PROPN	Npmsn	Case=Nom|Gender=Masc|Number=Sing	1	flat	_	NER=I-PER
 3	rođen	roditi	ADJ	Appmsnn	Case=Nom|Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
 4	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux	_	NER=O
-5	u	u	ADP	Sl	Case=Loc	6	case	_	NER=O
-6	Novom	nov	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing	3	obl	_	NER=B-LOC
-7	Sadu	Sad	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	6	flat	_	NER=I-LOC|SpaceAfter=No
+5	u	u	ADP	Sl	Case=Loc	7	case	_	NER=O
+6	Novom	nov	ADJ	Agpmsly	Case=Loc|Definite=Def|Degree=Pos|Gender=Masc|Number=Sing	7	amod	_	NER=B-LOC
+7	Sadu	Sad	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	3	obl	_	NER=I-LOC|SpaceAfter=No
 8	.	.	PUNCT	Z	_	3	punct	_	NER=O
 
 ```
@@ -246,18 +270,18 @@ If you use this tool, please cite the following paper:
 # sent_id = 1.1
 # text = ne mogu da verujem kakvo je zezanje bilo prosle godine u zagrebu...
 1	ne	ne	PART	Qz	Polarity=Neg	2	advmod	_	NER=O
-2	mogu	moći	VERB	Vmr1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	root	_	NER=O
+2	mogu	moći	VERB	Vmr1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	NER=O
 3	da	da	SCONJ	Cs	_	4	mark	_	NER=O
 4	verujem	verovati	VERB	Vmr1s	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	2	xcomp	_	NER=O
-5	kakvo	kakav	DET	Pi-nsn	Case=Nom|Gender=Neut|Number=Sing|PronType=Int,Rel	ccomp	_	NER=O
-6	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	aux	_	NER=O
-7	zezanje	zezanje	NOUN	Ncnsn	Case=Nom|Gender=Neut|Number=Sing	5	nsubj	NER=O
+5	kakvo	kakav	DET	Pi-nsn	Case=Nom|Gender=Neut|Number=Sing|PronType=Int,Rel	4	ccomp	_	NER=O
+6	je	biti	AUX	Var3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	aux	_	NER=O
+7	zezanje	zezanje	NOUN	Ncnsn	Case=Nom|Gender=Neut|Number=Sing	8	nsubj	_	NER=O
 8	bilo	biti	AUX	Vap-sn	Gender=Neut|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	5	cop	_	NER=O
 9	prosle	prošli	ADJ	Agpfsgy	Case=Gen|Definite=Def|Degree=Pos|Gender=Fem|Number=Sing	10	amod	_	NER=O
 10	godine	godina	NOUN	Ncfsg	Case=Gen|Gender=Fem|Number=Sing	8	obl	_	NER=O
 11	u	u	ADP	Sl	Case=Loc	12	case	_	NER=O
-12	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	8	obl	NER=B-LOC|SpaceAfter=No
-13	...	.	PUNCT	Z	_	2	punct	_	NER=O
+12	zagrebu	Zagreb	PROPN	Npmsl	Case=Loc|Gender=Masc|Number=Sing	8	obl	_	NER=B-LOC|SpaceAfter=No
+13	...	...	PUNCT	Z	_	2	punct	_	NER=O
 
 ```
 
@@ -274,11 +298,11 @@ If you use this tool, please cite the following paper:
 # sent_id = 1.1
 # text = Алеко Константинов е роден в Свищов.
 1	Алеко	алеко	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	nsubj:pass	_	NER=B-PER
-2	Константинов	константинов	PROPN	Hmsi	Definite=Ind|Gender=Masc|Number=Sing	flat	_	NER=I-PER
+2	Константинов	константинов	PROPN	Hmsi	Definite=Ind|Gender=Masc|Number=Sing	1	flat	_	NER=I-PER
 3	е	съм	AUX	Vxitf-r3s	Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	4	aux:pass	_	NER=O
 4	роден	родя-(се)	VERB	Vpptcv--smi	Aspect=Perf|Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	NER=O
 5	в	в	ADP	R	_	6	case	_	NER=O
-6	Свищов	свищов	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	iobj	NER=B-LOC|SpaceAfter=No
+6	Свищов	свищов	PROPN	Npmsi	Definite=Ind|Gender=Masc|Number=Sing	4	iobj	_	NER=B-LOC|SpaceAfter=No
 7	.	.	PUNCT	punct	_	4	punct	_	NER=O
 
 ```
@@ -295,13 +319,13 @@ If you use this tool, please cite the following paper:
 # newpar id = 1
 # sent_id = 1.1
 # text = Крсте Петков Мисирков е роден во Постол.
-1	Крсте	крсте	ADJ	Afpms-n	Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
-2	Петков	петков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
-3	Мисирков	мисирков	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
-4	е	сум	AUX	Vapip3s-n	Aspect=Prog|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres	_	_
+1	Крсте	Крсте	PROPN	Npmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+2	Петков	Петков	PROPN	Npmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+3	Мисирков	Мисирков	PROPN	Npmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	_
+4	е	сум	AUX	Vapip3s-n	Aspect=Prog|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres	_	_	_	_
 5	роден	роден	ADJ	Ap-ms-n	Definite=Ind|Gender=Masc|Number=Sing|VerbForm=Part	_	_	_	_
 6	во	во	ADP	Sps	AdpType=Prep	_	_	_	_
-7	Постол	постол	NOUN	Ncmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	SpaceAfter=No
+7	Постол	Постол	PROPN	Npmsnn	Case=Nom|Definite=Ind|Gender=Masc|Number=Sing	_	_	_	SpaceAfter=No
 8	.	.	PUNCT	Z	_	_	_	_	_
 
 ```

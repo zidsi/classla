@@ -10,7 +10,7 @@ This pipeline allows for processing of standard Slovenian, Croatian, Serbian and
 - dependency parsing
 - named entity recognition
 
-It also allows for (alpha) processing of standard Macedonian on the levels of 
+It also allows for processing of standard Macedonian on the levels of 
 
 - tokenization and sentence splitting
 - part-of-speech tagging
@@ -34,7 +34,37 @@ The differences of this pipeline to the original Stanza pipeline are the followi
 - Macedonian models (Macedonian is not available in UD yet)
 - non-standard models for Croatian, Slovenian, Serbian (there is no UD data for these varieties)
 
-The above modifications led to some important improvements in the tool’s performance in comparison to original Stanza. For standard Slovenian, for example, running the full classla pipeline increases sentence segmentation F1 scores to 99.52 (94.29% error reduction), lemmatization to 99.17 (68.8% error reduction), XPOS tagging  to 97.38 (46.75% error reduction), UPOS tagging to 98.69 (23.4% error reduction), and LAS to 92.05 (23.56% error reduction).  See official [Stanza performance](https://stanfordnlp.github.io/stanza/performance.html) (evaluated on different data splits) for comparison.
+The above modifications led to some important improvements in the tool’s performance in comparison to original Stanza. For standard Slovenian, comparing the CLASSLA-Stanza tool with Stanza on the [SloBENCH benchmark](https://slobench.cjvt.si/leaderboard/view/11), shows relative error reduction (part of the error removed by moving from Stanza to CLASSLA-Stanza) on sentence segmentation to be 98%, on token segmentation 50%, on lemmatization 69%, on morphosyntactic XPOS tagging 65%, and on dependency parsing 34%.
+
+## Citing
+
+If you use this tool, please cite the following papers:
+
+```
+@inproceedings{ljubesic-dobrovoljc-2019-neural,
+    title = "What does Neural Bring? Analysing Improvements in Morphosyntactic Annotation and Lemmatisation of {S}lovenian, {C}roatian and {S}erbian",
+    author = "Ljube{\v{s}}i{\'c}, Nikola  and
+      Dobrovoljc, Kaja",
+    booktitle = "Proceedings of the 7th Workshop on Balto-Slavic Natural Language Processing",
+    month = aug,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/W19-3704",
+    doi = "10.18653/v1/W19-3704",
+    pages = "29--34"
+    }
+@misc{terčon2023classlastanza,
+      title={CLASSLA-Stanza: The Next Step for Linguistic Processing of South Slavic Languages}, 
+      author={Luka Terčon and Nikola Ljubešić},
+      year={2023},
+      eprint={2308.04255},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+```
+
 
 ## Installation
 ### pip
@@ -172,26 +202,6 @@ The dependency parsing processor ```depparse``` performs syntactic dependency pa
 ### Named entity recognition
 
 The named entity recognition processor ```ner``` identifies named entities in text following the [IOB2](https://en.wikipedia.org/wiki/Inside–outside–beginning_(tagging)) format. It requires only the ```tokenize``` processor.
-
-## Citing
-
-If you use this tool, please cite the following paper:
-
-```
-@inproceedings{ljubesic-dobrovoljc-2019-neural,
-    title = "What does Neural Bring? Analysing Improvements in Morphosyntactic Annotation and Lemmatisation of {S}lovenian, {C}roatian and {S}erbian",
-    author = "Ljube{\v{s}}i{\'c}, Nikola  and
-      Dobrovoljc, Kaja",
-    booktitle = "Proceedings of the 7th Workshop on Balto-Slavic Natural Language Processing",
-    month = aug,
-    year = "2019",
-    address = "Florence, Italy",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/W19-3704",
-    doi = "10.18653/v1/W19-3704",
-    pages = "29--34"
-    }
-```
 
 ## Croatian examples
 

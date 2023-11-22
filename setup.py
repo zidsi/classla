@@ -78,7 +78,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['numpy', 'protobuf', 'requests==2.28.0', 'torch', 'tqdm', 'obeliks==1.1.6', 'reldi-tokeniser==1.0.2'],
+    install_requires=['numpy', 'protobuf', 'requests==2.28.0', 'torch', 'tqdm', 'obeliks==1.1.6', 'reldi-tokeniser==1.0.3'],
 
     # List required Python versions
     python_requires='>=3.6',
